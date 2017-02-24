@@ -10,16 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var loadingCircle: UIActivityIndicatorView!
+
+    @IBAction func signInButton(_ sender: UIButton) {
+        if (loadingCircle.isAnimating) {
+            loadingCircle.stopAnimating()
+        } else {
+            loadingCircle.startAnimating()
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
