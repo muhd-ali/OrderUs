@@ -12,6 +12,7 @@ class CategoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var typeImageView: UIImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
 
 
     
@@ -28,9 +29,13 @@ class CategoriesTableViewCell: UITableViewCell {
         if let urlStr = category?["image"] {
             if let url = NSURL(string: urlStr) {
                 let newThread = DispatchQueue(label: "image for \(typeLabel.text)", qos: .userInitiated, attributes: .concurrent)
+                spinner.startAnimating()
                 newThread.async {
                     if let imageData = NSData(contentsOf: url as URL) {
-                        typeImageView.image = UIImage(data: imageData as Data)
+                        DispatchQueue.main.async { [weak weakSelf = self] in
+                            weakSelf?.typeImageView.image = UIImage(data: imageData as Data)
+                            weakSelf?.spinner.stopAnimating()
+                        }
                     }
                 }
             }

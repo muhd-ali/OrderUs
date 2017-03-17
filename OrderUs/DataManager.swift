@@ -17,7 +17,7 @@ class DataManager {
             ],
         [
             "Type" : "Laundry",
-            "Examples" : "Get your Clothes, Bedsheets etc. cleaned",
+            "Examples" : "Get your stuff washed",
             "image" : "https://cdn.iconscout.com/public/images/icon/premium/png-256/laundry-plumber-cleaning-electrical-work-3b8d8471053d1179-256x256.png",
             ],
         [
