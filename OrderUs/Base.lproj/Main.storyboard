@@ -180,7 +180,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="126"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eOL-ai-0Ef" id="5YP-no-Z4m">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="125"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="126"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dph-Ip-4Zm">
@@ -237,7 +237,19 @@
                             <outlet property="delegate" destination="kDv-a7-jK2" id="KQJ-nU-5Gz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Categories" id="8g6-B6-tIe"/>
+                    <navigationItem key="navigationItem" title="Categories" id="8g6-B6-tIe">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="Pch-5i-idS">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lCh-P3-3uM">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <state key="normal" title="⬅︎"/>
+                            </button>
+                            <connections>
+                                <action selector="backButton:" destination="kDv-a7-jK2" id="yme-hj-qhK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q2S-AD-FGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

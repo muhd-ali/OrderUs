@@ -16,17 +16,17 @@ class CategoriesTableViewCell: UITableViewCell {
 
 
     
-    var category: [String:String]? {
+    var category: [String:Any]? {
         didSet {
             updateUI()
         }
     }
     
     private func updateUI() {
-        typeLabel.text = category?["Type"]
-        descriptionLabel.text = category?["Examples"]
+        typeLabel.text = category?["Type"] as? String
+        descriptionLabel.text = category?["Examples"] as? String
         
-        if let urlStr = category?["image"] {
+        if let urlStr = category?["image"] as? String {
             if let url = NSURL(string: urlStr) {
                 let newThread = DispatchQueue(label: "image for \(typeLabel.text)", qos: .userInitiated, attributes: .concurrent)
                 spinner.startAnimating()

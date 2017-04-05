@@ -9,21 +9,39 @@
 import Foundation
 
 class DataManager {
-    static let mainCategories = [
-        [
-            "Type" : "Food",
-            "Examples" : "Order Pizza, Steak, Burger etc.",
-            "image" : "http://icons.iconarchive.com/icons/mohsenfakharian/christmas/256/fast-food-icon.png",
-            ],
-        [
-            "Type" : "Laundry",
-            "Examples" : "Get your stuff washed",
-            "image" : "https://cdn.iconscout.com/public/images/icon/premium/png-256/laundry-plumber-cleaning-electrical-work-3b8d8471053d1179-256x256.png",
-            ],
-        [
-            "Type" : "Grocery",
-            "Examples" : "Order Fruits, Vegetables, etc.",
-            "image" : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",
-            ],
-        ]
+    static let sharedInstance = DataManager()
+    
+    struct Categories {
+        static let Layer2FreshProduce: [[String: Any]] = [
+            [
+                "Type" : "Fruits",
+                "Examples" : "Apple, Banana, etc.",
+                "image" : "https://cdn.pixabay.com/photo/2016/04/01/12/20/apple-1300670_960_720.png",
+                ],
+            [
+                "Type" : "Vegetables",
+                "Examples" : "Potatoes, Onions, etc.",
+                "image" : "https://cdn.pixabay.com/photo/2012/04/13/17/15/vegetables-32932_960_720.png",
+                ],
+            ]
+        
+        static let Layer1: [[String: Any]] = [
+            [
+                "Type" : "Fresh Produce",
+                "Examples" : "Order Pizza, Steak, Burger etc.",
+                "image" : "https://cdn.pixabay.com/photo/2012/04/24/16/09/fruit-40276_960_720.png",
+                "child" : Layer2FreshProduce,
+                ],
+            [
+                "Type" : "Laundry",
+                "Examples" : "Get your stuff washed",
+                "image" : "https://cdn.iconscout.com/public/images/icon/premium/png-256/laundry-plumber-cleaning-electrical-work-3b8d8471053d1179-256x256.png",
+                ],
+            [
+                "Type" : "Grocery",
+                "Examples" : "Order Fruits, Vegetables, etc.",
+                "image" : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",
+                ],
+            ]
+    }
 }
