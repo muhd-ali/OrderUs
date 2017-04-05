@@ -10,13 +10,10 @@ import UIKit
 
 class MainCategoriesTableViewController: UITableViewController {
     var parentList: [[String:Any]]?
-    
-    
-    @IBAction func backButton(_ sender: UIBarButtonItem) {
-        print("asdasdsadsadsasda")
+
+    @IBAction func backButton(_ sender: UIButton) {
         tableList = parentList!
     }
-    
     
     var tableList = DataManager.Categories.Layer1 {
         didSet {
