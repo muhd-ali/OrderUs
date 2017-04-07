@@ -12,54 +12,56 @@ class DataManager {
     static let sharedInstance = DataManager()
     
     struct Categories {
-        static let Layer2FreshProduce: [[String: Any]] = [
+        typealias List = [[String: Any]]
+        
+        private static let FreshProduceList: List = [
             [
                 "Type" : "Fruits",
-                "Examples" : "Apple, Banana, etc.",
-                "image" : "https://cdn.pixabay.com/photo/2016/04/01/12/20/apple-1300670_960_720.png",
+                "Description" : "Apple, Banana, etc.",
+                "ImageURL" : "https://cdn.pixabay.com/photo/2016/04/01/12/20/apple-1300670_960_720.png",
                 ],
             [
                 "Type" : "Vegetables",
-                "Examples" : "Potatoes, Onions, etc.",
-                "image" : "https://cdn.pixabay.com/photo/2012/04/13/17/15/vegetables-32932_960_720.png",
+                "Description" : "Potatoes, Onions, etc.",
+                "ImageURL" : "https://cdn.pixabay.com/photo/2012/04/13/17/15/vegetables-32932_960_720.png",
                 ],
             ]
         
-        static let Layer2Laundry: [[String: Any]] = [
+        private static let LaundryList: List = [
             
         ]
         
-        static let Layer2Grocery: [[String: Any]] = [
+        private static let GroceryList: List = [
+            [
+                "Type" : "Fresh Produce",
+                "Description" : "Order Pizza, Steak, Burger etc.",
+                "ImageURL" : "https://cdn.pixabay.com/photo/2012/04/24/16/09/fruit-40276_960_720.png",
+                "Child" : FreshProduceList,
+                ],
             [
                 "Type" : "Eggs",
-                "Examples" : "Anday",
-                "image" : "http://res.freestockphotos.biz/pictures/11/11446-illustration-of-a-white-egg-pv.png",
+                "Description" : "Anday",
+                "ImageUrl" : "http://res.freestockphotos.biz/pictures/11/11446-illustration-of-a-white-egg-pv.png",
                 ],
             [
                 "Type" : "Bread",
-                "Examples" : "Triple Roti",
-                "image" : "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25205_960_720.png",
+                "Description" : "Triple Roti",
+                "ImageURL" : "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25205_960_720.png",
                 ],
         ]
         
-        static let Layer1: [[String: Any]] = [
+        static let MainList: List = [
             [
-                "Type" : "Fresh Produce",
-                "Examples" : "Order Pizza, Steak, Burger etc.",
-                "image" : "https://cdn.pixabay.com/photo/2012/04/24/16/09/fruit-40276_960_720.png",
-                "child" : Layer2FreshProduce,
+                "Type" : "Grocery",
+                "Description" : "Order Fruits, Vegetables, etc.",
+                "ImageURL" : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",
+                "Child" : GroceryList,
                 ],
             [
                 "Type" : "Laundry",
-                "Examples" : "Get your stuff washed",
-                "image" : "https://cdn.iconscout.com/public/images/icon/premium/png-256/laundry-plumber-cleaning-electrical-work-3b8d8471053d1179-256x256.png",
-                "child" : Layer2Laundry,
-                ],
-            [
-                "Type" : "Grocery",
-                "Examples" : "Order Fruits, Vegetables, etc.",
-                "image" : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",
-                "child" : Layer2Grocery,
+                "Description" : "Get your stuff washed",
+                "ImageURL" : "https://cdn.iconscout.com/public/images/icon/premium/png-256/laundry-plumber-cleaning-electrical-work-3b8d8471053d1179-256x256.png",
+                "Child" : LaundryList,
                 ],
             ]
     }

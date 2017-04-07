@@ -240,19 +240,19 @@
                     <navigationItem key="navigationItem" title="Categories" id="8g6-B6-tIe">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="Pch-5i-idS">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lCh-P3-3uM">
-                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <rect key="frame" x="16" y="-1" width="83" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="⬅︎"/>
+                                <state key="normal" title="&lt;"/>
                                 <connections>
-                                    <action selector="backButton:" destination="kDv-a7-jK2" eventType="touchUpInside" id="WQ5-Ef-43r"/>
+                                    <action selector="backButtonAction:" destination="kDv-a7-jK2" eventType="touchUpInside" id="OaL-pw-zhK"/>
                                 </connections>
                             </button>
-                            <connections>
-                                <action selector="backButton:" destination="kDv-a7-jK2" id="0Ee-3x-XFI"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="backButtonOutlet" destination="lCh-P3-3uM" id="qKA-a3-Bjb"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q2S-AD-FGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

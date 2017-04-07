@@ -9,35 +9,51 @@
 import UIKit
 
 class MainCategoriesTableViewController: UITableViewController {
-    var parentList: [[String:Any]]?
+    var parentList: [DataManager.Categories.List] = []
+    var userIsForwardNavigating = true
 
-    @IBAction func backButton(_ sender: UIButton) {
-        tableList = parentList!
+    @IBOutlet weak var backButtonOutlet: UIButton!
+    @IBAction func backButtonAction(_ sender: UIButton) {
+        userIsForwardNavigating = false
+        tableList = parentList.removeLast()
     }
     
-    var tableList = DataManager.Categories.Layer1 {
+    var tableList = DataManager.Categories.MainList {
         didSet {
+            var transitionEffect: UIViewAnimationOptions
+            if userIsForwardNavigating {
+                transitionEffect = .transitionFlipFromRight
+                parentList.append(oldValue)
+            } else {
+                transitionEffect = .transitionFlipFromLeft
+            }
+            
             UIView.transition(
                 with: tableView,
-                duration: 0.75,
-                options: [.transitionFlipFromRight, .curveEaseInOut],
+                duration: 0.5,
+                options: [transitionEffect, .curveEaseInOut],
                 animations: { [weak weakSelf = self] in
                     weakSelf?.tableView.reloadData()
                 },
                 completion: nil
             )
-            parentList = oldValue
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableList[indexPath.row]
-        if let newTableList = selected["child"] as? [[String:Any]] {
+        if let newTableList = selected["Child"] as? DataManager.Categories.List {
+            userIsForwardNavigating = true
             tableList = newTableList
         }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        if parentList.count == 0 {
+            backButtonOutlet.isHidden = true
+        } else {
+            backButtonOutlet.isHidden = false
+        }
         return 1
     }
     
