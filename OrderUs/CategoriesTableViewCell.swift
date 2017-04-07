@@ -18,9 +18,9 @@ class CategoriesTableViewCell: UITableViewCell {
     
     var category: [String:Any]? {
         didSet {
-            categoryType = (category?["Type"] as? String) ?? NotFound.categoryType
-            categoryDescription = (category?["Description"] as? String) ?? NotFound.categoryDescription
-            categoryImageURL = (category?["ImageURL"] as? String) ?? NotFound.categoryImageURL
+            categoryType = (category?[DataManager.Categories.Key_Type] as? String) ?? NotFound.categoryType
+            categoryDescription = (category?[DataManager.Categories.Key_Description] as? String) ?? NotFound.categoryDescription
+            categoryImageURL = (category?[DataManager.Categories.Key_ImageURL] as? String) ?? NotFound.categoryImageURL
             updateUI()
         }
     }

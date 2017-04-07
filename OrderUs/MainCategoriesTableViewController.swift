@@ -42,9 +42,11 @@ class MainCategoriesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableList[indexPath.row]
-        if let newTableList = selected["Child"] as? DataManager.Categories.List {
+        if let newTableList = selected[DataManager.Categories.Key_Child] as? DataManager.Categories.List {
             userIsForwardNavigating = true
             tableList = newTableList
+        } else {
+            
         }
     }
     
