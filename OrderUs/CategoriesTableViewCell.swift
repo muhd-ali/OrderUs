@@ -39,9 +39,9 @@ class CategoriesTableViewCell: UITableViewCell {
     private func updateUI() {
         typeLabel.text = categoryType
         descriptionLabel.text = categoryDescription
+        typeImageView.image = nil
         if let url = NSURL(string: categoryImageURL) {
             spinner.startAnimating()
-            typeImageView.image = nil
             DispatchQueue(
                 label: "downloading image for \(typeLabel.text)",
                 qos: .userInitiated,
