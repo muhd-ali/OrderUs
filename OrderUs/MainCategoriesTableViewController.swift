@@ -9,25 +9,28 @@
 import UIKit
 
 class MainCategoriesTableViewController: UITableViewController {
-    var parentList: [DataManager.Categories.List] = []
+    var parentList: [DataManager.Categories.ListType] = []
+    var pageTitles: [String] = []
     var userIsForwardNavigating = true
-
+    
     @IBOutlet weak var backButtonOutlet: UIButton!
     @IBAction func backButtonAction(_ sender: UIButton) {
         userIsForwardNavigating = false
         tableList = parentList.removeLast()
+        title = pageTitles.removeLast()
     }
     
-    var tableList = DataManager.Categories.MainList {
+    private func getTransitionEffect() -> UIViewAnimationOptions {
+        if userIsForwardNavigating {
+            return .transitionFlipFromRight
+        } else {
+            return .transitionFlipFromLeft
+        }
+    }
+    
+    private var tableList = DataManager.Categories.MainList {
         didSet {
-            var transitionEffect: UIViewAnimationOptions
-            if userIsForwardNavigating {
-                transitionEffect = .transitionFlipFromRight
-                parentList.append(oldValue)
-            } else {
-                transitionEffect = .transitionFlipFromLeft
-            }
-            
+            let transitionEffect = getTransitionEffect()
             UIView.transition(
                 with: tableView,
                 duration: 0.5,
@@ -40,13 +43,26 @@ class MainCategoriesTableViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dvc = segue.destination as? ItemDetailsViewController {
+            if let tableListIndex = sender as? Int {
+                dvc.item = tableList[tableListIndex]
+            }
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableList[indexPath.row]
-        if let newTableList = selected[DataManager.Categories.Key_Child] as? DataManager.Categories.List {
+        if let newTableList = selected[.Child] as? DataManager.Categories.ListType {
             userIsForwardNavigating = true
+            
+            pageTitles.append(title!)
+            title = selected[.Name] as? String
+            
+            parentList.append(tableList)
             tableList = newTableList
         } else {
-            
+            performSegue(withIdentifier: "ItemDetail", sender: indexPath.row)
         }
     }
     
@@ -78,5 +94,6 @@ class MainCategoriesTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
+        title = "Categories"
     }
 }

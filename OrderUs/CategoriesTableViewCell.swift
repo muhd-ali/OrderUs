@@ -16,30 +16,50 @@ class CategoriesTableViewCell: UITableViewCell {
     
     
     
-    var category: [String:Any]? {
+    var category: DataManager.Categories.CategoryType? {
         didSet {
-            categoryType = (category?[DataManager.Categories.Key_Type] as? String) ?? NotFound.categoryType
-            categoryDescription = (category?[DataManager.Categories.Key_Description] as? String) ?? NotFound.categoryDescription
-            categoryImageURL = (category?[DataManager.Categories.Key_ImageURL] as? String) ?? NotFound.categoryImageURL
+            categoryName = (category?[.Name] as? String) ?? NotFound.categoryName
+            categoryDescription = (category?[.Description] as? String) ?? NotFound.categoryDescription
+            categoryImageURL = (category?[.ImageURL] as? String) ?? NotFound.categoryImageURL
+            if category?[.Child] == nil {
+                hasChild = false
+            } else {
+                hasChild = true
+            }
             updateUI()
         }
     }
     
     
     struct NotFound {
-        static let categoryType = "no type found"
+        static let categoryName = "no type found"
         static let categoryDescription = "no description found"
         static let categoryImageURL = "no url found"
     }
     
-    var categoryType = NotFound.categoryType
+    var categoryName = NotFound.categoryName
     var categoryDescription = NotFound.categoryDescription
     var categoryImageURL = NotFound.categoryImageURL
+    var hasChild = false
     
     private func updateUI() {
-        typeLabel.text = categoryType
+        typeLabel.text = categoryName
         descriptionLabel.text = categoryDescription
         typeImageView.image = nil
+        updateImage()
+        updateAccessoryOptions()
+        
+    }
+    
+    private func updateAccessoryOptions() {
+        if hasChild {
+            accessoryType = .disclosureIndicator
+        } else {
+            accessoryType = .none
+        }
+    }
+    
+    private func updateImage() {
         if let url = NSURL(string: categoryImageURL) {
             spinner.startAnimating()
             DispatchQueue(

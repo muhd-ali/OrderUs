@@ -8,64 +8,76 @@
 
 import Foundation
 
-class DataManager {
+class DataManager: NSObject {
     static let sharedInstance = DataManager()
     
     struct Categories {
-        typealias List = [[String: Any]]
-        static let Key_Type = "Type"
-        static let Key_Description = "Description"
-        static let Key_ImageURL = "ImageURL"
-        static let Key_Child = "Child"
+        enum Key {
+            case Name
+            case Description
+            case ImageURL
+            case Child
+            case MinQuantity
+            case Price
+            case MinQuanityNumber
+            case MinQuantityUnit
+        }
         
-        private static let FreshProduceList: List = [
+        typealias CategoryType = [Key: Any]
+        typealias ListType = [CategoryType]
+        
+        private static let FreshProduceList: ListType = [
             [
-                Key_Type : "Fruits",
-                Key_Description : "Apple, Banana, etc.",
-                Key_ImageURL : "https://cdn.pixabay.com/photo/2016/04/01/12/20/apple-1300670_960_720.png",
+                .Name : "Fruits",
+                .Description : "Apple, Banana, etc.",
+                .ImageURL : "https://cdn.pixabay.com/photo/2016/04/01/12/20/apple-1300670.960.720.png",
                 ],
             [
-                Key_Type : "Vegetables",
-                Key_Description : "Potatoes, Onions, etc.",
-                Key_ImageURL : "https://cdn.pixabay.com/photo/2012/04/13/17/15/vegetables-32932_960_720.png",
+                .Name : "Vegetables",
+                .Description : "Potatoes, Onions, etc.",
+                .ImageURL : "https://cdn.pixabay.com/photo/2012/04/13/17/15/vegetables-32932.960.720.png",
                 ],
             ]
         
-        private static let LaundryList: List = [
+        private static let LaundryList: ListType = [
             
         ]
         
-        private static let GroceryList: List = [
+        private static let GroceryList: ListType = [
             [
-                Key_Type : "Fresh Produce",
-                Key_Description : "Order Pizza, Steak, Burger etc.",
-                Key_ImageURL : "https://cdn.pixabay.com/photo/2012/04/24/16/09/fruit-40276_960_720.png",
-                Key_Child : FreshProduceList,
+                .Name : "Fresh Produce",
+                .Description : "Order Pizza, Steak, Burger etc.",
+                .ImageURL : "https://cdn.pixabay.com/photo/2012/04/24/16/09/fruit-40276.960.720.png",
+                .Child : FreshProduceList,
                 ],
             [
-                Key_Type : "Eggs",
-                Key_Description : "Anday",
-                Key_ImageURL : "http://res.freestockphotos.biz/pictures/11/11446-illustration-of-a-white-egg-pv.png",
+                .Name : "Eggs",
+                .Description : "Anday",
+                .ImageURL : "http://res.freestockphotos.biz/pictures/11/11446-illustration-of-a-white-egg-pv.png",
+                .MinQuantity : [Key.MinQuanityNumber : 1, .MinQuantityUnit : "dozen"],
+                .Price : 120,
                 ],
             [
-                Key_Type : "Bread",
-                Key_Description : "Triple Roti",
-                Key_ImageURL : "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25205_960_720.png",
+                .Name : "Bread",
+                .Description : "Triple Roti",
+                .ImageURL : "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25205.960.720.png",
+                .MinQuantity : ["number" : 1, "unit" : "unit"],
+                .Price : 80,
                 ],
         ]
         
-        static let MainList: List = [
+        static let MainList: ListType = [
             [
-                Key_Type : "Grocery",
-                Key_Description : "Order Fruits, Vegetables, etc.",
-                Key_ImageURL : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",
-                Key_Child : GroceryList,
+                .Name : "Grocery",
+                .Description : "Order Fruits, Vegetables, etc.",
+                .ImageURL : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",
+                .Child : GroceryList,
                 ],
             [
-                Key_Type : "Laundry",
-                Key_Description : "Get your stuff washed",
-                Key_ImageURL : "https://cdn.iconscout.com/public/images/icon/premium/png-256/laundry-plumber-cleaning-electrical-work-3b8d8471053d1179-256x256.png",
-                Key_Child : LaundryList,
+                .Name : "Laundry",
+                .Description : "Get your stuff washed",
+                .ImageURL : "https://cdn.iconscout.com/public/images/icon/premium/png-256/laundry-plumber-cleaning-electrical-work-3b8d8471053d1179-256x256.png",
+                .Child : LaundryList,
                 ],
             ]
     }
