@@ -55,14 +55,14 @@ class DataManager: NSObject {
                 .Description : "Anday",
                 .ImageURL : "http://res.freestockphotos.biz/pictures/11/11446-illustration-of-a-white-egg-pv.png",
                 .MinQuantity : [Key.MinQuanityNumber : 1, .MinQuantityUnit : "dozen"],
-                .Price : 120,
+                .Price : 120.0,
                 ],
             [
                 .Name : "Bread",
                 .Description : "Triple Roti",
                 .ImageURL : "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25205.960.720.png",
                 .MinQuantity : ["number" : 1, "unit" : "unit"],
-                .Price : 80,
+                .Price : 80.0,
                 ],
         ]
         

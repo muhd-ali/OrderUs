@@ -63,7 +63,7 @@ class CategoriesTableViewCell: UITableViewCell {
         if let url = NSURL(string: categoryImageURL) {
             spinner.startAnimating()
             DispatchQueue(
-                label: "downloading image for \(typeLabel.text)",
+                label: "downloading image for \(categoryName)",
                 qos: .userInitiated,
                 attributes: .concurrent
                 ).async {
