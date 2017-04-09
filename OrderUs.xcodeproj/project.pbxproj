@@ -10,6 +10,7 @@
 		138CD9C41E7C3283004C5EC4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C31E7C3283004C5EC4 /* DataManager.swift */; };
 		138CD9C61E7C3367004C5EC4 /* MainCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C51E7C3367004C5EC4 /* MainCategoriesTableViewController.swift */; };
 		138CD9C81E7C40B2004C5EC4 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */; };
+		13E83F0A1E9A2479004B32CF /* QuantityStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E83F091E9A2479004B32CF /* QuantityStepper.swift */; };
 		B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */; };
 		B95965101E606C4600C196E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B959650F1E606C4600C196E1 /* AppDelegate.swift */; };
 		B95965121E606C4600C196E1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95965111E606C4600C196E1 /* MainViewController.swift */; };
@@ -22,6 +23,7 @@
 		138CD9C31E7C3283004C5EC4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		138CD9C51E7C3367004C5EC4 /* MainCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCategoriesTableViewController.swift; sourceTree = "<group>"; };
 		138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
+		13E83F091E9A2479004B32CF /* QuantityStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuantityStepper.swift; sourceTree = "<group>"; };
 		B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailsViewController.swift; sourceTree = "<group>"; };
 		B959650C1E606C4600C196E1 /* OrderUs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderUs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B959650F1E606C4600C196E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				138CD9C51E7C3367004C5EC4 /* MainCategoriesTableViewController.swift */,
 				138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */,
 				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
+				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
 				138CD9C21E7C2C91004C5EC4 /* Extras */,
 			);
 			path = OrderUs;
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13E83F0A1E9A2479004B32CF /* QuantityStepper.swift in Sources */,
 				138CD9C61E7C3367004C5EC4 /* MainCategoriesTableViewController.swift in Sources */,
 				B95965121E606C4600C196E1 /* MainViewController.swift in Sources */,
 				B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */,

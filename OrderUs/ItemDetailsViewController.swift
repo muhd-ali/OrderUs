@@ -21,7 +21,6 @@ class ItemDetailsViewController: UIViewController {
             itemImageURL = (item?[.ImageURL] as? String) ?? NotFound.itemName
             itemPrice = (item?[.Price] as? Double) ?? NotFound.itemPrice
             itemMinQuantity = (item?[.MinQuantity] as? [DataManager.Categories.Key:Any]) ?? NotFound.itemMinQuantity
-            itemQuantity = itemMinQuantity
         }
     }
     
@@ -30,7 +29,7 @@ class ItemDetailsViewController: UIViewController {
         static let itemDescription = "no description found"
         static let itemImageURL = "no url found"
         static let itemPrice = -1.0
-        static let itemMinQuantity = Dictionary<DataManager.Categories.Key,Any>()
+        static let itemMinQuantity:[DataManager.Categories.Key : Any] = [DataManager.Categories.Key.MinQuanityNumber: -1, .MinQuantityUnit: "not found"]
     }
     
     private var itemName = NotFound.itemName
@@ -38,34 +37,73 @@ class ItemDetailsViewController: UIViewController {
     private var itemImageURL = NotFound.itemImageURL
     private var itemPrice = NotFound.itemPrice
     private var itemMinQuantity = NotFound.itemMinQuantity
-    private var itemQuantity = NotFound.itemMinQuantity
+    private var itemQuantity = 0.0
     
     
-
-    @IBOutlet weak var quantityStepperOutlet: UIStepper!
-    @IBAction func quantityStepperValueChangedAction(_ sender: UIStepper) {
-        updateDynamicContent()
+    
+    @IBOutlet weak var quantityStepperOutlet: QuantityStepper!
+    @IBAction func quantityStepperValueChangedAction(_ sender: QuantityStepper) {
+        quantityStepperOutlet.previousValue = itemQuantity
+        itemQuantity = quantityStepperOutlet.value
+        updateDynamicContent(increasingValues: quantityStepperOutlet.valueIsIncreasing)
     }
     
     @IBAction func addToCartButton(_ sender: UIButton) {
+        UIView.transition(
+            with: itemImageView,
+            duration: 0.5,
+            options: [.curveEaseInOut, .transitionFlipFromRight],
+            animations: nil,
+            completion: nil
+        )
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         quantityStepperOutlet.minimumValue = itemMinQuantity[DataManager.Categories.Key.MinQuanityNumber] as? Double ?? 1
         quantityStepperOutlet.stepValue = quantityStepperOutlet.minimumValue
+        itemQuantity = quantityStepperOutlet.minimumValue
         updateUI()
     }
     
     private func updateUI() {
         itemNameLabel.text = itemName
         updateImage()
-        updateDynamicContent()
+        updateDynamicContent(increasingValues: true)
     }
     
-    private func updateDynamicContent() {
-        itemQuantityLabel.text = "\(quantityStepperOutlet.value) \(itemMinQuantity[DataManager.Categories.Key.MinQuantityUnit] as? String ?? "")"
-        itemPriceLabel.text = "\((itemPrice/quantityStepperOutlet.minimumValue) * quantityStepperOutlet.value) PKR"
+    private func updateDynamicContent(increasingValues: Bool) {
+        var transitionEffect: UIViewAnimationOptions
+        if increasingValues {
+            transitionEffect = .transitionFlipFromTop
+        } else {
+            transitionEffect = .transitionFlipFromBottom
+        }
+        
+        UIView.transition(
+            with: itemQuantityLabel,
+            duration: 0.25,
+            options: [.curveEaseInOut, transitionEffect],
+            animations: { [unowned uoSelf = self] in
+                uoSelf.itemQuantityLabel.text = "\(uoSelf.quantityStepperOutlet.value) \(uoSelf.itemMinQuantity[DataManager.Categories.Key.MinQuantityUnit] as? String ?? "")"
+                if (uoSelf.quantityStepperOutlet.value > 1.0) {
+                    uoSelf.itemQuantityLabel.text = uoSelf.itemQuantityLabel.text! + "s"
+                }
+            },
+            completion: nil
+        )
+
+        UIView.transition(
+            with: itemPriceLabel,
+            duration: 0.25,
+            options: [.curveEaseInOut, transitionEffect],
+            animations: { [unowned uoSelf = self] in
+                uoSelf.itemPriceLabel.text = "\((uoSelf.itemPrice/uoSelf.quantityStepperOutlet.minimumValue) * uoSelf.quantityStepperOutlet.value) PKR"
+            },
+            completion: nil
+        )
+        
+        
     }
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -88,16 +126,4 @@ class ItemDetailsViewController: UIViewController {
             }
         }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

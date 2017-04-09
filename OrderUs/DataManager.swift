@@ -61,7 +61,7 @@ class DataManager: NSObject {
                 .Name : "Bread",
                 .Description : "Triple Roti",
                 .ImageURL : "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25205.960.720.png",
-                .MinQuantity : ["number" : 1, "unit" : "unit"],
+                .MinQuantity : [Key.MinQuanityNumber  : 1, .MinQuantityUnit : "unit"],
                 .Price : 80.0,
                 ],
         ]
