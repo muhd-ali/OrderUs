@@ -52,8 +52,6 @@ class CategoriesTableViewCell: UITableViewCell {
             accessoryType = .disclosureIndicator
         } else if ((category as? DataManager.Item) != nil) {
             accessoryType = .none
-        } else {
-            print("no suitable matches for \(category)")
         }
     }
     
