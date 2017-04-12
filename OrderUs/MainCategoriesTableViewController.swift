@@ -9,7 +9,7 @@
 import UIKit
 
 class MainCategoriesTableViewController: UITableViewController {
-    var parentList: [DataManager.Categories.ListType] = []
+    var parentList: [DataManager.ListType] = []
     var pageTitles: [String] = []
     var userIsForwardNavigating = true
     
@@ -28,7 +28,7 @@ class MainCategoriesTableViewController: UITableViewController {
         }
     }
     
-    private var tableList = DataManager.Categories.MainList {
+    private var tableList = DataManager.ExampleCategories.MainList {
         didSet {
             let transitionEffect = getTransitionEffect()
             UIView.transition(
@@ -46,18 +46,18 @@ class MainCategoriesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? ItemDetailsViewController {
             if let tableListIndex = sender as? Int {
-                dvc.item = tableList[tableListIndex]
+                dvc.item = tableList[tableListIndex] as? DataManager.Item
             }
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableList[indexPath.row]
-        if let newTableList = selected[.Child] as? DataManager.Categories.ListType {
+        if let newTableList = (selected as? DataManager.Category)?.Children {
             userIsForwardNavigating = true
             
             pageTitles.append(title!)
-            title = selected[.Name] as? String
+            title = selected.Name
             
             parentList.append(tableList)
             tableList = newTableList
@@ -95,5 +95,10 @@ class MainCategoriesTableViewController: UITableViewController {
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         title = "Categories"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("helllo")
     }
 }

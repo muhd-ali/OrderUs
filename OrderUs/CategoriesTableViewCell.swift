@@ -16,17 +16,14 @@ class CategoriesTableViewCell: UITableViewCell {
     
     
     
-    var category: DataManager.Categories.CategoryType? {
+    var category: Selectable? {
         didSet {
-            categoryName = (category?[.Name] as? String) ?? NotFound.categoryName
-            categoryDescription = (category?[.Description] as? String) ?? NotFound.categoryDescription
-            categoryImageURL = (category?[.ImageURL] as? String) ?? NotFound.categoryImageURL
-            if category?[.Child] == nil {
-                hasChild = false
-            } else {
-                hasChild = true
+            if category != nil {
+                categoryName = category!.Name
+                categoryDescription = category!.Description
+                categoryImageURL = category!.ImageURL
+                updateUI()
             }
-            updateUI()
         }
     }
     
@@ -40,7 +37,6 @@ class CategoriesTableViewCell: UITableViewCell {
     var categoryName = NotFound.categoryName
     var categoryDescription = NotFound.categoryDescription
     var categoryImageURL = NotFound.categoryImageURL
-    var hasChild = false
     
     private func updateUI() {
         typeLabel.text = categoryName
@@ -52,10 +48,12 @@ class CategoriesTableViewCell: UITableViewCell {
     }
     
     private func updateAccessoryOptions() {
-        if hasChild {
+        if ((category as? DataManager.Category) != nil) {
             accessoryType = .disclosureIndicator
-        } else {
+        } else if ((category as? DataManager.Item) != nil) {
             accessoryType = .none
+        } else {
+            print("no suitable matches for \(category)")
         }
     }
     

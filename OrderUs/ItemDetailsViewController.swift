@@ -14,13 +14,15 @@ class ItemDetailsViewController: UIViewController {
     @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var itemQuantityLabel: UILabel!
     
-    var item: DataManager.Categories.CategoryType? {
+    var item: DataManager.Item? {
         didSet {
-            itemName = (item?[.Name] as? String) ?? NotFound.itemName
-            itemDescription = (item?[.Description] as? String) ?? NotFound.itemName
-            itemImageURL = (item?[.ImageURL] as? String) ?? NotFound.itemName
-            itemPrice = (item?[.Price] as? Double) ?? NotFound.itemPrice
-            itemMinQuantity = (item?[.MinQuantity] as? [DataManager.Categories.Key:Any]) ?? NotFound.itemMinQuantity
+            if item != nil {
+                itemName = item!.Name
+                itemDescription = item!.Description
+                itemImageURL = item!.ImageURL
+                itemPrice = item!.Price
+                itemMinQuantity = item!.MinQuantity
+            }
         }
     }
     
@@ -29,7 +31,7 @@ class ItemDetailsViewController: UIViewController {
         static let itemDescription = "no description found"
         static let itemImageURL = "no url found"
         static let itemPrice = -1.0
-        static let itemMinQuantity:[DataManager.Categories.Key : Any] = [DataManager.Categories.Key.MinQuanityNumber: -1, .MinQuantityUnit: "not found"]
+        static let itemMinQuantity:[DataManager.Item.MinQuantityKey : Any] = [.Number : -1, .Unit : "not found"]
     }
     
     private var itemName = NotFound.itemName
@@ -49,18 +51,22 @@ class ItemDetailsViewController: UIViewController {
     }
     
     @IBAction func addToCartButton(_ sender: UIButton) {
-        UIView.transition(
-            with: itemImageView,
-            duration: 0.5,
-            options: [.curveEaseInOut, .transitionFlipFromRight],
-            animations: nil,
-            completion: nil
-        )
+        var cartItems = ShoppingCartModel.sharedInstance.cartItems
+        let currentThisItemInCart = cartItems.filter { cartItem -> Bool in cartItem.item.ID == item!.ID }
+        if (currentThisItemInCart.count == 0) {
+            cartItems.append(
+                ShoppingCartModel.OrderedItem(
+                    item: item!,
+                    quantity: itemQuantity
+                )
+            )
+            ShoppingCartModel.sharedInstance.cartItems = cartItems
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        quantityStepperOutlet.minimumValue = itemMinQuantity[DataManager.Categories.Key.MinQuanityNumber] as? Double ?? 1
+        quantityStepperOutlet.minimumValue = itemMinQuantity[.Number] as? Double ?? 1
         quantityStepperOutlet.stepValue = quantityStepperOutlet.minimumValue
         itemQuantity = quantityStepperOutlet.minimumValue
         updateUI()
@@ -85,14 +91,14 @@ class ItemDetailsViewController: UIViewController {
             duration: 0.25,
             options: [.curveEaseInOut, transitionEffect],
             animations: { [unowned uoSelf = self] in
-                uoSelf.itemQuantityLabel.text = "\(uoSelf.quantityStepperOutlet.value) \(uoSelf.itemMinQuantity[DataManager.Categories.Key.MinQuantityUnit] as? String ?? "")"
+                uoSelf.itemQuantityLabel.text = "\(uoSelf.quantityStepperOutlet.value) \(uoSelf.itemMinQuantity[.Unit] as? String ?? "")"
                 if (uoSelf.quantityStepperOutlet.value > 1.0) {
                     uoSelf.itemQuantityLabel.text = uoSelf.itemQuantityLabel.text! + "s"
                 }
             },
             completion: nil
         )
-
+        
         UIView.transition(
             with: itemPriceLabel,
             duration: 0.25,
