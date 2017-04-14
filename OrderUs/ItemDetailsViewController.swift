@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class ItemDetailsViewController: UIViewController {
     @IBOutlet weak var itemImageView: UIImageView!
@@ -61,6 +62,20 @@ class ItemDetailsViewController: UIViewController {
                 )
             )
             ShoppingCartModel.sharedInstance.cartItems = cartItems
+        } else {
+            ShoppingCartModel.sharedInstance.cartItems = cartItems.map {
+                var newItem = $0
+                if (newItem.item.ID == item!.ID) {
+                    newItem.quantity += itemQuantity
+                }
+                return newItem
+            }
+        }
+        
+        HUD.flash(.success, delay: 0.5) { [unowned uoSelf = self] finished in
+            if finished {
+                _ = uoSelf.navigationController?.popViewController(animated: true)
+            }
         }
     }
     

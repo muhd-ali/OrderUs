@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MIBadgeButton_Swift
 
 class MainCategoriesTableViewController: UITableViewController {
     var parentList: [DataManager.ListType] = []
@@ -97,7 +98,14 @@ class MainCategoriesTableViewController: UITableViewController {
         title = "Categories"
     }
     
+    @IBOutlet weak var shoppingCartOutlet: MIBadgeButton!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let itemsInCart = ShoppingCartModel.sharedInstance.cartItems.count
+        if ShoppingCartModel.sharedInstance.cartItems.count > 0 {
+            shoppingCartOutlet.badgeString = "\(itemsInCart)"
+        } else {
+            shoppingCartOutlet.badgeString = nil
+        }
     }
 }

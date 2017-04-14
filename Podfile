@@ -6,5 +6,7 @@ target 'OrderUs' do
   use_frameworks!
 
   # Pods for OrderUs
+  pod 'PKHUD', '~> 4.2'
+  pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
 
 end
