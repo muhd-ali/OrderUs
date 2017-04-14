@@ -53,7 +53,7 @@ class MainCategoriesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selected = tableList[indexPath.row]
+        let selected = tableList[indexPath.section]
         if let newTableList = (selected as? DataManager.Category)?.Children {
             userIsForwardNavigating = true
             
@@ -63,27 +63,31 @@ class MainCategoriesTableViewController: UITableViewController {
             parentList.append(tableList)
             tableList = newTableList
         } else {
-            performSegue(withIdentifier: "ItemDetail", sender: indexPath.row)
+            performSegue(withIdentifier: "ItemDetail", sender: indexPath.section)
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func setBackButtonVisibility() {
         if parentList.count == 0 {
             backButtonOutlet.isHidden = true
         } else {
             backButtonOutlet.isHidden = false
         }
-        return 1
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        setBackButtonVisibility()
+        return tableList.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableList.count
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Category", for: indexPath)
         
-        let category = tableList[indexPath.row]
+        let category = tableList[indexPath.section]
         if let categoryCell = cell as? CategoriesTableViewCell {
             categoryCell.category = category
         }
@@ -99,13 +103,18 @@ class MainCategoriesTableViewController: UITableViewController {
     }
     
     @IBOutlet weak var shoppingCartOutlet: MIBadgeButton!
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let itemsInCart = ShoppingCartModel.sharedInstance.cartItems.count
-        if ShoppingCartModel.sharedInstance.cartItems.count > 0 {
-            shoppingCartOutlet.badgeString = "\(itemsInCart)"
+    
+    func setShoppingCartBadgeAppearance() {
+        let cartItemsCount = ShoppingCartModel.sharedInstance.cartItems.count
+        
+        if cartItemsCount > 0 {
+            shoppingCartOutlet.badgeString = "\(cartItemsCount)"
         } else {
             shoppingCartOutlet.badgeString = nil
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setShoppingCartBadgeAppearance()
     }
 }

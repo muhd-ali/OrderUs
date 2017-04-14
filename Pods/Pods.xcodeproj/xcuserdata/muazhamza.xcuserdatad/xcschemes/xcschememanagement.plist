@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>M13Checkbox.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MIBadgeButton-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,12 +27,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>34E1BEE5B9151B6FF42B51C88D1AF746</key>
+		<key>0056DB3617767444D9494CE5F1217A75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8CC0E45FB2A2C842E502E3616440871D</key>
+		<key>20A9DD9ABBF08BC57372A26C35327BF1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>34E1BEE5B9151B6FF42B51C88D1AF746</key>
 		<dict>
 			<key>primary</key>
 			<true/>

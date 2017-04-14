@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -22,6 +23,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func updateUI() {
+        title = "Shopping Cart"
         let totalCost = shoppingCartList.reduce(0) { $0 + ($1.item.Price * $1.quantity) }
         totalCostDisplay.text = "Total Cost = \(totalCost) PKR"
     }
@@ -29,19 +31,17 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return shoppingCartList.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return shoppingCartList.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingCartItem", for: indexPath)
         
-        let cartItem = shoppingCartList[indexPath.row]
+        let cartItem = shoppingCartList[indexPath.section]
         cell.textLabel?.text = cartItem.item.Name
         cell.detailTextLabel?.text = "Ordered \(cartItem.quantity) for \(cartItem.item.Price * cartItem.quantity)"
         
@@ -60,11 +60,18 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            shoppingCartList.remove(at: indexPath.row)
+            shoppingCartList.remove(at: indexPath.section)
             ShoppingCartModel.sharedInstance.cartItems = shoppingCartList
             updateUI()
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
         default: break
+        }
+    }
+    
+    @IBAction func placeOrderAction(_ sender: UIButton) {
+        ShoppingCartModel.sharedInstance.cartItems = []
+        HUD.flash(.success, delay: 0.5) { [unowned uoSelf = self] finished in
+            _ = uoSelf.navigationController?.popViewController(animated: true)
         }
     }
     
