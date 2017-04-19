@@ -19,7 +19,14 @@ class ServerCommunicator: NSObject {
         static let dataNeedsToBeReloaded = "dataNeedsToBeReloaded"
     }
     
-    let socket: SocketIOClient = SocketIOClient(socketURL: URL(string: Constants.serverIP)!, config: [.forceWebsockets(true)])
+    let socket: SocketIOClient = SocketIOClient(
+        socketURL: URL(string: Constants.serverIP)!,
+        config: [
+            .forcePolling(true),
+            .reconnects(true),
+            .reconnectWait(5),
+        ]
+    )
     
     func connect() {
         socket.connect()
@@ -41,7 +48,6 @@ class ServerCommunicator: NSObject {
     private func setupConnectEvent() {
         socket.on(Constants.connectionEstablished) { [unowned uoSelf = self] (data, ack) in
             print("connected to server at ip \(Constants.serverIP)")
-            uoSelf.socket.emit(Constants.dataNeedsToBeReloaded, with: ["poasidpsaoidpsoaid"])
         }
     }
     
@@ -50,8 +56,10 @@ class ServerCommunicator: NSObject {
     }
     
     private func sendMessageTocheckIfDataNeedsToBeReloaded() {
-        socket.emitWithAck(Constants.dataNeedsToBeReloaded, with: []).timingOut(after: 10) { data in
-            print("here: \(data)")
+        socket.on(Constants.connectionEstablished) { [unowned uoSelf = self] _ in
+            uoSelf.socket.emitWithAck(Constants.dataNeedsToBeReloaded, with: ["nothing"]).timingOut(after: 10) { data in
+                print("here: \(data)")
+            }
         }
     }
 }
