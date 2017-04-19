@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -353,10 +353,10 @@
             </objects>
             <point key="canvasLocation" x="2533.5999999999999" y="141.67916041979012"/>
         </scene>
-        <!--Order Options View Controller-->
+        <!--View Controller-->
         <scene sceneID="9lk-xb-edm">
             <objects>
-                <viewController id="hFr-Hy-WtC" customClass="OrderOptionsViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hFr-Hy-WtC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ksy-rN-IZ3"/>
                         <viewControllerLayoutGuide type="bottom" id="i06-ho-2Ak"/>
@@ -371,39 +371,22 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Place Order"/>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="s5F-XO-A8u">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2X-uZ-vSq">
                                 <rect key="frame" x="0.0" y="72" width="375" height="484"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="doorStepOptions" textLabel="722-1a-iBc" style="IBUITableViewCellStyleDefault" id="IBX-ni-TUp">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IBX-ni-TUp" id="Htg-mc-s7x">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="722-1a-iBc">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
+                                <connections>
+                                    <segue destination="QbX-mj-aKD" kind="embed" id="JbR-mQ-I5F"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="s5F-XO-A8u" firstAttribute="centerX" secondItem="kbG-3P-y5H" secondAttribute="centerX" id="9fM-5y-jJB"/>
-                            <constraint firstItem="s5F-XO-A8u" firstAttribute="width" secondItem="kbG-3P-y5H" secondAttribute="width" id="Aed-QS-Gka"/>
+                            <constraint firstItem="n2X-uZ-vSq" firstAttribute="centerX" secondItem="kbG-3P-y5H" secondAttribute="centerX" id="3W8-qz-ZMp"/>
                             <constraint firstItem="act-eb-5xt" firstAttribute="width" secondItem="kbG-3P-y5H" secondAttribute="width" multiplier="0.75" id="FMn-18-jgb"/>
-                            <constraint firstItem="act-eb-5xt" firstAttribute="top" secondItem="s5F-XO-A8u" secondAttribute="bottom" constant="8" symbolic="YES" id="Qb2-vc-bcD"/>
+                            <constraint firstItem="n2X-uZ-vSq" firstAttribute="width" secondItem="kbG-3P-y5H" secondAttribute="width" id="N64-a5-76N"/>
                             <constraint firstItem="act-eb-5xt" firstAttribute="centerX" secondItem="kbG-3P-y5H" secondAttribute="centerX" id="WuB-Mz-tmB"/>
-                            <constraint firstItem="s5F-XO-A8u" firstAttribute="top" secondItem="Ksy-rN-IZ3" secondAttribute="bottom" constant="8" symbolic="YES" id="j6q-lO-THv"/>
+                            <constraint firstItem="n2X-uZ-vSq" firstAttribute="top" secondItem="Ksy-rN-IZ3" secondAttribute="bottom" constant="8" symbolic="YES" id="ke7-ww-6d0"/>
                             <constraint firstItem="i06-ho-2Ak" firstAttribute="top" secondItem="act-eb-5xt" secondAttribute="bottom" constant="8" symbolic="YES" id="tve-Iy-Z1t"/>
+                            <constraint firstItem="act-eb-5xt" firstAttribute="top" secondItem="n2X-uZ-vSq" secondAttribute="bottom" constant="8" symbolic="YES" id="zQe-Hq-oEF"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -574,12 +557,12 @@
             <objects>
                 <tableViewController id="QbX-mj-aKD" customClass="OrderOptionsTableViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="1aC-3Y-b2w">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="484"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <pickerView key="tableFooterView" hidden="YES" contentMode="scaleToFill" id="qb0-wt-uyf">
                             <rect key="frame" x="0.0" y="118" width="375" height="171"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         </pickerView>
                         <sections>
                             <tableViewSection headerTitle="When at my doorstep:" id="hD1-pK-DvA">
