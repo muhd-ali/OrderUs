@@ -21,6 +21,7 @@
 		B95965151E606C4600C196E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B95965131E606C4600C196E1 /* Main.storyboard */; };
 		B95965171E606C4600C196E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B95965161E606C4600C196E1 /* Assets.xcassets */; };
 		B959651A1E606C4600C196E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B95965181E606C4600C196E1 /* LaunchScreen.storyboard */; };
+		B972566D1EA75A7300D9DE9E /* ServerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B972566C1EA75A7300D9DE9E /* ServerCommunicator.swift */; };
 		B99B69E11EA100070002A354 /* OrderOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */; };
 		DAC9866CA0D56B406FCC6D19 /* Pods_OrderUs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D766159F5A336ED0D480271 /* Pods_OrderUs.framework */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		B95965161E606C4600C196E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B95965191E606C4600C196E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B959651B1E606C4600C196E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B972566C1EA75A7300D9DE9E /* ServerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCommunicator.swift; sourceTree = "<group>"; };
 		B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderOptionsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,7 +75,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		138CD9C21E7C2C91004C5EC4 /* Extras */ = {
+		138CD9C21E7C2C91004C5EC4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				B959651B1E606C4600C196E1 /* Info.plist */,
@@ -81,7 +83,7 @@
 				B95965161E606C4600C196E1 /* Assets.xcassets */,
 				B95965181E606C4600C196E1 /* LaunchScreen.storyboard */,
 			);
-			name = Extras;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		3C9917E60042D19C36D4A487 /* Frameworks */ = {
@@ -123,7 +125,8 @@
 				B94AACC51E9E2C91005328D0 /* shoppingCartViewController.swift */,
 				B94AACC71E9E4A88005328D0 /* ShoppingCartModel.swift */,
 				B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */,
-				138CD9C21E7C2C91004C5EC4 /* Extras */,
+				B972566C1EA75A7300D9DE9E /* ServerCommunicator.swift */,
+				138CD9C21E7C2C91004C5EC4 /* Supporting Files */,
 			);
 			path = OrderUs;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				13E83F0A1E9A2479004B32CF /* QuantityStepper.swift in Sources */,
 				B99B69E11EA100070002A354 /* OrderOptionsTableViewController.swift in Sources */,
+				B972566D1EA75A7300D9DE9E /* ServerCommunicator.swift in Sources */,
 				B94AACC61E9E2C91005328D0 /* shoppingCartViewController.swift in Sources */,
 				B94AACC81E9E4A88005328D0 /* ShoppingCartModel.swift in Sources */,
 				138CD9C61E7C3367004C5EC4 /* MainCategoriesTableViewController.swift in Sources */,

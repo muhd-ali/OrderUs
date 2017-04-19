@@ -2,7 +2,7 @@
 //  OrderOptionsTableViewController.swift
 //  OrderUs
 //
-//  Created by muaz hamza on 2017-04-14.
+//  Created by Muhammad Ali on 2017-04-14.
 //  Copyright © 2017 PRO. All rights reserved.
 //
 

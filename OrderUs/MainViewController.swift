@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  OrderUs
 //
-//  Created by muaz hamza on 2017-02-24.
+//  Created by Muhammad Ali on 2017-02-24.
 //  Copyright © 2017 PRO. All rights reserved.
 //
 

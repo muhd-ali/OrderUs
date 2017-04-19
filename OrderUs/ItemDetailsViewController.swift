@@ -2,7 +2,7 @@
 //  ItemDetailsViewController.swift
 //  OrderUs
 //
-//  Created by muaz hamza on 2017-04-07.
+//  Created by Muhammad Ali on 2017-04-07.
 //  Copyright © 2017 PRO. All rights reserved.
 //
 
