@@ -9,5 +9,6 @@ target 'OrderUs' do
   pod 'PKHUD', '~> 4.2'
   pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
   pod 'M13Checkbox'
+  pod 'Socket.IO-Client-Swift'
 
 end
