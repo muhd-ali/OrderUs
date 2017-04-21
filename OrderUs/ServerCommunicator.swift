@@ -14,9 +14,10 @@ class ServerCommunicator: NSObject {
     static let sharedInstance = ServerCommunicator()
     
     struct Constants {
-        static let serverIP = "http://192.168.0.29"
+        static let serverIP = "http://192.168.0.28"
         static let connectionEstablished = "connect"
-        static let dataNeedsToBeReloaded = "dataNeedsToBeReloaded"
+        static let checkIfDataNeedsToBeReloaded = "dataNeedsToBeReloaded"
+        static let connectionLost = "disconnect"
     }
     
     let socket: SocketIOClient = SocketIOClient(
@@ -25,29 +26,54 @@ class ServerCommunicator: NSObject {
             .forcePolling(true),
             .reconnects(true),
             .reconnectWait(5),
-        ]
+            ]
     )
     
     func connect() {
         socket.connect()
     }
-    
+
     func disconnect() {
         socket.disconnect()
     }
     
     func bootstrap() {
-        setupEvents()
-        sendNecessaryMessages()
+        setupMainEvents()
+        socket.connect()
     }
     
-    private func setupEvents() {
+    private func setupMainEvents() {
         setupConnectEvent()
+        setupDisconnectEvent()
+        setupAppEvents()
+    }
+    
+    private func setupAppEvents() {
+        setupEventTocheckIfDataNeedsToBeReloaded()
+    }
+    
+    private func requestReloadData() {
+        
+    }
+    
+    private func setupEventTocheckIfDataNeedsToBeReloaded() {
+        socket.on(Constants.checkIfDataNeedsToBeReloaded) { [unowned uoSelf = self] (data, ack) in
+            let dataNeedsToBeReloaded = data[0] as! Bool
+            if dataNeedsToBeReloaded {
+                uoSelf.requestReloadData()
+            }
+        }
     }
     
     private func setupConnectEvent() {
         socket.on(Constants.connectionEstablished) { [unowned uoSelf = self] (data, ack) in
-            print("connected to server at ip \(Constants.serverIP)")
+            uoSelf.sendNecessaryMessages()
+        }
+    }
+    
+    private func setupDisconnectEvent() {
+        socket.on(Constants.connectionLost) { [unowned uoSelf = self] (data, ack) in
+            uoSelf.socket.off(Constants.connectionEstablished)
         }
     }
     
@@ -56,10 +82,6 @@ class ServerCommunicator: NSObject {
     }
     
     private func sendMessageTocheckIfDataNeedsToBeReloaded() {
-        socket.on(Constants.connectionEstablished) { [unowned uoSelf = self] _ in
-            uoSelf.socket.emitWithAck(Constants.dataNeedsToBeReloaded, with: ["nothing"]).timingOut(after: 10) { data in
-                print("here: \(data)")
-            }
-        }
+        socket.emit(Constants.checkIfDataNeedsToBeReloaded, with: [""])
     }
 }
