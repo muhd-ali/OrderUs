@@ -88,6 +88,17 @@
 			name = "Shopping Cart";
 			sourceTree = "<group>";
 		};
+		135036D71EAE6DDB003B7745 /* Shopping Menu */ = {
+			isa = PBXGroup;
+			children = (
+				138CD9C51E7C3367004C5EC4 /* MainCategoriesTableViewController.swift */,
+				138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */,
+				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
+				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
+			);
+			name = "Shopping Menu";
+			sourceTree = "<group>";
+		};
 		138CD9C21E7C2C91004C5EC4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,11 +142,8 @@
 				B95965131E606C4600C196E1 /* Main.storyboard */,
 				B95965111E606C4600C196E1 /* MainViewController.swift */,
 				138CD9C31E7C3283004C5EC4 /* DataManager.swift */,
-				138CD9C51E7C3367004C5EC4 /* MainCategoriesTableViewController.swift */,
-				138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */,
-				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
-				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
 				B972566C1EA75A7300D9DE9E /* ServerCommunicator.swift */,
+				135036D71EAE6DDB003B7745 /* Shopping Menu */,
 				135036D61EAE5E7D003B7745 /* Shopping Cart */,
 				138CD9C21E7C2C91004C5EC4 /* Supporting Files */,
 			);
