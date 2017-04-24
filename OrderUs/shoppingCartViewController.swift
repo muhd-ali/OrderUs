@@ -24,7 +24,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     
     func updateUI() {
         title = "Shopping Cart"
-        let totalCost = shoppingCartList.reduce(0) { $0 + ($1.item.Price * $1.quantity) }
+        let totalCost = shoppingCartList.reduce(0) { $0 + ($1.item.Price * $1.quantityValue) }
         totalCostDisplay.text = "Total Cost = \(totalCost) PKR"
     }
     
@@ -43,7 +43,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         
         let cartItem = shoppingCartList[indexPath.section]
         cell.textLabel?.text = cartItem.item.Name
-        cell.detailTextLabel?.text = "Ordered \(cartItem.quantity) for \(cartItem.item.Price * cartItem.quantity)"
+        cell.detailTextLabel?.text = "Ordered \(cartItem.quantityValue) \(cartItem.quantityUnit) for \(cartItem.item.Price * cartItem.quantityValue) PKR"
         
         return cell
     }

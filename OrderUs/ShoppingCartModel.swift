@@ -12,7 +12,8 @@ class ShoppingCartModel: NSObject {
     
     struct OrderedItem {
         var item: DataManager.Item
-        var quantity: Double
+        var quantityValue: Double
+        var quantityUnit: String
     }
     
     static let sharedInstance = ShoppingCartModel()

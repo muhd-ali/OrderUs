@@ -40,14 +40,22 @@ class ItemDetailsViewController: UIViewController {
     private var itemImageURL = NotFound.itemImageURL
     private var itemPrice = NotFound.itemPrice
     private var itemMinQuantity = NotFound.itemMinQuantity
-    private var itemQuantity = 0.0
+    private var itemQuantityValue = 0.0 {
+        didSet {
+            itemQuantityUnit = itemMinQuantity[.Unit] as! String
+            if (itemQuantityValue > 1.0) {
+                itemQuantityUnit = itemQuantityUnit + "s"
+            }
+        }
+    }
+    private var itemQuantityUnit = ""
     
     
     
     @IBOutlet weak var quantityStepperOutlet: QuantityStepper!
     @IBAction func quantityStepperValueChangedAction(_ sender: QuantityStepper) {
-        quantityStepperOutlet.previousValue = itemQuantity
-        itemQuantity = quantityStepperOutlet.value
+        quantityStepperOutlet.previousValue = itemQuantityValue
+        itemQuantityValue = quantityStepperOutlet.value
         updateDynamicContent(increasingValues: quantityStepperOutlet.valueIsIncreasing)
     }
     
@@ -58,7 +66,8 @@ class ItemDetailsViewController: UIViewController {
             cartItems.append(
                 ShoppingCartModel.OrderedItem(
                     item: item!,
-                    quantity: itemQuantity
+                    quantityValue: itemQuantityValue,
+                    quantityUnit: itemQuantityUnit
                 )
             )
             ShoppingCartModel.sharedInstance.cartItems = cartItems
@@ -66,7 +75,7 @@ class ItemDetailsViewController: UIViewController {
             ShoppingCartModel.sharedInstance.cartItems = cartItems.map {
                 var newItem = $0
                 if (newItem.item.ID == item!.ID) {
-                    newItem.quantity += itemQuantity
+                    newItem.quantityValue += itemQuantityValue
                 }
                 return newItem
             }
@@ -83,7 +92,7 @@ class ItemDetailsViewController: UIViewController {
         super.viewDidLoad()
         quantityStepperOutlet.minimumValue = itemMinQuantity[.Number] as? Double ?? 1
         quantityStepperOutlet.stepValue = quantityStepperOutlet.minimumValue
-        itemQuantity = quantityStepperOutlet.minimumValue
+        itemQuantityValue = quantityStepperOutlet.minimumValue
         updateUI()
     }
     
@@ -106,10 +115,7 @@ class ItemDetailsViewController: UIViewController {
             duration: 0.25,
             options: [.curveEaseInOut, transitionEffect],
             animations: { [unowned uoSelf = self] in
-                uoSelf.itemQuantityLabel.text = "\(uoSelf.quantityStepperOutlet.value) \(uoSelf.itemMinQuantity[.Unit] as? String ?? "")"
-                if (uoSelf.quantityStepperOutlet.value > 1.0) {
-                    uoSelf.itemQuantityLabel.text = uoSelf.itemQuantityLabel.text! + "s"
-                }
+                uoSelf.itemQuantityLabel.text = "\(uoSelf.quantityStepperOutlet.value) \(uoSelf.itemQuantityUnit)"
             },
             completion: nil
         )
