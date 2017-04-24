@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		135036D51EAE5E3B003B7745 /* PlaceOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135036D41EAE5E3B003B7745 /* PlaceOrderViewController.swift */; };
 		138CD9C41E7C3283004C5EC4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C31E7C3283004C5EC4 /* DataManager.swift */; };
 		138CD9C61E7C3367004C5EC4 /* MainCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C51E7C3367004C5EC4 /* MainCategoriesTableViewController.swift */; };
 		138CD9C81E7C40B2004C5EC4 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		135036D41EAE5E3B003B7745 /* PlaceOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOrderViewController.swift; sourceTree = "<group>"; };
 		138CD9C31E7C3283004C5EC4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		138CD9C51E7C3367004C5EC4 /* MainCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCategoriesTableViewController.swift; sourceTree = "<group>"; };
 		138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
@@ -75,6 +77,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		135036D61EAE5E7D003B7745 /* Shopping Cart */ = {
+			isa = PBXGroup;
+			children = (
+				135036D41EAE5E3B003B7745 /* PlaceOrderViewController.swift */,
+				B94AACC51E9E2C91005328D0 /* shoppingCartViewController.swift */,
+				B94AACC71E9E4A88005328D0 /* ShoppingCartModel.swift */,
+				B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */,
+			);
+			name = "Shopping Cart";
+			sourceTree = "<group>";
+		};
 		138CD9C21E7C2C91004C5EC4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,10 +135,8 @@
 				138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */,
 				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
 				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
-				B94AACC51E9E2C91005328D0 /* shoppingCartViewController.swift */,
-				B94AACC71E9E4A88005328D0 /* ShoppingCartModel.swift */,
-				B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */,
 				B972566C1EA75A7300D9DE9E /* ServerCommunicator.swift */,
+				135036D61EAE5E7D003B7745 /* Shopping Cart */,
 				138CD9C21E7C2C91004C5EC4 /* Supporting Files */,
 			);
 			path = OrderUs;
@@ -270,6 +281,7 @@
 				B972566D1EA75A7300D9DE9E /* ServerCommunicator.swift in Sources */,
 				B94AACC61E9E2C91005328D0 /* shoppingCartViewController.swift in Sources */,
 				B94AACC81E9E4A88005328D0 /* ShoppingCartModel.swift in Sources */,
+				135036D51EAE5E3B003B7745 /* PlaceOrderViewController.swift in Sources */,
 				138CD9C61E7C3367004C5EC4 /* MainCategoriesTableViewController.swift in Sources */,
 				B95965121E606C4600C196E1 /* MainViewController.swift in Sources */,
 				B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */,

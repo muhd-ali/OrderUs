@@ -8,7 +8,12 @@
 
 import UIKit
 
+protocol OrderOptionsTableViewControllerDelegate {
+    func doorStepChanged(selectedOption: OrderOptionsTableViewController.doorStepOption)
+}
+
 class OrderOptionsTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    var delegate: OrderOptionsTableViewControllerDelegate?
     
     enum doorStepOption {
         case call
@@ -47,7 +52,9 @@ class OrderOptionsTableViewController: UITableViewController, UIPickerViewDataSo
     var selectedDoorStepOption = 0
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedDoorStepOption = row
-        doorStepOptionOutlet.text = doorStepOptionStructs[selectedDoorStepOption].displayText
+        let selectedOption = doorStepOptionStructs[selectedDoorStepOption]
+        doorStepOptionOutlet.text = selectedOption.displayText
+        delegate?.doorStepChanged(selectedOption: selectedOption.option)
     }
     
     func toggleOptionPickerVisibility() {

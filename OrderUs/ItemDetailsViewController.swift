@@ -81,10 +81,12 @@ class ItemDetailsViewController: UIViewController {
             }
         }
         
-        HUD.flash(.success, delay: 0.5) { [unowned uoSelf = self] finished in
-            if finished {
-                _ = uoSelf.navigationController?.popViewController(animated: true)
-            }
+        HUD.flash(
+            .labeledSuccess(title: "Added To Cart", subtitle: nil),
+            delay: 0.5) { [unowned uoSelf = self] finished in
+                if finished {
+                    _ = uoSelf.navigationController?.popViewController(animated: true)
+                }
         }
     }
     

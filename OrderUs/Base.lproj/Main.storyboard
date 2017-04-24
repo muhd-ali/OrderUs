@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -292,18 +292,18 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="okE-bD-ReW" id="opM-pO-qII">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="45.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Np4-HV-2Id">
-                                                    <rect key="frame" x="15" y="5" width="34" height="21"/>
+                                                    <rect key="frame" x="15" y="6" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gUB-h4-fDO">
-                                                    <rect key="frame" x="15" y="26" width="44" height="15"/>
+                                                    <rect key="frame" x="15" y="26.5" width="44" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -326,7 +326,7 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Proceed"/>
                                 <connections>
-                                    <segue destination="hFr-Hy-WtC" kind="show" id="bha-J9-om8"/>
+                                    <action selector="proceedAction:" destination="stU-Fw-yXh" eventType="touchUpInside" id="ase-eg-0QL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -347,16 +347,17 @@
                     <connections>
                         <outlet property="cartTableView" destination="Zh7-dK-dGO" id="7Pn-8v-hsH"/>
                         <outlet property="totalCostDisplay" destination="P6h-qK-dfR" id="vqx-c8-eok"/>
+                        <segue destination="hFr-Hy-WtC" kind="show" identifier="placeOrderView" id="5es-TD-u7u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfE-Y0-EvH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2533.5999999999999" y="141.67916041979012"/>
         </scene>
-        <!--View Controller-->
+        <!--Place Order View Controller-->
         <scene sceneID="9lk-xb-edm">
             <objects>
-                <viewController id="hFr-Hy-WtC" sceneMemberID="viewController">
+                <viewController id="hFr-Hy-WtC" customClass="PlaceOrderViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ksy-rN-IZ3"/>
                         <viewControllerLayoutGuide type="bottom" id="i06-ho-2Ak"/>
@@ -370,11 +371,14 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Place Order"/>
+                                <connections>
+                                    <action selector="placeOrderAction:" destination="hFr-Hy-WtC" eventType="touchUpInside" id="CzW-jJ-b4F"/>
+                                </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2X-uZ-vSq">
                                 <rect key="frame" x="0.0" y="72" width="375" height="484"/>
                                 <connections>
-                                    <segue destination="QbX-mj-aKD" kind="embed" id="JbR-mQ-I5F"/>
+                                    <segue destination="QbX-mj-aKD" kind="embed" identifier="orderOptionsView" id="JbR-mQ-I5F"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -561,14 +565,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <pickerView key="tableFooterView" hidden="YES" contentMode="scaleToFill" id="qb0-wt-uyf">
-                            <rect key="frame" x="0.0" y="118" width="375" height="171"/>
+                            <rect key="frame" x="0.0" y="117.5" width="375" height="171"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         </pickerView>
                         <sections>
                             <tableViewSection headerTitle="When at my doorstep:" id="hD1-pK-DvA">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bdk-Rb-6Y2">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bdk-Rb-6Y2" id="1MU-OF-a97">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>

@@ -9,7 +9,17 @@
 import UIKit
 import PKHUD
 
-class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OrderOptionsTableViewControllerDelegate, PlaceOrderViewControllerDelegate {
+    
+    private var doorStepOption = OrderOptionsTableViewController.doorStepOption.pushNotify
+    func doorStepChanged(selectedOption: OrderOptionsTableViewController.doorStepOption) {
+        doorStepOption = selectedOption
+    }
+    
+    private var userWantsToPlaceOrder = false
+    func userRequestedToPlaceOrder() {
+        userWantsToPlaceOrder = true
+    }
     
     @IBOutlet weak var cartTableView: UITableView!
     var shoppingCartList: [ShoppingCartModel.OrderedItem] = ShoppingCartModel.sharedInstance.cartItems
@@ -20,6 +30,17 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         cartTableView.dataSource = self
         cartTableView.delegate = self
         updateUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if userWantsToPlaceOrder {
+            HUD.flash(
+                .labeledSuccess(title: "Order Placed", subtitle: "Please wait while we process"),
+                delay: 0.5) { [unowned uoSelf = self] _ in
+                    ShoppingCartModel.sharedInstance.cartItems = []
+                    _ = uoSelf.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     func updateUI() {
@@ -43,7 +64,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         
         let cartItem = shoppingCartList[indexPath.section]
         cell.textLabel?.text = cartItem.item.Name
-        cell.detailTextLabel?.text = "Ordered \(cartItem.quantityValue) \(cartItem.quantityUnit) for \(cartItem.item.Price * cartItem.quantityValue) PKR"
+        cell.detailTextLabel?.text = "\(cartItem.quantityValue) \(cartItem.quantityUnit) for \(cartItem.item.Price * cartItem.quantityValue) PKR"
         
         return cell
     }
@@ -68,10 +89,23 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    @IBAction func placeOrderAction(_ sender: UIButton) {
-        ShoppingCartModel.sharedInstance.cartItems = []
-        HUD.flash(.success, delay: 0.5) { [unowned uoSelf = self] finished in
-            _ = uoSelf.navigationController?.popViewController(animated: true)
+    @IBAction func proceedAction(_ sender: UIButton) {
+        if shoppingCartList.count == 0 {
+            HUD.flash(
+                .labeledError(title: "Cart Empty", subtitle: "Add Items To Shopping Cart"),
+                delay: 0.5
+            )
+        } else {
+            performSegue(withIdentifier: "placeOrderView", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "placeOrderView" {
+            if let dvc = segue.destination as? PlaceOrderViewController {
+                dvc.orderOptionsVC?.delegate = self
+                dvc.delegate = self
+            }
         }
     }
     
