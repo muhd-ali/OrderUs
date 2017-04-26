@@ -14,10 +14,11 @@ class ServerCommunicator: NSObject {
     static let sharedInstance = ServerCommunicator()
     
     struct Constants {
-        static let serverIP = "http://192.168.0.28"
+        static let serverIP = "http://192.168.0.29"
         static let connectionEstablished = "connect"
         static let checkIfDataNeedsToBeReloaded = "dataNeedsToBeReloaded"
         static let connectionLost = "disconnect"
+        static let itemsList = "itemsList"
     }
     
     let socket: SocketIOClient = SocketIOClient(
@@ -32,7 +33,7 @@ class ServerCommunicator: NSObject {
     func connect() {
         socket.connect()
     }
-
+    
     func disconnect() {
         socket.disconnect()
     }
@@ -50,10 +51,19 @@ class ServerCommunicator: NSObject {
     
     private func setupAppEvents() {
         setupEventTocheckIfDataNeedsToBeReloaded()
+        setupEventToReceiveItemsList()
     }
     
     private func requestReloadData() {
-        
+        socket.emit(Constants.itemsList, with: [""])
+    }
+    
+    private func setupEventToReceiveItemsList() {
+        socket.on(Constants.itemsList) { (data, ack) in
+            if let items = data[0] as? [[String : Any]] {
+                print(items[0])
+            }
+        }
     }
     
     private func setupEventTocheckIfDataNeedsToBeReloaded() {
@@ -83,5 +93,10 @@ class ServerCommunicator: NSObject {
     
     private func sendMessageTocheckIfDataNeedsToBeReloaded() {
         socket.emit(Constants.checkIfDataNeedsToBeReloaded, with: [""])
+    }
+    
+    func placeOrder() {
+            let jsonData = ShoppingCartModel.sharedInstance.cartItems.map({ $0.jsonData })
+            socket.emit("newOrder", with: [jsonData])
     }
 }

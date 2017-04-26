@@ -10,30 +10,48 @@ import Foundation
 
 protocol Selectable {
     var Name: String {get}
-    var Description: String {get}
     var ImageURL: String {get}
+    var Parent: String {get}
+    var ID: String {get}
 }
 
 class DataManager: NSObject {
     static let sharedInstance = DataManager()
     
     struct Item: Selectable {
-        enum MinQuantityKey {
-            case Number
-            case Unit
+        struct MinQuantityKey {
+            static let Number = "number"
+            static let Unit = "unit"
         }
         internal var Name: String
-        internal var Description: String
         internal var ImageURL: String
-        var MinQuantity: [MinQuantityKey : Any]
+        internal var Parent: String
+        internal var ID: String
+        var MinQuantity: [String : Any]
         var Price: Double
-        var ID: String
+    }
+    
+    var itemsCooked: [Item] = []
+    var itemsRaw: [[String : Any]] = [] {
+        didSet {
+            itemsCooked = itemsRaw.map { item in
+                Item(
+                    Name: item["Name"]! as! String,
+                    ImageURL: item["imageURL"]! as! String,
+                    Parent: item["Parent"]! as! String,
+                    ID: item["_id"]! as! String,
+                    MinQuantity: item["minQuantity"]! as! [String : Any],
+                    Price: item["price"]! as! Double
+                )
+            }
+        }
     }
     
     struct Category: Selectable {
         internal var Name: String
-        internal var Description: String
         internal var ImageURL: String
+        internal var Parent: String
+        internal var ID: String
         var Children: [Selectable]
     }
     
@@ -43,60 +61,54 @@ class DataManager: NSObject {
         private static let FreshProduceList: ListType = [
             Category(
                 Name : "Fruits",
-                Description : "Apple, Banana, etc.",
                 ImageURL : "https://cdn.pixabay.com/photo/2016/04/01/12/20/apple-1300670.960.720.png",
+                Parent: "0",
+                ID: "1",
                 Children : []
             ),
             Category(
                 Name : "Vegetables",
-                Description : "Potatoes, Onions, etc.",
                 ImageURL : "https://cdn.pixabay.com/photo/2012/04/13/17/15/vegetables-32932.960.720.png",
+                Parent: "0",
+                ID: "2",
                 Children : []
             ),
             ]
         
-        private static let LaundryList: ListType = [
-            
-        ]
-        
         private static let GroceryList: ListType = [
             Category(
                 Name : "Fresh Produce",
-                Description : "Order Pizza, Steak, Burger etc.",
                 ImageURL : "https://cdn.pixabay.com/photo/2012/04/24/16/09/fruit-40276.960.720.png",
+                Parent: "0",
+                ID: "3",
                 Children : FreshProduceList
             ),
             Item(
                 Name : "Eggs",
-                Description : "Anday",
                 ImageURL : "http://res.freestockphotos.biz/pictures/11/11446-illustration-of-a-white-egg-pv.png",
-                MinQuantity : [.Number : 1, .Unit : "dozen"],
-                Price : 120,
-                ID : "egg"
+                Parent: "4",
+                ID : "1",
+                MinQuantity : [Item.MinQuantityKey.Number : 1, Item.MinQuantityKey.Unit : "dozen"],
+                Price : 120
             ),
             Item(
                 Name : "Bread",
-                Description : "Triple Roti",
                 ImageURL : "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25205.960.720.png",
-                MinQuantity : [.Number  : 1, .Unit : "unit"],
-                Price : 80.0,
-                ID : "bread" 
+                Parent: "4",
+                ID : "2",
+                MinQuantity : [Item.MinQuantityKey.Number : 1, Item.MinQuantityKey.Unit : "unit"],
+                Price : 80.0
             )
         ]
         
         static let MainList: ListType = [
             Category(
                 Name : "Grocery",
-                Description : "Order Fruits, Vegetables, etc.",
                 ImageURL : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",
+                Parent: "0",
+                ID: "4",
                 Children : GroceryList
             ),
-            Category(
-                Name : "Laundry",
-                Description : "Get your stuff washed",
-                ImageURL : "https://cdn.iconscout.com/public/images/icon/premium/png-256/laundry-plumber-cleaning-electrical-work-3b8d8471053d1179-256x256.png",
-                Children : LaundryList
-            )
         ]
     }
 }

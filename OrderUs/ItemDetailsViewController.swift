@@ -19,7 +19,6 @@ class ItemDetailsViewController: UIViewController {
         didSet {
             if item != nil {
                 itemName = item!.Name
-                itemDescription = item!.Description
                 itemImageURL = item!.ImageURL
                 itemPrice = item!.Price
                 itemMinQuantity = item!.MinQuantity
@@ -29,20 +28,21 @@ class ItemDetailsViewController: UIViewController {
     
     private struct NotFound {
         static let itemName = "no type found"
-        static let itemDescription = "no description found"
         static let itemImageURL = "no url found"
         static let itemPrice = -1.0
-        static let itemMinQuantity:[DataManager.Item.MinQuantityKey : Any] = [.Number : -1, .Unit : "not found"]
+        static let itemMinQuantity: [String : Any] = [
+            DataManager.Item.MinQuantityKey.Number : -1,
+            DataManager.Item.MinQuantityKey.Unit : "not found"
+        ]
     }
     
     private var itemName = NotFound.itemName
-    private var itemDescription = NotFound.itemDescription
     private var itemImageURL = NotFound.itemImageURL
     private var itemPrice = NotFound.itemPrice
     private var itemMinQuantity = NotFound.itemMinQuantity
     private var itemQuantityValue = 0.0 {
         didSet {
-            itemQuantityUnit = itemMinQuantity[.Unit] as! String
+            itemQuantityUnit = itemMinQuantity[DataManager.Item.MinQuantityKey.Unit] as! String
             if (itemQuantityValue > 1.0) {
                 itemQuantityUnit = itemQuantityUnit + "s"
             }
@@ -92,7 +92,7 @@ class ItemDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        quantityStepperOutlet.minimumValue = itemMinQuantity[.Number] as? Double ?? 1
+        quantityStepperOutlet.minimumValue = itemMinQuantity[DataManager.Item.MinQuantityKey.Number] as? Double ?? 1
         quantityStepperOutlet.stepValue = quantityStepperOutlet.minimumValue
         itemQuantityValue = quantityStepperOutlet.minimumValue
         updateUI()

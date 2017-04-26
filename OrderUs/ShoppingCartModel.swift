@@ -14,9 +14,17 @@ class ShoppingCartModel: NSObject {
         var item: DataManager.Item
         var quantityValue: Double
         var quantityUnit: String
+        
+        var jsonData: [String : String] {
+            return [
+                "item_id" : item.ID,
+                "quanity" : "\(quantityValue) \(quantityUnit)"
+            ]
+        }
     }
     
     static let sharedInstance = ShoppingCartModel()
     
     var cartItems: [OrderedItem] = []
+    
 }

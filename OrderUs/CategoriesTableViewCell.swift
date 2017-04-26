@@ -10,17 +10,14 @@ import UIKit
 
 class CategoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var typeImageView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
     
     
     var category: Selectable? {
         didSet {
             if category != nil {
                 categoryName = category!.Name
-                categoryDescription = category!.Description
                 categoryImageURL = category!.ImageURL
                 updateUI()
             }
@@ -30,17 +27,14 @@ class CategoriesTableViewCell: UITableViewCell {
     
     struct NotFound {
         static let categoryName = "no type found"
-        static let categoryDescription = "no description found"
         static let categoryImageURL = "no url found"
     }
     
     var categoryName = NotFound.categoryName
-    var categoryDescription = NotFound.categoryDescription
     var categoryImageURL = NotFound.categoryImageURL
     
     private func updateUI() {
         typeLabel.text = categoryName
-        descriptionLabel.text = categoryDescription
         typeImageView.image = nil
         updateImage()
         updateAccessoryOptions()

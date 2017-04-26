@@ -32,21 +32,31 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         updateUI()
     }
     
+    func placeOrder() {
+        ServerCommunicator.sharedInstance.placeOrder()
+        ShoppingCartModel.sharedInstance.cartItems = []
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         if userWantsToPlaceOrder {
+            placeOrder()
             HUD.flash(
                 .labeledSuccess(title: "Order Placed", subtitle: "Please wait while we process"),
                 delay: 0.5) { [unowned uoSelf = self] _ in
-                    ShoppingCartModel.sharedInstance.cartItems = []
                     _ = uoSelf.navigationController?.popViewController(animated: true)
             }
         }
     }
     
+    @IBOutlet weak var proceedButtonOutlet: UIButton!
     func updateUI() {
         title = "Shopping Cart"
         let totalCost = shoppingCartList.reduce(0) { $0 + ($1.item.Price * $1.quantityValue) }
         totalCostDisplay.text = "Total Cost = \(totalCost) PKR"
+        if shoppingCartList.count == 0 {
+            proceedButtonOutlet.isEnabled = false
+            proceedButtonOutlet.setTitle("Cart is Empty", for: .disabled)
+        }
     }
     
     // MARK: - Table view data source
@@ -90,14 +100,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func proceedAction(_ sender: UIButton) {
-        if shoppingCartList.count == 0 {
-            HUD.flash(
-                .labeledError(title: "Cart Empty", subtitle: "Add Items To Shopping Cart"),
-                delay: 0.5
-            )
-        } else {
-            performSegue(withIdentifier: "placeOrderView", sender: nil)
-        }
+        performSegue(withIdentifier: "placeOrderView", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
