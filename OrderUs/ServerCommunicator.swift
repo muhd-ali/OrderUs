@@ -19,6 +19,8 @@ class ServerCommunicator: NSObject {
         static let checkIfDataNeedsToBeReloaded = "dataNeedsToBeReloaded"
         static let connectionLost = "disconnect"
         static let itemsList = "itemsList"
+        static let categoriesList = "categoriesList"
+        static let newOrder = "newOrder"
     }
     
     let socket: SocketIOClient = SocketIOClient(
@@ -52,16 +54,30 @@ class ServerCommunicator: NSObject {
     private func setupAppEvents() {
         setupEventTocheckIfDataNeedsToBeReloaded()
         setupEventToReceiveItemsList()
+        setupEventToReceiveCategoriesList()
     }
     
-    private func requestReloadData() {
+    private func requestReloadItemsData() {
         socket.emit(Constants.itemsList, with: [""])
+    }
+    
+    private func requestReloadCategoriesData() {
+        socket.emit(Constants.categoriesList, with: [""])
     }
     
     private func setupEventToReceiveItemsList() {
         socket.on(Constants.itemsList) { (data, ack) in
             if let items = data[0] as? [[String : Any]] {
-                print(items[0])
+                DataManager.sharedInstance.itemsRaw = items
+            }
+        }
+    }
+    
+    private func setupEventToReceiveCategoriesList() {
+        socket.on(Constants.categoriesList) { (data, ack) in
+            if let categories = data[0] as? [[String : Any]] {
+                print(categories[0])
+                DataManager.sharedInstance.categoriesRaw = categories
             }
         }
     }
@@ -70,7 +86,8 @@ class ServerCommunicator: NSObject {
         socket.on(Constants.checkIfDataNeedsToBeReloaded) { [unowned uoSelf = self] (data, ack) in
             let dataNeedsToBeReloaded = data[0] as! Bool
             if dataNeedsToBeReloaded {
-                uoSelf.requestReloadData()
+                uoSelf.requestReloadItemsData()
+                uoSelf.requestReloadCategoriesData()
             }
         }
     }
@@ -97,6 +114,6 @@ class ServerCommunicator: NSObject {
     
     func placeOrder() {
             let jsonData = ShoppingCartModel.sharedInstance.cartItems.map({ $0.jsonData })
-            socket.emit("newOrder", with: [jsonData])
+            socket.emit(Constants.newOrder, with: [jsonData])
     }
 }

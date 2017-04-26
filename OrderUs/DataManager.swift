@@ -37,12 +37,38 @@ class DataManager: NSObject {
             itemsCooked = itemsRaw.map { item in
                 Item(
                     Name: item["Name"]! as! String,
-                    ImageURL: item["imageURL"]! as! String,
+                    ImageURL: "\(ServerCommunicator.Constants.serverIP)\\\(item["imageURL"]! as! String)",
                     Parent: item["Parent"]! as! String,
                     ID: item["_id"]! as! String,
                     MinQuantity: item["minQuantity"]! as! [String : Any],
                     Price: item["price"]! as! Double
                 )
+            }
+        }
+    }
+    
+    private func makeCategory(rawCategory: [String : Any]) -> Category {
+        return Category(
+            Name: rawCategory["Name"]! as! String,
+            ImageURL: "\(ServerCommunicator.Constants.serverIP)\\\(rawCategory["imageURL"]! as! String)",
+            Parent: rawCategory["Parent"]! as! String,
+            ID: rawCategory["_id"]! as! String,
+            Children: [],
+            ChildrenCategories: rawCategory["ChildrenCategories"]! as! [String],
+            ChildrenItems: rawCategory["ChildrenItems"]! as! [String]
+        )
+    }
+    var categoriesCooked: [Category] = []
+    var categoriesRaw: [[String : Any]] = [] {
+        didSet {
+            categoriesCooked = categoriesRaw
+                .map { makeCategory(rawCategory: $0) }
+            
+            categoriesCooked = categoriesCooked.map { tempCat0 in
+                var category = tempCat0
+                let children = categoriesCooked.filter({ tempCat1 in true })
+                category.Children.append(contentsOf: children as [Selectable])
+                return category
             }
         }
     }
@@ -53,6 +79,8 @@ class DataManager: NSObject {
         internal var Parent: String
         internal var ID: String
         var Children: [Selectable]
+        var ChildrenCategories: [String]
+        var ChildrenItems: [String]
     }
     
     typealias ListType = [Selectable]
@@ -62,16 +90,20 @@ class DataManager: NSObject {
             Category(
                 Name : "Fruits",
                 ImageURL : "https://cdn.pixabay.com/photo/2016/04/01/12/20/apple-1300670.960.720.png",
-                Parent: "0",
-                ID: "1",
-                Children : []
+                Parent : "0",
+                ID : "1",
+                Children : [],
+                ChildrenCategories : [],
+                ChildrenItems : []
             ),
             Category(
                 Name : "Vegetables",
                 ImageURL : "https://cdn.pixabay.com/photo/2012/04/13/17/15/vegetables-32932.960.720.png",
-                Parent: "0",
-                ID: "2",
-                Children : []
+                Parent : "0",
+                ID : "2",
+                Children : [],
+                ChildrenCategories : [],
+                ChildrenItems : []
             ),
             ]
         
@@ -79,9 +111,11 @@ class DataManager: NSObject {
             Category(
                 Name : "Fresh Produce",
                 ImageURL : "https://cdn.pixabay.com/photo/2012/04/24/16/09/fruit-40276.960.720.png",
-                Parent: "0",
-                ID: "3",
-                Children : FreshProduceList
+                Parent : "0",
+                ID : "3",
+                Children : FreshProduceList,
+                ChildrenCategories : [],
+                ChildrenItems : []
             ),
             Item(
                 Name : "Eggs",
@@ -105,10 +139,12 @@ class DataManager: NSObject {
             Category(
                 Name : "Grocery",
                 ImageURL : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",
-                Parent: "0",
-                ID: "4",
-                Children : GroceryList
+                Parent : "0",
+                ID : "4",
+                Children : GroceryList,
+                ChildrenCategories : [],
+                ChildrenItems : []
             ),
-        ]
+            ]
     }
 }
