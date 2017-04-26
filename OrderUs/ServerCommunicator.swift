@@ -14,7 +14,7 @@ class ServerCommunicator: NSObject {
     static let sharedInstance = ServerCommunicator()
     
     struct Constants {
-        static let serverIP = "http://192.168.0.29"
+        static let serverIP = "http://192.168.0.105"
         static let connectionEstablished = "connect"
         static let checkIfDataNeedsToBeReloaded = "dataNeedsToBeReloaded"
         static let connectionLost = "disconnect"
@@ -76,7 +76,6 @@ class ServerCommunicator: NSObject {
     private func setupEventToReceiveCategoriesList() {
         socket.on(Constants.categoriesList) { (data, ack) in
             if let categories = data[0] as? [[String : Any]] {
-                print(categories[0])
                 DataManager.sharedInstance.categoriesRaw = categories
             }
         }

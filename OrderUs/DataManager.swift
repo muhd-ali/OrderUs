@@ -15,8 +15,14 @@ protocol Selectable {
     var ID: String {get}
 }
 
+protocol DataManagerDelegate {
+    func dataChanged(newList: DataManager.ListType)
+}
+
 class DataManager: NSObject {
     static let sharedInstance = DataManager()
+    
+    var delegate: DataManagerDelegate?
     
     struct Item: Selectable {
         struct MinQuantityKey {
@@ -31,26 +37,39 @@ class DataManager: NSObject {
         var Price: Double
     }
     
+    private func makeItem(rawItem:  [String : Any]) -> Item {
+        return Item(
+            Name: rawItem["Name"]! as! String,
+            ImageURL: "\(ServerCommunicator.Constants.serverIP)/\(rawItem["imageURL"]! as! String)".replacingOccurrences(of: " ", with: "%20"),
+            Parent: rawItem["Parent"]! as! String,
+            ID: rawItem["_id"]! as! String,
+            MinQuantity: rawItem["minQuantity"]! as! [String : Any],
+            Price: rawItem["price"]! as! Double
+        )
+    }
+    
+    private func ifDataFetchedFromServerGenerateTree() {
+        if itemsLoaded && categoriesLoaded {
+            generateCategoryTree()
+            itemsLoaded = false
+            categoriesLoaded = false
+        }
+    }
+    
+    var itemsLoaded = false
     var itemsCooked: [Item] = []
     var itemsRaw: [[String : Any]] = [] {
         didSet {
-            itemsCooked = itemsRaw.map { item in
-                Item(
-                    Name: item["Name"]! as! String,
-                    ImageURL: "\(ServerCommunicator.Constants.serverIP)\\\(item["imageURL"]! as! String)",
-                    Parent: item["Parent"]! as! String,
-                    ID: item["_id"]! as! String,
-                    MinQuantity: item["minQuantity"]! as! [String : Any],
-                    Price: item["price"]! as! Double
-                )
-            }
+            itemsCooked = itemsRaw.map { makeItem(rawItem: $0) }
+            itemsLoaded = true
+            ifDataFetchedFromServerGenerateTree()
         }
     }
     
     private func makeCategory(rawCategory: [String : Any]) -> Category {
         return Category(
             Name: rawCategory["Name"]! as! String,
-            ImageURL: "\(ServerCommunicator.Constants.serverIP)\\\(rawCategory["imageURL"]! as! String)",
+            ImageURL: "\(ServerCommunicator.Constants.serverIP)/\(rawCategory["imageURL"]! as! String)".replacingOccurrences(of: " ", with: "%20"),
             Parent: rawCategory["Parent"]! as! String,
             ID: rawCategory["_id"]! as! String,
             Children: [],
@@ -58,18 +77,44 @@ class DataManager: NSObject {
             ChildrenItems: rawCategory["ChildrenItems"]! as! [String]
         )
     }
+    
+    private func setupCategories() {
+        categoriesCooked = categoriesCooked.map { categoryWithoutChildren in
+            var category = categoryWithoutChildren
+            let children = categoriesCooked.filter { maybeChild in
+                category.ChildrenCategories.filter { childID in childID == maybeChild.ID }.count > 0
+            }
+            category.Children.append(contentsOf: children as [Selectable])
+            return category
+        }
+        
+        categoriesCooked = categoriesCooked.filter{ $0.Parent == "0" }
+    }
+    
+    private func setupItems() {
+        categoriesCooked = categoriesCooked.map { categoryWithoutChildren in
+            var category = categoryWithoutChildren
+            let children = itemsCooked.filter { maybeChild in
+                category.ChildrenItems.filter { childID in childID == maybeChild.ID }.count > 0
+            }
+            category.Children.append(contentsOf: children as [Selectable])
+            return category
+        }
+    }
+    
+    private func generateCategoryTree() {
+        setupItems()
+        setupCategories()
+        delegate?.dataChanged(newList: categoriesCooked)
+    }
+    
+    var categoriesLoaded = false
     var categoriesCooked: [Category] = []
     var categoriesRaw: [[String : Any]] = [] {
         didSet {
-            categoriesCooked = categoriesRaw
-                .map { makeCategory(rawCategory: $0) }
-            
-            categoriesCooked = categoriesCooked.map { tempCat0 in
-                var category = tempCat0
-                let children = categoriesCooked.filter({ tempCat1 in true })
-                category.Children.append(contentsOf: children as [Selectable])
-                return category
-            }
+            categoriesCooked = categoriesRaw.map { makeCategory(rawCategory: $0) }
+            categoriesLoaded = true
+            ifDataFetchedFromServerGenerateTree()
         }
     }
     

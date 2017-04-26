@@ -9,10 +9,14 @@
 import UIKit
 import MIBadgeButton_Swift
 
-class MainCategoriesTableViewController: UITableViewController {
+class MainCategoriesTableViewController: UITableViewController, DataManagerDelegate {
     var parentList: [DataManager.ListType] = []
     var pageTitles: [String] = []
     var userIsForwardNavigating = true
+    
+    func dataChanged(newList: DataManager.ListType) {
+        tableList = newList
+    }
     
     @IBOutlet weak var backButtonOutlet: UIButton!
     @IBAction func backButtonAction(_ sender: UIButton) {
@@ -29,7 +33,7 @@ class MainCategoriesTableViewController: UITableViewController {
         }
     }
     
-    private var tableList = DataManager.ExampleCategories.MainList {
+    private var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
         didSet {
             let transitionEffect = getTransitionEffect()
             UIView.transition(
@@ -97,6 +101,7 @@ class MainCategoriesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DataManager.sharedInstance.delegate = self
 //        tableView.estimatedRowHeight = tableView.rowHeight
 //        tableView.rowHeight = UITableViewAutomaticDimension
         title = "Categories"
