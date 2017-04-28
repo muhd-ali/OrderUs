@@ -11,8 +11,8 @@ import PKHUD
 
 class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OrderOptionsTableViewControllerDelegate, PlaceOrderViewControllerDelegate {
     
-    private var doorStepOption = OrderOptionsTableViewController.doorStepOption.pushNotify
-    func doorStepChanged(selectedOption: OrderOptionsTableViewController.doorStepOption) {
+    private var doorStepOption = OrderOptionsTableViewController.DoorStepOption.ringDoorBell
+    func doorStepChanged(selectedOption: OrderOptionsTableViewController.DoorStepOption) {
         doorStepOption = selectedOption
     }
     
@@ -32,7 +32,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         updateUI()
     }
     
-    func placeOrder() {
+    private func placeOrder() {
         ServerCommunicator.sharedInstance.placeOrder()
         ShoppingCartModel.sharedInstance.cartItems = []
     }
@@ -49,9 +49,9 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBOutlet weak var proceedButtonOutlet: UIButton!
-    func updateUI() {
+    private func updateUI() {
         title = "Shopping Cart"
-        let totalCost = shoppingCartList.reduce(0) { $0 + ($1.item.Price * $1.quantityValue) }
+        let totalCost = shoppingCartList.reduce(0) { $0 + ($1.totalCost()) }
         totalCostDisplay.text = "Total Cost = \(totalCost) PKR"
         if shoppingCartList.count == 0 {
             proceedButtonOutlet.isEnabled = false
@@ -74,18 +74,10 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         
         let cartItem = shoppingCartList[indexPath.section]
         cell.textLabel?.text = cartItem.item.Name
-        cell.detailTextLabel?.text = "\(cartItem.quantityValue) \(cartItem.quantityUnit) for \(cartItem.item.Price * cartItem.quantityValue) PKR"
+        cell.detailTextLabel?.text = "\(cartItem.quantityValue) \(cartItem.quantityUnit) for \(cartItem.totalCost()) PKR"
         
         return cell
     }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
     
     // Override to support editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

@@ -9,74 +9,51 @@
 import UIKit
 
 protocol OrderOptionsTableViewControllerDelegate {
-    func doorStepChanged(selectedOption: OrderOptionsTableViewController.doorStepOption)
+    func doorStepChanged(selectedOption: OrderOptionsTableViewController.DoorStepOption)
 }
 
-class OrderOptionsTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class OrderOptionsTableViewController: UITableViewController {
     var delegate: OrderOptionsTableViewControllerDelegate?
     
-    enum doorStepOption {
+    enum DoorStepOption {
         case call
         case text
-        case pushNotify
         case ringDoorBell
     }
     
-    struct doorStepOptionStruct {
-        let option: doorStepOption
+    struct DoorStepOptionStruct {
+        let option: DoorStepOption
         let displayText: String
     }
     
-    let doorStepOptionStructs: [doorStepOptionStruct] = [
-        doorStepOptionStruct(option: .pushNotify, displayText: "Send Push Notification"),
-        doorStepOptionStruct(option: .ringDoorBell, displayText: "Ring My Doorbell"),
-        doorStepOptionStruct(option: .call, displayText: "Call Me"),
-        doorStepOptionStruct(option: .text, displayText: "Text Me"),
+    let doorStepOptions: [DoorStepOptionStruct] = [
+        DoorStepOptionStruct(option: .ringDoorBell, displayText: "Ring My Doorbell"),
+        DoorStepOptionStruct(option: .text, displayText: "Text Me"),
+        DoorStepOptionStruct(option: .call, displayText: "Call Me"),
         ]
-    @IBOutlet weak var optionsPicker: UIPickerView!
     
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return doorStepOptionStructs.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return doorStepOptionStructs[row].displayText
-    }
     
     @IBOutlet weak var doorStepOptionOutlet: UILabel!
-    var selectedDoorStepOption = 0
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedDoorStepOption = row
-        let selectedOption = doorStepOptionStructs[selectedDoorStepOption]
-        doorStepOptionOutlet.text = selectedOption.displayText
-        delegate?.doorStepChanged(selectedOption: selectedOption.option)
-    }
-    
-    func toggleOptionPickerVisibility() {
-        UIView.transition(
-            with: optionsPicker,
-            duration: 0.5,
-            options: [.curveEaseInOut, .transitionFlipFromTop],
-            animations: { [unowned uoSelf = self] in
-                if uoSelf.optionsPicker.isHidden {
-                    uoSelf.optionsPicker.isHidden = false
-                } else {
-                    uoSelf.optionsPicker.isHidden = true
+    var selectedDoorStepOption: DoorStepOptionStruct?
+    private func showDoorStepOptionsMenu() {
+        let actionName = "Choose Action"
+        let optionsMenu = UIAlertController(title: actionName, message: "When at my doorstep, the rider should:", preferredStyle: .actionSheet)
+        doorStepOptions.forEach { [unowned uoSelf = self] doorStepOption in
+            optionsMenu.addAction(
+                UIAlertAction(title: doorStepOption.displayText, style: .default) { _ in
+                    uoSelf.selectedDoorStepOption = doorStepOption
+                    uoSelf.doorStepOptionOutlet.text = doorStepOption.displayText
+                    uoSelf.delegate?.doorStepChanged(selectedOption: doorStepOption.option)
                 }
-        },
-            completion: nil
-        )
+            )
+        }
+        present(optionsMenu, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            toggleOptionPickerVisibility()
+            showDoorStepOptionsMenu()
         default:
             break
         }
@@ -84,9 +61,8 @@ class OrderOptionsTableViewController: UITableViewController, UIPickerViewDataSo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        optionsPicker.dataSource = self
-        optionsPicker.delegate = self
-        doorStepOptionOutlet.text = doorStepOptionStructs[selectedDoorStepOption].displayText
+        selectedDoorStepOption = doorStepOptions[0]
+        doorStepOptionOutlet.text = selectedDoorStepOption?.displayText
     }
     
     

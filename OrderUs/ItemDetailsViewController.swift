@@ -21,7 +21,7 @@ class ItemDetailsViewController: UIViewController {
                 itemName = item!.Name
                 itemImageURL = item!.ImageURL
                 itemPrice = item!.Price
-                itemMinQuantity = item!.MinQuantity
+                itemMinQuantity = item!.minQuantity
             }
         }
     }
@@ -30,10 +30,12 @@ class ItemDetailsViewController: UIViewController {
         static let itemName = "no type found"
         static let itemImageURL = "no url found"
         static let itemPrice = -1.0
-        static let itemMinQuantity: [String : Any] = [
-            DataManager.Item.MinQuantityKey.Number : -1,
-            DataManager.Item.MinQuantityKey.Unit : "not found"
-        ]
+        static let itemMinQuantity = DataManager.Item.MinQuantity (
+            rawMinQuantity: [
+                DataManager.Item.MinQuantity.NumberKey : -1,
+                DataManager.Item.MinQuantity.UnitKey : "not found"
+            ]
+        )
     }
     
     private var itemName = NotFound.itemName
@@ -42,7 +44,7 @@ class ItemDetailsViewController: UIViewController {
     private var itemMinQuantity = NotFound.itemMinQuantity
     private var itemQuantityValue = 0.0 {
         didSet {
-            itemQuantityUnit = itemMinQuantity[DataManager.Item.MinQuantityKey.Unit] as! String
+            itemQuantityUnit = itemMinQuantity.Unit
             if (itemQuantityValue > 1.0) {
                 itemQuantityUnit = itemQuantityUnit + "s"
             }
@@ -92,7 +94,7 @@ class ItemDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        quantityStepperOutlet.minimumValue = itemMinQuantity[DataManager.Item.MinQuantityKey.Number] as? Double ?? 1
+        quantityStepperOutlet.minimumValue = itemMinQuantity.Number
         quantityStepperOutlet.stepValue = quantityStepperOutlet.minimumValue
         itemQuantityValue = quantityStepperOutlet.minimumValue
         updateUI()
@@ -102,6 +104,10 @@ class ItemDetailsViewController: UIViewController {
         itemNameLabel.text = itemName
         updateImage()
         updateDynamicContent(increasingValues: true)
+    }
+    
+    private func getTotalPrice() -> Double {
+        return itemPrice/quantityStepperOutlet.minimumValue * quantityStepperOutlet.value
     }
     
     private func updateDynamicContent(increasingValues: Bool) {
@@ -127,7 +133,7 @@ class ItemDetailsViewController: UIViewController {
             duration: 0.25,
             options: [.curveEaseInOut, transitionEffect],
             animations: { [unowned uoSelf = self] in
-                uoSelf.itemPriceLabel.text = "\((uoSelf.itemPrice/uoSelf.quantityStepperOutlet.minimumValue) * uoSelf.quantityStepperOutlet.value) PKR"
+                uoSelf.itemPriceLabel.text = "\(uoSelf.getTotalPrice()) PKR"
             },
             completion: nil
         )

@@ -25,15 +25,21 @@ class DataManager: NSObject {
     var delegate: DataManagerDelegate?
     
     struct Item: Selectable {
-        struct MinQuantityKey {
-            static let Number = "number"
-            static let Unit = "unit"
+        struct MinQuantity {
+            static let NumberKey = "number"
+            static let UnitKey = "unit"
+            let Number: Double
+            let Unit: String
+            init(rawMinQuantity: [String : Any]) {
+                Number = Double(rawMinQuantity[MinQuantity.NumberKey]! as! Int)
+                Unit = rawMinQuantity[MinQuantity.UnitKey]! as! String
+            }
         }
         internal var Name: String
         internal var ImageURL: String
         internal var Parent: String
         internal var ID: String
-        var MinQuantity: [String : Any]
+        var minQuantity: MinQuantity
         var Price: Double
     }
     
@@ -43,7 +49,7 @@ class DataManager: NSObject {
             ImageURL: "\(ServerCommunicator.Constants.serverIP)/\(rawItem["imageURL"]! as! String)".replacingOccurrences(of: " ", with: "%20"),
             Parent: rawItem["Parent"]! as! String,
             ID: rawItem["_id"]! as! String,
-            MinQuantity: rawItem["minQuantity"]! as! [String : Any],
+            minQuantity: Item.MinQuantity(rawMinQuantity: rawItem["minQuantity"]! as! [String : Any]),
             Price: rawItem["price"]! as! Double
         )
     }
@@ -78,25 +84,25 @@ class DataManager: NSObject {
         )
     }
     
-    private func setupCategories() {
-        categoriesCooked = categoriesCooked.map { categoryWithoutChildren in
-            var category = categoryWithoutChildren
-            let children = categoriesCooked.filter { maybeChild in
-                category.ChildrenCategories.filter { childID in childID == maybeChild.ID }.count > 0
-            }
-            category.Children.append(contentsOf: children as [Selectable])
-            return category
+    private func addChildrenCategories(toCategory category: Category, fromList catList: [Category]) -> Category {
+        var childrenCategories = catList.filter {category.ChildrenCategories.contains($0.ID)}
+        childrenCategories = childrenCategories.map {
+            return addChildrenCategories(toCategory: $0, fromList: catList)
         }
-        
+        var modifiedCategory = category
+        modifiedCategory.Children.append(contentsOf: childrenCategories as [Selectable])
+        return modifiedCategory
+    }
+    
+    private func setupCategories() {
+        categoriesCooked = categoriesCooked.map { addChildrenCategories(toCategory: $0, fromList: categoriesCooked) }
         categoriesCooked = categoriesCooked.filter{ $0.Parent == "0" }
     }
     
     private func setupItems() {
         categoriesCooked = categoriesCooked.map { categoryWithoutChildren in
             var category = categoryWithoutChildren
-            let children = itemsCooked.filter { maybeChild in
-                category.ChildrenItems.filter { childID in childID == maybeChild.ID }.count > 0
-            }
+            let children = itemsCooked.filter { category.ChildrenItems.contains($0.ID) }
             category.Children.append(contentsOf: children as [Selectable])
             return category
         }
@@ -167,7 +173,7 @@ class DataManager: NSObject {
                 ImageURL : "http://res.freestockphotos.biz/pictures/11/11446-illustration-of-a-white-egg-pv.png",
                 Parent: "4",
                 ID : "1",
-                MinQuantity : [Item.MinQuantityKey.Number : 1, Item.MinQuantityKey.Unit : "dozen"],
+                minQuantity : Item.MinQuantity(rawMinQuantity: [Item.MinQuantity.NumberKey : 1, Item.MinQuantity.UnitKey : "dozen"]),
                 Price : 120
             ),
             Item(
@@ -175,7 +181,7 @@ class DataManager: NSObject {
                 ImageURL : "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25205.960.720.png",
                 Parent: "4",
                 ID : "2",
-                MinQuantity : [Item.MinQuantityKey.Number : 1, Item.MinQuantityKey.Unit : "unit"],
+                minQuantity : Item.MinQuantity(rawMinQuantity: [Item.MinQuantity.NumberKey : 50, Item.MinQuantity.UnitKey : "loaf"]),
                 Price : 80.0
             )
         ]

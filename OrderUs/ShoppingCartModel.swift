@@ -21,6 +21,10 @@ class ShoppingCartModel: NSObject {
                 "quanity" : "\(quantityValue) \(quantityUnit)"
             ]
         }
+        
+        func totalCost() -> Double {
+            return (item.Price / item.minQuantity.Number) * quantityValue
+        }
     }
     
     static let sharedInstance = ShoppingCartModel()

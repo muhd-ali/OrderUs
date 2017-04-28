@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -174,7 +174,7 @@
         <!--Categories-->
         <scene sceneID="WlC-1K-wxr">
             <objects>
-                <tableViewController id="kDv-a7-jK2" customClass="MainCategoriesTableViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MainCategoriesController" id="kDv-a7-jK2" customClass="MainCategoriesTableViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="98" sectionHeaderHeight="28" sectionFooterHeight="28" id="bH3-Df-LZc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -195,8 +195,8 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WqD-d4-8nr">
-                                            <rect key="frame" x="98" y="28" width="67" height="34"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                            <rect key="frame" x="98" y="35" width="42" height="20.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -227,17 +227,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Categories" id="8g6-B6-tIe">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="Pch-5i-idS">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lCh-P3-3uM">
-                                <rect key="frame" x="16" y="-1" width="83" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="&lt;"/>
-                                <connections>
-                                    <action selector="backButtonAction:" destination="kDv-a7-jK2" eventType="touchUpInside" id="OaL-pw-zhK"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="zn0-gP-fpb">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q4o-gf-n16" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
                                 <rect key="frame" x="276" y="5" width="83" height="33"/>
@@ -251,7 +240,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="backButtonOutlet" destination="lCh-P3-3uM" id="qKA-a3-Bjb"/>
                         <outlet property="shoppingCartOutlet" destination="Q4o-gf-n16" id="hYY-B2-ICn"/>
                         <segue destination="Oh2-dG-GUp" kind="show" identifier="ItemDetail" id="mAw-zj-32N"/>
                     </connections>
@@ -553,15 +541,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="484"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <pickerView key="tableFooterView" hidden="YES" contentMode="scaleToFill" id="qb0-wt-uyf">
-                            <rect key="frame" x="0.0" y="117.5" width="375" height="171"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        </pickerView>
                         <sections>
                             <tableViewSection headerTitle="When at my doorstep:" id="hD1-pK-DvA">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bdk-Rb-6Y2">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bdk-Rb-6Y2" id="1MU-OF-a97">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -587,7 +571,6 @@
                     </tableView>
                     <connections>
                         <outlet property="doorStepOptionOutlet" destination="ykE-6J-Ih7" id="fbv-bX-TsB"/>
-                        <outlet property="optionsPicker" destination="qb0-wt-uyf" id="JpM-ey-ib8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byQ-Ep-Kmb" userLabel="First Responder" sceneMemberID="firstResponder"/>

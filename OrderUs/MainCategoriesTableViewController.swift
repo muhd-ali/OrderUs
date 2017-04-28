@@ -10,36 +10,17 @@ import UIKit
 import MIBadgeButton_Swift
 
 class MainCategoriesTableViewController: UITableViewController, DataManagerDelegate {
-    var parentList: [DataManager.ListType] = []
-    var pageTitles: [String] = []
-    var userIsForwardNavigating = true
-    
     func dataChanged(newList: DataManager.ListType) {
         tableList = newList
     }
     
-    @IBOutlet weak var backButtonOutlet: UIButton!
-    @IBAction func backButtonAction(_ sender: UIButton) {
-        userIsForwardNavigating = false
-        tableList = parentList.removeLast()
-        title = pageTitles.removeLast()
-    }
-    
-    private func getTransitionEffect() -> UIViewAnimationOptions {
-        if userIsForwardNavigating {
-            return .transitionFlipFromRight
-        } else {
-            return .transitionFlipFromLeft
-        }
-    }
-    
     private var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
+//    private var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
         didSet {
-            let transitionEffect = getTransitionEffect()
             UIView.transition(
                 with: tableView,
                 duration: 0.5,
-                options: [transitionEffect, .curveEaseInOut],
+                options: [.transitionCrossDissolve, .curveEaseInOut],
                 animations: { [weak weakSelf = self] in
                     weakSelf?.tableView.reloadData()
                 },
@@ -51,7 +32,9 @@ class MainCategoriesTableViewController: UITableViewController, DataManagerDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? ItemDetailsViewController {
             if let tableListIndex = sender as? Int {
-                dvc.item = tableList[tableListIndex] as? DataManager.Item
+                let selected = tableList[tableListIndex] as! DataManager.Item
+                dvc.item = selected
+                dvc.title = selected.Name
             }
         }
     }
@@ -59,28 +42,16 @@ class MainCategoriesTableViewController: UITableViewController, DataManagerDeleg
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableList[indexPath.section]
         if let newTableList = (selected as? DataManager.Category)?.Children {
-            userIsForwardNavigating = true
-            
-            pageTitles.append(title!)
-            title = selected.Name
-            
-            parentList.append(tableList)
-            tableList = newTableList
+            let vc = storyboard?.instantiateViewController(withIdentifier: "MainCategoriesController") as! MainCategoriesTableViewController
+            vc.tableList = newTableList
+            vc.title = selected.Name
+            navigationController?.pushViewController(vc, animated: true)
         } else {
             performSegue(withIdentifier: "ItemDetail", sender: indexPath.section)
         }
     }
     
-    func setBackButtonVisibility() {
-        if parentList.count == 0 {
-            backButtonOutlet.isHidden = true
-        } else {
-            backButtonOutlet.isHidden = false
-        }
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        setBackButtonVisibility()
         return tableList.count
     }
     
@@ -102,9 +73,6 @@ class MainCategoriesTableViewController: UITableViewController, DataManagerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         DataManager.sharedInstance.delegate = self
-//        tableView.estimatedRowHeight = tableView.rowHeight
-//        tableView.rowHeight = UITableViewAutomaticDimension
-        title = "Categories"
     }
     
     @IBOutlet weak var shoppingCartOutlet: MIBadgeButton!
