@@ -24,6 +24,7 @@
 		B959651A1E606C4600C196E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B95965181E606C4600C196E1 /* LaunchScreen.storyboard */; };
 		B972566D1EA75A7300D9DE9E /* ServerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B972566C1EA75A7300D9DE9E /* ServerCommunicator.swift */; };
 		B99B69E11EA100070002A354 /* OrderOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */; };
+		B9CE10FB1EB37BA600C8C29C /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */; };
 		DAC9866CA0D56B406FCC6D19 /* Pods_OrderUs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D766159F5A336ED0D480271 /* Pods_OrderUs.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		B959651B1E606C4600C196E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B972566C1EA75A7300D9DE9E /* ServerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCommunicator.swift; sourceTree = "<group>"; };
 		B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderOptionsTableViewController.swift; sourceTree = "<group>"; };
+		B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */,
 				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
 				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
+				B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */,
 			);
 			name = "Shopping Menu";
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				B972566D1EA75A7300D9DE9E /* ServerCommunicator.swift in Sources */,
 				B94AACC61E9E2C91005328D0 /* shoppingCartViewController.swift in Sources */,
 				B94AACC81E9E4A88005328D0 /* ShoppingCartModel.swift in Sources */,
+				B9CE10FB1EB37BA600C8C29C /* SearchResultsTableViewController.swift in Sources */,
 				135036D51EAE5E3B003B7745 /* PlaceOrderViewController.swift in Sources */,
 				138CD9C61E7C3367004C5EC4 /* MainCategoriesTableViewController.swift in Sources */,
 				B95965121E606C4600C196E1 /* MainViewController.swift in Sources */,

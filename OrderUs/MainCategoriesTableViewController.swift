@@ -9,7 +9,7 @@
 import UIKit
 import MIBadgeButton_Swift
 
-class MainCategoriesTableViewController: UITableViewController, DataManagerDelegate {
+class MainCategoriesTableViewController: UITableViewController, DataManagerDelegate, UISearchBarDelegate {
     func dataChanged(newList: DataManager.ListType) {
         tableList = newList
     }
@@ -70,11 +70,6 @@ class MainCategoriesTableViewController: UITableViewController, DataManagerDeleg
         return cell
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        DataManager.sharedInstance.delegate = self
-    }
-    
     @IBOutlet weak var shoppingCartOutlet: MIBadgeButton!
     
     func setShoppingCartBadgeAppearance() {
@@ -86,8 +81,28 @@ class MainCategoriesTableViewController: UITableViewController, DataManagerDeleg
             shoppingCartOutlet.badgeString = nil
         }
     }
+    
+    private func hideSearchBar() {
+        let searchBarHeight = 44.0
+        if tableView.contentOffset.y == 0.0 {
+            tableView.contentOffset = CGPoint(x: 0.0, y: searchBarHeight)
+        }
+    }
+    
+    // Search Bar Operations
+    
+    @IBOutlet weak var searchBarOutlet: UISearchBar!
+    
+    // Mark: View Controller Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        searchBarOutlet.delegate = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as! SearchResultsTableViewController
+        DataManager.sharedInstance.delegate = self
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        hideSearchBar()
         setShoppingCartBadgeAppearance()
     }
 }

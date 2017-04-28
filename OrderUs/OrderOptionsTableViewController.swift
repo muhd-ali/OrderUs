@@ -32,12 +32,10 @@ class OrderOptionsTableViewController: UITableViewController {
         DoorStepOptionStruct(option: .call, displayText: "Call Me"),
         ]
     
-    
     @IBOutlet weak var doorStepOptionOutlet: UILabel!
     var selectedDoorStepOption: DoorStepOptionStruct?
     private func showDoorStepOptionsMenu() {
-        let actionName = "Choose Action"
-        let optionsMenu = UIAlertController(title: actionName, message: "When at my doorstep, the rider should:", preferredStyle: .actionSheet)
+        let optionsMenu = UIAlertController(title: "Choose Action", message: "When at my doorstep, the rider should:", preferredStyle: .actionSheet)
         doorStepOptions.forEach { [unowned uoSelf = self] doorStepOption in
             optionsMenu.addAction(
                 UIAlertAction(title: doorStepOption.displayText, style: .default) { _ in
