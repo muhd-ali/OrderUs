@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import MIBadgeButton_Swift
 
-class MainCategoriesTableViewController: UITableViewController, DataManagerDelegate, UISearchBarDelegate {
+class CategoriesTableViewController: UITableViewController, DataManagerDelegate, UISearchResultsUpdating {
     func dataChanged(newList: DataManager.ListType) {
         tableList = newList
     }
@@ -39,10 +38,11 @@ class MainCategoriesTableViewController: UITableViewController, DataManagerDeleg
         }
     }
     
+    private var titleToDisplay = ""
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableList[indexPath.section]
         if let newTableList = (selected as? DataManager.Category)?.Children {
-            let vc = storyboard?.instantiateViewController(withIdentifier: "MainCategoriesController") as! MainCategoriesTableViewController
+            let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesController") as! CategoriesTableViewController
             vc.tableList = newTableList
             vc.title = selected.Name
             navigationController?.pushViewController(vc, animated: true)
@@ -70,18 +70,6 @@ class MainCategoriesTableViewController: UITableViewController, DataManagerDeleg
         return cell
     }
     
-    @IBOutlet weak var shoppingCartOutlet: MIBadgeButton!
-    
-    func setShoppingCartBadgeAppearance() {
-        let cartItemsCount = ShoppingCartModel.sharedInstance.cartItems.count
-        
-        if cartItemsCount > 0 {
-            shoppingCartOutlet.badgeString = "\(cartItemsCount)"
-        } else {
-            shoppingCartOutlet.badgeString = nil
-        }
-    }
-    
     private func hideSearchBar() {
         let searchBarHeight = 44.0
         if tableView.contentOffset.y == 0.0 {
@@ -90,19 +78,54 @@ class MainCategoriesTableViewController: UITableViewController, DataManagerDeleg
     }
     
     // Search Bar Operations
+    private func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResultsTableViewController.SearchResult] {
+        let jaggedResults:[[SearchResultsTableViewController.SearchResult]] = list.map { listItem in
+            var foundResults: [SearchResultsTableViewController.SearchResult] = []
+            if let category = listItem as? DataManager.Category {
+                foundResults = findSearchResults(fromList: category.Children, listPath: "\(listPath) -> \(category.Name)", withSearchedText: text)
+            } else if let item = listItem as? DataManager.Item {
+                if (!text.isEmpty) {
+                    let range = item.Name.range(of: text)
+                    if range != nil {
+                        foundResults.append(SearchResultsTableViewController.SearchResult(item: item, path: "\(listPath) -> \(item.Name)"))
+                    }
+                }
+            }
+            return foundResults
+        }
+        return jaggedResults.flatMap { $0 }
+    }
     
-    @IBOutlet weak var searchBarOutlet: UISearchBar!
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchedText = searchController.searchBar.text {
+            resultsController?.results = findSearchResults(fromList: tableList, listPath: "list", withSearchedText: searchedText)
+            resultsController?.tableView.reloadData()
+        }
+    }
+    
+    var searchController: UISearchController!
+    var resultsController: SearchResultsTableViewController?
+    
+    private func initializeSearchController() {
+        resultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
+        searchController = UISearchController(searchResultsController: resultsController)
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = true
+        searchController.searchBar.sizeToFit()
+        tableView.tableHeaderView = searchController.searchBar
+        definesPresentationContext = true
+    }
     
     // Mark: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBarOutlet.delegate = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as! SearchResultsTableViewController
+        initializeSearchController()
         DataManager.sharedInstance.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideSearchBar()
-        setShoppingCartBadgeAppearance()
     }
 }
