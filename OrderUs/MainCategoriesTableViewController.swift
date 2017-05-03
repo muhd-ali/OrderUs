@@ -14,8 +14,8 @@ class MainCategoriesTableViewController: UITableViewController, DataManagerDeleg
         tableList = newList
     }
     
-    private var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
-//    private var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
+//    private var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
+    private var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
         didSet {
             UIView.transition(
                 with: tableView,

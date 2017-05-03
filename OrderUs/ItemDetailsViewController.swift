@@ -83,6 +83,7 @@ class ItemDetailsViewController: UIViewController {
             }
         }
         
+        
         HUD.flash(
             .labeledSuccess(title: "Added To Cart", subtitle: nil),
             delay: 0.5) { [unowned uoSelf = self] finished in
