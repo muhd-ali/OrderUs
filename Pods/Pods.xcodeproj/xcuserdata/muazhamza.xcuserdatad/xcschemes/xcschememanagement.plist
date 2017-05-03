@@ -4,6 +4,31 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FacebookCore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FacebookLogin.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>M13Checkbox.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -31,32 +56,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>20A9DD9ABBF08BC57372A26C35327BF1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2C9DE3F120B83EF216E89341D7347D68</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>34E1BEE5B9151B6FF42B51C88D1AF746</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4AC0C0218397F4E36E3579A1EF09215A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D7A75F149082140741FC1E0B5B2863C8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

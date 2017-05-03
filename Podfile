@@ -11,4 +11,8 @@ target 'OrderUs' do
   pod 'M13Checkbox'
   pod 'Socket.IO-Client-Swift'
 
+  # Facebook
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+
 end
