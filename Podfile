@@ -15,4 +15,7 @@ target 'OrderUs' do
   pod 'FacebookCore'
   pod 'FacebookLogin'
 
+  # Google
+  pod 'Google/SignIn'
+
 end

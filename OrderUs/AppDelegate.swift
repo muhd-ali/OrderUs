@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FacebookCore
+import GoogleSignIn
+import GGLSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +20,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         serverCommunicator.bootstrap()
+        
+        // Sign In API
+        //// Facebook
+        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        //// Google
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let googleDidHandle =  GIDSignIn.sharedInstance().handle(
+            url,
+            sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplicationOpenURLOptionsKey.annotation]
+        )
+        let facebookDidHandle = SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        return facebookDidHandle || googleDidHandle
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

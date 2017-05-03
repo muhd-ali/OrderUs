@@ -1,3 +1,2 @@
-1) Implement Search
-2) Fix item segues
-3) Add Animations
+1) Implement Login
+2) Add Animations
