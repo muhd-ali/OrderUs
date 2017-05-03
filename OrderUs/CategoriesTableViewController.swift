@@ -13,8 +13,8 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate,
         tableList = newList
     }
     
-//    private var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
-    private var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
+//    internal var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
+    internal var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
         didSet {
             UIView.transition(
                 with: tableView,
@@ -38,7 +38,7 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate,
         }
     }
     
-    private var titleToDisplay = ""
+    internal var titleToDisplay = ""
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableList[indexPath.section]
         if let newTableList = (selected as? DataManager.Category)?.Children {
@@ -70,7 +70,7 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate,
         return cell
     }
     
-    private func hideSearchBar() {
+    internal func hideSearchBar() {
         let searchBarHeight = 44.0
         if tableView.contentOffset.y == 0.0 {
             tableView.contentOffset = CGPoint(x: 0.0, y: searchBarHeight)
@@ -78,7 +78,7 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate,
     }
     
     // Search Bar Operations
-    private func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResultsTableViewController.SearchResult] {
+    internal func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResultsTableViewController.SearchResult] {
         let jaggedResults:[[SearchResultsTableViewController.SearchResult]] = list.map { listItem in
             var foundResults: [SearchResultsTableViewController.SearchResult] = []
             if let category = listItem as? DataManager.Category {
@@ -107,7 +107,7 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate,
     var searchController: UISearchController!
     var resultsController: SearchResultsTableViewController?
     
-    private func initializeSearchController() {
+    internal func initializeSearchController() {
         resultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
         searchController = UISearchController(searchResultsController: resultsController)
         searchController.searchResultsUpdater = self

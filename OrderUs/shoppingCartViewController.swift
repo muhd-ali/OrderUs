@@ -11,12 +11,12 @@ import PKHUD
 
 class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OrderOptionsTableViewControllerDelegate, PlaceOrderViewControllerDelegate {
     
-    private var doorStepOption = OrderOptionsTableViewController.DoorStepOption.ringDoorBell
+    internal var doorStepOption = OrderOptionsTableViewController.DoorStepOption.ringDoorBell
     func doorStepChanged(selectedOption: OrderOptionsTableViewController.DoorStepOption) {
         doorStepOption = selectedOption
     }
     
-    private var userWantsToPlaceOrder = false
+    internal var userWantsToPlaceOrder = false
     func userRequestedToPlaceOrder() {
         userWantsToPlaceOrder = true
     }
@@ -32,7 +32,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         updateUI()
     }
     
-    private func placeOrder() {
+    internal func placeOrder() {
         ServerCommunicator.sharedInstance.placeOrder()
         ShoppingCartModel.sharedInstance.cartItems = []
     }
@@ -49,7 +49,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBOutlet weak var proceedButtonOutlet: UIButton!
-    private func updateUI() {
+    internal func updateUI() {
         title = "Shopping Cart"
         let totalCost = shoppingCartList.reduce(0) { $0 + ($1.totalCost()) }
         totalCostDisplay.text = "Total Cost = \(totalCost) PKR"

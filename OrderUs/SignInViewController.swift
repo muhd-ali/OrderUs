@@ -8,8 +8,9 @@
 
 import UIKit
 import FacebookLogin
+import GoogleSignIn
 
-class SignInViewController: UIViewController, LoginButtonDelegate {
+class SignInViewController: UIViewController, GIDSignInUIDelegate {
 
     @IBOutlet weak var loadingCircle: UIActivityIndicatorView!
 
@@ -20,23 +21,49 @@ class SignInViewController: UIViewController, LoginButtonDelegate {
             loadingCircle.startAnimating()
         }
     }
- 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    
+    internal func setupFacebookLoginButton() {
         let loginButton = LoginButton(readPermissions: [ .publicProfile ])
         loginButton.center = view.center
-        
+        loginButton.bounds.origin.y  = loginButton.bounds.origin.y + 50
+        loginButton.delegate = SignInModel.sharedInstance
         view.addSubview(loginButton)
     }
     
-    // Login Button Delegate API
-    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-        //
+    internal func setupGoogleLoginButton() {
+        GIDSignIn.sharedInstance().uiDelegate = self
+        let loginButton = GIDSignInButton()
+        loginButton.center = view.center
+        loginButton.bounds.origin.y  = loginButton.bounds.origin.y - 50
+        view.addSubview(loginButton)
     }
     
-    func loginButtonDidLogOut(_ loginButton: LoginButton) {
-        //
+    // Implement these methods only if the GIDSignInUIDelegate is not a subclass of
+    // UIViewController.
+    
+    // Stop the UIActivityIndicatorView animation that was started when the user
+    // pressed the Sign In button
+    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+//        myActivityIndicator.stopAnimating()
+    }
+    
+    // Present a view that prompts the user to sign in with Google
+    func sign(_ signIn: GIDSignIn!,
+              present viewController: UIViewController!) {
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
+    // Dismiss the "Sign in with Google" view
+    func sign(_ signIn: GIDSignIn!,
+              dismiss viewController: UIViewController!) {
+        self.dismiss(animated: true, completion: nil)
+    }
+ 
+    // Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupFacebookLoginButton()
+        setupGoogleLoginButton()
     }
     
 }
