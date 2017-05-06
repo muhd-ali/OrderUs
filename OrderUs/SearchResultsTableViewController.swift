@@ -15,7 +15,9 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
     }
     
     var tableList: DataManager.ListType?
-    var results: [SearchResult] = []
+    var parentNavigationController: UINavigationController?
+    var searchController: UISearchController?
+    internal var results: [SearchResult] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,16 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
         cell.detailTextLabel?.attributedText = result.path
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "ItemDetailViewController") as? ItemDetailsViewController {
+            let item = results[indexPath.row].item
+            vc.item = item
+            vc.title = item.Name
+            parentNavigationController?.pushViewController(vc, animated: true)
+            
+        }
     }
 
     // MARK: - UISearchResultsUpdating

@@ -120,8 +120,8 @@
 		138CD9C21E7C2C91004C5EC4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1372B3BB1EBA5AA50042B0F2 /* GoogleService-Info.plist */,
 				B959651B1E606C4600C196E1 /* Info.plist */,
+				1372B3BB1EBA5AA50042B0F2 /* GoogleService-Info.plist */,
 				B959650F1E606C4600C196E1 /* AppDelegate.swift */,
 				B95965161E606C4600C196E1 /* Assets.xcassets */,
 				B95965181E606C4600C196E1 /* LaunchScreen.storyboard */,

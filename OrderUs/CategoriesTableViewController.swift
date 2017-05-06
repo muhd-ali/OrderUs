@@ -82,13 +82,14 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
     internal func initializeSearchController() {
         let resultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
         resultsController?.tableList = tableList
+        resultsController?.parentNavigationController = navigationController
+        resultsController?.searchController = searchController
         
         searchController = UISearchController(searchResultsController: resultsController)
         searchController.searchResultsUpdater = resultsController
         searchController.dimsBackgroundDuringPresentation = true
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
-        definesPresentationContext = true
     }
     
     // Mark: View Controller Life Cycle
