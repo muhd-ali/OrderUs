@@ -49,7 +49,7 @@ class OrderOptionsTableViewController: UITableViewController {
         present(optionsMenu, animated: true, completion: nil)
     }
     
-//    @IBOutlet weak var paymentOptionOutlet: UILabel!
+    @IBOutlet weak var paymentOptionOutlet: UILabel!
 //    let paymentOptions: [DoorStepOptionStruct] = [
 //        DoorStepOptionStruct(option: .ringDoorBell, displayText: "Ring My Doorbell"),
 //        DoorStepOptionStruct(option: .text, displayText: "Text Me"),

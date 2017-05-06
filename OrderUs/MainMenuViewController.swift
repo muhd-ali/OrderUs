@@ -39,6 +39,13 @@ class MainMenuViewController: UITabBarController {
         super.viewDidAppear(animated)
         setShoppingCartBadgeAppearance()
     }
+
+    
+    @IBAction func signOutButtonAction(_ sender: UIButton) {
+        presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    
     /*
     // MARK: - Navigation
 

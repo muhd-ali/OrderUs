@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoriesTableViewController: UITableViewController, DataManagerDelegate, UISearchResultsUpdating {
+class CategoriesTableViewController: UITableViewController, DataManagerDelegate {
     func dataChanged(newList: DataManager.ListType) {
         tableList = newList
     }
@@ -77,40 +77,14 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate,
         }
     }
     
-    // Search Bar Operations
-    internal func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResultsTableViewController.SearchResult] {
-        let jaggedResults:[[SearchResultsTableViewController.SearchResult]] = list.map { listItem in
-            var foundResults: [SearchResultsTableViewController.SearchResult] = []
-            if let category = listItem as? DataManager.Category {
-                foundResults = findSearchResults(fromList: category.Children, listPath: "\(listPath) -> \(category.Name)", withSearchedText: text)
-            } else if let item = listItem as? DataManager.Item {
-                if (!text.isEmpty) {
-                    let range = item.Name.range(of: text)
-                    if range != nil {
-                        foundResults.append(SearchResultsTableViewController.SearchResult(item: item, path: "\(listPath) -> \(item.Name)"))
-                    }
-                }
-            }
-            return foundResults
-        }
-        return jaggedResults.flatMap { $0 }
-    }
-    
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchedText = searchController.searchBar.text {
-            resultsController?.results = findSearchResults(fromList: tableList, listPath: "list", withSearchedText: searchedText)
-            resultsController?.tableView.reloadData()
-        }
-    }
-    
     var searchController: UISearchController!
-    var resultsController: SearchResultsTableViewController?
     
     internal func initializeSearchController() {
-        resultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
+        let resultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
+        resultsController?.tableList = tableList
+        
         searchController = UISearchController(searchResultsController: resultsController)
-        searchController.searchResultsUpdater = self
+        searchController.searchResultsUpdater = resultsController
         searchController.dimsBackgroundDuringPresentation = true
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
