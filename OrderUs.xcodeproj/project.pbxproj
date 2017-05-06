@@ -18,7 +18,6 @@
 		B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */; };
 		B94AACC61E9E2C91005328D0 /* shoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94AACC51E9E2C91005328D0 /* shoppingCartViewController.swift */; };
 		B94AACC81E9E4A88005328D0 /* ShoppingCartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94AACC71E9E4A88005328D0 /* ShoppingCartModel.swift */; };
-		B94AACCD1EA0BA70005328D0 /* Pods_OrderUs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D766159F5A336ED0D480271 /* Pods_OrderUs.framework */; };
 		B94AACCE1EA0BA70005328D0 /* Pods_OrderUs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D766159F5A336ED0D480271 /* Pods_OrderUs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B95965101E606C4600C196E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B959650F1E606C4600C196E1 /* AppDelegate.swift */; };
 		B95965121E606C4600C196E1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95965111E606C4600C196E1 /* SignInViewController.swift */; };
@@ -80,7 +79,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAC9866CA0D56B406FCC6D19 /* Pods_OrderUs.framework in Frameworks */,
-				B94AACCD1EA0BA70005328D0 /* Pods_OrderUs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +211,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = PRO;
 				TargetAttributes = {
 					B959650B1E606C4600C196E1 = {
@@ -389,7 +387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -433,7 +431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

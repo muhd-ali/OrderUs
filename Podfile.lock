@@ -13,11 +13,11 @@ PODS:
     - FacebookCore (~> 0.2)
     - FBSDKCoreKit (~> 4.15)
     - FBSDKLoginKit (~> 4.15)
-  - FBSDKCoreKit (4.21.0):
+  - FBSDKCoreKit (4.22.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.21.0):
+  - FBSDKLoginKit (4.22.0):
     - FBSDKCoreKit
-  - FirebaseAnalytics (3.8.0):
+  - FirebaseAnalytics (3.9.0):
     - FirebaseCore (~> 3.6)
     - FirebaseInstanceID (~> 1.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
@@ -80,9 +80,9 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
-  FBSDKCoreKit: 8a372ab194b5c7c26355c1920ef52dbeb44bc222
-  FBSDKLoginKit: a1a5f4b4ac445823a020fbeeaf5f03714a67ff9c
-  FirebaseAnalytics: 920e46455f27b0a52a80907a6d9b73ee4bd1c635
+  FBSDKCoreKit: c693bad19feb225469eeff14452ba364522ee48b
+  FBSDKLoginKit: 1fa529fc622d7b32ebeaffbecd377180833c6d30
+  FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e

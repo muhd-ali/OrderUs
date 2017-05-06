@@ -22,12 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         serverCommunicator.bootstrap()
         
         // Sign In API
+        
         //// Facebook
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         //// Google
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")
         
         return true
     }

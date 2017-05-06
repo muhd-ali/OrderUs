@@ -35,7 +35,7 @@ class OrderOptionsTableViewController: UITableViewController {
     @IBOutlet weak var doorStepOptionOutlet: UILabel!
     var selectedDoorStepOption: DoorStepOptionStruct?
     internal func showDoorStepOptionsMenu() {
-        let optionsMenu = UIAlertController(title: "Choose Action", message: "When at my doorstep, the rider should:", preferredStyle: .actionSheet)
+        let optionsMenu = UIAlertController(title: "Choose Your Preference", message: "When at my doorstep, the rider should:", preferredStyle: .actionSheet)
         doorStepOptions.forEach { [unowned uoSelf = self] doorStepOption in
             optionsMenu.addAction(
                 UIAlertAction(title: doorStepOption.displayText, style: .default) { _ in
@@ -45,13 +45,41 @@ class OrderOptionsTableViewController: UITableViewController {
                 }
             )
         }
+        optionsMenu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(optionsMenu, animated: true, completion: nil)
     }
+    
+//    @IBOutlet weak var paymentOptionOutlet: UILabel!
+//    let paymentOptions: [DoorStepOptionStruct] = [
+//        DoorStepOptionStruct(option: .ringDoorBell, displayText: "Ring My Doorbell"),
+//        DoorStepOptionStruct(option: .text, displayText: "Text Me"),
+//        DoorStepOptionStruct(option: .call, displayText: "Call Me"),
+//        ]
+//    
+//
+//    var selectedPaymentOption: DoorStepOptionStruct?
+//    internal func showPaymentOptionsMenu() {
+//        let optionsMenu = UIAlertController(title: "Choose Your Preference", message: "When at my doorstep, the rider should:", preferredStyle: .actionSheet)
+//        doorStepOptions.forEach { [unowned uoSelf = self] doorStepOption in
+//            optionsMenu.addAction(
+//                UIAlertAction(title: doorStepOption.displayText, style: .default) { _ in
+//                    uoSelf.selectedDoorStepOption = doorStepOption
+//                    uoSelf.doorStepOptionOutlet.text = doorStepOption.displayText
+//                    uoSelf.delegate?.doorStepChanged(selectedOption: doorStepOption.option)
+//                }
+//            )
+//        }
+//        optionsMenu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        present(optionsMenu, animated: true, completion: nil)
+//    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             showDoorStepOptionsMenu()
+        case 1:
+            break
+            //showPaymentOptionsMenu()
         default:
             break
         }
