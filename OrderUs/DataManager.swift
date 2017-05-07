@@ -19,29 +19,61 @@ protocol DataManagerDelegate {
     func dataChanged(newList: DataManager.ListType)
 }
 
+struct Item: Selectable {
+    struct MinQuantity {
+        static let NumberKey = "number"
+        static let UnitKey = "unit"
+        let Number: Double
+        let Unit: String
+        init(rawMinQuantity: [String : Any]) {
+            Number = Double(rawMinQuantity[MinQuantity.NumberKey]! as! Int)
+            Unit = rawMinQuantity[MinQuantity.UnitKey]! as! String
+        }
+    }
+    internal var Name: String
+    internal var ImageURL: String
+    internal var Parent: String
+    internal var ID: String
+    var minQuantity: MinQuantity
+    var Price: Double
+}
+
+struct Category: Selectable {
+    internal var Name: String
+    internal var ImageURL: String
+    internal var Parent: String
+    internal var ID: String
+    var Children: [Selectable]
+    var ChildrenCategories: [String]
+    var ChildrenItems: [String]
+}
+
+extension Array where Element: Selectable {
+    func filterItemsHelper(selectables: [Selectable], condition: (Item) -> Bool) -> [Item] {
+        var items: [Item] = []
+        selectables.forEach { selectable in
+            if let category = selectable as? Category {
+                let innerItems = filterItemsHelper(selectables: category.Children, condition: condition)
+                items.append(contentsOf: innerItems)
+            } else if let item = selectable as? Item {
+                items.append(item)
+            }
+        }
+        return items
+    }
+    
+    func filterItems(condition: (Item) -> Bool) -> [Item] {
+        return filterItemsHelper(selectables: self, condition: condition)
+    }
+}
+
+
 class DataManager: NSObject {
+    typealias ListType = [Selectable]
     static let sharedInstance = DataManager()
     
     var delegate: DataManagerDelegate?
     
-    struct Item: Selectable {
-        struct MinQuantity {
-            static let NumberKey = "number"
-            static let UnitKey = "unit"
-            let Number: Double
-            let Unit: String
-            init(rawMinQuantity: [String : Any]) {
-                Number = Double(rawMinQuantity[MinQuantity.NumberKey]! as! Int)
-                Unit = rawMinQuantity[MinQuantity.UnitKey]! as! String
-            }
-        }
-        internal var Name: String
-        internal var ImageURL: String
-        internal var Parent: String
-        internal var ID: String
-        var minQuantity: MinQuantity
-        var Price: Double
-    }
     
     internal func makeItem(rawItem:  [String : Any]) -> Item {
         return Item(
@@ -123,18 +155,6 @@ class DataManager: NSObject {
             ifDataFetchedFromServerGenerateTree()
         }
     }
-    
-    struct Category: Selectable {
-        internal var Name: String
-        internal var ImageURL: String
-        internal var Parent: String
-        internal var ID: String
-        var Children: [Selectable]
-        var ChildrenCategories: [String]
-        var ChildrenItems: [String]
-    }
-    
-    typealias ListType = [Selectable]
     
     struct ExampleCategories {
         internal static let FreshProduceList: ListType = [

@@ -8,15 +8,7 @@
 
 import UIKit
 
-protocol OrderOptionsTableViewControllerDelegate {
-    func doorStepChanged(selectedOption: String)
-    func paymentChanged(selectecOption: String)
-}
-
 class OrderOptionsTableViewController: UITableViewController {
-    var delegate: OrderOptionsTableViewControllerDelegate?
-    
-    
     internal func showOptionsMenu(options: [(String, String)], message: String, handler: (((String, String)) -> Void)?) {
         let optionsMenu = UIAlertController(title: "Choose Your Preference", message: message, preferredStyle: .actionSheet)
         options.forEach { option in

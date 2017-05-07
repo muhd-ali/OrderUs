@@ -42,9 +42,9 @@ class CategoriesTableViewCell: UITableViewCell {
     }
     
     internal func updateAccessoryOptions() {
-        if ((category as? DataManager.Category) != nil) {
+        if ((category as? Category) != nil) {
             accessoryType = .disclosureIndicator
-        } else if ((category as? DataManager.Item) != nil) {
+        } else if ((category as? Item) != nil) {
             accessoryType = .none
         }
     }

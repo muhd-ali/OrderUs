@@ -31,7 +31,7 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? ItemDetailsViewController {
             if let tableListIndex = sender as? Int {
-                let selected = tableList[tableListIndex] as! DataManager.Item
+                let selected = tableList[tableListIndex] as! Item
                 dvc.item = selected
                 dvc.title = selected.Name
             }
@@ -41,7 +41,7 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
     internal var titleToDisplay = ""
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableList[indexPath.section]
-        if let newTableList = (selected as? DataManager.Category)?.Children {
+        if let newTableList = (selected as? Category)?.Children {
             let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesController") as! CategoriesTableViewController
             vc.tableList = newTableList
             vc.title = selected.Name

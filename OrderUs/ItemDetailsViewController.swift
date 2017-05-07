@@ -15,7 +15,7 @@ class ItemDetailsViewController: UIViewController {
     @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var itemQuantityLabel: UILabel!
     
-    var item: DataManager.Item? {
+    var item: Item? {
         didSet {
             if item != nil {
                 itemName = item!.Name
@@ -30,10 +30,10 @@ class ItemDetailsViewController: UIViewController {
         static let itemName = "no type found"
         static let itemImageURL = "no url found"
         static let itemPrice = -1.0
-        static let itemMinQuantity = DataManager.Item.MinQuantity (
+        static let itemMinQuantity = Item.MinQuantity (
             rawMinQuantity: [
-                DataManager.Item.MinQuantity.NumberKey : -1,
-                DataManager.Item.MinQuantity.UnitKey : "not found"
+                Item.MinQuantity.NumberKey : -1,
+                Item.MinQuantity.UnitKey : "not found"
             ]
         )
     }

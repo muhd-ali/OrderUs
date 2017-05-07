@@ -23,7 +23,7 @@ class ShoppingCartModel: NSObject {
     
     
     struct OrderedItem {
-        var item: DataManager.Item
+        var item: Item
         var quantityValue: Double
         var quantityUnit: String
         

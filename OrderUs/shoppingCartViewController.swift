@@ -9,17 +9,7 @@
 import UIKit
 import PKHUD
 
-class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OrderOptionsTableViewControllerDelegate, PlaceOrderViewControllerDelegate {
-    internal var paymentOption = ShoppingCartModel.Preferences.Payment.initial.1
-    func paymentChanged(selectecOption: String) {
-        paymentOption = selectecOption
-    }
-
-    
-    internal var doorStepOption = ShoppingCartModel.Preferences.Doorstep.initial.1
-    func doorStepChanged(selectedOption: String) {
-        doorStepOption = selectedOption
-    }
+class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PlaceOrderViewControllerDelegate {
     
     internal var userWantsToPlaceOrder = false
     func userRequestedToPlaceOrder() {
@@ -103,7 +93,6 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "placeOrderView" {
             if let dvc = segue.destination as? PlaceOrderViewController {
-                dvc.orderOptionsVC?.delegate = self
                 dvc.delegate = self
             }
         }

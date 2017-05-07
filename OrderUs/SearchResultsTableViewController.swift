@@ -10,7 +10,7 @@ import UIKit
 
 class SearchResultsTableViewController: UITableViewController, UISearchResultsUpdating {
     struct SearchResult {
-        var item: DataManager.Item
+        var item: Item
         var path: NSMutableAttributedString
     }
     
@@ -60,9 +60,9 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
     internal func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResultsTableViewController.SearchResult] {
         let jaggedResults:[[SearchResultsTableViewController.SearchResult]] = list.map { listItem in
             var foundResults: [SearchResultsTableViewController.SearchResult] = []
-            if let category = listItem as? DataManager.Category {
+            if let category = listItem as? Category {
                 foundResults = findSearchResults(fromList: category.Children, listPath: "\(listPath) -> \(category.Name)", withSearchedText: text)
-            } else if let item = listItem as? DataManager.Item {
+            } else if let item = listItem as? Item {
                 if (!text.isEmpty) {
                     if item.Name.range(of: text) != nil {
                         let fontSize: CGFloat = 15.0

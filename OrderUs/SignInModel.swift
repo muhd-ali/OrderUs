@@ -9,21 +9,18 @@
 import Foundation
 import FacebookLogin
 import GoogleSignIn
-
-protocol SignInModelDelegate {
-    func signedIn()
-}
+//
+//protocol SignInModelDelegate {
+//    func signedIn()
+//}
 
 class SignInModel: NSObject, LoginButtonDelegate, GIDSignInDelegate {
     
     static let sharedInstance = SignInModel()
     
-    var delegate: SignInModelDelegate?
-    
     // Facebook Login Button Delegate API
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         print("======================Logged in Using Facebook========================")
-        delegate?.signedIn()
     }
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
@@ -42,7 +39,6 @@ class SignInModel: NSObject, LoginButtonDelegate, GIDSignInDelegate {
             let email = user.profile.email
             // ...
             print("======================Logged in Using Google========================")
-            delegate?.signedIn()
         } else {
             print("\(error.localizedDescription)")
         }
