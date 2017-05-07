@@ -410,34 +410,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fm3-bo-VX4">
-                                <rect key="frame" x="16" y="20" width="343" height="167"/>
+                                <rect key="frame" x="16" y="64" width="343" height="167"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfm-DK-pz8">
-                                <rect key="frame" x="16" y="195" width="343" height="29"/>
+                                <rect key="frame" x="16" y="239" width="343" height="29"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEc-B3-sya">
-                                <rect key="frame" x="16" y="232" width="343" height="29"/>
+                                <rect key="frame" x="16" y="276" width="343" height="29"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRs-zF-Vqk">
-                                <rect key="frame" x="118" y="266" width="241" height="29"/>
+                                <rect key="frame" x="118" y="310" width="241" height="29"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" continuous="NO" autorepeat="NO" value="1" minimumValue="1" maximumValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Tsh-KQ-Z1w" customClass="QuantityStepper" customModule="OrderUs" customModuleProvider="target">
-                                <rect key="frame" x="16" y="266" width="94" height="29"/>
+                                <rect key="frame" x="16" y="310" width="94" height="29"/>
                                 <connections>
                                     <action selector="quantityStepperValueChangedAction:" destination="Oh2-dG-GUp" eventType="valueChanged" id="HQT-i1-sUL"/>
                                 </connections>
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbV-HF-nYc">
-                                <rect key="frame" x="47" y="613" width="281" height="46"/>
+                                <rect key="frame" x="47" y="564" width="281" height="46"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Add to Cart">
@@ -452,13 +452,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Similar Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqc-hn-w7M">
-                                <rect key="frame" x="16" y="303" width="98" height="29"/>
+                                <rect key="frame" x="16" y="347" width="98" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qb9-Pw-N2c">
-                                <rect key="frame" x="16" y="340" width="343" height="265"/>
+                                <rect key="frame" x="16" y="384" width="343" height="172"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bWF-RG-nPP">
@@ -523,7 +523,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="P8m-S4-h0S" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" systemItem="favorites" id="wmk-Aw-nEe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZLY-ef-8b3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZLY-ef-8b3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -566,7 +566,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="I would pay with:" id="bOr-hz-bYL">
+                            <tableViewSection headerTitle="I would pay:" id="bOr-hz-bYL">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="N9s-RL-SSe">
                                         <rect key="frame" x="0.0" y="155.5" width="375" height="44"/>

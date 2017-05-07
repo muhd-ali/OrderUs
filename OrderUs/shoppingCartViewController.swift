@@ -10,9 +10,14 @@ import UIKit
 import PKHUD
 
 class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, OrderOptionsTableViewControllerDelegate, PlaceOrderViewControllerDelegate {
+    internal var paymentOption = ShoppingCartModel.Preferences.Payment.initial.1
+    func paymentChanged(selectecOption: String) {
+        paymentOption = selectecOption
+    }
+
     
-    internal var doorStepOption = OrderOptionsTableViewController.DoorStepOption.ringDoorBell
-    func doorStepChanged(selectedOption: OrderOptionsTableViewController.DoorStepOption) {
+    internal var doorStepOption = ShoppingCartModel.Preferences.Doorstep.initial.1
+    func doorStepChanged(selectedOption: String) {
         doorStepOption = selectedOption
     }
     
@@ -22,7 +27,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBOutlet weak var cartTableView: UITableView!
-    var shoppingCartList: [ShoppingCartModel.OrderedItem] = ShoppingCartModel.sharedInstance.cartItems
+    var shoppingCartList: [ShoppingCartModel.OrderedItem] = ShoppingCartModel.sharedInstance.order.items
     
     @IBOutlet weak var totalCostDisplay: UILabel!
     override func viewDidLoad() {
@@ -34,7 +39,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     
     internal func placeOrder() {
         ServerCommunicator.sharedInstance.placeOrder()
-        ShoppingCartModel.sharedInstance.cartItems = []
+        ShoppingCartModel.sharedInstance.order.items = []
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,7 +89,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         switch editingStyle {
         case .delete:
             shoppingCartList.remove(at: indexPath.section)
-            ShoppingCartModel.sharedInstance.cartItems = shoppingCartList
+            ShoppingCartModel.sharedInstance.order.items = shoppingCartList
             updateUI()
             tableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
         default: break
@@ -103,30 +108,5 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
     }
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

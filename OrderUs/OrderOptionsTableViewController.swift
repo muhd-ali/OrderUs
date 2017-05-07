@@ -9,39 +9,22 @@
 import UIKit
 
 protocol OrderOptionsTableViewControllerDelegate {
-    func doorStepChanged(selectedOption: OrderOptionsTableViewController.DoorStepOption)
+    func doorStepChanged(selectedOption: String)
+    func paymentChanged(selectecOption: String)
 }
 
 class OrderOptionsTableViewController: UITableViewController {
     var delegate: OrderOptionsTableViewControllerDelegate?
     
-    enum DoorStepOption {
-        case call
-        case text
-        case ringDoorBell
-    }
     
-    struct DoorStepOptionStruct {
-        let option: DoorStepOption
-        let displayText: String
-    }
-    
-    let doorStepOptions: [DoorStepOptionStruct] = [
-        DoorStepOptionStruct(option: .ringDoorBell, displayText: "Ring My Doorbell"),
-        DoorStepOptionStruct(option: .text, displayText: "Text Me"),
-        DoorStepOptionStruct(option: .call, displayText: "Call Me"),
-        ]
-    
-    @IBOutlet weak var doorStepOptionOutlet: UILabel!
-    var selectedDoorStepOption: DoorStepOptionStruct?
-    internal func showDoorStepOptionsMenu() {
-        let optionsMenu = UIAlertController(title: "Choose Your Preference", message: "When at my doorstep, the rider should:", preferredStyle: .actionSheet)
-        doorStepOptions.forEach { [unowned uoSelf = self] doorStepOption in
+    internal func showOptionsMenu(options: [(String, String)], message: String, handler: (((String, String)) -> Void)?) {
+        let optionsMenu = UIAlertController(title: "Choose Your Preference", message: message, preferredStyle: .actionSheet)
+        options.forEach { option in
             optionsMenu.addAction(
-                UIAlertAction(title: doorStepOption.displayText, style: .default) { _ in
-                    uoSelf.selectedDoorStepOption = doorStepOption
-                    uoSelf.doorStepOptionOutlet.text = doorStepOption.displayText
-                    uoSelf.delegate?.doorStepChanged(selectedOption: doorStepOption.option)
+                UIAlertAction(title: option.0, style: .default) { _ in
+                    if handler != nil {
+                        handler!(option)
+                    }
                 }
             )
         }
@@ -49,37 +32,29 @@ class OrderOptionsTableViewController: UITableViewController {
         present(optionsMenu, animated: true, completion: nil)
     }
     
+    @IBOutlet weak var doorStepOptionOutlet: UILabel!
+    internal func showDoorStepOptionsMenu() {
+        showOptionsMenu(options: ShoppingCartModel.Preferences.Doorstep.all, message: "When at my doorstep, the rider should:") { [unowned uoSelf = self] doorStepOption in
+            uoSelf.doorStepOptionOutlet.text = doorStepOption.0
+            ShoppingCartModel.sharedInstance.order.userDoorStepOption = doorStepOption.1
+        }
+    }
+    
     @IBOutlet weak var paymentOptionOutlet: UILabel!
-//    let paymentOptions: [DoorStepOptionStruct] = [
-//        DoorStepOptionStruct(option: .ringDoorBell, displayText: "Ring My Doorbell"),
-//        DoorStepOptionStruct(option: .text, displayText: "Text Me"),
-//        DoorStepOptionStruct(option: .call, displayText: "Call Me"),
-//        ]
-//    
-//
-//    var selectedPaymentOption: DoorStepOptionStruct?
-//    internal func showPaymentOptionsMenu() {
-//        let optionsMenu = UIAlertController(title: "Choose Your Preference", message: "When at my doorstep, the rider should:", preferredStyle: .actionSheet)
-//        doorStepOptions.forEach { [unowned uoSelf = self] doorStepOption in
-//            optionsMenu.addAction(
-//                UIAlertAction(title: doorStepOption.displayText, style: .default) { _ in
-//                    uoSelf.selectedDoorStepOption = doorStepOption
-//                    uoSelf.doorStepOptionOutlet.text = doorStepOption.displayText
-//                    uoSelf.delegate?.doorStepChanged(selectedOption: doorStepOption.option)
-//                }
-//            )
-//        }
-//        optionsMenu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        present(optionsMenu, animated: true, completion: nil)
-//    }
+    internal func showPaymentOptionsMenu() {
+        showOptionsMenu(options: ShoppingCartModel.Preferences.Payment.all, message: "I would like to pay:") { [unowned uoSelf = self] paymentOption in
+            uoSelf.paymentOptionOutlet.text = paymentOption.0
+            ShoppingCartModel.sharedInstance.order.userPaymentOption = paymentOption.1
+        }
+    }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             showDoorStepOptionsMenu()
         case 1:
-            break
-            //showPaymentOptionsMenu()
+            showPaymentOptionsMenu()
         default:
             break
         }
@@ -87,8 +62,8 @@ class OrderOptionsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedDoorStepOption = doorStepOptions[0]
-        doorStepOptionOutlet.text = selectedDoorStepOption?.displayText
+        doorStepOptionOutlet.text = ShoppingCartModel.Preferences.Doorstep.initial.0
+        paymentOptionOutlet.text = ShoppingCartModel.Preferences.Payment.initial.0
     }
     
     

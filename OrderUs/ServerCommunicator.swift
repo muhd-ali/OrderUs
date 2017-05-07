@@ -14,7 +14,7 @@ class ServerCommunicator: NSObject {
     static let sharedInstance = ServerCommunicator()
     
     struct Constants {
-        static let serverIP = "http://192.168.0.222"
+        static let serverIP = "http://192.168.0.105"
         static let connectionEstablished = "connect"
         static let checkIfDataNeedsToBeReloaded = "dataNeedsToBeReloaded"
         static let connectionLost = "disconnect"
@@ -112,7 +112,7 @@ class ServerCommunicator: NSObject {
     }
     
     func placeOrder() {
-            let jsonData = ShoppingCartModel.sharedInstance.cartItems.map({ $0.jsonData })
+            let jsonData = ShoppingCartModel.sharedInstance.order.jsonData
             socket.emit(Constants.newOrder, with: [jsonData])
     }
 }

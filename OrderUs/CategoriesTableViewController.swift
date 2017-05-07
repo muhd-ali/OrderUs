@@ -13,8 +13,8 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
         tableList = newList
     }
     
-//    internal var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
-    internal var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
+    internal var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
+//    internal var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
         didSet {
             UIView.transition(
                 with: tableView,
