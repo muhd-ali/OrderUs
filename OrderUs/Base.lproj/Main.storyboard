@@ -30,10 +30,10 @@
                                     <constraint firstAttribute="height" constant="75" id="UBf-mM-MS5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <state key="normal" title="Sign In"/>
+                                <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="signInButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dfg-3s-oZb"/>
-                                    <segue destination="P8m-S4-h0S" kind="show" id="kjP-6N-bZO"/>
+                                    <segue destination="P8m-S4-h0S" kind="show" identifier="MainMenu" id="kjP-6N-bZO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" tag="30" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Us" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sx5-sg-4Ic">
@@ -42,21 +42,40 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehp-js-KKF" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="127" y="463" width="122" height="27"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ff-jw-1N5" customClass="GIDSignInButton">
+                                <rect key="frame" x="126" y="406" width="122" height="27"/>
+                            </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NWm-xf-t4W">
-                                <rect key="frame" x="178" y="457" width="20" height="20"/>
+                                <rect key="frame" x="177" y="510" width="20" height="20"/>
+                                <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Sx5-sg-4Ic" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3cY-AI-cpK"/>
+                            <constraint firstItem="ehp-js-KKF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="127" id="4mW-Zy-pgc"/>
                             <constraint firstItem="Sx5-sg-4Ic" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Czm-qu-DfJ"/>
+                            <constraint firstItem="1Ff-jw-1N5" firstAttribute="width" secondItem="ehp-js-KKF" secondAttribute="width" id="EPt-vd-mg7"/>
+                            <constraint firstItem="1Ff-jw-1N5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K9Y-iM-f0E"/>
                             <constraint firstItem="V7C-zh-s35" firstAttribute="centerX" secondItem="Sx5-sg-4Ic" secondAttribute="centerX" id="LSw-9n-51r"/>
+                            <constraint firstItem="NWm-xf-t4W" firstAttribute="top" secondItem="1Ff-jw-1N5" secondAttribute="bottom" constant="77" id="NgQ-EJ-m8a"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="V7C-zh-s35" secondAttribute="bottom" constant="75" id="Z1T-tc-n7u"/>
-                            <constraint firstItem="V7C-zh-s35" firstAttribute="top" secondItem="NWm-xf-t4W" secondAttribute="bottom" constant="40" id="dMd-bY-se9"/>
-                            <constraint firstItem="NWm-xf-t4W" firstAttribute="centerX" secondItem="V7C-zh-s35" secondAttribute="centerX" id="mR8-To-URd"/>
+                            <constraint firstItem="1Ff-jw-1N5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="126" id="ZTb-8e-LZP"/>
+                            <constraint firstItem="1Ff-jw-1N5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="406" id="ZWH-v4-g5P"/>
+                            <constraint firstItem="V7C-zh-s35" firstAttribute="top" secondItem="NWm-xf-t4W" secondAttribute="bottom" constant="-13" id="dMd-bY-se9"/>
+                            <constraint firstItem="ehp-js-KKF" firstAttribute="centerX" secondItem="V7C-zh-s35" secondAttribute="centerX" id="gq7-qw-ky6"/>
+                            <constraint firstItem="V7C-zh-s35" firstAttribute="top" secondItem="ehp-js-KKF" secondAttribute="bottom" constant="27" id="kqi-vg-VZO"/>
+                            <constraint firstItem="NWm-xf-t4W" firstAttribute="centerX" secondItem="V7C-zh-s35" secondAttribute="centerX" constant="-1" id="mR8-To-URd"/>
+                            <constraint firstItem="1Ff-jw-1N5" firstAttribute="height" secondItem="ehp-js-KKF" secondAttribute="height" id="qRA-S2-Smx"/>
+                            <constraint firstItem="ehp-js-KKF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="463" id="vtb-2Q-YIm"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="facebookLoginButtonOutlet" destination="ehp-js-KKF" id="P5r-Hd-ZpD"/>
+                        <outlet property="googleLoginButtonOutlet" destination="1Ff-jw-1N5" id="Zpc-jU-crM"/>
                         <outlet property="loadingCircle" destination="NWm-xf-t4W" id="H7f-r8-rco"/>
                     </connections>
                 </viewController>
@@ -149,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7E-4k-64e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="882"/>
+            <point key="canvasLocation" x="473" y="906"/>
         </scene>
         <!--Categories Table View Controller-->
         <scene sceneID="WlC-1K-wxr">
@@ -461,7 +480,7 @@
                                 <rect key="frame" x="16" y="384" width="343" height="172"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bWF-RG-nPP">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemProperty" id="bWF-RG-nPP">
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bWF-RG-nPP" id="1h0-hV-4Ab">
@@ -470,6 +489,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

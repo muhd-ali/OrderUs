@@ -8,6 +8,8 @@
 
 import UIKit
 import MIBadgeButton_Swift
+import FBSDKLoginKit
+import GoogleSignIn
 
 class MainMenuViewController: UITabBarController {
 
@@ -42,6 +44,9 @@ class MainMenuViewController: UITabBarController {
 
     
     @IBAction func signOutButtonAction(_ sender: UIButton) {
+        FBSDKLoginManager().logOut()
+        GIDSignIn.sharedInstance().signOut()
+        SignInModel.sharedInstance.signedIn = false
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     

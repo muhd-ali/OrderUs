@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import FacebookLogin
 import GoogleSignIn
+import FBSDKLoginKit
 
-class SignInViewController: UIViewController, GIDSignInUIDelegate {
+class SignInViewController: UIViewController, GIDSignInUIDelegate, SignInModelDelegate {
     
     @IBOutlet weak var loadingCircle: UIActivityIndicatorView!
     
@@ -22,23 +22,21 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
         }
     }
     
+    @IBOutlet weak var facebookLoginButtonOutlet: FBSDKLoginButton!
     private func setupFacebookLoginButton() {
-        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
-        loginButton.center = view.center
-        loginButton.bounds.origin.y  = loginButton.bounds.origin.y - 50
-        loginButton.delegate = SignInModel.sharedInstance
-        view.addSubview(loginButton)
+        facebookLoginButtonOutlet.delegate = SignInModel.sharedInstance
+        facebookLoginButtonOutlet.readPermissions = ["public_profile", "email", "user_friends"]
+        facebookLoginButtonOutlet.sizeToFit()
     }
     
+    
+    @IBOutlet weak var googleLoginButtonOutlet: GIDSignInButton!
     private func setupGoogleLoginButton() {
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = SignInModel.sharedInstance
-        
-        let loginButton = GIDSignInButton()
-        loginButton.backgroundColor = UIColor.white
-        loginButton.center = view.center
-        loginButton.bounds.origin.y  = loginButton.bounds.origin.y - 100
-        view.addSubview(loginButton)
+        googleLoginButtonOutlet.style = .standard
+        googleLoginButtonOutlet.backgroundColor = UIColor.white
+        googleLoginButtonOutlet.sizeToFit()
     }
     
     // Implement these methods only if the GIDSignInUIDelegate is not a subclass of
@@ -47,7 +45,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
     // Stop the UIActivityIndicatorView animation that was started when the user
     // pressed the Sign In button
     func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
-        //        myActivityIndicator.stopAnimating()
+        signInStarted()
         print("function 1 was called")
     }
     
@@ -63,11 +61,49 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
         print("function 3 was called")
     }
     
+    var signInInProgress = false
+    func signInStarted() {
+        loadingCircle.startAnimating()
+        signInInProgress = true
+        let duration = 1.0
+        
+        UIView.transition(
+            with: facebookLoginButtonOutlet,
+            duration: duration,
+            options: [.curveEaseInOut, .transitionCrossDissolve],
+            animations: { [unowned uoSelf = self] in
+                uoSelf.facebookLoginButtonOutlet.isHidden = true
+        }, completion: nil)
+        
+        UIView.transition(
+            with: googleLoginButtonOutlet,
+            duration: duration,
+            options: [.curveEaseInOut, .transitionCrossDissolve],
+            animations: { [unowned uoSelf = self] in
+                uoSelf.googleLoginButtonOutlet.isHidden = true
+            }, completion: nil)
+    }
+    
+    func signInCompleted() {
+        signInInProgress = false
+        loadingCircle.stopAnimating()
+        performSegue(withIdentifier: "MainMenu", sender: nil)
+    }
+    
     // Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        SignInModel.sharedInstance.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         setupFacebookLoginButton()
         setupGoogleLoginButton()
+        SignInModel.sharedInstance.signInViewDidLoad()
+        if (!SignInModel.sharedInstance.signedIn && !signInInProgress) {
+            facebookLoginButtonOutlet.isHidden = false
+            googleLoginButtonOutlet.isHidden = false
+        }
     }
     
 }
