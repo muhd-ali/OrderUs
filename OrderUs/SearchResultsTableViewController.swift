@@ -9,11 +9,6 @@
 import UIKit
 
 class SearchResultsTableViewController: UITableViewController, UISearchResultsUpdating {
-    struct SearchResult {
-        var item: Item
-        var path: NSMutableAttributedString
-    }
-    
     var tableList: DataManager.ListType?
     var parentNavigationController: UINavigationController?
     var searchController: UISearchController?
@@ -40,7 +35,7 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
         let result = results[indexPath.row]
         
         cell.textLabel?.text = result.item.Name
-        cell.detailTextLabel?.attributedText = result.path
+        cell.detailTextLabel?.attributedText = result.attributedPath
         
         return cell
     }
@@ -54,30 +49,21 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
             
         }
     }
-
+    
     // MARK: - UISearchResultsUpdating
     
-    internal func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResultsTableViewController.SearchResult] {
-        let jaggedResults:[[SearchResultsTableViewController.SearchResult]] = list.map { listItem in
-            var foundResults: [SearchResultsTableViewController.SearchResult] = []
-            if let category = listItem as? Category {
-                foundResults = findSearchResults(fromList: category.Children, listPath: "\(listPath) -> \(category.Name)", withSearchedText: text)
-            } else if let item = listItem as? Item {
-                if (!text.isEmpty) {
-                    if item.Name.range(of: text) != nil {
-                        let fontSize: CGFloat = 15.0
-                        let path = "\(listPath) -> \(item.Name)"
-                        let attributedPath = NSMutableAttributedString(string: path, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])
-                        let highlightAttribute = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: fontSize), NSBackgroundColorAttributeName : UIColor.yellow]
-                        attributedPath.addAttributes(highlightAttribute, range: (path as NSString).range(of: text))
-                        let foundResult = SearchResultsTableViewController.SearchResult(item: item, path: attributedPath)
-                        foundResults.append(foundResult)
-                    }
-                }
-            }
-            return foundResults
+    internal func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResult] {
+        let results = list.searchItems { result in
+            result.Name.range(of: text) != nil
         }
-        return jaggedResults.flatMap { $0 }
+        return results.map {
+            var result = $0
+            let fontSize: CGFloat = 15.0
+            result.attributedPath = NSMutableAttributedString(string: result.path, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])
+            let highlightAttributes = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: fontSize), NSBackgroundColorAttributeName : UIColor.yellow]
+            result.attributedPath?.addAttributes(highlightAttributes, range: (result.path as NSString).range(of: text))
+            return result
+        }
     }
     
     

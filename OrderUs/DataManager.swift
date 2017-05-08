@@ -48,22 +48,32 @@ struct Category: Selectable {
     var ChildrenItems: [String]
 }
 
-extension Array where Element: Selectable {
-    func filterItemsHelper(selectables: [Selectable], condition: (Item) -> Bool) -> [Item] {
-        var items: [Item] = []
-        selectables.forEach { selectable in
+struct SearchResult {
+    var item: Item
+    var path: String
+    var attributedPath: NSMutableAttributedString?
+}
+
+extension Sequence where Iterator.Element == Selectable {
+    private func searchItemsHelper(condition: (Item) -> Bool, path: String) -> [SearchResult] {
+        var results: [SearchResult] = []
+        self.forEach { selectable in
             if let category = selectable as? Category {
-                let innerItems = filterItemsHelper(selectables: category.Children, condition: condition)
-                items.append(contentsOf: innerItems)
+                let innerResults = category.Children.searchItemsHelper(condition: condition, path: "\(path) -> \(category.Name)")
+                results.append(contentsOf: innerResults)
             } else if let item = selectable as? Item {
-                items.append(item)
+                if condition(item) {
+                    let itemPath = "\(path) -> \(item.Name)"
+                    let result = SearchResult(item: item, path: itemPath, attributedPath: nil)
+                    results.append(result)
+                }
             }
         }
-        return items
+        return results
     }
     
-    func filterItems(condition: (Item) -> Bool) -> [Item] {
-        return filterItemsHelper(selectables: self, condition: condition)
+    func searchItems(condition: (Item) -> Bool) -> [SearchResult]  {
+        return searchItemsHelper(condition: condition, path: "list")
     }
 }
 
