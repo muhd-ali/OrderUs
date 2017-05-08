@@ -81,11 +81,11 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="zn0-gP-fpb">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q4o-gf-n16" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                                <rect key="frame" x="276" y="5" width="83" height="33"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" id="Q4o-gf-n16" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
+                                <rect key="frame" x="324" y="5" width="35" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <state key="normal" title="🛒"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Cart"/>
                                 <connections>
                                     <segue destination="stU-Fw-yXh" kind="show" id="6Ad-hh-VFe"/>
                                 </connections>
@@ -395,7 +395,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGB-6A-fZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1532" y="-1356"/>
+            <point key="canvasLocation" x="473" y="-591"/>
         </scene>
         <!--Item Details View Controller-->
         <scene sceneID="UDo-8u-PBJ">
@@ -523,7 +523,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="P8m-S4-h0S" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" systemItem="favorites" id="wmk-Aw-nEe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZLY-ef-8b3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZLY-ef-8b3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
