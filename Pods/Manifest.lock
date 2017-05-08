@@ -52,7 +52,6 @@ PODS:
   - GTMSessionFetcher/Core (1.1.9)
   - GTMSessionFetcher/Full (1.1.9):
     - GTMSessionFetcher/Core (= 1.1.9)
-  - M13Checkbox (3.1.3)
   - MIBadgeButton-Swift (0.5)
   - PKHUD (4.2.1)
   - Socket.IO-Client-Swift (9.0.0)
@@ -61,7 +60,6 @@ DEPENDENCIES:
   - FacebookCore
   - FacebookLogin
   - Google/SignIn
-  - M13Checkbox
   - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
   - PKHUD (~> 4.2)
   - Socket.IO-Client-Swift
@@ -90,11 +88,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
-  M13Checkbox: c132a7e0eb964731855eff67b883a0b21b7c0977
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   PKHUD: 957ce2a68b3c97a51839b30216120c1dbc0c3a78
   Socket.IO-Client-Swift: c4c6f4193305a65fdee226a9bf9329151a304d0b
 
-PODFILE CHECKSUM: bc8d455afc3ecd0cd2fa89c8baf407b645de904e
+PODFILE CHECKSUM: 26b8a647fdef915a7bec5bda045acc4b5c442181
 
 COCOAPODS: 1.2.1

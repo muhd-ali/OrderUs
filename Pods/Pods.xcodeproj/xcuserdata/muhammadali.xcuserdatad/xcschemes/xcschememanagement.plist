@@ -44,11 +44,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>M13Checkbox.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MIBadgeButton-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,17 +67,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>01E8D6CA12C2BEBC915DF0BB391C8EA8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>20A9DD9ABBF08BC57372A26C35327BF1</key>
+		<key>2B34CBF129B615FEE8111B9321BB7C80</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,17 +102,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F0B2C7C6BD9E13B7B0C0835F0BDC392</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>7335E9C9689F3B8A16F063A884748533</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>B1C4AAFAF49036C7007633DAA3C806AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BC6D40D60BD6C7310BCC3F32DEC968AE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
