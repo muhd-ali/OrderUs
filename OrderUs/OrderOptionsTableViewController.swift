@@ -9,7 +9,7 @@
 import UIKit
 
 class OrderOptionsTableViewController: UITableViewController {
-    internal func showOptionsMenu(options: [(String, String)], message: String, handler: (((String, String)) -> Void)?) {
+    private func showOptionsMenu(options: [(String, String)], message: String, handler: (((String, String)) -> Void)?) {
         let optionsMenu = UIAlertController(title: "Choose Your Preference", message: message, preferredStyle: .actionSheet)
         options.forEach { option in
             optionsMenu.addAction(
@@ -25,7 +25,7 @@ class OrderOptionsTableViewController: UITableViewController {
     }
     
     @IBOutlet weak var doorStepOptionOutlet: UILabel!
-    internal func showDoorStepOptionsMenu() {
+    private func showDoorStepOptionsMenu() {
         showOptionsMenu(options: ShoppingCartModel.Preferences.Doorstep.all, message: "When at my doorstep, the rider should:") { [unowned uoSelf = self] doorStepOption in
             uoSelf.doorStepOptionOutlet.text = doorStepOption.0
             ShoppingCartModel.sharedInstance.order.userDoorStepOption = doorStepOption.1
@@ -33,7 +33,7 @@ class OrderOptionsTableViewController: UITableViewController {
     }
     
     @IBOutlet weak var paymentOptionOutlet: UILabel!
-    internal func showPaymentOptionsMenu() {
+    private func showPaymentOptionsMenu() {
         showOptionsMenu(options: ShoppingCartModel.Preferences.Payment.all, message: "I would like to pay:") { [unowned uoSelf = self] paymentOption in
             uoSelf.paymentOptionOutlet.text = paymentOption.0
             ShoppingCartModel.sharedInstance.order.userPaymentOption = paymentOption.1

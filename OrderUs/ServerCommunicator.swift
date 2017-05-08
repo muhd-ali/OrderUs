@@ -45,27 +45,27 @@ class ServerCommunicator: NSObject {
         socket.connect()
     }
     
-    internal func setupMainEvents() {
+    private func setupMainEvents() {
         setupConnectEvent()
         setupDisconnectEvent()
         setupAppEvents()
     }
     
-    internal func setupAppEvents() {
+    private func setupAppEvents() {
         setupEventTocheckIfDataNeedsToBeReloaded()
         setupEventToReceiveItemsList()
         setupEventToReceiveCategoriesList()
     }
     
-    internal func requestReloadItemsData() {
+    private func requestReloadItemsData() {
         socket.emit(Constants.itemsList, with: [""])
     }
     
-    internal func requestReloadCategoriesData() {
+    private func requestReloadCategoriesData() {
         socket.emit(Constants.categoriesList, with: [""])
     }
     
-    internal func setupEventToReceiveItemsList() {
+    private func setupEventToReceiveItemsList() {
         socket.on(Constants.itemsList) { (data, ack) in
             if let items = data[0] as? [[String : Any]] {
                 DataManager.sharedInstance.itemsRaw = items
@@ -73,7 +73,7 @@ class ServerCommunicator: NSObject {
         }
     }
     
-    internal func setupEventToReceiveCategoriesList() {
+    private func setupEventToReceiveCategoriesList() {
         socket.on(Constants.categoriesList) { (data, ack) in
             if let categories = data[0] as? [[String : Any]] {
                 DataManager.sharedInstance.categoriesRaw = categories
@@ -81,7 +81,7 @@ class ServerCommunicator: NSObject {
         }
     }
     
-    internal func setupEventTocheckIfDataNeedsToBeReloaded() {
+    private func setupEventTocheckIfDataNeedsToBeReloaded() {
         socket.on(Constants.checkIfDataNeedsToBeReloaded) { [unowned uoSelf = self] (data, ack) in
             let dataNeedsToBeReloaded = data[0] as! Bool
             if dataNeedsToBeReloaded {
@@ -91,23 +91,23 @@ class ServerCommunicator: NSObject {
         }
     }
     
-    internal func setupConnectEvent() {
+    private func setupConnectEvent() {
         socket.on(Constants.connectionEstablished) { [unowned uoSelf = self] (data, ack) in
             uoSelf.sendNecessaryMessages()
         }
     }
     
-    internal func setupDisconnectEvent() {
+    private func setupDisconnectEvent() {
         socket.on(Constants.connectionLost) { [unowned uoSelf = self] (data, ack) in
             uoSelf.socket.off(Constants.connectionEstablished)
         }
     }
     
-    internal func sendNecessaryMessages() {
+    private func sendNecessaryMessages() {
         sendMessageTocheckIfDataNeedsToBeReloaded()
     }
     
-    internal func sendMessageTocheckIfDataNeedsToBeReloaded() {
+    private func sendMessageTocheckIfDataNeedsToBeReloaded() {
         socket.emit(Constants.checkIfDataNeedsToBeReloaded, with: [""])
     }
     

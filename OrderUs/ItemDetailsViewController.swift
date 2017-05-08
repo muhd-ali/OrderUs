@@ -26,7 +26,7 @@ class ItemDetailsViewController: UIViewController {
         }
     }
     
-    internal struct NotFound {
+    private struct NotFound {
         static let itemName = "no type found"
         static let itemImageURL = "no url found"
         static let itemPrice = -1.0
@@ -38,11 +38,11 @@ class ItemDetailsViewController: UIViewController {
         )
     }
     
-    internal var itemName = NotFound.itemName
-    internal var itemImageURL = NotFound.itemImageURL
-    internal var itemPrice = NotFound.itemPrice
-    internal var itemMinQuantity = NotFound.itemMinQuantity
-    internal var itemQuantityValue = 0.0 {
+    private var itemName = NotFound.itemName
+    private var itemImageURL = NotFound.itemImageURL
+    private var itemPrice = NotFound.itemPrice
+    private var itemMinQuantity = NotFound.itemMinQuantity
+    private var itemQuantityValue = 0.0 {
         didSet {
             itemQuantityUnit = itemMinQuantity.Unit
             if (itemQuantityValue > 1.0) {
@@ -50,7 +50,7 @@ class ItemDetailsViewController: UIViewController {
             }
         }
     }
-    internal var itemQuantityUnit = ""
+    private var itemQuantityUnit = ""
     
     
     
@@ -101,17 +101,17 @@ class ItemDetailsViewController: UIViewController {
         updateUI()
     }
     
-    internal func updateUI() {
+    private func updateUI() {
         itemNameLabel.text = itemName
         updateImage()
         updateDynamicContent(increasingValues: true)
     }
     
-    internal func getTotalPrice() -> Double {
+    private func getTotalPrice() -> Double {
         return itemPrice/quantityStepperOutlet.minimumValue * quantityStepperOutlet.value
     }
     
-    internal func updateDynamicContent(increasingValues: Bool) {
+    private func updateDynamicContent(increasingValues: Bool) {
         var transitionEffect: UIViewAnimationOptions
         if increasingValues {
             transitionEffect = .transitionFlipFromTop
@@ -143,7 +143,7 @@ class ItemDetailsViewController: UIViewController {
     }
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    internal func updateImage() {
+    private func updateImage() {
         if let url = NSURL(string: itemImageURL) {
             spinner.startAnimating()
             DispatchQueue(

@@ -25,7 +25,7 @@ class MainMenuViewController: UITabBarController {
 
     @IBOutlet weak var shoppingCartOutlet: MIBadgeButton!
     
-    func setShoppingCartBadgeAppearance() {
+    private func setShoppingCartBadgeAppearance() {
         let cartItemsCount = ShoppingCartModel.sharedInstance.order.items.count
         
         if cartItemsCount > 0 {

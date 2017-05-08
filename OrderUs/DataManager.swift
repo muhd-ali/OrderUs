@@ -85,7 +85,7 @@ class DataManager: NSObject {
     var delegate: DataManagerDelegate?
     
     
-    internal func makeItem(rawItem:  [String : Any]) -> Item {
+    private func makeItem(rawItem:  [String : Any]) -> Item {
         return Item(
             Name: rawItem["Name"]! as! String,
             ImageURL: "\(ServerCommunicator.Constants.serverIP)/\(rawItem["imageURL"]! as! String)".replacingOccurrences(of: " ", with: "%20"),
@@ -96,7 +96,7 @@ class DataManager: NSObject {
         )
     }
     
-    internal func ifDataFetchedFromServerGenerateTree() {
+    private func ifDataFetchedFromServerGenerateTree() {
         if itemsLoaded && categoriesLoaded {
             generateCategoryTree()
             itemsLoaded = false
@@ -104,7 +104,7 @@ class DataManager: NSObject {
         }
     }
     
-    var itemsLoaded = false
+    private var itemsLoaded = false
     var itemsCooked: [Item] = []
     var itemsRaw: [[String : Any]] = [] {
         didSet {
@@ -114,7 +114,7 @@ class DataManager: NSObject {
         }
     }
     
-    internal func makeCategory(rawCategory: [String : Any]) -> Category {
+    private func makeCategory(rawCategory: [String : Any]) -> Category {
         return Category(
             Name: rawCategory["Name"]! as! String,
             ImageURL: "\(ServerCommunicator.Constants.serverIP)/\(rawCategory["imageURL"]! as! String)".replacingOccurrences(of: " ", with: "%20"),
@@ -126,7 +126,7 @@ class DataManager: NSObject {
         )
     }
     
-    internal func addChildrenCategories(toCategory category: Category, fromList catList: [Category]) -> Category {
+    private func addChildrenCategories(toCategory category: Category, fromList catList: [Category]) -> Category {
         var childrenCategories = catList.filter {category.ChildrenCategories.contains($0.ID)}
         childrenCategories = childrenCategories.map {
             return addChildrenCategories(toCategory: $0, fromList: catList)
@@ -136,12 +136,12 @@ class DataManager: NSObject {
         return modifiedCategory
     }
     
-    internal func setupCategories() {
+    private func setupCategories() {
         categoriesCooked = categoriesCooked.map { addChildrenCategories(toCategory: $0, fromList: categoriesCooked) }
         categoriesCooked = categoriesCooked.filter{ $0.Parent == "0" }
     }
     
-    internal func setupItems() {
+    private func setupItems() {
         categoriesCooked = categoriesCooked.map { categoryWithoutChildren in
             var category = categoryWithoutChildren
             let children = itemsCooked.filter { category.ChildrenItems.contains($0.ID) }
@@ -150,13 +150,13 @@ class DataManager: NSObject {
         }
     }
     
-    internal func generateCategoryTree() {
+    private func generateCategoryTree() {
         setupItems()
         setupCategories()
         delegate?.dataChanged(newList: categoriesCooked)
     }
     
-    var categoriesLoaded = false
+    private var categoriesLoaded = false
     var categoriesCooked: [Category] = []
     var categoriesRaw: [[String : Any]] = [] {
         didSet {
@@ -167,7 +167,7 @@ class DataManager: NSObject {
     }
     
     struct ExampleCategories {
-        internal static let FreshProduceList: ListType = [
+        private static let FreshProduceList: ListType = [
             Category(
                 Name : "Fruits",
                 ImageURL : "https://cdn.pixabay.com/photo/2016/04/01/12/20/apple-1300670.960.720.png",
@@ -188,7 +188,7 @@ class DataManager: NSObject {
             ),
             ]
         
-        internal static let GroceryList: ListType = [
+        private static let GroceryList: ListType = [
             Category(
                 Name : "Fresh Produce",
                 ImageURL : "https://cdn.pixabay.com/photo/2012/04/24/16/09/fruit-40276.960.720.png",

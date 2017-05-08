@@ -22,7 +22,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
         }
     }
     
-    internal func setupFacebookLoginButton() {
+    private func setupFacebookLoginButton() {
         let loginButton = LoginButton(readPermissions: [ .publicProfile ])
         loginButton.center = view.center
         loginButton.bounds.origin.y  = loginButton.bounds.origin.y - 50
@@ -30,7 +30,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
         view.addSubview(loginButton)
     }
     
-    internal func setupGoogleLoginButton() {
+    private func setupGoogleLoginButton() {
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = SignInModel.sharedInstance
         

@@ -11,7 +11,7 @@ import PKHUD
 
 class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PlaceOrderViewControllerDelegate {
     
-    internal var userWantsToPlaceOrder = false
+    private var userWantsToPlaceOrder = false
     func userRequestedToPlaceOrder() {
         userWantsToPlaceOrder = true
     }
@@ -27,7 +27,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         updateUI()
     }
     
-    internal func placeOrder() {
+    private func placeOrder() {
         ServerCommunicator.sharedInstance.placeOrder()
         ShoppingCartModel.sharedInstance.order.items = []
     }
@@ -44,7 +44,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBOutlet weak var proceedButtonOutlet: UIButton!
-    internal func updateUI() {
+    private func updateUI() {
         title = "Shopping Cart"
         let totalCost = shoppingCartList.reduce(0) { $0 + ($1.totalCost()) }
         totalCostDisplay.text = "Total Cost = \(totalCost) PKR"

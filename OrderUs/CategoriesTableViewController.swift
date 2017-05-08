@@ -13,8 +13,8 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
         tableList = newList
     }
     
-//    internal var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
-    internal var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
+//    private var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
+    private var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
         didSet {
             UIView.transition(
                 with: tableView,
@@ -38,7 +38,6 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
         }
     }
     
-    internal var titleToDisplay = ""
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = tableList[indexPath.section]
         if let newTableList = (selected as? Category)?.Children {
@@ -70,7 +69,7 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
         return cell
     }
     
-    internal func hideSearchBar() {
+    private func hideSearchBar() {
         let searchBarHeight = 44.0
         if tableView.contentOffset.y == 0.0 {
             tableView.contentOffset = CGPoint(x: 0.0, y: searchBarHeight)
@@ -79,7 +78,7 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
     
     var searchController: UISearchController!
     
-    internal func initializeSearchController() {
+    private func initializeSearchController() {
         let resultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
         resultsController?.tableList = tableList
         resultsController?.parentNavigationController = navigationController

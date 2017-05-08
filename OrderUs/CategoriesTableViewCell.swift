@@ -33,7 +33,7 @@ class CategoriesTableViewCell: UITableViewCell {
     var categoryName = NotFound.categoryName
     var categoryImageURL = NotFound.categoryImageURL
     
-    internal func updateUI() {
+    private func updateUI() {
         typeLabel.text = categoryName
         typeImageView.image = nil
         updateImage()
@@ -41,7 +41,7 @@ class CategoriesTableViewCell: UITableViewCell {
         
     }
     
-    internal func updateAccessoryOptions() {
+    private func updateAccessoryOptions() {
         if ((category as? Category) != nil) {
             accessoryType = .disclosureIndicator
         } else if ((category as? Item) != nil) {
@@ -49,7 +49,7 @@ class CategoriesTableViewCell: UITableViewCell {
         }
     }
     
-    internal func updateImage() {
+    private func updateImage() {
         if let url = NSURL(string: categoryImageURL) {
             spinner.startAnimating()
             DispatchQueue(
