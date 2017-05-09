@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol Selectable {
     var Name: String {get}
@@ -28,6 +29,11 @@ struct Item: Selectable {
         init(rawMinQuantity: [String : Any]) {
             Number = Double(rawMinQuantity[MinQuantity.NumberKey]! as! Int)
             Unit = rawMinQuantity[MinQuantity.UnitKey]! as! String
+        }
+        
+        init(number: Double, unit: String) {
+            Number = number
+            Unit = unit
         }
     }
     internal var Name: String
@@ -78,11 +84,36 @@ extension Sequence where Iterator.Element == Selectable {
 }
 
 
+
 class DataManager: NSObject {
     typealias ListType = [Selectable]
     static let sharedInstance = DataManager()
     
-    var delegate: DataManagerDelegate?
+    class NullDelegate: DataManagerDelegate {
+        var called = false
+        func dataChanged(newList: DataManager.ListType) {
+            called = true
+        }
+    }
+    var delegate: DataManagerDelegate = NullDelegate() {
+        didSet {
+            if (oldValue as? NullDelegate)?.called ?? false {
+                delegate.dataChanged(newList: categoryTree)
+            }
+        }
+    }
+    
+    var managedObjectContext: NSManagedObjectContext?
+    
+    func loadDataFromDB() {
+        managedObjectContext?.perform { [unowned uoSelf = self] in
+            uoSelf.structuredItems = ItemCD.getItems(from: uoSelf.managedObjectContext!) ?? []
+            uoSelf.structuredCategories = CategoryCD.getCategories(from: uoSelf.managedObjectContext!) ?? []
+            DispatchQueue.main.async {
+                uoSelf.generateCategoryTree()
+            }
+        }
+    }
     
     
     private func makeItem(rawItem:  [String : Any]) -> Item {
@@ -104,11 +135,25 @@ class DataManager: NSObject {
         }
     }
     
+    private func updateItemsInDB(items: [Item]) {
+        managedObjectContext?.perform { [unowned uoSelf = self] in
+            items.forEach { item in
+                _ = ItemCD.replaceOrAddItem(with: item, inManagedObjectContext: uoSelf.managedObjectContext!)
+            }
+            do {
+                try uoSelf.managedObjectContext?.save()
+            } catch let error {
+                print ("Core Data Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     private var itemsLoaded = false
-    var itemsCooked: [Item] = []
-    var itemsRaw: [[String : Any]] = [] {
+    private var structuredItems: [Item] = []
+    var rawItems: [[String : Any]] = [] {
         didSet {
-            itemsCooked = itemsRaw.map { makeItem(rawItem: $0) }
+            structuredItems = rawItems.map { makeItem(rawItem: $0) }
+            updateItemsInDB(items: structuredItems)
             itemsLoaded = true
             ifDataFetchedFromServerGenerateTree()
         }
@@ -126,41 +171,63 @@ class DataManager: NSObject {
         )
     }
     
-    private func addChildrenCategories(toCategory category: Category, fromList catList: [Category]) -> Category {
-        var childrenCategories = catList.filter {category.ChildrenCategories.contains($0.ID)}
+    private func addChildrenCategories(to category: Category, from list: [Category]) -> Category {
+        var childrenCategories = list.filter {category.ChildrenCategories.contains($0.ID)}
         childrenCategories = childrenCategories.map {
-            return addChildrenCategories(toCategory: $0, fromList: catList)
+            return addChildrenCategories(to: $0, from: list)
         }
         var modifiedCategory = category
         modifiedCategory.Children.append(contentsOf: childrenCategories as [Selectable])
         return modifiedCategory
     }
     
-    private func setupCategories() {
-        categoriesCooked = categoriesCooked.map { addChildrenCategories(toCategory: $0, fromList: categoriesCooked) }
-        categoriesCooked = categoriesCooked.filter{ $0.Parent == "0" }
+    private func reorder(categoriesWithAddedItems: [Category]) -> [Category] {
+        let reordered = categoriesWithAddedItems.map { addChildrenCategories(to: $0, from: categoriesWithAddedItems) }
+        return reordered.filter{ $0.Parent == "0" }
     }
     
-    private func setupItems() {
-        categoriesCooked = categoriesCooked.map { categoryWithoutChildren in
+    private func addItems(to categories: [Category]) -> [Category] {
+         return categories.map { categoryWithoutChildren in
             var category = categoryWithoutChildren
-            let children = itemsCooked.filter { category.ChildrenItems.contains($0.ID) }
+            let children = structuredItems.filter { item in category.ChildrenItems.contains(item.ID) }
             category.Children.append(contentsOf: children as [Selectable])
             return category
         }
     }
     
-    private func generateCategoryTree() {
-        setupItems()
-        setupCategories()
-        delegate?.dataChanged(newList: categoriesCooked)
+    private func freeMemory() {
+        rawCategories.removeAll()
+        structuredCategories.removeAll()
+        rawItems.removeAll()
+        structuredItems.removeAll()
     }
     
+    var categoryTree: [Selectable] = ExampleCategories.MainList
+    private func generateCategoryTree() {
+        let categoriesWithAddedItems = addItems(to: structuredCategories)
+        categoryTree = reorder(categoriesWithAddedItems: categoriesWithAddedItems)
+        //freeMemory()
+        delegate.dataChanged(newList: categoryTree)
+    }
+    
+    private func updateCategoriesInDB(categories: [Category]) {
+        managedObjectContext?.perform { [unowned uoSelf = self] in
+            categories.forEach { category in
+                _ = CategoryCD.replaceOrAddCategory(with: category, inManagedObjectContext: uoSelf.managedObjectContext!)
+            }
+            do {
+                try uoSelf.managedObjectContext?.save()
+            } catch let error {
+                print ("Core Data Error: \(error.localizedDescription)")
+            }
+        }
+    }
     private var categoriesLoaded = false
-    var categoriesCooked: [Category] = []
-    var categoriesRaw: [[String : Any]] = [] {
+    private var structuredCategories: [Category] = []
+    var rawCategories: [[String : Any]] = [] {
         didSet {
-            categoriesCooked = categoriesRaw.map { makeCategory(rawCategory: $0) }
+            structuredCategories = rawCategories.map { makeCategory(rawCategory: $0) }
+            updateCategoriesInDB(categories: structuredCategories)
             categoriesLoaded = true
             ifDataFetchedFromServerGenerateTree()
         }

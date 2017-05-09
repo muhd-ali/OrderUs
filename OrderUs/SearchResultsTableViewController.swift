@@ -54,6 +54,7 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
         let results = list.searchItems { result in
             result.Name.range(of: text) != nil
         }
+
         return results.map {
             var result = $0
             let fontSize: CGFloat = 15.0

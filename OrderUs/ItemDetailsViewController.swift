@@ -152,10 +152,10 @@ class ItemDetailsViewController: UIViewController {
                 attributes: .concurrent
                 ).async {
                     if let imageData = NSData(contentsOf: url as URL) {
-                        DispatchQueue.main.async { [weak weakSelf = self] in
-                            weakSelf?.spinner.stopAnimating()
-                            if weakSelf?.itemImageURL == url.absoluteString {
-                                weakSelf?.itemImageView.image = UIImage(data: imageData as Data)
+                        DispatchQueue.main.async { [unowned uoSelf = self] in
+                            uoSelf.spinner.stopAnimating()
+                            if uoSelf.itemImageURL == url.absoluteString {
+                                uoSelf.itemImageView.image = UIImage(data: imageData as Data)
                             }
                         }
                     }

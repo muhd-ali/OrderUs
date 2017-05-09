@@ -13,18 +13,19 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
         tableList = newList
     }
     
-//    private var tableList: DataManager.ListType = DataManager.sharedInstance.categoriesCooked {
-    private var tableList: DataManager.ListType = DataManager.ExampleCategories.MainList {
+    var tableList: DataManager.ListType = [] {
         didSet {
             UIView.transition(
                 with: tableView,
                 duration: 0.5,
                 options: [.transitionCrossDissolve, .curveEaseInOut],
-                animations: { [weak weakSelf = self] in
-                    weakSelf?.tableView.reloadData()
+                animations: { [unowned uoSelf = self] in
+                    uoSelf.tableView.reloadData()
                 },
                 completion: nil
             )
+            
+            resultsController?.tableList = tableList
         }
     }
     
@@ -77,15 +78,16 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
     }
     
     var searchController: UISearchController!
+    var resultsController: SearchResultsTableViewController?
     
     private func initializeSearchController() {
-        let resultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
+        resultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
         resultsController?.tableList = tableList
         resultsController?.parentNavigationController = navigationController
         resultsController?.searchController = searchController
-        
         searchController = UISearchController(searchResultsController: resultsController)
         searchController.searchResultsUpdater = resultsController
+        
         searchController.dimsBackgroundDuringPresentation = true
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar

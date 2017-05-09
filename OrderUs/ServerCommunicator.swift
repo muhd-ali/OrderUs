@@ -68,7 +68,7 @@ class ServerCommunicator: NSObject {
     private func setupEventToReceiveItemsList() {
         socket.on(Constants.itemsList) { (data, ack) in
             if let items = data[0] as? [[String : Any]] {
-                DataManager.sharedInstance.itemsRaw = items
+                DataManager.sharedInstance.rawItems = items
             }
         }
     }
@@ -76,7 +76,7 @@ class ServerCommunicator: NSObject {
     private func setupEventToReceiveCategoriesList() {
         socket.on(Constants.categoriesList) { (data, ack) in
             if let categories = data[0] as? [[String : Any]] {
-                DataManager.sharedInstance.categoriesRaw = categories
+                DataManager.sharedInstance.rawCategories = categories
             }
         }
     }
@@ -87,6 +87,8 @@ class ServerCommunicator: NSObject {
             if dataNeedsToBeReloaded {
                 uoSelf.requestReloadItemsData()
                 uoSelf.requestReloadCategoriesData()
+            } else {
+                DataManager.sharedInstance.loadDataFromDB()
             }
         }
     }

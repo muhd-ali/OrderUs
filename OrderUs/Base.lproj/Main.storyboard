@@ -90,10 +90,10 @@
                     <navigationItem key="navigationItem" title="Main Menu" id="8Cz-PV-4s8">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="LVg-M0-ElM">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bbD-ou-13Y">
-                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <rect key="frame" x="16" y="5" width="83" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <state key="normal" title="Sign Out"/>
+                                <state key="normal" title="❌"/>
                                 <connections>
                                     <action selector="signOutButtonAction:" destination="ddM-ss-WEa" eventType="touchUpInside" id="Jqz-kF-yfq"/>
                                 </connections>
@@ -101,10 +101,10 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="zn0-gP-fpb">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" id="Q4o-gf-n16" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                                <rect key="frame" x="324" y="5" width="35" height="33"/>
+                                <rect key="frame" x="329" y="5" width="30" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <state key="normal" title="Cart"/>
+                                <state key="normal" title="🛒"/>
                                 <connections>
                                     <segue destination="stU-Fw-yXh" kind="show" id="6Ad-hh-VFe"/>
                                 </connections>
@@ -226,7 +226,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" systemItem="search" id="r77-FZ-zV2"/>
-                    <navigationItem key="navigationItem" id="8g6-B6-tIe"/>
+                    <navigationItem key="navigationItem" id="8g6-B6-tIe">
+                        <nil key="title"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="okY-AO-1Ms" id="66Q-xp-LYN"/>
                         <segue destination="Oh2-dG-GUp" kind="show" identifier="ItemDetail" id="mAw-zj-32N"/>
@@ -543,7 +545,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="P8m-S4-h0S" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" systemItem="favorites" id="wmk-Aw-nEe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZLY-ef-8b3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZLY-ef-8b3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

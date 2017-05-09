@@ -58,10 +58,10 @@ class CategoriesTableViewCell: UITableViewCell {
                 attributes: .concurrent
                 ).async {
                     if let imageData = NSData(contentsOf: url as URL) {
-                        DispatchQueue.main.async { [weak weakSelf = self] in
-                            weakSelf?.spinner.stopAnimating()
-                            if weakSelf?.categoryImageURL == url.absoluteString {
-                                weakSelf?.typeImageView.image = UIImage(data: imageData as Data)
+                        DispatchQueue.main.async { [unowned uoSelf = self] in
+                            uoSelf.spinner.stopAnimating()
+                            if uoSelf.categoryImageURL == url.absoluteString {
+                                uoSelf.typeImageView.image = UIImage(data: imageData as Data)
                             }
                         }
                     }
