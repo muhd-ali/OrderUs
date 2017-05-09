@@ -41,12 +41,14 @@ class ShoppingCartModel: NSObject {
     
     struct Order {
         var items: [OrderedItem]
+        var userData: UserData?
         var userDoorStepOption: String
         var userPaymentOption: String
         
         var jsonData: [String : Any] {
             return [
                 "items" : items.map { $0.jsonData },
+                "userData" : userData?.jsonData ?? "",
                 "userDoorStepOption" : userDoorStepOption,
                 "userPaymentOption" : userPaymentOption,
             ]
@@ -57,6 +59,7 @@ class ShoppingCartModel: NSObject {
     
     var order = Order(
         items: [],
+        userData: SignInModel.sharedInstance.userData,
         userDoorStepOption: Preferences.Doorstep.initial.1,
         userPaymentOption: Preferences.Payment.initial.1
     )

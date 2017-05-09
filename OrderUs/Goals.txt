@@ -1,3 +1,2 @@
-1) Implement Core Data
+1)
 2) Add Animations
-3) Items vanished from list

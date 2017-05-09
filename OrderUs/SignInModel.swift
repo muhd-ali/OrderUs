@@ -23,6 +23,13 @@ struct UserData {
     let id: String?
     let name: String?
     let email: String?
+    var jsonData: [String:Any] {
+        return [
+            "id" : id ?? "",
+            "name" : name ?? "",
+            "email" : email ?? "",
+        ]
+    }
 }
 
 class SignInModel: NSObject, FBSDKLoginButtonDelegate, GIDSignInDelegate {
