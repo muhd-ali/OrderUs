@@ -56,21 +56,23 @@ struct Category: Selectable {
 
 struct SearchResult {
     var item: Item
-    var path: String
+    var path: [String]
     var attributedPath: NSMutableAttributedString?
 }
 
 extension Sequence where Iterator.Element == Selectable {
-    private func searchItemsHelper(condition: (Item) -> Bool, path: String) -> [SearchResult] {
+    private func searchItemsHelper(condition: (Item) -> Bool, path: [String]) -> [SearchResult] {
         var results: [SearchResult] = []
+        var mutablePath = path
         self.forEach { selectable in
             if let category = selectable as? Category {
-                let innerResults = category.Children.searchItemsHelper(condition: condition, path: "\(path) -> \(category.Name)")
+                mutablePath.append(category.Name)
+                let innerResults = category.Children.searchItemsHelper(condition: condition, path: mutablePath)
                 results.append(contentsOf: innerResults)
             } else if let item = selectable as? Item {
                 if condition(item) {
-                    let itemPath = "\(path) -> \(item.Name)"
-                    let result = SearchResult(item: item, path: itemPath, attributedPath: nil)
+                    mutablePath.append(item.Name)
+                    let result = SearchResult(item: item, path: mutablePath, attributedPath: nil)
                     results.append(result)
                 }
             }
@@ -79,7 +81,7 @@ extension Sequence where Iterator.Element == Selectable {
     }
     
     func searchItems(condition: (Item) -> Bool) -> [SearchResult]  {
-        return searchItemsHelper(condition: condition, path: "list")
+        return searchItemsHelper(condition: condition, path: [])
     }
 }
 
@@ -87,6 +89,7 @@ extension Sequence where Iterator.Element == Selectable {
 
 class DataManager: NSObject {
     typealias ListType = [Selectable]
+    
     static let sharedInstance = DataManager()
     
     class NullDelegate: DataManagerDelegate {
@@ -95,6 +98,7 @@ class DataManager: NSObject {
             called = true
         }
     }
+    
     var delegate: DataManagerDelegate = NullDelegate() {
         didSet {
             if (oldValue as? NullDelegate)?.called ?? false {
@@ -104,6 +108,11 @@ class DataManager: NSObject {
     }
     
     var managedObjectContext: NSManagedObjectContext?
+    
+    func bootStrap(dbContext: NSManagedObjectContext) {
+        managedObjectContext = dbContext
+    }
+    
     
     func loadDataFromDB() {
         managedObjectContext?.perform { [unowned uoSelf = self] in

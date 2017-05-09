@@ -40,31 +40,52 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selected = tableList[indexPath.section]
-        if let newTableList = (selected as? Category)?.Children {
-            let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesController") as! CategoriesTableViewController
-            vc.tableList = newTableList
-            vc.title = selected.Name
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            performSegue(withIdentifier: "ItemDetail", sender: indexPath.section)
+        switch indexPath.section {
+        case 0:
+            let selected = tableList[indexPath.row]
+            if let newTableList = (selected as? Category)?.Children {
+                let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesController") as! CategoriesTableViewController
+                vc.tableList = newTableList
+                vc.title = selected.Name
+                navigationController?.pushViewController(vc, animated: true)
+            } else {
+                performSegue(withIdentifier: "ItemDetail", sender: indexPath.row)
+            }
+        default:
+            break
         }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return tableList.count
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Category", for: indexPath)
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var rows = 0
         
-        let category = tableList[indexPath.section]
-        if let categoryCell = cell as? CategoriesTableViewCell {
-            categoryCell.category = category
+        switch section {
+        case 0:
+            rows = tableList.count
+        default:
+            break
+        }
+        
+        return rows
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = UITableViewCell()
+        
+        switch indexPath.section {
+        case 0:
+            cell = tableView.dequeueReusableCell(withIdentifier: "Category", for: indexPath)
+            
+            let category = tableList[indexPath.row]
+            if let categoryCell = cell as? CategoriesTableViewCell {
+                categoryCell.category = category
+            }
+        default:
+            break
         }
         
         return cell

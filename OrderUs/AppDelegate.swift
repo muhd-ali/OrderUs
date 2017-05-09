@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         serverCommunicator.bootstrap()
         
-        DataManager.sharedInstance.managedObjectContext = managedObjectContext
+        DataManager.sharedInstance.bootStrap(dbContext: managedObjectContext)
         
         // Sign In API
         

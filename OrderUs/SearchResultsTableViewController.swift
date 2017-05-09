@@ -52,15 +52,25 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
     
     private func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResult] {
         let results = list.searchItems { result in
-            result.Name.range(of: text) != nil
+            result.Name.lowercased().range(of: text.lowercased()) != nil
         }
 
         return results.map {
             var result = $0
-            let fontSize: CGFloat = 15.0
-            result.attributedPath = NSMutableAttributedString(string: result.path, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])
+            let fontSize: CGFloat = 12.0
+            let attributedPath = result.path.map { pathStep in NSMutableAttributedString(string: pathStep, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])}
             let highlightAttributes = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: fontSize), NSBackgroundColorAttributeName : UIColor.yellow]
-            result.attributedPath?.addAttributes(highlightAttributes, range: (result.path as NSString).range(of: text))
+            attributedPath.last?.addAttributes(highlightAttributes, range: (result.path.last!.lowercased() as NSString).range(of: text.lowercased()))
+            result.attributedPath = attributedPath.reduce(nil) {
+                var str = $0.0
+                if str == nil {
+                    str = NSMutableAttributedString()
+                } else {
+                    str?.append(NSMutableAttributedString(string: "->"))
+                }
+                str?.append($0.1)
+                return str
+            }
             return result
         }
     }
