@@ -111,10 +111,11 @@ class DataManager: NSObject {
     
     func bootStrap(dbContext: NSManagedObjectContext) {
         managedObjectContext = dbContext
+        loadDataFromDB()
     }
     
     
-    func loadDataFromDB() {
+    private func loadDataFromDB() {
         managedObjectContext?.perform { [unowned uoSelf = self] in
             uoSelf.structuredItems = ItemCD.getItems(from: uoSelf.managedObjectContext!) ?? []
             uoSelf.structuredCategories = CategoryCD.getCategories(from: uoSelf.managedObjectContext!) ?? []

@@ -87,8 +87,6 @@ class ServerCommunicator: NSObject {
             if dataNeedsToBeReloaded {
                 uoSelf.requestReloadItemsData()
                 uoSelf.requestReloadCategoriesData()
-            } else {
-                DataManager.sharedInstance.loadDataFromDB()
             }
         }
     }
@@ -114,7 +112,10 @@ class ServerCommunicator: NSObject {
     }
     
     func placeOrder() {
-            let jsonData = ShoppingCartModel.sharedInstance.order.jsonData
+        let order = OrdersModel.sharedInstance.order
+            let jsonData = order.jsonData
             socket.emit(Constants.newOrder, with: [jsonData])
+        
+        OrdersModel.sharedInstance.orderPlaced()
     }
 }

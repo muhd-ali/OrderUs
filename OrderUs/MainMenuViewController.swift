@@ -27,8 +27,10 @@ class MainMenuViewController: UITabBarController {
 
     @IBOutlet weak var shoppingCartOutlet: MIBadgeButton!
     
-    private func setShoppingCartBadgeAppearance() {
-        let cartItemsCount = ShoppingCartModel.sharedInstance.order.items.count
+    @IBOutlet weak var trackOrdersButtonOutlet: MIBadgeButton!
+    
+    private func setShoppingCartBadge() {
+        let cartItemsCount = OrdersModel.sharedInstance.order.items.count
         
         if cartItemsCount > 0 {
             shoppingCartOutlet.badgeString = "\(cartItemsCount)"
@@ -36,10 +38,25 @@ class MainMenuViewController: UITabBarController {
             shoppingCartOutlet.badgeString = nil
         }
     }
+
+    private func setTrackOrderBadge() {
+        let orderedItemsCount = OrdersModel.sharedInstance.orders.count
+        
+        if orderedItemsCount > 0 {
+            trackOrdersButtonOutlet.badgeString = "\(orderedItemsCount)"
+        } else {
+            trackOrdersButtonOutlet.badgeString = nil
+        }
+    }
+
+    private func setBadges() {
+        setShoppingCartBadge()
+        setTrackOrderBadge()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setShoppingCartBadgeAppearance()
+        setBadges()
     }
 
     
@@ -49,16 +66,5 @@ class MainMenuViewController: UITabBarController {
         SignInModel.sharedInstance.signedIn = false
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -17,7 +17,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBOutlet weak var cartTableView: UITableView!
-    var shoppingCartList: [ShoppingCartModel.OrderedItem] = ShoppingCartModel.sharedInstance.order.items
+    var shoppingCartList: [OrdersModel.OrderedItem] = OrdersModel.sharedInstance.order.items
     
     @IBOutlet weak var totalCostDisplay: UILabel!
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     
     private func placeOrder() {
         ServerCommunicator.sharedInstance.placeOrder()
-        ShoppingCartModel.sharedInstance.order.items = []
+        OrdersModel.sharedInstance.order.items = []
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,7 +79,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
         switch editingStyle {
         case .delete:
             shoppingCartList.remove(at: indexPath.section)
-            ShoppingCartModel.sharedInstance.order.items = shoppingCartList
+            OrdersModel.sharedInstance.order.items = shoppingCartList
             updateUI()
             tableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
         default: break

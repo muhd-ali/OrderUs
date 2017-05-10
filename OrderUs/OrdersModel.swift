@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ShoppingCartModel: NSObject {
+class OrdersModel: NSObject {
     struct Preferences {
         struct Doorstep {
             static let all = [("Ring My Doorbell", "Ring doorbell"), ("Text Me", "Text the customer"), ("Call Me", "Call the customer")]
@@ -55,7 +55,7 @@ class ShoppingCartModel: NSObject {
         }
     }
     
-    static let sharedInstance = ShoppingCartModel()
+    static let sharedInstance = OrdersModel()
     
     var order = Order(
         items: [],
@@ -64,4 +64,22 @@ class ShoppingCartModel: NSObject {
         userPaymentOption: Preferences.Payment.initial.1
     )
     
+    var orders: [Order] = [
+        Order(
+            items: [],
+            userData: SignInModel.sharedInstance.userData,
+            userDoorStepOption: Preferences.Doorstep.initial.1,
+            userPaymentOption: Preferences.Payment.initial.1
+        )
+    ]
+    
+    func orderPlaced() {
+        orders.append(order)
+        order = Order(
+            items: [],
+            userData: SignInModel.sharedInstance.userData,
+            userDoorStepOption: Preferences.Doorstep.initial.1,
+            userPaymentOption: Preferences.Payment.initial.1
+        )
+    }
 }

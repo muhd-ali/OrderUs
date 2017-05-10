@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -99,17 +100,30 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="zn0-gP-fpb">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" id="Q4o-gf-n16" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                                <rect key="frame" x="329" y="5" width="30" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <state key="normal" title="🛒"/>
-                                <connections>
-                                    <segue destination="stU-Fw-yXh" kind="show" id="6Ad-hh-VFe"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" id="zn0-gP-fpb">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" id="Q4o-gf-n16" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
+                                    <rect key="frame" x="329" y="7" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <state key="normal" title="🛒"/>
+                                    <connections>
+                                        <segue destination="stU-Fw-yXh" kind="show" id="6Ad-hh-VFe"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="cVh-vv-ccs">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" id="DDJ-Dz-665" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
+                                    <rect key="frame" x="291" y="5" width="30" height="33"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <state key="normal" title="👁‍🗨"/>
+                                    <connections>
+                                        <segue destination="N0s-Q9-VoT" kind="show" id="jla-gM-JwF"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="KBQ-7Z-lAC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -118,6 +132,7 @@
                     </tabBar>
                     <connections>
                         <outlet property="shoppingCartOutlet" destination="Q4o-gf-n16" id="BfZ-vb-Eio"/>
+                        <outlet property="trackOrdersButtonOutlet" destination="DDJ-Dz-665" id="717-FA-VCe"/>
                         <segue destination="kDv-a7-jK2" kind="relationship" relationship="viewControllers" id="tY1-S9-hTU"/>
                         <segue destination="ahB-Yg-eWC" kind="relationship" relationship="viewControllers" id="5HP-DE-dHp"/>
                     </connections>
@@ -125,6 +140,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZzH-92-hyD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="473" y="116"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="40S-X4-2Ab">
+            <objects>
+                <tableViewController id="N0s-Q9-VoT" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="50z-DU-se3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="jnc-K1-qSt" detailTextLabel="r5a-Wj-J2u" rowHeight="90" style="IBUITableViewCellStyleSubtitle" id="oho-cI-cL8">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oho-cI-cL8" id="u25-qJ-8Z4">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jnc-K1-qSt">
+                                            <rect key="frame" x="15" y="28" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r5a-Wj-J2u">
+                                            <rect key="frame" x="15" y="48.5" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="N0s-Q9-VoT" id="6WI-Vv-BBI"/>
+                            <outlet property="delegate" destination="N0s-Q9-VoT" id="qUe-Lc-Ei7"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K6x-lC-gm7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1532" y="351.27436281859076"/>
         </scene>
         <!--Post a Job-->
         <scene sceneID="Oqu-bn-VDI">
@@ -244,7 +303,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1532" y="-591.45427286356824"/>
+            <point key="canvasLocation" x="1532" y="-1013"/>
         </scene>
         <!--Item-->
         <scene sceneID="Mcc-R5-pXT">
@@ -328,7 +387,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfE-Y0-EvH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1532" y="116"/>
+            <point key="canvasLocation" x="1532" y="-331"/>
         </scene>
         <!--Place Order View Controller-->
         <scene sceneID="9lk-xb-edm">
@@ -372,7 +431,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAt-yT-6SQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2534" y="116"/>
+            <point key="canvasLocation" x="2534" y="-331"/>
         </scene>
         <!--Search Results Table View Controller-->
         <scene sceneID="ffK-pN-xLS">
@@ -416,7 +475,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGB-6A-fZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="-591"/>
+            <point key="canvasLocation" x="473" y="-1013"/>
         </scene>
         <!--Item Details View Controller-->
         <scene sceneID="UDo-8u-PBJ">
@@ -537,7 +596,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJb-9p-gSW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2534" y="-591"/>
+            <point key="canvasLocation" x="2534" y="-1013"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yA0-MJ-vun">

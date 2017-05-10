@@ -26,17 +26,17 @@ class OrderOptionsTableViewController: UITableViewController {
     
     @IBOutlet weak var doorStepOptionOutlet: UILabel!
     private func showDoorStepOptionsMenu() {
-        showOptionsMenu(options: ShoppingCartModel.Preferences.Doorstep.all, message: "When at my doorstep, the rider should:") { [unowned uoSelf = self] doorStepOption in
+        showOptionsMenu(options: OrdersModel.Preferences.Doorstep.all, message: "When at my doorstep, the rider should:") { [unowned uoSelf = self] doorStepOption in
             uoSelf.doorStepOptionOutlet.text = doorStepOption.0
-            ShoppingCartModel.sharedInstance.order.userDoorStepOption = doorStepOption.1
+            OrdersModel.sharedInstance.order.userDoorStepOption = doorStepOption.1
         }
     }
     
     @IBOutlet weak var paymentOptionOutlet: UILabel!
     private func showPaymentOptionsMenu() {
-        showOptionsMenu(options: ShoppingCartModel.Preferences.Payment.all, message: "I would like to pay:") { [unowned uoSelf = self] paymentOption in
+        showOptionsMenu(options: OrdersModel.Preferences.Payment.all, message: "I would like to pay:") { [unowned uoSelf = self] paymentOption in
             uoSelf.paymentOptionOutlet.text = paymentOption.0
-            ShoppingCartModel.sharedInstance.order.userPaymentOption = paymentOption.1
+            OrdersModel.sharedInstance.order.userPaymentOption = paymentOption.1
         }
     }
     
@@ -54,8 +54,8 @@ class OrderOptionsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doorStepOptionOutlet.text = ShoppingCartModel.Preferences.Doorstep.initial.0
-        paymentOptionOutlet.text = ShoppingCartModel.Preferences.Payment.initial.0
+        doorStepOptionOutlet.text = OrdersModel.Preferences.Doorstep.initial.0
+        paymentOptionOutlet.text = OrdersModel.Preferences.Payment.initial.0
     }
     
     

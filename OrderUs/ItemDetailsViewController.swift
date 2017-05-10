@@ -62,19 +62,19 @@ class ItemDetailsViewController: UIViewController {
     }
     
     @IBAction func addToCartButton(_ sender: UIButton) {
-        var cartItems = ShoppingCartModel.sharedInstance.order.items
+        var cartItems = OrdersModel.sharedInstance.order.items
         let currentThisItemInCart = cartItems.filter { cartItem -> Bool in cartItem.item.ID == item!.ID }
         if (currentThisItemInCart.count == 0) {
             cartItems.append(
-                ShoppingCartModel.OrderedItem(
+                OrdersModel.OrderedItem(
                     item: item!,
                     quantityValue: itemQuantityValue,
                     quantityUnit: itemQuantityUnit
                 )
             )
-            ShoppingCartModel.sharedInstance.order.items = cartItems
+            OrdersModel.sharedInstance.order.items = cartItems
         } else {
-            ShoppingCartModel.sharedInstance.order.items = cartItems.map {
+            OrdersModel.sharedInstance.order.items = cartItems.map {
                 var newItem = $0
                 if (newItem.item.ID == item!.ID) {
                     newItem.quantityValue += itemQuantityValue
