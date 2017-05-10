@@ -102,7 +102,6 @@
 			children = (
 				135036D41EAE5E3B003B7745 /* PlaceOrderViewController.swift */,
 				B94AACC51E9E2C91005328D0 /* shoppingCartViewController.swift */,
-				B94AACC71E9E4A88005328D0 /* OrdersModel.swift */,
 				B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */,
 			);
 			name = "Shopping Cart";
@@ -156,7 +155,9 @@
 		13A34A531EC3616300720285 /* Orders */ = {
 			isa = PBXGroup;
 			children = (
+				B94AACC71E9E4A88005328D0 /* OrdersModel.swift */,
 				13A34A511EC3615700720285 /* OrdersTableViewController.swift */,
+				135036D61EAE5E7D003B7745 /* Shopping Cart */,
 			);
 			name = Orders;
 			sourceTree = "<group>";
@@ -196,7 +197,6 @@
 				B908F8771EB9FF930002C319 /* MainMenuViewController.swift */,
 				1372B3BF1EBA5F360042B0F2 /* Sign In */,
 				135036D71EAE6DDB003B7745 /* Shopping Menu */,
-				135036D61EAE5E7D003B7745 /* Shopping Cart */,
 				13A34A531EC3616300720285 /* Orders */,
 				13573CBD1EC12DDD003A396A /* Core Data */,
 				138CD9C21E7C2C91004C5EC4 /* Supporting Files */,

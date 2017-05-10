@@ -39,18 +39,60 @@ class OrdersModel: NSObject {
         }
     }
     
-    struct Order {
+    enum OrderState {
+        case readyToBePlaced
+        case unacknowledged
+        case receivedByServer
+        case receivedByRider
+        case delieveredToUser
+        case deadState
+        
+        func nextState() -> OrderState {
+            switch self {
+            case .readyToBePlaced:
+                return .unacknowledged
+            case .unacknowledged:
+                return .receivedByServer
+            case .receivedByServer:
+                return .receivedByRider
+            case .receivedByRider:
+                return .delieveredToUser
+            default:
+                return .deadState
+            }
+        }
+    }
+    
+    class Order: NSObject {
+        var id: String
         var items: [OrderedItem]
         var userData: UserData?
         var userDoorStepOption: String
         var userPaymentOption: String
+        var state: OrderState
+        
+        init(id: String, items: [OrderedItem], userData: UserData?, userDoorStepOption: String, userPaymentOption: String, state: OrderState) {
+            self.id = id
+            self.items = items
+            self.userData = userData
+            self.userDoorStepOption = userDoorStepOption
+            self.userPaymentOption = userPaymentOption
+            self.state = state
+            super.init()
+        }
+        
+        func promoteState() {
+            state = state.nextState()
+        }
         
         var jsonData: [String : Any] {
             return [
                 "items" : items.map { $0.jsonData },
                 "userData" : userData?.jsonData ?? "",
-                "userDoorStepOption" : userDoorStepOption,
-                "userPaymentOption" : userPaymentOption,
+                "userPreferences" : [
+                    "userDoorStepOption" : userDoorStepOption,
+                    "userPaymentOption" : userPaymentOption,
+                ],
             ]
         }
     }
@@ -58,28 +100,46 @@ class OrdersModel: NSObject {
     static let sharedInstance = OrdersModel()
     
     var order = Order(
+        id: "",
         items: [],
         userData: SignInModel.sharedInstance.userData,
         userDoorStepOption: Preferences.Doorstep.initial.1,
-        userPaymentOption: Preferences.Payment.initial.1
+        userPaymentOption: Preferences.Payment.initial.1,
+        state: .readyToBePlaced
     )
     
     var orders: [Order] = [
-        Order(
-            items: [],
-            userData: SignInModel.sharedInstance.userData,
-            userDoorStepOption: Preferences.Doorstep.initial.1,
-            userPaymentOption: Preferences.Payment.initial.1
-        )
     ]
+    
+    private func getOrdersWith(state: OrderState) -> [Order] {
+        return orders.filter { $0.state == state }
+    }
+    
+    private func getOrdersExcept(state: OrderState) -> [Order] {
+        return orders.filter { $0.state != state }
+    }
+    
+    var unacknowledgedOrders: [Order] {
+        return getOrdersWith(state: .unacknowledged)
+    }
+    
+    var notYetDelieveredOrders: [Order] {
+        return getOrdersExcept(state: .delieveredToUser)
+    }
+    
+    var nextOrderCanBePlaced: Bool {
+        return unacknowledgedOrders.isEmpty
+    }
     
     func orderPlaced() {
         orders.append(order)
         order = Order(
+            id: "",
             items: [],
             userData: SignInModel.sharedInstance.userData,
             userDoorStepOption: Preferences.Doorstep.initial.1,
-            userPaymentOption: Preferences.Payment.initial.1
+            userPaymentOption: Preferences.Payment.initial.1,
+            state: .readyToBePlaced
         )
     }
 }

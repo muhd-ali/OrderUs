@@ -112,9 +112,10 @@ class ServerCommunicator: NSObject {
     }
     
     func placeOrder() {
-        let order = OrdersModel.sharedInstance.order
-            let jsonData = order.jsonData
-            socket.emit(Constants.newOrder, with: [jsonData])
+        OrdersModel.sharedInstance.order.promoteState()
+        
+        let jsonData = OrdersModel.sharedInstance.order.jsonData
+        socket.emit(Constants.newOrder, with: [jsonData])
         
         OrdersModel.sharedInstance.orderPlaced()
     }
