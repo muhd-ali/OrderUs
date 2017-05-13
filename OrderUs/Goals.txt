@@ -1,2 +1,4 @@
 1) Add Core Location
 2) Add Animations
+3) Resolve Free Memory Issue
+4) 
