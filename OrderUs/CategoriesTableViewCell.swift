@@ -10,41 +10,31 @@ import UIKit
 
 class CategoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var typeImageView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     
-    
-    var category: DataManager.Categories.CategoryType? {
+    var category: Selectable? {
         didSet {
-            categoryName = (category?[.Name] as? String) ?? NotFound.categoryName
-            categoryDescription = (category?[.Description] as? String) ?? NotFound.categoryDescription
-            categoryImageURL = (category?[.ImageURL] as? String) ?? NotFound.categoryImageURL
-            if category?[.Child] == nil {
-                hasChild = false
-            } else {
-                hasChild = true
+            if category != nil {
+                categoryName = category!.Name
+                categoryImageURL = category!.ImageURL
+                updateUI()
             }
-            updateUI()
         }
     }
     
     
     struct NotFound {
         static let categoryName = "no type found"
-        static let categoryDescription = "no description found"
         static let categoryImageURL = "no url found"
     }
     
     var categoryName = NotFound.categoryName
-    var categoryDescription = NotFound.categoryDescription
     var categoryImageURL = NotFound.categoryImageURL
-    var hasChild = false
     
     private func updateUI() {
         typeLabel.text = categoryName
-        descriptionLabel.text = categoryDescription
         typeImageView.image = nil
         updateImage()
         updateAccessoryOptions()
@@ -52,9 +42,9 @@ class CategoriesTableViewCell: UITableViewCell {
     }
     
     private func updateAccessoryOptions() {
-        if hasChild {
+        if ((category as? Category) != nil) {
             accessoryType = .disclosureIndicator
-        } else {
+        } else if ((category as? Item) != nil) {
             accessoryType = .none
         }
     }
@@ -68,10 +58,10 @@ class CategoriesTableViewCell: UITableViewCell {
                 attributes: .concurrent
                 ).async {
                     if let imageData = NSData(contentsOf: url as URL) {
-                        DispatchQueue.main.async { [weak weakSelf = self] in
-                            weakSelf?.spinner.stopAnimating()
-                            if weakSelf?.categoryImageURL == url.absoluteString {
-                                weakSelf?.typeImageView.image = UIImage(data: imageData as Data)
+                        DispatchQueue.main.async { [unowned uoSelf = self] in
+                            uoSelf.spinner.stopAnimating()
+                            if uoSelf.categoryImageURL == url.absoluteString {
+                                uoSelf.typeImageView.image = UIImage(data: imageData as Data)
                             }
                         }
                     }
