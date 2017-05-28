@@ -17,6 +17,7 @@ protocol Selectable {
 }
 
 protocol DataManagerDelegate {
+    var dataChangedFunctionCalled: Bool { get }
     func dataChanged(newList: DataManager.ListType)
 }
 
@@ -93,15 +94,20 @@ class DataManager: NSObject {
     static let sharedInstance = DataManager()
     
     class NullDelegate: DataManagerDelegate {
-        var called = false
+        var dataChangedFunctionCalled = false
+        
+        init(called: Bool) {
+            dataChangedFunctionCalled = called
+        }
+        
         func dataChanged(newList: DataManager.ListType) {
-            called = true
+            dataChangedFunctionCalled = true
         }
     }
     
-    var delegate: DataManagerDelegate = NullDelegate() {
+    var delegate: DataManagerDelegate = NullDelegate(called: false) {
         didSet {
-            if (oldValue as? NullDelegate)?.called ?? false {
+            if (oldValue as? NullDelegate)?.dataChangedFunctionCalled ?? false {
                 delegate.dataChanged(newList: categoryTree)
             }
         }

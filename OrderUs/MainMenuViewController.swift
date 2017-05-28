@@ -12,19 +12,6 @@ import FBSDKLoginKit
 import GoogleSignIn
 
 class MainMenuViewController: UITabBarController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     @IBOutlet weak var shoppingCartOutlet: MIBadgeButton!
     
     @IBOutlet weak var trackOrdersButtonOutlet: MIBadgeButton!
@@ -64,6 +51,8 @@ class MainMenuViewController: UITabBarController {
         FBSDKLoginManager().logOut()
         GIDSignIn.sharedInstance().signOut()
         SignInModel.sharedInstance.signedIn = false
+        let dmDel = DataManager.sharedInstance.delegate
+        DataManager.sharedInstance.delegate = DataManager.NullDelegate(called: dmDel.dataChangedFunctionCalled)
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 

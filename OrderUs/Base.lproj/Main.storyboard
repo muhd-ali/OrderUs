@@ -604,7 +604,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="P8m-S4-h0S" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" systemItem="favorites" id="wmk-Aw-nEe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZLY-ef-8b3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ZLY-ef-8b3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
