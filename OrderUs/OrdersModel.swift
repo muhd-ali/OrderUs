@@ -39,13 +39,13 @@ class OrdersModel: NSObject {
         }
     }
     
-    enum OrderState {
-        case readyToBePlaced
-        case unacknowledged
-        case receivedByServer
-        case receivedByRider
-        case delieveredToUser
-        case deadState
+    enum OrderState: Int, Comparable {
+        case readyToBePlaced,
+        unacknowledged,
+        receivedByServer,
+        receivedByRider,
+        delieveredToUser,
+        deadState
         
         func nextState() -> OrderState {
             switch self {
@@ -61,25 +61,26 @@ class OrdersModel: NSObject {
                 return .deadState
             }
         }
+        
+        static func < (a: OrderState, b: OrderState) -> Bool {
+            return a.rawValue < b.rawValue
+        }
     }
     
     class Order: NSObject {
-        var id: String
-        var items: [OrderedItem]
-        var userData: UserData?
-        var userDoorStepOption: String
-        var userPaymentOption: String
-        var state: OrderState
-        
-        init(id: String, items: [OrderedItem], userData: UserData?, userDoorStepOption: String, userPaymentOption: String, state: OrderState) {
-            self.id = id
-            self.items = items
-            self.userData = userData
-            self.userDoorStepOption = userDoorStepOption
-            self.userPaymentOption = userPaymentOption
-            self.state = state
-            super.init()
+        struct TimeStamp {
+            var startedAt: Date
+            var acceptedAt: Date?
+            var completedAt: Date?
         }
+        
+        var id: String?
+        var items: [OrderedItem] = []
+        var userData: UserData? = SignInModel.sharedInstance.userData
+        var userDoorStepOption: String = Preferences.Doorstep.initial.1
+        var userPaymentOption: String = Preferences.Payment.initial.1
+        var state: OrderState = .readyToBePlaced
+        var timeStamp: TimeStamp?
         
         func promoteState() {
             state = state.nextState()
@@ -99,22 +100,20 @@ class OrdersModel: NSObject {
     
     static let sharedInstance = OrdersModel()
     
-    var order = Order(
-        id: "",
-        items: [],
-        userData: SignInModel.sharedInstance.userData,
-        userDoorStepOption: Preferences.Doorstep.initial.1,
-        userPaymentOption: Preferences.Payment.initial.1,
-        state: .readyToBePlaced
-    )
+    var order = Order()
     
     var orders: [Order] = [
+        Order()
     ]
     
     private func getOrdersWith(state: OrderState) -> [Order] {
         return orders.filter { $0.state == state }
     }
-    
+
+    private func getOrdersLessThan(state: OrderState) -> [Order] {
+        return orders.filter { $0.state < state }
+    }
+
     private func getOrdersExcept(state: OrderState) -> [Order] {
         return orders.filter { $0.state != state }
     }
@@ -123,7 +122,7 @@ class OrdersModel: NSObject {
         return getOrdersWith(state: .unacknowledged)
     }
     
-    var notYetDelieveredOrders: [Order] {
+    var pendingOrders: [Order] {
         return getOrdersExcept(state: .delieveredToUser)
     }
     
@@ -132,14 +131,8 @@ class OrdersModel: NSObject {
     }
     
     func orderPlaced() {
+        order.timeStamp = Order.TimeStamp(startedAt: Date(), acceptedAt: nil, completedAt: nil)
         orders.append(order)
-        order = Order(
-            id: "",
-            items: [],
-            userData: SignInModel.sharedInstance.userData,
-            userDoorStepOption: Preferences.Doorstep.initial.1,
-            userPaymentOption: Preferences.Payment.initial.1,
-            state: .readyToBePlaced
-        )
+        order = Order()
     }
 }

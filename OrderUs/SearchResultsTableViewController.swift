@@ -44,7 +44,9 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
         if let vc = storyboard?.instantiateViewController(withIdentifier: "ItemDetailViewController") as? ItemDetailsViewController {
             let item = results[indexPath.row].item
             vc.item = item; vc.title = item.Name
-            parentNavigationController?.pushViewController(vc, animated: true)
+            dismiss(animated: true) { [unowned uoSelf = self] in
+                uoSelf.parentNavigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     
@@ -54,7 +56,7 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
         let results = list.searchItems { result in
             result.Name.lowercased().range(of: text.lowercased()) != nil
         }
-
+        
         return results.map {
             var result = $0
             let fontSize: CGFloat = 12.0

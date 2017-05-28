@@ -141,26 +141,26 @@
             </objects>
             <point key="canvasLocation" x="473" y="116"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Pending Orders Table View Controller-->
         <scene sceneID="40S-X4-2Ab">
             <objects>
-                <tableViewController id="N0s-Q9-VoT" sceneMemberID="viewController">
+                <tableViewController id="N0s-Q9-VoT" customClass="PendingOrdersTableViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="90" sectionHeaderHeight="18" sectionFooterHeight="18" id="50z-DU-se3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="jnc-K1-qSt" detailTextLabel="r5a-Wj-J2u" rowHeight="90" style="IBUITableViewCellStyleSubtitle" id="oho-cI-cL8">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pendingOrder" textLabel="jnc-K1-qSt" detailTextLabel="r5a-Wj-J2u" rowHeight="90" style="IBUITableViewCellStyleSubtitle" id="oho-cI-cL8">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oho-cI-cL8" id="u25-qJ-8Z4">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jnc-K1-qSt">
-                                            <rect key="frame" x="15" y="28" width="33.5" height="20.5"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="jnc-K1-qSt">
+                                            <rect key="frame" x="15" y="28" width="35.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -259,15 +259,15 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0OQ-sn-9B2">
-                                            <rect key="frame" x="314" y="34" width="20" height="20"/>
+                                            <rect key="frame" x="38" y="34" width="20" height="20"/>
                                             <color key="color" red="0.039215686270000001" green="0.37647058820000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="xIn-Fh-GCo" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="3fQ-sC-8fF"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="xIn-Fh-GCo" secondAttribute="leading" id="8Hx-n3-PKd"/>
-                                        <constraint firstItem="0OQ-sn-9B2" firstAttribute="trailing" secondItem="ORh-tT-T5x" secondAttribute="trailingMargin" id="NOZ-B4-3qU"/>
-                                        <constraint firstItem="0OQ-sn-9B2" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="W7R-S5-2Xc"/>
+                                        <constraint firstItem="0OQ-sn-9B2" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="Qbs-Y2-Dhc"/>
+                                        <constraint firstItem="0OQ-sn-9B2" firstAttribute="centerX" secondItem="xIn-Fh-GCo" secondAttribute="centerX" id="Tzp-rx-SAh"/>
                                         <constraint firstItem="YFY-do-4Ae" firstAttribute="leading" secondItem="xIn-Fh-GCo" secondAttribute="trailing" constant="9.5" id="fSV-Ls-p5W"/>
                                         <constraint firstItem="YFY-do-4Ae" firstAttribute="centerY" secondItem="xIn-Fh-GCo" secondAttribute="centerY" id="ylw-AA-im8"/>
                                     </constraints>

@@ -120,12 +120,12 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
     // Mark: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeSearchController()
         DataManager.sharedInstance.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        initializeSearchController()
         hideSearchBar()
     }
 }
