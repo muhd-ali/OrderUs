@@ -14,10 +14,6 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
     var searchController: UISearchController?
     private var results: [SearchResult] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,10 +48,12 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
     
     // MARK: - UISearchResultsUpdating
     
-    private func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResult] {
+    private func findSearchResults(fromList list: DataManager.ListType, withSearchedText text: String) -> [SearchResult] {
         let results = list.searchItems { result in
             result.Name.lowercased().range(of: text.lowercased()) != nil
         }
+        
+        print("results => \(results)")
         
         return results.map {
             var result = $0
@@ -80,7 +78,7 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
     
     func updateSearchResults(for searchController: UISearchController) {
         if let searchedText = searchController.searchBar.text {
-            results = findSearchResults(fromList: tableList ?? [], listPath: "list", withSearchedText: searchedText)
+            results = findSearchResults(fromList: tableList ?? [], withSearchedText: searchedText)
             tableView.reloadData()
         }
     }

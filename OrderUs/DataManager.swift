@@ -64,14 +64,15 @@ struct SearchResult {
 extension Sequence where Iterator.Element == Selectable {
     private func searchItemsHelper(condition: (Item) -> Bool, path: [String]) -> [SearchResult] {
         var results: [SearchResult] = []
-        var mutablePath = path
         self.forEach { selectable in
             if let category = selectable as? Category {
+                var mutablePath = path
                 mutablePath.append(category.Name)
                 let innerResults = category.Children.searchItemsHelper(condition: condition, path: mutablePath)
                 results.append(contentsOf: innerResults)
             } else if let item = selectable as? Item {
                 if condition(item) {
+                    var mutablePath = path
                     mutablePath.append(item.Name)
                     let result = SearchResult(item: item, path: mutablePath, attributedPath: nil)
                     results.append(result)
