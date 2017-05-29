@@ -54,6 +54,9 @@ PODS:
     - GTMSessionFetcher/Core (= 1.1.9)
   - MIBadgeButton-Swift (0.5)
   - PKHUD (4.2.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - Socket.IO-Client-Swift (9.0.0)
 
 DEPENDENCIES:
@@ -62,6 +65,7 @@ DEPENDENCIES:
   - Google/SignIn
   - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
   - PKHUD (~> 4.2)
+  - SDWebImage (~> 4.0)
   - Socket.IO-Client-Swift
 
 EXTERNAL SOURCES:
@@ -90,8 +94,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   PKHUD: 957ce2a68b3c97a51839b30216120c1dbc0c3a78
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   Socket.IO-Client-Swift: c4c6f4193305a65fdee226a9bf9329151a304d0b
 
-PODFILE CHECKSUM: 26b8a647fdef915a7bec5bda045acc4b5c442181
+PODFILE CHECKSUM: d1b4d0e04f5aa624f3ddeb872893bdfd3981d907
 
 COCOAPODS: 1.2.1

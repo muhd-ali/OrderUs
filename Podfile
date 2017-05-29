@@ -9,6 +9,7 @@ target 'OrderUs' do
   pod 'PKHUD', '~> 4.2'
   pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
   pod 'Socket.IO-Client-Swift'
+  pod 'SDWebImage', '~> 4.0'
 
   # Facebook
   pod 'FacebookCore'

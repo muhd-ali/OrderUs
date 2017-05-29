@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CategoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var typeLabel: UILabel!
@@ -50,21 +51,10 @@ class CategoriesTableViewCell: UITableViewCell {
     }
     
     private func updateImage() {
-        if let url = NSURL(string: categoryImageURL) {
+        if let url = URL(string: categoryImageURL) {
             spinner.startAnimating()
-            DispatchQueue(
-                label: "downloading image for \(categoryName)",
-                qos: .userInitiated,
-                attributes: .concurrent
-                ).async {
-                    if let imageData = NSData(contentsOf: url as URL) {
-                        DispatchQueue.main.async { [unowned uoSelf = self] in
-                            uoSelf.spinner.stopAnimating()
-                            if uoSelf.categoryImageURL == url.absoluteString {
-                                uoSelf.typeImageView.image = UIImage(data: imageData as Data)
-                            }
-                        }
-                    }
+            typeImageView.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
+                uoSelf.spinner.stopAnimating()
             }
         }
     }

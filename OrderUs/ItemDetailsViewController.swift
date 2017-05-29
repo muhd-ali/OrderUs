@@ -144,21 +144,10 @@ class ItemDetailsViewController: UIViewController {
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     private func updateImage() {
-        if let url = NSURL(string: itemImageURL) {
+        if let url = URL(string: itemImageURL) {
             spinner.startAnimating()
-            DispatchQueue(
-                label: "downloading image for \(itemName)",
-                qos: .userInitiated,
-                attributes: .concurrent
-                ).async {
-                    if let imageData = NSData(contentsOf: url as URL) {
-                        DispatchQueue.main.async { [unowned uoSelf = self] in
-                            uoSelf.spinner.stopAnimating()
-                            if uoSelf.itemImageURL == url.absoluteString {
-                                uoSelf.itemImageView.image = UIImage(data: imageData as Data)
-                            }
-                        }
-                    }
+            itemImageView.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
+                uoSelf.spinner.stopAnimating()
             }
         }
     }
