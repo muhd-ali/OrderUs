@@ -71,7 +71,7 @@ class OrdersModel: NSObject {
         struct TimeStamp {
             var startedAt: Date
             var acceptedAt: Date?
-            var completedAt: Date?
+            var delieveredAt: Date?
         }
         
         var id = UUID().uuidString
@@ -97,13 +97,44 @@ class OrdersModel: NSObject {
                 ],
             ]
         }
-    }
+        
+        var startedAtshortString: String {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            if let time = timeStamp?.startedAt {
+                return formatter.string(from: time)
+            }
+            return ""
+        }
+
+        var acceptedAtshortString: String {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            if let time = timeStamp?.acceptedAt {
+                return formatter.string(from: time)
+            }
+            return ""
+        }
+
+        var delieveredAtshortString: String {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            if let time = timeStamp?.delieveredAt {
+                return formatter.string(from: time)
+            }
+            return ""
+        }
+}
     
     static let sharedInstance = OrdersModel()
     
     var order = Order()
     
     var orders: [Order] = [
+        Order()
     ]
     
     private func getOrdersWith(state: OrderState) -> [Order] {
@@ -147,7 +178,7 @@ class OrdersModel: NSObject {
     }
     
     func orderPlaced() {
-        order.timeStamp = Order.TimeStamp(startedAt: Date(), acceptedAt: nil, completedAt: nil)
+        order.timeStamp = Order.TimeStamp(startedAt: Date(), acceptedAt: nil, delieveredAt: nil)
         orders.append(order)
         order = Order()
     }

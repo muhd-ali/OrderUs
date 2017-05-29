@@ -18,6 +18,7 @@
 		138CD9C41E7C3283004C5EC4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C31E7C3283004C5EC4 /* DataManager.swift */; };
 		138CD9C61E7C3367004C5EC4 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C51E7C3367004C5EC4 /* CategoriesTableViewController.swift */; };
 		138CD9C81E7C40B2004C5EC4 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */; };
+		13969B2E1EDBC53C001145B1 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B2D1EDBC53C001145B1 /* OrderDetailViewController.swift */; };
 		13A34A521EC3615700720285 /* PendingOrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A34A511EC3615700720285 /* PendingOrdersTableViewController.swift */; };
 		13E83F0A1E9A2479004B32CF /* QuantityStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E83F091E9A2479004B32CF /* QuantityStepper.swift */; };
 		B908F8781EB9FF930002C319 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B908F8771EB9FF930002C319 /* MainMenuViewController.swift */; };
@@ -63,6 +64,7 @@
 		138CD9C31E7C3283004C5EC4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		138CD9C51E7C3367004C5EC4 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CategoriesTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		13969B2D1EDBC53C001145B1 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		13A34A511EC3615700720285 /* PendingOrdersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingOrdersTableViewController.swift; sourceTree = "<group>"; };
 		13E83F091E9A2479004B32CF /* QuantityStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuantityStepper.swift; sourceTree = "<group>"; };
 		5D766159F5A336ED0D480271 /* Pods_OrderUs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrderUs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +159,7 @@
 			children = (
 				B94AACC71E9E4A88005328D0 /* OrdersModel.swift */,
 				13A34A511EC3615700720285 /* PendingOrdersTableViewController.swift */,
+				13969B2D1EDBC53C001145B1 /* OrderDetailViewController.swift */,
 				135036D61EAE5E7D003B7745 /* Shopping Cart */,
 			);
 			name = Orders;
@@ -345,6 +348,7 @@
 				B99B69E11EA100070002A354 /* OrderOptionsTableViewController.swift in Sources */,
 				13573CC51EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift in Sources */,
 				B972566D1EA75A7300D9DE9E /* ServerCommunicator.swift in Sources */,
+				13969B2E1EDBC53C001145B1 /* OrderDetailViewController.swift in Sources */,
 				B94AACC61E9E2C91005328D0 /* shoppingCartViewController.swift in Sources */,
 				B908F8781EB9FF930002C319 /* MainMenuViewController.swift in Sources */,
 				B94AACC81E9E4A88005328D0 /* OrdersModel.swift in Sources */,
