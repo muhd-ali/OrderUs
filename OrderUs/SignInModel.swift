@@ -30,6 +30,7 @@ struct UserData {
             "email" : email ?? "",
         ]
     }
+    static let null = UserData(id: nil, name: nil, email: nil)
 }
 
 class SignInModel: NSObject, FBSDKLoginButtonDelegate, GIDSignInDelegate {

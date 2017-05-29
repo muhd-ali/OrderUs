@@ -53,8 +53,6 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
             result.Name.lowercased().range(of: text.lowercased()) != nil
         }
         
-        print("results => \(results)")
-        
         return results.map {
             var result = $0
             let fontSize: CGFloat = 12.0

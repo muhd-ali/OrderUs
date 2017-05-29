@@ -74,11 +74,11 @@ class OrdersModel: NSObject {
             var completedAt: Date?
         }
         
-        var id: String?
+        var id = UUID().uuidString
         var items: [OrderedItem] = []
-        var userData: UserData? = SignInModel.sharedInstance.userData
-        var userDoorStepOption: String = Preferences.Doorstep.initial.1
-        var userPaymentOption: String = Preferences.Payment.initial.1
+        var userData = UserData.null
+        var userDoorStepOption = Preferences.Doorstep.initial.1
+        var userPaymentOption = Preferences.Payment.initial.1
         var state: OrderState = .readyToBePlaced
         var timeStamp: TimeStamp?
         
@@ -88,8 +88,9 @@ class OrdersModel: NSObject {
         
         var jsonData: [String : Any] {
             return [
+                "id" : id,
                 "items" : items.map { $0.jsonData },
-                "userData" : userData?.jsonData ?? "",
+                "userData" : userData.jsonData,
                 "userPreferences" : [
                     "userDoorStepOption" : userDoorStepOption,
                     "userPaymentOption" : userPaymentOption,
@@ -103,17 +104,16 @@ class OrdersModel: NSObject {
     var order = Order()
     
     var orders: [Order] = [
-        Order()
     ]
     
     private func getOrdersWith(state: OrderState) -> [Order] {
         return orders.filter { $0.state == state }
     }
-
+    
     private func getOrdersLessThan(state: OrderState) -> [Order] {
         return orders.filter { $0.state < state }
     }
-
+    
     private func getOrdersExcept(state: OrderState) -> [Order] {
         return orders.filter { $0.state != state }
     }
@@ -128,6 +128,22 @@ class OrdersModel: NSObject {
     
     var nextOrderCanBePlaced: Bool {
         return unacknowledgedOrders.isEmpty
+    }
+    
+    enum PlaceOrderResult {
+        case success, notSignedIn
+    }
+    
+    func placeOrder() -> PlaceOrderResult {
+        let signInModel = SignInModel.sharedInstance
+        if let userData = signInModel.userData, signInModel.signedIn {
+            if userData.email != nil {
+                order.userData = userData
+                ServerCommunicator.sharedInstance.placeOrder()
+                return .success
+            }
+        }
+        return .notSignedIn
     }
     
     func orderPlaced() {

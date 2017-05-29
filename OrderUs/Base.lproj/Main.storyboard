@@ -107,6 +107,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <state key="normal" title="🛒"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="badgeBackgroundColor">
+                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="badgeTextColor">
+                                            <color key="value" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <segue destination="stU-Fw-yXh" kind="show" id="6Ad-hh-VFe"/>
                                     </connections>
@@ -118,6 +126,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <state key="normal" title="👁‍🗨"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="badgeBackgroundColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="badgeTextColor">
+                                            <color key="value" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <segue destination="N0s-Q9-VoT" kind="show" id="jla-gM-JwF"/>
                                     </connections>
@@ -184,6 +200,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6x-lC-gm7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1532" y="351.27436281859076"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="wAW-NE-2j3">
+            <objects>
+                <viewController id="jai-8o-5A7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sec-Nd-QY0"/>
+                        <viewControllerLayoutGuide type="bottom" id="SEz-oH-6A1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3od-s3-Sob">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="53q-zn-gSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2534" y="351"/>
         </scene>
         <!--Post a Job-->
         <scene sceneID="Oqu-bn-VDI">
@@ -303,7 +337,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1532" y="-1013"/>
+            <point key="canvasLocation" x="1532" y="-1013.3433283358322"/>
         </scene>
         <!--Item-->
         <scene sceneID="Mcc-R5-pXT">
@@ -518,7 +552,7 @@
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbV-HF-nYc">
                                 <rect key="frame" x="47" y="564" width="281" height="46"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Add to Cart">
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -685,4 +719,5 @@
             <point key="canvasLocation" x="3480.8000000000002" y="32.383808095952027"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.95686274509803915" green="0.48627450980392156" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

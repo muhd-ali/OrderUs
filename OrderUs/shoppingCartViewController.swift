@@ -28,18 +28,25 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     private func placeOrder() {
-        ServerCommunicator.sharedInstance.placeOrder()
-        OrdersModel.sharedInstance.order.items = []
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        if userWantsToPlaceOrder {
-            placeOrder()
+        let result = OrdersModel.sharedInstance.placeOrder()
+        switch result {
+        case .success:
             HUD.flash(
                 .labeledSuccess(title: "Order Placed", subtitle: "Please wait while we process"),
                 delay: 0.5) { [unowned uoSelf = self] _ in
                     _ = uoSelf.navigationController?.popViewController(animated: true)
             }
+        case .notSignedIn:
+            HUD.flash(
+                .labeledError(title: "Sign In", subtitle: "Please sign in and try again"),
+                delay: 0.5
+            )
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if userWantsToPlaceOrder {
+            placeOrder()
         }
     }
     

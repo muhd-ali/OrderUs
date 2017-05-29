@@ -30,11 +30,15 @@ class PendingOrdersTableViewController: UITableViewController {
 
         let order = pendingOrders[indexPath.row]
         
+        if let startedAt = order.timeStamp?.startedAt {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            cell.textLabel?.text = "Placed On: \(formatter.string(from: startedAt))"
+        }
+
         let id = order.id ?? "not yet received"
-        cell.textLabel?.text = "Order ID: \(id)"
-        
-        let startedAt = order.timeStamp?.startedAt.description(with: Locale.autoupdatingCurrent) ?? ""
-        cell.detailTextLabel?.text = "Placed On: \(startedAt)"
+        cell.detailTextLabel?.text = "Order ID: \(id)"
         
         return cell
     }

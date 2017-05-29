@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FlexibleSteppedProgressBar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMOAuth2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,12 +77,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>025CA841C7F3E733EFB05AD5CB10FAA0</key>
+		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
+		<key>1B88F595A24B0ADE3E651C35A61AE59C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28EB89DF0EC5BC5BC6AEFB4A9EDCBCB4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,12 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8613EFCD73D64A82094BDEA942C895D2</key>
+		<key>878CFD6608614D017343D238F44ED042</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>B1C4AAFAF49036C7007633DAA3C806AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BC24A18919057DEE97C16DD835940481</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -128,11 +143,6 @@
 			<true/>
 		</dict>
 		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E7C56FBA39414E599EBFFC03C0C98DE4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
