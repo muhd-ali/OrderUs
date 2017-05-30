@@ -81,6 +81,7 @@ class OrdersModel: NSObject {
         var userPaymentOption = Preferences.Payment.initial.1
         var state: OrderState = .readyToBePlaced
         var timeStamp: TimeStamp?
+        var location = OrderLocation.null
         
         func promoteState() {
             state = state.nextState()
@@ -95,6 +96,7 @@ class OrdersModel: NSObject {
                     "userDoorStepOption" : userDoorStepOption,
                     "userPaymentOption" : userPaymentOption,
                 ],
+                "location" : location.jsonData,
             ]
         }
         
@@ -107,7 +109,7 @@ class OrdersModel: NSObject {
             }
             return ""
         }
-
+        
         var acceptedAtshortString: String {
             let formatter = DateFormatter()
             formatter.dateStyle = .short
@@ -117,7 +119,7 @@ class OrdersModel: NSObject {
             }
             return ""
         }
-
+        
         var delieveredAtshortString: String {
             let formatter = DateFormatter()
             formatter.dateStyle = .short
@@ -127,7 +129,7 @@ class OrdersModel: NSObject {
             }
             return ""
         }
-}
+    }
     
     static let sharedInstance = OrdersModel()
     
@@ -162,7 +164,11 @@ class OrdersModel: NSObject {
     }
     
     enum PlaceOrderResult {
-        case success, notSignedIn
+        case success, notSignedIn, noLocationFound
+    }
+    
+    func orderAcknowledged() {
+        unacknowledgedOrders.first?.promoteState()
     }
     
     func placeOrder() -> PlaceOrderResult {
@@ -170,8 +176,12 @@ class OrdersModel: NSObject {
         if let userData = signInModel.userData, signInModel.signedIn {
             if userData.email != nil {
                 order.userData = userData
-                ServerCommunicator.sharedInstance.placeOrder()
-                return .success
+                if let location = DataManager.sharedInstance.orderLocation {
+                    order.location = location
+                    ServerCommunicator.sharedInstance.placeOrder()
+                    return .success
+                }
+                return .noLocationFound
             }
         }
         return .notSignedIn

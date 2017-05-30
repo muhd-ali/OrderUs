@@ -33,7 +33,7 @@ struct UserData {
     static let null = UserData(id: nil, name: nil, email: nil)
 }
 
-class SignInModel: NSObject, FBSDKLoginButtonDelegate, GIDSignInDelegate {
+class SignInModel: NSObject, FacebookCustomLoginButtonDelegate, FBSDKLoginButtonDelegate, GIDSignInDelegate {
     var signedIn = false
     func signInViewDidLoad() {
         if (FBSDKAccessToken.current() != nil) {    // User already Signed Into Facebook
@@ -95,8 +95,25 @@ class SignInModel: NSObject, FBSDKLoginButtonDelegate, GIDSignInDelegate {
         print("======================Logged in Using Facebook========================")
         delegate?.signInCompleted()
     }
+    // keep
+    func facebookCustomloginButton(_ loginButton: FacebookCustomLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        //
+        guard (error == nil && !result.isCancelled) else {
+            print("======================Could not log in Using Facebook========================")
+            return
+        }
+        
+        userSignedInSoGetFacebookUserInfo()
+        print("======================Logged in Using Facebook========================")
+        delegate?.signInCompleted()
+    }
     
     func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
+        delegate?.signInStarted()
+        return true
+    }
+    
+    func facebookCustomloginButtonWillLogin(_ loginButton: FacebookCustomLoginButton!) -> Bool {
         delegate?.signInStarted()
         return true
     }

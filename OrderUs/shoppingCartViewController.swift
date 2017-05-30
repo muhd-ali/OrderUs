@@ -41,7 +41,12 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
                 .labeledError(title: "Sign In", subtitle: "Please sign in and try again"),
                 delay: 0.5
             )
-        }
+        case .noLocationFound:
+            HUD.flash(
+                .labeledError(title: "Location", subtitle: "Please enable location services and try again"),
+                delay: 0.5
+            )
+}
     }
     
     override func viewDidAppear(_ animated: Bool) {

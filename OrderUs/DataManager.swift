@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import CoreLocation
 
 protocol Selectable {
     var Name: String {get}
@@ -87,9 +88,24 @@ extension Sequence where Iterator.Element == Selectable {
     }
 }
 
+struct OrderLocation {
+    var addressLines: [String]
+    var location: CLLocation
+    
+    var jsonData: [String: Any] {
+        return [
+            "addressLines" : addressLines,
+            "coordinates" : [
+                "latitude" : location.coordinate.latitude,
+                "longitude" : location.coordinate.longitude
+                ],
+        ]
+    }
+    
+    static let null = OrderLocation(addressLines: [], location: CLLocation())
+}
 
-
-class DataManager: NSObject {
+class DataManager: NSObject, CLLocationManagerDelegate {
     typealias ListType = [Selectable]
     
     static let sharedInstance = DataManager()
@@ -119,8 +135,8 @@ class DataManager: NSObject {
     func bootStrap(dbContext: NSManagedObjectContext) {
         managedObjectContext = dbContext
         loadDataFromDB()
+        initLocationService()
     }
-    
     
     private func loadDataFromDB() {
         managedObjectContext?.perform { [unowned uoSelf = self] in
@@ -247,6 +263,28 @@ class DataManager: NSObject {
             updateCategoriesInDB(categories: structuredCategories)
             categoriesLoaded = true
             ifDataFetchedFromServerGenerateTree()
+        }
+    }
+    
+    var locationManager = CLLocationManager()
+    var orderLocation: OrderLocation?
+    
+    func initLocationService() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let latestLocation = locations.last {
+            CLGeocoder().reverseGeocodeLocation(latestLocation) {[unowned uoSelf = self] (placeMarks, error) in
+                if let placeMark = placeMarks?.first {
+                    if let address = placeMark.addressDictionary?["FormattedAddressLines"] as? [String] {
+                        uoSelf.orderLocation = OrderLocation(addressLines: address, location: latestLocation)
+                    }
+                }
+            }
         }
     }
     

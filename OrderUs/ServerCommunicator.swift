@@ -21,6 +21,8 @@ class ServerCommunicator: NSObject {
         static let itemsList = "itemsList"
         static let categoriesList = "categoriesList"
         static let newOrder = "newOrder"
+        static let orderAcknowledged = "acknowledgeOrder"
+
     }
     
     let socket: SocketIOClient = SocketIOClient(
@@ -55,6 +57,7 @@ class ServerCommunicator: NSObject {
         setupEventTocheckIfDataNeedsToBeReloaded()
         setupEventToReceiveItemsList()
         setupEventToReceiveCategoriesList()
+        setupOrderEvents()
     }
     
     private func requestReloadItemsData() {
@@ -111,11 +114,25 @@ class ServerCommunicator: NSObject {
         socket.emit(Constants.checkIfDataNeedsToBeReloaded, with: [""])
     }
     
+    private func setupAcknowledgedOrderEvent() {
+        socket.on(Constants.orderAcknowledged) { (data, ack) in
+            OrdersModel.sharedInstance.orderAcknowledged()
+        }
+    }
+    
+    private func setupOrderEvents() {
+        setupAcknowledgedOrderEvent()
+    }
+    
     func placeOrder() {
         OrdersModel.sharedInstance.order.promoteState()
         
         let jsonData = OrdersModel.sharedInstance.order.jsonData
-        socket.emit(Constants.newOrder, with: [jsonData])
+        socket
+            .emitWithAck(Constants.newOrder, with: [jsonData])
+            .timingOut(after: 10) { (ack) in
+                print(ack)
+        }
         
         OrdersModel.sharedInstance.orderPlaced()
     }

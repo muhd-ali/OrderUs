@@ -18,6 +18,26 @@ class PlaceOrderViewController: UIViewController {
     var orderOptionsVC: OrderOptionsTableViewController?
     var delegate: PlaceOrderViewControllerDelegate?
     
+    @IBOutlet weak var addressOutlet: UITextView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateUI()
+    }
+    
+    func updateUI() {
+        let addressLines = DataManager.sharedInstance.orderLocation?.addressLines ?? []
+        if addressLines.count > 0 {
+            addressOutlet.text = addressLines.reduce("") { (result, address) in
+                if result.isEmpty {
+                    return address
+                } else {
+                    return result + "\n" + address
+                }
+            }
+        }
+    }
+    
     @IBAction func placeOrderAction(_ sender: UIButton) {
         if OrdersModel.sharedInstance.nextOrderCanBePlaced {
             delegate?.userRequestedToPlaceOrder()
@@ -31,17 +51,6 @@ class PlaceOrderViewController: UIViewController {
                 delay: 0.5
             )
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

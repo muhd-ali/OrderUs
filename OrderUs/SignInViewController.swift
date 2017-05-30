@@ -22,11 +22,28 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, SignInModelDe
         }
     }
     
+    @IBOutlet weak var facebookCustomLoginButtonOutlet: FacebookCustomLoginButton!
+    
+    @IBAction func facebookLoginButtonAction(_ sender: UIButton) {
+        
+        if (facebookCustomLoginButtonOutlet.delegate?.facebookCustomloginButtonWillLogin(facebookCustomLoginButtonOutlet)) ?? false {
+            FBSDKLoginManager().logIn(
+                withReadPermissions: ["public_profile", "email", "user_friends"],
+                from: self
+            ) { [unowned uoSelf = self] (result, error) in
+                uoSelf.facebookCustomLoginButtonOutlet.setTitle("Log out", for: .normal)
+                uoSelf.facebookCustomLoginButtonOutlet.delegate?.facebookCustomloginButton(uoSelf.facebookCustomLoginButtonOutlet, didCompleteWith: result, error: error)
+            }
+        }
+    }
+    
     @IBOutlet weak var facebookLoginButtonOutlet: FBSDKLoginButton!
     private func setupFacebookLoginButton() {
         facebookLoginButtonOutlet.delegate = SignInModel.sharedInstance
         facebookLoginButtonOutlet.readPermissions = ["public_profile", "email", "user_friends"]
         facebookLoginButtonOutlet.sizeToFit()
+        
+        facebookCustomLoginButtonOutlet.delegate = SignInModel.sharedInstance
     }
     
     
@@ -73,7 +90,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, SignInModelDe
             options: [.curveEaseInOut, .transitionCrossDissolve],
             animations: { [unowned uoSelf = self] in
                 uoSelf.facebookLoginButtonOutlet.isHidden = true
-        }, completion: nil)
+            }, completion: nil)
         
         UIView.transition(
             with: googleLoginButtonOutlet,
