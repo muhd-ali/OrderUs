@@ -12,6 +12,7 @@ import FBSDKLoginKit
 protocol FacebookCustomLoginButtonDelegate {
     func facebookCustomloginButton(_ loginButton: FacebookCustomLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!)
     func facebookCustomloginButtonWillLogin(_ loginButton: FacebookCustomLoginButton!) -> Bool
+    func loginButtonDidLogOut(_ loginButton: FacebookCustomLoginButton!)
 }
 
 class FacebookCustomLoginButton: UIButton {

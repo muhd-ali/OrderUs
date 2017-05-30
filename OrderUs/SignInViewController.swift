@@ -1,127 +1,143 @@
 //
-//  ViewController.swift
+//  SignInViewController.swift
 //  OrderUs
 //
-//  Created by Muhammad Ali on 2017-02-24.
+//  Created by Muhammadali on 30/05/2017.
 //  Copyright © 2017 PRO. All rights reserved.
 //
 
 import UIKit
-import GoogleSignIn
 import FBSDKLoginKit
+import GoogleSignIn
 
-class SignInViewController: UIViewController, GIDSignInUIDelegate, SignInModelDelegate {
+protocol SignInViewControllerDelegate {
+    func signInCompleted()
+}
+
+class SignInViewController: UIViewController, SignInModelDelegate, GIDSignInUIDelegate {
     
-    @IBOutlet weak var loadingCircle: UIActivityIndicatorView!
+    var delegate: SignInViewControllerDelegate?
+    @IBOutlet weak var emailOutlet: UITextField!
+    @IBOutlet weak var passwordOutlet: UITextField!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+
+    @IBOutlet weak var facebookCustomLoginViewOutlet: UIView!
+    @IBOutlet weak var facebookCustomLoginButtonOutlet: FacebookCustomLoginButton!
     
-    @IBAction func signInButton(_ sender: UIButton) {
-        if (loadingCircle.isAnimating) {
-            loadingCircle.stopAnimating()
-        } else {
-            loadingCircle.startAnimating()
+    @IBOutlet weak var googleCustomLoginButtonOutlet: UIButton!
+    @IBOutlet weak var googleCustomLoginViewOutlet: UIView!
+    
+    @IBOutlet weak var alternateOptionsLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        SignInModel.sharedInstance.delegate = self
+        [(emailOutlet, "Email Address"), (passwordOutlet, "Password")].forEach { (textField, placeholderText) in
+            textField?.layer.borderWidth = 2
+            textField?.layer.borderColor = UIColor.white.cgColor
+            textField.attributedPlaceholder = NSAttributedString(
+                string: placeholderText,
+                attributes: [NSForegroundColorAttributeName: UIColor.orange]
+            )
         }
     }
     
-    @IBOutlet weak var facebookCustomLoginButtonOutlet: FacebookCustomLoginButton!
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupFacebookLoginButton()
+        setupGoogleLoginButton()
+        SignInModel.sharedInstance.signInViewDidLoad()
+        if (!SignInModel.sharedInstance.signedIn && !signInInProgress) {
+            facebookCustomLoginButtonOutlet.isHidden = false
+            googleCustomLoginButtonOutlet.isHidden = false
+        }
+    }
     
-    @IBAction func facebookLoginButtonAction(_ sender: UIButton) {
-        
+    
+    @IBAction func facebookCustomLoginButtonAction(_ sender: FacebookCustomLoginButton) {
         if (facebookCustomLoginButtonOutlet.delegate?.facebookCustomloginButtonWillLogin(facebookCustomLoginButtonOutlet)) ?? false {
             FBSDKLoginManager().logIn(
                 withReadPermissions: ["public_profile", "email", "user_friends"],
                 from: self
             ) { [unowned uoSelf = self] (result, error) in
+                if (error != nil || (result?.isCancelled ?? false)) {
+                    uoSelf.showUI()
+                    uoSelf.spinner.stopAnimating()
+                    return
+                }
                 uoSelf.facebookCustomLoginButtonOutlet.setTitle("Log out", for: .normal)
                 uoSelf.facebookCustomLoginButtonOutlet.delegate?.facebookCustomloginButton(uoSelf.facebookCustomLoginButtonOutlet, didCompleteWith: result, error: error)
             }
         }
     }
     
-    @IBOutlet weak var facebookLoginButtonOutlet: FBSDKLoginButton!
     private func setupFacebookLoginButton() {
-        facebookLoginButtonOutlet.delegate = SignInModel.sharedInstance
-        facebookLoginButtonOutlet.readPermissions = ["public_profile", "email", "user_friends"]
-        facebookLoginButtonOutlet.sizeToFit()
-        
         facebookCustomLoginButtonOutlet.delegate = SignInModel.sharedInstance
     }
     
-    
-    @IBOutlet weak var googleLoginButtonOutlet: GIDSignInButton!
     private func setupGoogleLoginButton() {
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = SignInModel.sharedInstance
-        googleLoginButtonOutlet.style = .standard
-        googleLoginButtonOutlet.backgroundColor = UIColor.white
-        googleLoginButtonOutlet.sizeToFit()
+        
     }
     
-    // Implement these methods only if the GIDSignInUIDelegate is not a subclass of
-    // UIViewController.
+    @IBAction func googleCustomLoginButtonAction(_ sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
     
-    // Stop the UIActivityIndicatorView animation that was started when the user
-    // pressed the Sign In button
     func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
         signInStarted()
         print("function 1 was called")
     }
     
-    // Present a view that prompts the user to sign in with Google
     func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
         self.present(viewController, animated: true, completion: nil)
         print("function 2 was called")
     }
     
-    // Dismiss the "Sign in with Google" view
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
         self.dismiss(animated: true, completion: nil)
+        googleCustomLoginButtonOutlet.setTitle("Log Out", for: .normal)
         print("function 3 was called")
     }
     
+    
     var signInInProgress = false
-    func signInStarted() {
-        loadingCircle.startAnimating()
-        signInInProgress = true
+    
+    private func hideUI() {
         let duration = 1.0
-        
-        UIView.transition(
-            with: facebookLoginButtonOutlet,
-            duration: duration,
-            options: [.curveEaseInOut, .transitionCrossDissolve],
-            animations: { [unowned uoSelf = self] in
-                uoSelf.facebookLoginButtonOutlet.isHidden = true
-            }, completion: nil)
-        
-        UIView.transition(
-            with: googleLoginButtonOutlet,
-            duration: duration,
-            options: [.curveEaseInOut, .transitionCrossDissolve],
-            animations: { [unowned uoSelf = self] in
-                uoSelf.googleLoginButtonOutlet.isHidden = true
-            }, completion: nil)
+        UIView.animate(
+            withDuration: duration) { [unowned uoSelf = self] in
+                uoSelf.emailOutlet.alpha = 0
+                uoSelf.passwordOutlet.alpha = 0
+                uoSelf.facebookCustomLoginViewOutlet.alpha = 0
+                uoSelf.googleCustomLoginViewOutlet.alpha = 0
+                uoSelf.alternateOptionsLabel.alpha = 0
+        }
+    }
+ 
+    private func showUI() {
+        let duration = 1.0
+        UIView.animate(
+        withDuration: duration) { [unowned uoSelf = self] in
+            uoSelf.emailOutlet.alpha = 1
+            uoSelf.passwordOutlet.alpha = 1
+            uoSelf.facebookCustomLoginViewOutlet.alpha = 1
+            uoSelf.googleCustomLoginViewOutlet.alpha = 1
+            uoSelf.alternateOptionsLabel.alpha = 1
+        }
+    }
+    
+    func signInStarted() {
+        spinner.startAnimating()
+        signInInProgress = true
+        hideUI()
     }
     
     func signInCompleted() {
         signInInProgress = false
-        loadingCircle.stopAnimating()
-        performSegue(withIdentifier: "MainMenu", sender: nil)
-    }
-    
-    // Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        SignInModel.sharedInstance.delegate = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        setupFacebookLoginButton()
-        setupGoogleLoginButton()
-        SignInModel.sharedInstance.signInViewDidLoad()
-        if (!SignInModel.sharedInstance.signedIn && !signInInProgress) {
-            facebookLoginButtonOutlet.isHidden = false
-            googleLoginButtonOutlet.isHidden = false
-        }
+        spinner.stopAnimating()
+        delegate?.signInCompleted()
     }
     
 }
-

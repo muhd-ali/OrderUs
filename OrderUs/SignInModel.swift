@@ -33,7 +33,7 @@ struct UserData {
     static let null = UserData(id: nil, name: nil, email: nil)
 }
 
-class SignInModel: NSObject, FacebookCustomLoginButtonDelegate, FBSDKLoginButtonDelegate, GIDSignInDelegate {
+class SignInModel: NSObject, FacebookCustomLoginButtonDelegate, GIDSignInDelegate {
     var signedIn = false
     func signInViewDidLoad() {
         if (FBSDKAccessToken.current() != nil) {    // User already Signed Into Facebook
@@ -84,33 +84,11 @@ class SignInModel: NSObject, FacebookCustomLoginButtonDelegate, FBSDKLoginButton
     var userData: UserData?
     
     // Facebook Login Button Delegate API
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        //
-        guard (error == nil && !result.isCancelled) else {
-            print("======================Could not log in Using Facebook========================")
-            return
-        }
-        
-        userSignedInSoGetFacebookUserInfo()
-        print("======================Logged in Using Facebook========================")
-        delegate?.signInCompleted()
-    }
-    // keep
     func facebookCustomloginButton(_ loginButton: FacebookCustomLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         //
-        guard (error == nil && !result.isCancelled) else {
-            print("======================Could not log in Using Facebook========================")
-            return
-        }
-        
         userSignedInSoGetFacebookUserInfo()
         print("======================Logged in Using Facebook========================")
         delegate?.signInCompleted()
-    }
-    
-    func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
-        delegate?.signInStarted()
-        return true
     }
     
     func facebookCustomloginButtonWillLogin(_ loginButton: FacebookCustomLoginButton!) -> Bool {
@@ -118,7 +96,7 @@ class SignInModel: NSObject, FacebookCustomLoginButtonDelegate, FBSDKLoginButton
         return true
     }
     
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+    func loginButtonDidLogOut(_ loginButton: FacebookCustomLoginButton!) {
         print("======================Logged out of Facebook========================")
     }
     
