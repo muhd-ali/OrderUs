@@ -19,7 +19,7 @@ protocol Selectable {
 
 protocol DataManagerDelegate {
     var dataChangedFunctionCalled: Bool { get }
-    func dataChanged(newList: DataManager.ListType)
+    func dataChanged(newList: [Category])
 }
 
 struct Item: Selectable {
@@ -117,7 +117,7 @@ class DataManager: NSObject, CLLocationManagerDelegate {
             dataChangedFunctionCalled = called
         }
         
-        func dataChanged(newList: DataManager.ListType) {
+        func dataChanged(newList: [Category]) {
             dataChangedFunctionCalled = true
         }
     }
@@ -235,7 +235,7 @@ class DataManager: NSObject, CLLocationManagerDelegate {
         structuredItems.removeAll()
     }
     
-    var categoryTree: [Selectable] = ExampleCategories.MainList
+    var categoryTree: [Category] = ExampleCategories.MainList
     private func generateCategoryTree() {
         let categoriesWithAddedItems = addItems(to: structuredCategories)
         categoryTree = reorder(categoriesWithAddedItems: categoriesWithAddedItems)
@@ -338,7 +338,7 @@ class DataManager: NSObject, CLLocationManagerDelegate {
             )
         ]
         
-        static let MainList: ListType = [
+        static let MainList: [Category] = [
             Category(
                 Name : "Grocery",
                 ImageURL : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",

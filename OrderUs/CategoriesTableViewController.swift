@@ -11,12 +11,12 @@ import UIKit
 class CategoriesTableViewController: UITableViewController, DataManagerDelegate {
     var dataChangedFunctionCalled = false
     
-    func dataChanged(newList: DataManager.ListType) {
+    func dataChanged(newList: [Category]) {
         tableList = newList
         dataChangedFunctionCalled = true
     }
     
-    private var tableList: DataManager.ListType = [] {
+    private var tableList: [Selectable] = [] {
         didSet {
             UIView.transition(
                 with: tableView,
