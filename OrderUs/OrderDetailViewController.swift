@@ -9,7 +9,7 @@
 import UIKit
 import FlexibleSteppedProgressBar
 
-class OrderDetailViewController: UIViewController, FlexibleSteppedProgressBarDelegate {
+class OrderDetailViewController: UIViewController {
     var order: OrdersModel.Order?
     
     @IBOutlet weak var progressBarOutlet: FlexibleSteppedProgressBar!
@@ -46,7 +46,9 @@ class OrderDetailViewController: UIViewController, FlexibleSteppedProgressBarDel
         super.viewDidLoad()
         updateUI()
     }
-    
+}
+
+extension OrderDetailViewController: FlexibleSteppedProgressBarDelegate {
     func progressBar(_ progressBar: FlexibleSteppedProgressBar, didSelectItemAtIndex index: Int) {
         print("Index selected!")
     }
@@ -83,5 +85,4 @@ class OrderDetailViewController: UIViewController, FlexibleSteppedProgressBarDel
         
         return ""
     }
-    
 }

@@ -105,7 +105,7 @@ struct OrderLocation {
     static let null = OrderLocation(addressLines: [], location: CLLocation())
 }
 
-class DataManager: NSObject, CLLocationManagerDelegate {
+class DataManager: NSObject {
     typealias ListType = [Selectable]
     
     static let sharedInstance = DataManager()
@@ -276,18 +276,6 @@ class DataManager: NSObject, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let latestLocation = locations.last {
-            CLGeocoder().reverseGeocodeLocation(latestLocation) {[unowned uoSelf = self] (placeMarks, error) in
-                if let placeMark = placeMarks?.first {
-                    if let address = placeMark.addressDictionary?["FormattedAddressLines"] as? [String] {
-                        uoSelf.orderLocation = OrderLocation(addressLines: address, location: latestLocation)
-                    }
-                }
-            }
-        }
-    }
-    
     struct ExampleCategories {
         private static let FreshProduceList: ListType = [
             Category(
@@ -349,5 +337,19 @@ class DataManager: NSObject, CLLocationManagerDelegate {
                 ChildrenItems : []
             ),
             ]
+    }
+}
+
+extension DataManager: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let latestLocation = locations.last {
+            CLGeocoder().reverseGeocodeLocation(latestLocation) {[unowned uoSelf = self] (placeMarks, error) in
+                if let placeMark = placeMarks?.first {
+                    if let address = placeMark.addressDictionary?["FormattedAddressLines"] as? [String] {
+                        uoSelf.orderLocation = OrderLocation(addressLines: address, location: latestLocation)
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,26 +1,22 @@
 //
-//  CategoriesRootTableViewCell.swift
+//  RootCategoriesCollectionViewCell.swift
 //  OrderUs
 //
-//  Created by Muhammadali on 31/05/2017.
+//  Created by Muhammadali on 01/06/2017.
 //  Copyright © 2017 PRO. All rights reserved.
 //
 
 import UIKit
-import SDWebImage
 
-class CategoriesRootTableViewCellBody: UITableViewCell {
-
+class RootCategoriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    
     var categoryImageURL = ""
-    
     var category: Category? {
         didSet {
-            if let url = category?.ImageURL {
-                categoryImageURL = url
+            if category != nil {
+                categoryImageURL = category!.ImageURL
                 updateUI()
             }
         }
@@ -29,8 +25,8 @@ class CategoriesRootTableViewCellBody: UITableViewCell {
     func updateUI() {
         updateImage()
     }
-
-    private func updateImage() {
+    
+    func updateImage() {
         if let url = URL(string: categoryImageURL) {
             spinner.startAnimating()
             categoryImage.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
@@ -38,5 +34,4 @@ class CategoriesRootTableViewCellBody: UITableViewCell {
             }
         }
     }
-    
 }

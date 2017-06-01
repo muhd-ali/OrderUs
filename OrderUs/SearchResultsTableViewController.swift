@@ -8,13 +8,11 @@
 
 import UIKit
 
-class SearchResultsTableViewController: UITableViewController, UISearchResultsUpdating {
+class SearchResultsTableViewController: UITableViewController {
     var tableList: DataManager.ListType?
     var parentNavigationController: UINavigationController?
     var searchController: UISearchController?
-    private var results: [SearchResult] = []
-    
-    // MARK: - Table view data source
+    internal var results: [SearchResult] = []
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -45,9 +43,9 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
             }
         }
     }
-    
-    // MARK: - UISearchResultsUpdating
-    
+}
+
+extension SearchResultsTableViewController: UISearchResultsUpdating {
     private func findSearchResults(fromList list: DataManager.ListType, withSearchedText text: String) -> [SearchResult] {
         let results = list.searchItems { result in
             result.Name.lowercased().range(of: text.lowercased()) != nil
@@ -80,5 +78,4 @@ class SearchResultsTableViewController: UITableViewController, UISearchResultsUp
             tableView.reloadData()
         }
     }
-    
 }
