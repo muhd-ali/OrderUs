@@ -16,7 +16,7 @@ class CategoriesTableViewController: UITableViewController, DataManagerDelegate 
         dataChangedFunctionCalled = true
     }
     
-    private var tableList: [Selectable] = [] {
+    var tableList: [Selectable] = [] {
         didSet {
             UIView.transition(
                 with: tableView,

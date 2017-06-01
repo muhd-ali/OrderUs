@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol RootCategoriesCollectionViewLayoutDelegate {
+    func featuredCellChanged(to indexPath: IndexPath)
+}
+
 class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
-    let dragOffset: CGFloat = 180
+    var delegate: RootCategoriesCollectionViewLayoutDelegate?
+    
+    let dragOffset: CGFloat = 10
     
     var numberOfItems: Int {
         return collectionView?.numberOfItems(inSection: 0) ?? 0
@@ -32,7 +38,7 @@ class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
     }
     
     var standardCellHeight: CGFloat {
-        return featuredCellHeight / 4
+        return featuredCellHeight / 8
     }
     
     var cellWidth: CGFloat {
@@ -65,6 +71,7 @@ class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
             if item == featuredCellIndex {
                 let yOffset = standardCellHeight * nextItemPercentageOffset
                 y = collectionView!.contentOffset.y - yOffset
+                delegate?.featuredCellChanged(to: indexPath)
                 height = featuredCellHeight
             } else if item == featuredCellIndex + 1 && item < numberOfItems {
                 height += max((featuredCellHeight - standardCellHeight) * nextItemPercentageOffset, 0)
@@ -84,6 +91,9 @@ class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
                 layoutAttributes.append(attribute)
             }
         }
+        
         return layoutAttributes
     }
+    
+    
 }
