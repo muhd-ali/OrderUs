@@ -9,7 +9,6 @@
 import UIKit
 
 class MiddleCategoriesTableViewController: UITableViewController, DataManagerDelegate {
-    
     var dataChangedFunctionCalled: Bool = false
     func dataChanged(newList: [Category]) {
         categories = newList
@@ -24,12 +23,33 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     
     var categories: [Category] = []
     
+    struct Constants {
+        static let noSelectedSection = -1
+    }
+    
+    var selectedSection: Int = Constants.noSelectedSection
+    
+    func selectedChanged(to selected: Int?) {
+        if let s = selected {
+            if selectedSection != s {
+                selectedSection = s
+            } else {
+                selectedSection = Constants.noSelectedSection
+            }
+//            let indexPath = IndexPath(row: 0, section: s)
+//            tableView.beginUpdates()
+//            tableView.reloadRows(at: [indexPath], with: .none)
+//            tableView.endUpdates()
+//            tableView.reloadData()
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return categories.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if categories[section].ChildrenCategories.count > 0 {
+        if !categories[section].ChildrenCategories.isEmpty {
             return 1
         }
         return 0
@@ -39,11 +59,17 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
         return tableView.rowHeight
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.rowHeight
+//        return (selectedSection == indexPath.section) ? tableView.rowHeight : 0
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MiddleCategoryCell")
-        print("getting header")
         if let categoryCell = cell as? MiddleCategoriesTableViewCell {
             categoryCell.category = categories[section]
+            categoryCell.controller = self
+            categoryCell.indexSection = section
         }
         return cell
     }

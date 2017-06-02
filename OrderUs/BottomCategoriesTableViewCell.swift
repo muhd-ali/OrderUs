@@ -14,6 +14,7 @@ class BottomCategoriesTableViewCell: UITableViewCell {
     var categories = [Category]() {
         didSet {
             collectionView.dataSource = self
+            collectionView.delegate = self
             collectionView.reloadData()
         }
     }
@@ -30,5 +31,13 @@ extension BottomCategoriesTableViewCell: UICollectionViewDataSource {
             categoryCell.category = categories[indexPath.item]
         }
         return cell
+    }
+}
+
+extension BottomCategoriesTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if categories[indexPath.item].ChildrenCategories.isEmpty {
+            
+        }
     }
 }
