@@ -53,6 +53,9 @@ class MainMenuViewController: UITabBarController {
         SignInModel.sharedInstance.signedIn = false
         let dmDel = DataManager.sharedInstance.delegate
         DataManager.sharedInstance.delegate = DataManager.NullDelegate(called: dmDel.dataChangedFunctionCalled)
+        if let vc = presentingViewController as? SignInRootViewController {
+            vc.signedOut()
+        }
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 

@@ -28,6 +28,9 @@
 		13FEE9071EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */; };
 		13FEE9091EE06465000DA99E /* RootCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9081EE06465000DA99E /* RootCategoriesCollectionViewCell.swift */; };
 		13FEE90C1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE90B1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift */; };
+		13FEE90E1EE0BB8E000DA99E /* MiddleCategoriesTableViewHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE90D1EE0BB8E000DA99E /* MiddleCategoriesTableViewHeaderCell.swift */; };
+		13FEE9111EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9101EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift */; };
+		13FEE9131EE0C109000DA99E /* BottomCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9121EE0C109000DA99E /* BottomCategoriesTableViewCell.swift */; };
 		B908F8781EB9FF930002C319 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B908F8771EB9FF930002C319 /* MainMenuViewController.swift */; };
 		B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */; };
 		B94AACC61E9E2C91005328D0 /* shoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94AACC51E9E2C91005328D0 /* shoppingCartViewController.swift */; };
@@ -82,6 +85,9 @@
 		13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesCollectionViewLayout.swift; sourceTree = "<group>"; };
 		13FEE9081EE06465000DA99E /* RootCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		13FEE90B1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleCategoriesTableViewController.swift; sourceTree = "<group>"; };
+		13FEE90D1EE0BB8E000DA99E /* MiddleCategoriesTableViewHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleCategoriesTableViewHeaderCell.swift; sourceTree = "<group>"; };
+		13FEE9101EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
+		13FEE9121EE0C109000DA99E /* BottomCategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomCategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		5D766159F5A336ED0D480271 /* Pods_OrderUs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrderUs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D681797CAD195E9CAAA9642 /* Pods-OrderUs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrderUs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OrderUs/Pods-OrderUs.debug.xcconfig"; sourceTree = "<group>"; };
 		AE73323074D86D0D740746B9 /* Pods-OrderUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrderUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-OrderUs/Pods-OrderUs.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,12 +134,13 @@
 			isa = PBXGroup;
 			children = (
 				13FEE90A1EE06777000DA99E /* RootCategories */,
+				13FEE90F1EE0BB95000DA99E /* MiddleCategories */,
+				13FEE9141EE0C179000DA99E /* BottomCategories */,
 				138CD9C51E7C3367004C5EC4 /* CategoriesTableViewController.swift */,
 				138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */,
 				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
 				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
 				B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */,
-				13FEE90B1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift */,
 			);
 			name = "Shopping Menu";
 			sourceTree = "<group>";
@@ -193,6 +200,24 @@
 				13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */,
 			);
 			name = RootCategories;
+			sourceTree = "<group>";
+		};
+		13FEE90F1EE0BB95000DA99E /* MiddleCategories */ = {
+			isa = PBXGroup;
+			children = (
+				13FEE90B1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift */,
+				13FEE90D1EE0BB8E000DA99E /* MiddleCategoriesTableViewHeaderCell.swift */,
+			);
+			name = MiddleCategories;
+			sourceTree = "<group>";
+		};
+		13FEE9141EE0C179000DA99E /* BottomCategories */ = {
+			isa = PBXGroup;
+			children = (
+				13FEE9121EE0C109000DA99E /* BottomCategoriesTableViewCell.swift */,
+				13FEE9101EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift */,
+			);
+			name = BottomCategories;
 			sourceTree = "<group>";
 		};
 		3C9917E60042D19C36D4A487 /* Frameworks */ = {
@@ -380,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13FEE9111EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift in Sources */,
 				13E83F0A1E9A2479004B32CF /* QuantityStepper.swift in Sources */,
 				B99B69E11EA100070002A354 /* OrderOptionsTableViewController.swift in Sources */,
 				13573CC51EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift in Sources */,
@@ -400,12 +426,14 @@
 				138CD9C61E7C3367004C5EC4 /* CategoriesTableViewController.swift in Sources */,
 				B95965121E606C4600C196E1 /* SignInRootViewController.swift in Sources */,
 				B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */,
+				13FEE90E1EE0BB8E000DA99E /* MiddleCategoriesTableViewHeaderCell.swift in Sources */,
 				13573CB21EC11C91003A396A /* Model.xcdatamodeld in Sources */,
 				138CD9C41E7C3283004C5EC4 /* DataManager.swift in Sources */,
 				B95965101E606C4600C196E1 /* AppDelegate.swift in Sources */,
 				13573CC41EC12FB0003A396A /* CategoryCD+CoreDataClass.swift in Sources */,
 				138CD9C81E7C40B2004C5EC4 /* CategoriesTableViewCell.swift in Sources */,
 				13969B3A1EDDA1DB001145B1 /* SignInViewController.swift in Sources */,
+				13FEE9131EE0C109000DA99E /* BottomCategoriesTableViewCell.swift in Sources */,
 				1372B3BE1EBA5F2B0042B0F2 /* SignInModel.swift in Sources */,
 				13573CC21EC12FB0003A396A /* ItemCD+CoreDataClass.swift in Sources */,
 				13A34A521EC3615700720285 /* PendingOrdersTableViewController.swift in Sources */,

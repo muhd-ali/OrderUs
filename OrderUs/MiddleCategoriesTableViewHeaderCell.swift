@@ -1,17 +1,17 @@
 //
-//  RootCategoriesCollectionViewCell.swift
+//  MiddleCategoriesTableViewCell.swift
 //  OrderUs
 //
-//  Created by Muhammadali on 01/06/2017.
+//  Created by Muhammadali on 02/06/2017.
 //  Copyright © 2017 PRO. All rights reserved.
 //
 
 import UIKit
 
-class RootCategoriesCollectionViewCell: UICollectionViewCell {
+class MiddleCategoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var categoryLabelOutlet: UILabel!
+    @IBOutlet weak var categoryNameOutlet: UILabel!
     
     var categoryImageURL = ""
     var categoryLabel = ""
@@ -26,28 +26,15 @@ class RootCategoriesCollectionViewCell: UICollectionViewCell {
     }
     
     func updateUI() {
-        categoryLabelOutlet.text = categoryLabel
-        let frame = categoryLabelOutlet.frame
-        categoryLabelOutlet.frame = CGRect(
+        categoryNameOutlet.text = categoryLabel
+        let frame = categoryNameOutlet.frame
+        categoryNameOutlet.frame = CGRect(
             x: frame.origin.x,
             y: frame.origin.y,
             width: frame.width,
             height: 0
         )
         updateImage()
-//        addDropShadow()
-    }
-    
-    func addDropShadow() {
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        self.layer.shadowRadius = 2.0
-        self.layer.shadowOpacity = 0.5
-        self.layer.masksToBounds = false
-        self.layer.shadowPath = UIBezierPath(
-            roundedRect: self.bounds,
-            cornerRadius: self.contentView.layer.cornerRadius
-            ).cgPath
     }
     
     func updateImage() {
@@ -58,4 +45,5 @@ class RootCategoriesCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+
 }

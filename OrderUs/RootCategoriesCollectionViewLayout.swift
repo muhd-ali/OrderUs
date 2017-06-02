@@ -15,7 +15,7 @@ protocol RootCategoriesCollectionViewLayoutDelegate {
 class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
     var delegate: RootCategoriesCollectionViewLayoutDelegate?
     
-    let dragOffset: CGFloat = 10
+    let dragOffset: CGFloat = 300
     
     var numberOfItems: Int {
         return collectionView?.numberOfItems(inSection: 0) ?? 0
@@ -94,6 +94,4 @@ class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
         
         return layoutAttributes
     }
-    
-    
 }

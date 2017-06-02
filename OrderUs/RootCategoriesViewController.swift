@@ -64,7 +64,6 @@ extension RootCategoriesViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryBody", for: indexPath)
         if let categoryCell = cell as? RootCategoriesCollectionViewCell {
             categoryCell.category = categories[indexPath.item]
-            categoryCell.collectionView = collectionView
         }
         return cell
     }

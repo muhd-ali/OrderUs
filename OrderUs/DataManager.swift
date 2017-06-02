@@ -63,13 +63,13 @@ struct SearchResult {
 }
 
 extension Sequence where Iterator.Element == Selectable {
-    private func searchItemsHelper(condition: (Item) -> Bool, path: [String]) -> [SearchResult] {
+    private func searchItemsFromWholeTreeHelper(condition: (Item) -> Bool, path: [String]) -> [SearchResult] {
         var results: [SearchResult] = []
         self.forEach { selectable in
             if let category = selectable as? Category {
                 var mutablePath = path
                 mutablePath.append(category.Name)
-                let innerResults = category.Children.searchItemsHelper(condition: condition, path: mutablePath)
+                let innerResults = category.Children.searchItemsFromWholeTreeHelper(condition: condition, path: mutablePath)
                 results.append(contentsOf: innerResults)
             } else if let item = selectable as? Item {
                 if condition(item) {
@@ -83,8 +83,18 @@ extension Sequence where Iterator.Element == Selectable {
         return results
     }
     
-    func searchItems(condition: (Item) -> Bool) -> [SearchResult]  {
-        return searchItemsHelper(condition: condition, path: [])
+    func searchItemsFromWholeTree(condition: (Item) -> Bool) -> [SearchResult]  {
+        return searchItemsFromWholeTreeHelper(condition: condition, path: [])
+    }
+    
+    func categories() -> [Category] {
+        var categories = [Category]()
+        for selectable in self {
+            if let category = selectable as? Category {
+                categories.append(category)
+            }
+        }
+        return categories
     }
 }
 

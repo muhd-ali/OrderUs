@@ -47,7 +47,7 @@ class SearchResultsTableViewController: UITableViewController {
 
 extension SearchResultsTableViewController: UISearchResultsUpdating {
     private func findSearchResults(fromList list: DataManager.ListType, withSearchedText text: String) -> [SearchResult] {
-        let results = list.searchItems { result in
+        let results = list.searchItemsFromWholeTree { result in
             result.Name.lowercased().range(of: text.lowercased()) != nil
         }
         

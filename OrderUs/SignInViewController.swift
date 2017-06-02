@@ -14,7 +14,13 @@ protocol SignInViewControllerDelegate {
     func signInCompleted()
 }
 
+
 class SignInViewController: UIViewController, SignInModelDelegate, GIDSignInUIDelegate {
+    
+    private struct ButtonText {
+        static let signIn = "Log In"
+        static let signOut = "Log Out"
+    }
     
     var delegate: SignInViewControllerDelegate?
     @IBOutlet weak var emailOutlet: UITextField!
@@ -31,6 +37,7 @@ class SignInViewController: UIViewController, SignInModelDelegate, GIDSignInUIDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setButtonsTextToSignIn()
         SignInModel.sharedInstance.delegate = self
         [(emailOutlet, "Email Address"), (passwordOutlet, "Password")].forEach { (textField, placeholderText) in
             textField?.layer.borderWidth = 2
@@ -61,11 +68,11 @@ class SignInViewController: UIViewController, SignInModelDelegate, GIDSignInUIDe
                 from: self
             ) { [unowned uoSelf = self] (result, error) in
                 if (error != nil || (result?.isCancelled ?? false)) {
-                    uoSelf.showUI()
+                    uoSelf.showUI(animate: true)
                     uoSelf.spinner.stopAnimating()
                     return
                 }
-                uoSelf.facebookCustomLoginButtonOutlet.setTitle("Log out", for: .normal)
+                uoSelf.facebookCustomLoginButtonOutlet.setTitle(ButtonText.signOut, for: .normal)
                 uoSelf.facebookCustomLoginButtonOutlet.delegate?.facebookCustomloginButton(uoSelf.facebookCustomLoginButtonOutlet, didCompleteWith: result, error: error)
             }
         }
@@ -97,7 +104,7 @@ class SignInViewController: UIViewController, SignInModelDelegate, GIDSignInUIDe
     
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
         self.dismiss(animated: true, completion: nil)
-        googleCustomLoginButtonOutlet.setTitle("Log Out", for: .normal)
+        googleCustomLoginButtonOutlet.setTitle(ButtonText.signOut, for: .normal)
         print("function 3 was called")
     }
     
@@ -105,39 +112,65 @@ class SignInViewController: UIViewController, SignInModelDelegate, GIDSignInUIDe
     var signInInProgress = false
     
     private func hideUI() {
-        let duration = 1.0
-        UIView.animate(
+        emailOutlet.alpha = 0
+        passwordOutlet.alpha = 0
+        facebookCustomLoginViewOutlet.alpha = 0
+        googleCustomLoginViewOutlet.alpha = 0
+        alternateOptionsLabel.alpha = 0
+    }
+    
+    private func hideUI(animate: Bool) {
+        if animate {
+            let duration = 1.0
+            UIView.animate(
             withDuration: duration) { [unowned uoSelf = self] in
-                uoSelf.emailOutlet.alpha = 0
-                uoSelf.passwordOutlet.alpha = 0
-                uoSelf.facebookCustomLoginViewOutlet.alpha = 0
-                uoSelf.googleCustomLoginViewOutlet.alpha = 0
-                uoSelf.alternateOptionsLabel.alpha = 0
+                uoSelf.hideUI()
+            }
+        } else {
+            hideUI()
         }
     }
- 
+    
     private func showUI() {
-        let duration = 1.0
-        UIView.animate(
-        withDuration: duration) { [unowned uoSelf = self] in
-            uoSelf.emailOutlet.alpha = 1
-            uoSelf.passwordOutlet.alpha = 1
-            uoSelf.facebookCustomLoginViewOutlet.alpha = 1
-            uoSelf.googleCustomLoginViewOutlet.alpha = 1
-            uoSelf.alternateOptionsLabel.alpha = 1
+        emailOutlet.alpha = 1
+        passwordOutlet.alpha = 1
+        facebookCustomLoginViewOutlet.alpha = 1
+        googleCustomLoginViewOutlet.alpha = 1
+        alternateOptionsLabel.alpha = 1
+    }
+
+    private func showUI(animate: Bool) {
+        if animate {
+            let duration = 1.0
+            UIView.animate(
+            withDuration: duration) { [unowned uoSelf = self] in
+                uoSelf.showUI()
+            }
+        } else {
+            showUI()
         }
     }
     
     func signInStarted() {
         spinner.startAnimating()
         signInInProgress = true
-        hideUI()
+        hideUI(animate: true)
     }
     
     func signInCompleted() {
         signInInProgress = false
         spinner.stopAnimating()
         delegate?.signInCompleted()
+    }
+    
+    private func setButtonsTextToSignIn() {
+        googleCustomLoginButtonOutlet.setTitle(ButtonText.signIn, for: .normal)
+        facebookCustomLoginButtonOutlet.setTitle(ButtonText.signIn, for: .normal)
+    }
+    
+    func signedOut() {
+        showUI(animate: true)
+        setButtonsTextToSignIn()
     }
     
 }

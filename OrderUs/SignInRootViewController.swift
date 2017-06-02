@@ -10,12 +10,14 @@ import UIKit
 import GoogleSignIn
 import FBSDKLoginKit
 
-
 class SignInRootViewController: UIViewController, GIDSignInUIDelegate, SignInViewControllerDelegate {
     
     @IBOutlet weak var signInView: UIView!
     var viewPosition = CGPoint(x: 0.0, y: 0.0)
     @IBOutlet weak var signUpView: UIView!
+    
+    var signInViewController: SignInViewController?
+    var signUpViewController: SignUpViewController?
     
     func showSignInView() {
         UIView.animate(
@@ -58,7 +60,12 @@ class SignInRootViewController: UIViewController, GIDSignInUIDelegate, SignInVie
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? SignInViewController {
+            signInViewController = dvc
             dvc.delegate = self
+        }
+        
+        if let dvc = segue.destination as? SignUpViewController {
+            signUpViewController = dvc
         }
     }
     
@@ -66,5 +73,9 @@ class SignInRootViewController: UIViewController, GIDSignInUIDelegate, SignInVie
         performSegue(withIdentifier: "MainMenu", sender: nil)
     }
     
+    
+    func signedOut() {
+        signInViewController?.signedOut()
+    }
 }
 
