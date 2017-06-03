@@ -32,6 +32,16 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     
     var categories: [Category] = []
     var featuredCellIndexPath = IndexPath(item: 0, section: 0)
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dvc = segue.destination as? MiddleCategoriesTableViewController,
+           let index = sender as? Int,
+           segue.identifier == "MiddleCategories" {
+            let selected = categories[index]
+            dvc.categories = selected.Children.categories()
+            dvc.title = selected.Name
+        }
+    }
 }
 
 extension RootCategoriesViewController: RootCategoriesCollectionViewLayoutDelegate {
@@ -43,12 +53,7 @@ extension RootCategoriesViewController: RootCategoriesCollectionViewLayoutDelega
 extension RootCategoriesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath == featuredCellIndexPath {
-            let selected = categories[indexPath.row]
-            let newTableList = selected.Children
-            let vc = storyboard?.instantiateViewController(withIdentifier: "CategoriesController") as! CategoriesTableViewController
-            vc.tableList = newTableList
-            vc.title = selected.Name
-            navigationController?.pushViewController(vc, animated: true)
+            performSegue(withIdentifier: "MiddleCategories", sender: indexPath.item)
         } else {
             collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.top, animated: true)
         }

@@ -27,7 +27,7 @@
 		13E83F0A1E9A2479004B32CF /* QuantityStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E83F091E9A2479004B32CF /* QuantityStepper.swift */; };
 		13FEE9071EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */; };
 		13FEE9091EE06465000DA99E /* RootCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9081EE06465000DA99E /* RootCategoriesCollectionViewCell.swift */; };
-		13FEE90C1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE90B1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift */; };
+		13FEE90C1EE0A426000DA99E /* MiddleCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE90B1EE0A426000DA99E /* MiddleCategoriesViewController.swift */; };
 		13FEE90E1EE0BB8E000DA99E /* MiddleCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE90D1EE0BB8E000DA99E /* MiddleCategoriesTableViewCell.swift */; };
 		13FEE9111EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9101EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift */; };
 		13FEE9131EE0C109000DA99E /* BottomCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9121EE0C109000DA99E /* BottomCategoriesTableViewCell.swift */; };
@@ -84,7 +84,7 @@
 		13E83F091E9A2479004B32CF /* QuantityStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuantityStepper.swift; sourceTree = "<group>"; };
 		13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesCollectionViewLayout.swift; sourceTree = "<group>"; };
 		13FEE9081EE06465000DA99E /* RootCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
-		13FEE90B1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleCategoriesTableViewController.swift; sourceTree = "<group>"; };
+		13FEE90B1EE0A426000DA99E /* MiddleCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleCategoriesViewController.swift; sourceTree = "<group>"; };
 		13FEE90D1EE0BB8E000DA99E /* MiddleCategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleCategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		13FEE9101EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		13FEE9121EE0C109000DA99E /* BottomCategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomCategoriesTableViewCell.swift; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 		13FEE90F1EE0BB95000DA99E /* MiddleCategories */ = {
 			isa = PBXGroup;
 			children = (
-				13FEE90B1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift */,
+				13FEE90B1EE0A426000DA99E /* MiddleCategoriesViewController.swift */,
 				13FEE90D1EE0BB8E000DA99E /* MiddleCategoriesTableViewCell.swift */,
 			);
 			name = MiddleCategories;
@@ -418,7 +418,7 @@
 				B908F8781EB9FF930002C319 /* MainMenuViewController.swift in Sources */,
 				B94AACC81E9E4A88005328D0 /* OrdersModel.swift in Sources */,
 				13FEE9071EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift in Sources */,
-				13FEE90C1EE0A426000DA99E /* MiddleCategoriesTableViewController.swift in Sources */,
+				13FEE90C1EE0A426000DA99E /* MiddleCategoriesViewController.swift in Sources */,
 				B9CE10FB1EB37BA600C8C29C /* SearchResultsTableViewController.swift in Sources */,
 				13969B461EDEF041001145B1 /* RootCategoriesViewController.swift in Sources */,
 				13573CC31EC12FB0003A396A /* ItemCD+CoreDataProperties.swift in Sources */,

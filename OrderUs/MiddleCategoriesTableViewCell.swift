@@ -39,7 +39,7 @@ class MiddleCategoriesTableViewCell: UITableViewCell {
     }
     
     func handleTapGesture(recognizer: UITapGestureRecognizer) {
-        controller?.selectedChanged(to: indexSection)
+        controller?.didSelectSection(at: indexSection)
         isSelectedSection = isSelectedSection ? false : true
         var rotation: CGFloat = 0
         if isSelectedSection {
