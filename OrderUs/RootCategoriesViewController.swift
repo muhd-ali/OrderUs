@@ -16,22 +16,65 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     }
     
     let appTintColor = Constants.appTintColor
+    let animationDuration: TimeInterval = 0.2
     
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var blurViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var blurViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sideMenuButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var seatchBarViewTopOffset: NSLayoutConstraint!
     
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
-
+    
     @IBOutlet weak var searchButtonOutlet: UIBarButtonItem!
     @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
         searchBarIsHidden ? showSearchBar() : hideSearchBar()
     }
-
+    
     @IBOutlet weak var shoppingCartButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var trackingButtonOutlet: UIBarButtonItem!
     
+    
+    private func initializeSideMenu() {
+        let rvc = self.revealViewController()
+        if rvc != nil {
+            sideMenuButtonOutlet.target = rvc
+            sideMenuButtonOutlet.action = #selector((SWRevealViewController.revealToggle) as (SWRevealViewController) -> (Void) -> Void)
+            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        hideBlurView()
+        SideMenuTableViewController.delegate = self
+    }
+    
+    internal func showBlurView() {
+        blurView.isHidden = false
+        blurViewTopConstraint.constant = 0
+        blurViewBottomConstraint.constant = -(tabBarController?.tabBar.bounds.height ?? 0)
+        UIView.animate(withDuration: animationDuration) { [unowned uoSelf = self] in
+            uoSelf.blurView.layer.opacity = 1
+        }
+    }
+    
+    internal func hideBlurView() {
+        UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
+            uoSelf.blurView.layer.opacity = 0
+        }) { [unowned uoSelf = self] (completed) in
+            if completed {
+                let height = uoSelf.view.bounds.height
+                uoSelf.blurViewTopConstraint.constant = -height
+                uoSelf.blurViewBottomConstraint.constant = height
+                uoSelf.blurView.isHidden = true
+            }
+        }
+    }
+    
+    private func setNavigationBarColors() {
+        navigationController?.navigationBar.barTintColor = appTintColor
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,19 +84,36 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         if let layout = collectionView.collectionViewLayout as? RootCategoriesCollectionViewLayout {
             layout.delegate = self
         }
+        setNavigationBarColors()
         initializeSearchController()
+        initializeSideMenu()
+    }
+    
+    internal func hideTabBar() {
+        let frame = tabBarController?.tabBar.frame
+        UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
+            uoSelf.tabBarController?.tabBar.frame = frame!.offsetBy(dx: 0, dy: frame?.height ?? 0)
+        }) {   [unowned uoSelf = self] (completed) in
+            if completed {
+                uoSelf.tabBarController?.tabBar.isHidden = true
+            }
+        }
+    }
+    
+    internal func showTabBar() {
+        tabBarController?.tabBar.isHidden = false
+        let frame = tabBarController?.tabBar.frame
+        UIView.animate(withDuration: animationDuration) { [unowned uoSelf = self] in
+            uoSelf.tabBarController?.tabBar.frame = frame!.offsetBy(dx: 0, dy: -(frame?.height ?? 0))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.tabBar.isHidden = false
+        if (tabBarController?.tabBar.isHidden ?? false) {
+            showTabBar()
+        }
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        tabBarController?.tabBar.isHidden = true
-    }
-    
     
     var dataChangedFunctionCalled: Bool = false
     func dataChanged(newList: [Category]) {
@@ -68,9 +128,11 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     var featuredCellIndexPath = IndexPath(item: 0, section: 0)
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        hideTabBar()
+        hideSearchBar()
         if let dvc = segue.destination as? MiddleCategoriesTableViewController,
-           let index = sender as? Int,
-           segue.identifier == "MiddleCategories" {
+            let index = sender as? Int,
+            segue.identifier == "MiddleCategories" {
             let selected = categories[index]
             dvc.categories = selected.Children.categories()
             dvc.title = selected.Name
@@ -78,21 +140,21 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     }
     
     private func animateLayout(delay: TimeInterval) {
-        UIView.animate(withDuration: 0.2, delay: delay, options: [.curveEaseInOut], animations: { [unowned uoSelf = self] in
+        UIView.animate(withDuration: animationDuration, delay: delay, options: [.curveEaseInOut], animations: { [unowned uoSelf = self] in
             uoSelf.view.layoutIfNeeded()
-        }, completion: nil)
+            }, completion: nil)
     }
     
     private func hideSearchBar() {
         hideSearchBar(delay: 0)
     }
-
+    
     internal func hideSearchBar(delay: TimeInterval) {
         searchBarIsHidden = true
         seatchBarViewTopOffset.constant = -searchBarView.bounds.height
         animateLayout(delay: delay)
     }
-
+    
     private func showSearchBar() {
         searchBarIsHidden = false
         seatchBarViewTopOffset.constant = 0
@@ -120,6 +182,18 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         searchBarView.addSubview(searchBar)
         searchBar.sizeToFit()
         hideSearchBar()
+    }
+}
+
+extension RootCategoriesViewController: SideMenuTableViewControllerDelegate {
+    func sideMenuDidAppear() {
+        showBlurView()
+        hideTabBar()
+    }
+    
+    func sideMenuWillDisappear() {
+        hideBlurView()
+        showTabBar()
     }
 }
 

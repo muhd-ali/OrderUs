@@ -58,5 +58,4 @@ class MainMenuViewController: UITabBarController {
         }
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
-
 }

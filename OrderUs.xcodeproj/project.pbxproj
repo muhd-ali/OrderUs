@@ -15,6 +15,8 @@
 		13573CC51EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13573CC11EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift */; };
 		1372B3BC1EBA5AA50042B0F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1372B3BB1EBA5AA50042B0F2 /* GoogleService-Info.plist */; };
 		1372B3BE1EBA5F2B0042B0F2 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1372B3BD1EBA5F2B0042B0F2 /* SignInModel.swift */; };
+		138983791EE4F8DE003FD12A /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 138983781EE4F8DE003FD12A /* SWRevealViewController.m */; };
+		1389837D1EE59322003FD12A /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1389837C1EE59322003FD12A /* SideMenuTableViewController.swift */; };
 		138CD9C41E7C3283004C5EC4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C31E7C3283004C5EC4 /* DataManager.swift */; };
 		138CD9C61E7C3367004C5EC4 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C51E7C3367004C5EC4 /* CategoriesTableViewController.swift */; };
 		138CD9C81E7C40B2004C5EC4 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */; };
@@ -72,6 +74,10 @@
 		13573CC11EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1372B3BB1EBA5AA50042B0F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1372B3BD1EBA5F2B0042B0F2 /* SignInModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
+		138983771EE4F8DE003FD12A /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		138983781EE4F8DE003FD12A /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		1389837B1EE4FBF4003FD12A /* OrderUs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrderUs-Bridging-Header.h"; sourceTree = "<group>"; };
+		1389837C1EE59322003FD12A /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 		138CD9C31E7C3283004C5EC4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		138CD9C51E7C3367004C5EC4 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CategoriesTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -171,14 +177,25 @@
 			name = "Sign In";
 			sourceTree = "<group>";
 		};
+		1389837A1EE4F909003FD12A /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				138983771EE4F8DE003FD12A /* SWRevealViewController.h */,
+				138983781EE4F8DE003FD12A /* SWRevealViewController.m */,
+			);
+			name = SWRevealViewController;
+			sourceTree = "<group>";
+		};
 		138CD9C21E7C2C91004C5EC4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1389837A1EE4F909003FD12A /* SWRevealViewController */,
 				B959651B1E606C4600C196E1 /* Info.plist */,
 				1372B3BB1EBA5AA50042B0F2 /* GoogleService-Info.plist */,
 				B959650F1E606C4600C196E1 /* AppDelegate.swift */,
 				B95965161E606C4600C196E1 /* Assets.xcassets */,
 				B95965181E606C4600C196E1 /* LaunchScreen.storyboard */,
+				1389837B1EE4FBF4003FD12A /* OrderUs-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -257,6 +274,7 @@
 				138CD9C31E7C3283004C5EC4 /* DataManager.swift */,
 				B972566C1EA75A7300D9DE9E /* ServerCommunicator.swift */,
 				B908F8771EB9FF930002C319 /* MainMenuViewController.swift */,
+				1389837C1EE59322003FD12A /* SideMenuTableViewController.swift */,
 				1372B3BF1EBA5F360042B0F2 /* Sign In */,
 				135036D71EAE6DDB003B7745 /* Shopping Menu */,
 				13A34A531EC3616300720285 /* Orders */,
@@ -313,6 +331,7 @@
 					B959650B1E606C4600C196E1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 3F8V2776R5;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -417,6 +436,7 @@
 				13969B3C1EDDB1F3001145B1 /* SignUpViewController.swift in Sources */,
 				13969B2E1EDBC53C001145B1 /* OrderDetailViewController.swift in Sources */,
 				13969B351EDCEAF6001145B1 /* FacebookCustomLoginButton.swift in Sources */,
+				138983791EE4F8DE003FD12A /* SWRevealViewController.m in Sources */,
 				13FEE9091EE06465000DA99E /* RootCategoriesCollectionViewCell.swift in Sources */,
 				B94AACC61E9E2C91005328D0 /* shoppingCartViewController.swift in Sources */,
 				B908F8781EB9FF930002C319 /* MainMenuViewController.swift in Sources */,
@@ -429,6 +449,7 @@
 				135036D51EAE5E3B003B7745 /* PlaceOrderViewController.swift in Sources */,
 				138CD9C61E7C3367004C5EC4 /* CategoriesTableViewController.swift in Sources */,
 				B95965121E606C4600C196E1 /* SignInRootViewController.swift in Sources */,
+				1389837D1EE59322003FD12A /* SideMenuTableViewController.swift in Sources */,
 				B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */,
 				13D898391EE484340049ED22 /* MiddleSuperCategoryView.swift in Sources */,
 				13573CB21EC11C91003A396A /* Model.xcdatamodeld in Sources */,
@@ -511,6 +532,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "OrderUs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -553,6 +575,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "OrderUs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -565,6 +588,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OrderUs/OrderUs.entitlements;
 				DEVELOPMENT_TEAM = 3F8V2776R5;
 				INFOPLIST_FILE = OrderUs/Info.plist;
@@ -572,6 +596,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PRO.ali.OrderUs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OrderUs/OrderUs-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -582,6 +608,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OrderUs/OrderUs.entitlements;
 				DEVELOPMENT_TEAM = 3F8V2776R5;
 				INFOPLIST_FILE = OrderUs/Info.plist;
@@ -589,6 +616,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PRO.ali.OrderUs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OrderUs/OrderUs-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
