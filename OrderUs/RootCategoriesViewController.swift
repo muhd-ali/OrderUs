@@ -77,22 +77,26 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         }
     }
     
-    private func animateLayout() {
-        UIView.animate(withDuration: 0.2) { [unowned uoSelf = self] in
+    private func animateLayout(delay: TimeInterval) {
+        UIView.animate(withDuration: 0.2, delay: delay, options: [.curveEaseInOut], animations: { [unowned uoSelf = self] in
             uoSelf.view.layoutIfNeeded()
-        }
+        }, completion: nil)
     }
     
-    internal func hideSearchBar() {
+    private func hideSearchBar() {
+        hideSearchBar(delay: 0)
+    }
+
+    internal func hideSearchBar(delay: TimeInterval) {
         searchBarIsHidden = true
         seatchBarViewTopOffset.constant = -searchBarView.bounds.height
-        animateLayout()
+        animateLayout(delay: delay)
     }
-    
+
     private func showSearchBar() {
         searchBarIsHidden = false
         seatchBarViewTopOffset.constant = 0
-        animateLayout()
+        animateLayout(delay: 0)
     }
     
     private var searchBarIsHidden = true
@@ -121,7 +125,7 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
 
 extension RootCategoriesViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        hideSearchBar()
+        hideSearchBar(delay: 0.3)
     }
 }
 
