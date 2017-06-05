@@ -9,8 +9,29 @@
 import UIKit
 import SDWebImage
 
+
 class RootCategoriesViewController: UIViewController, DataManagerDelegate {
+    struct Constants {
+        static let appTintColor = UIColor(red: 244/255, green: 124/255, blue: 32/255, alpha: 1)
+    }
+    
+    let appTintColor = Constants.appTintColor
+    
+    @IBOutlet weak var searchBarView: UIView!
+    @IBOutlet weak var seatchBarViewTopOffset: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    
+
+    @IBOutlet weak var searchButtonOutlet: UIBarButtonItem!
+    @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
+        searchBarIsHidden ? showSearchBar() : hideSearchBar()
+    }
+
+    @IBOutlet weak var shoppingCartButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var trackingButtonOutlet: UIBarButtonItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +41,17 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         if let layout = collectionView.collectionViewLayout as? RootCategoriesCollectionViewLayout {
             layout.delegate = self
         }
+        initializeSearchController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = true
     }
     
     
@@ -27,7 +59,9 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     func dataChanged(newList: [Category]) {
         dataChangedFunctionCalled = true
         categories = newList
-        collectionView.reloadData()
+        if collectionView != nil {
+            collectionView.reloadData()
+        }
     }
     
     var categories: [Category] = []
@@ -41,6 +75,53 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
             dvc.categories = selected.Children.categories()
             dvc.title = selected.Name
         }
+    }
+    
+    private func animateLayout() {
+        UIView.animate(withDuration: 0.2) { [unowned uoSelf = self] in
+            uoSelf.view.layoutIfNeeded()
+        }
+    }
+    
+    internal func hideSearchBar() {
+        searchBarIsHidden = true
+        seatchBarViewTopOffset.constant = -searchBarView.bounds.height
+        animateLayout()
+    }
+    
+    private func showSearchBar() {
+        searchBarIsHidden = false
+        seatchBarViewTopOffset.constant = 0
+        animateLayout()
+    }
+    
+    private var searchBarIsHidden = true
+    private var searchController: UISearchController!
+    private var searchResultsController: SearchResultsTableViewController?
+    
+    private func initializeSearchController() {
+        searchResultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
+        searchResultsController?.tableList = categories
+        searchResultsController?.parentNavigationController = navigationController
+        searchResultsController?.searchController = searchController
+        
+        searchController = UISearchController(searchResultsController: searchResultsController)
+        searchController.searchResultsUpdater = searchResultsController
+        
+        searchController.dimsBackgroundDuringPresentation = true
+        
+        let searchBar = searchController.searchBar
+        searchBar.delegate = self
+        searchBar.barTintColor = appTintColor
+        searchBarView.addSubview(searchBar)
+        searchBar.sizeToFit()
+        hideSearchBar()
+    }
+}
+
+extension RootCategoriesViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        hideSearchBar()
     }
 }
 

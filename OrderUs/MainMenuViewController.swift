@@ -16,6 +16,11 @@ class MainMenuViewController: UITabBarController {
     
     @IBOutlet weak var trackOrdersButtonOutlet: MIBadgeButton!
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setBadges()
+    }
+    
     private func setShoppingCartBadge() {
         let cartItemsCount = OrdersModel.sharedInstance.order.items.count
         
@@ -25,7 +30,7 @@ class MainMenuViewController: UITabBarController {
             shoppingCartOutlet.badgeString = nil
         }
     }
-
+    
     private func setTrackOrderBadge() {
         let orderedItemsCount = OrdersModel.sharedInstance.orders.count
         
@@ -35,15 +40,10 @@ class MainMenuViewController: UITabBarController {
             trackOrdersButtonOutlet.badgeString = nil
         }
     }
-
+    
     private func setBadges() {
         setShoppingCartBadge()
         setTrackOrderBadge()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setBadges()
     }
 
     
