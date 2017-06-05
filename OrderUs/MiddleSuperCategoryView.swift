@@ -1,22 +1,32 @@
 //
-//  MiddleCategoriesTableViewCell.swift
+//  MiddleSuperCategoryView.swift
 //  OrderUs
 //
-//  Created by Muhammadali on 02/06/2017.
+//  Created by Muhammadali on 04/06/2017.
 //  Copyright © 2017 PRO. All rights reserved.
 //
 
 import UIKit
 
-class MiddleCategoriesTableViewCell: UITableViewCell {
-    @IBOutlet weak var categoryImage: UIImageView!
+class MiddleSuperCategoryView: UIView {
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var accessoryArrow: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var categoryNameOutlet: UILabel!
-    @IBOutlet weak var directionArrowOutlet: UILabel!
     
     var controller: MiddleCategoriesTableViewController?
     var indexSection: Int?
-    private var isSelectedSection = false
+    var isSelectedSection = false {
+        didSet {
+            if category?.ChildrenCategories.count ?? 0 > 0 {
+                var rotation: CGFloat = 0
+                if isSelectedSection {
+                    rotation = CGFloat(Double.pi / 2)
+                }
+                accessoryArrow.layer.transform = CATransform3DMakeRotation(rotation, 0, 0, 1)
+            }
+        }
+    }
     
     var categoryImageURL = ""
     var categoryName = ""
@@ -41,22 +51,17 @@ class MiddleCategoriesTableViewCell: UITableViewCell {
     func handleTapGesture(recognizer: UITapGestureRecognizer) {
         controller?.didSelectSection(at: indexSection)
         isSelectedSection = isSelectedSection ? false : true
-        var rotation: CGFloat = 0
-        if isSelectedSection {
-            rotation = CGFloat(Double.pi / 2)
-        }
-        directionArrowOutlet.layer.transform = CATransform3DMakeRotation(rotation, 0, 0, 1)
     }
     
     func updateUI() {
-        categoryNameOutlet.text = categoryName
+        label.text = categoryName
         updateImage()
     }
     
     func updateImage() {
         if let url = URL(string: categoryImageURL) {
             spinner.startAnimating()
-            categoryImage.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
+            imageView.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
                 uoSelf.spinner.stopAnimating()
             }
         }

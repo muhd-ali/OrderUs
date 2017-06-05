@@ -24,11 +24,12 @@
 		13969B3C1EDDB1F3001145B1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B3B1EDDB1F3001145B1 /* SignUpViewController.swift */; };
 		13969B461EDEF041001145B1 /* RootCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B451EDEF041001145B1 /* RootCategoriesViewController.swift */; };
 		13A34A521EC3615700720285 /* PendingOrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A34A511EC3615700720285 /* PendingOrdersTableViewController.swift */; };
+		13D898371EE4804C0049ED22 /* MiddleCategoriesCellViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13D898361EE4804C0049ED22 /* MiddleCategoriesCellViews.xib */; };
+		13D898391EE484340049ED22 /* MiddleSuperCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D898381EE484340049ED22 /* MiddleSuperCategoryView.swift */; };
 		13E83F0A1E9A2479004B32CF /* QuantityStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E83F091E9A2479004B32CF /* QuantityStepper.swift */; };
 		13FEE9071EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */; };
 		13FEE9091EE06465000DA99E /* RootCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9081EE06465000DA99E /* RootCategoriesCollectionViewCell.swift */; };
 		13FEE90C1EE0A426000DA99E /* MiddleCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE90B1EE0A426000DA99E /* MiddleCategoriesViewController.swift */; };
-		13FEE90E1EE0BB8E000DA99E /* MiddleCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE90D1EE0BB8E000DA99E /* MiddleCategoriesTableViewCell.swift */; };
 		13FEE9111EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9101EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift */; };
 		13FEE9131EE0C109000DA99E /* BottomCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9121EE0C109000DA99E /* BottomCategoriesTableViewCell.swift */; };
 		B908F8781EB9FF930002C319 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B908F8771EB9FF930002C319 /* MainMenuViewController.swift */; };
@@ -81,11 +82,12 @@
 		13969B3B1EDDB1F3001145B1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		13969B451EDEF041001145B1 /* RootCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesViewController.swift; sourceTree = "<group>"; };
 		13A34A511EC3615700720285 /* PendingOrdersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingOrdersTableViewController.swift; sourceTree = "<group>"; };
+		13D898361EE4804C0049ED22 /* MiddleCategoriesCellViews.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleCategoriesCellViews.xib; sourceTree = "<group>"; };
+		13D898381EE484340049ED22 /* MiddleSuperCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleSuperCategoryView.swift; sourceTree = "<group>"; };
 		13E83F091E9A2479004B32CF /* QuantityStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuantityStepper.swift; sourceTree = "<group>"; };
 		13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesCollectionViewLayout.swift; sourceTree = "<group>"; };
 		13FEE9081EE06465000DA99E /* RootCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		13FEE90B1EE0A426000DA99E /* MiddleCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleCategoriesViewController.swift; sourceTree = "<group>"; };
-		13FEE90D1EE0BB8E000DA99E /* MiddleCategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleCategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		13FEE9101EE0C04C000DA99E /* BottomCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		13FEE9121EE0C109000DA99E /* BottomCategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomCategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		5D766159F5A336ED0D480271 /* Pods_OrderUs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrderUs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				13FEE90B1EE0A426000DA99E /* MiddleCategoriesViewController.swift */,
-				13FEE90D1EE0BB8E000DA99E /* MiddleCategoriesTableViewCell.swift */,
+				13D898361EE4804C0049ED22 /* MiddleCategoriesCellViews.xib */,
+				13D898381EE484340049ED22 /* MiddleSuperCategoryView.swift */,
 			);
 			name = MiddleCategories;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B959651A1E606C4600C196E1 /* LaunchScreen.storyboard in Resources */,
+				13D898371EE4804C0049ED22 /* MiddleCategoriesCellViews.xib in Resources */,
 				B9CE10FD1EB9C42400C8C29C /* Goals.txt in Resources */,
 				1372B3BC1EBA5AA50042B0F2 /* GoogleService-Info.plist in Resources */,
 				B95965171E606C4600C196E1 /* Assets.xcassets in Resources */,
@@ -426,7 +430,7 @@
 				138CD9C61E7C3367004C5EC4 /* CategoriesTableViewController.swift in Sources */,
 				B95965121E606C4600C196E1 /* SignInRootViewController.swift in Sources */,
 				B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */,
-				13FEE90E1EE0BB8E000DA99E /* MiddleCategoriesTableViewCell.swift in Sources */,
+				13D898391EE484340049ED22 /* MiddleSuperCategoryView.swift in Sources */,
 				13573CB21EC11C91003A396A /* Model.xcdatamodeld in Sources */,
 				138CD9C41E7C3283004C5EC4 /* DataManager.swift in Sources */,
 				B95965101E606C4600C196E1 /* AppDelegate.swift in Sources */,

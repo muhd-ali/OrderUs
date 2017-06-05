@@ -24,11 +24,9 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
         tableView.reloadData()
     }
     
-    var tableViewOriginalSize: CGRect?
-    
     private var rowHeightRange = Range<CGFloat>(uncheckedBounds: (lower: 100, upper: 200))
     private var rowHeight: CGFloat {
-        let bestHeight = tableView.frame.height / 6
+        let bestHeight = tableView.bounds.height / 6
         if bestHeight < rowHeightRange.lowerBound {
             return rowHeightRange.lowerBound
         } else if bestHeight > rowHeightRange.upperBound {
@@ -42,7 +40,6 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
         DataManager.sharedInstance.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        tableViewOriginalSize = tableView.frame
         initializeSearchController()
     }
     
@@ -77,11 +74,13 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
             } else {
                 selectedSection = Constants.noSelectedSection
             }
-            //            let indexPath = IndexPath(row: 0, section: s)
-            //            tableView.beginUpdates()
-            //            tableView.reloadRows(at: [indexPath], with: .none)
-            //            tableView.endUpdates()
-            //            tableView.reloadData()
+            
+            tableView.beginUpdates()
+            let indexPath = IndexPath(row: 0, section: s)
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+            
+            tableView.scrollToRow(at: IndexPath(row: 0, section: s), at: .none, animated: true)
         }
     }
     
@@ -141,18 +140,17 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return rowHeight
-        //        return (selectedSection == indexPath.section) ? tableView.rowHeight : 0
+        return (selectedSection == indexPath.section) ? rowHeight : 0
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MiddleCategoryCell")
-        if let categoryCell = cell as? MiddleCategoriesTableViewCell {
+        if let categoryCell = Bundle.main.loadNibNamed("MiddleCategoriesCellViews", owner: self, options: nil)?.first as? MiddleSuperCategoryView {
             categoryCell.category = categories[section]
             categoryCell.controller = self
             categoryCell.indexSection = section
+            return categoryCell
         }
-        return cell
+        return nil
     }
     
     // UITableViewDelegate - end
