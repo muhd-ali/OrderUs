@@ -560,29 +560,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8KM-fz-i8i">
-                                <rect key="frame" x="16" y="385" width="288" height="46"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jr4-YJ-4Tb">
-                                        <rect key="frame" x="0.0" y="0.0" width="224" height="46"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHw-H7-8Sy">
-                                        <rect key="frame" x="224" y="0.0" width="64" height="46"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <state key="normal" title="Send"/>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ad-subscription" translatesAutoresizingMaskIntoConstraints="NO" id="UYS-cd-a7Z">
+                                <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="8KM-fz-i8i" secondAttribute="trailing" id="2v2-jY-BuX"/>
-                            <constraint firstItem="jr4-YJ-4Tb" firstAttribute="leading" secondItem="AuA-vZ-HBk" secondAttribute="leadingMargin" id="Jqv-bi-x8n"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="8KM-fz-i8i" secondAttribute="leading" id="W1s-XC-1fK"/>
-                            <constraint firstItem="CGO-aS-ib9" firstAttribute="top" secondItem="8KM-fz-i8i" secondAttribute="bottom" id="dP3-dg-3Of"/>
+                            <constraint firstItem="UYS-cd-a7Z" firstAttribute="width" secondItem="AuA-vZ-HBk" secondAttribute="width" id="3IK-RL-uF2"/>
+                            <constraint firstItem="CGO-aS-ib9" firstAttribute="top" secondItem="UYS-cd-a7Z" secondAttribute="bottom" id="5Iz-Mh-SqC"/>
+                            <constraint firstItem="UYS-cd-a7Z" firstAttribute="centerX" secondItem="AuA-vZ-HBk" secondAttribute="centerX" id="9tV-Ci-rvB"/>
+                            <constraint firstItem="UYS-cd-a7Z" firstAttribute="top" secondItem="mgC-CA-DJf" secondAttribute="bottom" id="MPQ-jm-oBf"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="XLc-vq-6GU"/>
@@ -590,7 +577,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7E-4k-64e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="906"/>
+            <point key="canvasLocation" x="472.5" y="905"/>
         </scene>
         <!--Categories Table View Controller-->
         <scene sceneID="WlC-1K-wxr">
@@ -1382,6 +1369,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ad-subscription" width="797" height="1405"/>
         <image name="app-logo" width="254" height="254"/>
         <image name="facebook-button-logo" width="150" height="150"/>
         <image name="google-button-logo" width="150" height="153"/>

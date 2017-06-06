@@ -36,6 +36,14 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     @IBOutlet weak var shoppingCartButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var trackingButtonOutlet: UIBarButtonItem!
     
+    private func initializeBlurMenu() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(blurViewTapped))
+        blurView.addGestureRecognizer(recognizer)
+    }
+    
+    func blurViewTapped(recognizer: UITapGestureRecognizer) {
+        revealViewController().revealToggle(nil)
+    }
     
     private func initializeSideMenu() {
         let rvc = self.revealViewController()
@@ -87,6 +95,7 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         setNavigationBarColors()
         initializeSearchController()
         initializeSideMenu()
+        initializeBlurMenu()
     }
     
     internal func hideTabBar() {
@@ -150,12 +159,14 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     }
     
     internal func hideSearchBar(delay: TimeInterval) {
+        view.layoutIfNeeded()
         searchBarIsHidden = true
         seatchBarViewTopOffset.constant = -searchBarView.bounds.height
         animateLayout(delay: delay)
     }
     
     private func showSearchBar() {
+        view.layoutIfNeeded()
         searchBarIsHidden = false
         seatchBarViewTopOffset.constant = 0
         animateLayout(delay: 0)
