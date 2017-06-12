@@ -198,6 +198,8 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         searchBar.sizeToFit()
         hideSearchBar()
     }
+    
+    var lastFeaturedIndex: CGFloat = 0
 }
 
 extension RootCategoriesViewController: SideMenuTableViewControllerDelegate {
@@ -248,6 +250,10 @@ extension RootCategoriesViewController: UICollectionViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let featuredCellIndex = CGFloat(RootCategoriesCollectionViewLayout.calculateFeaturedCellIndex(of: collectionView))
+        guard ((featuredCellIndex == lastFeaturedIndex + 1) || (featuredCellIndex == lastFeaturedIndex - 1)) else {
+            return
+        }
+        lastFeaturedIndex = featuredCellIndex
         let cellHeight = collectionView.bounds.width / 2
         let cellOffset = scrollView.contentOffset.y.truncatingRemainder(dividingBy: cellHeight)
         var targetOffset: CGFloat = 0
