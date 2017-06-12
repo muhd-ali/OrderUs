@@ -15,14 +15,18 @@ protocol RootCategoriesCollectionViewLayoutDelegate {
 class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
     var delegate: RootCategoriesCollectionViewLayoutDelegate?
     
-    let dragOffset: CGFloat = 300
+    static let dragOffset: CGFloat = 150
     
     var numberOfItems: Int {
         return collectionView?.numberOfItems(inSection: 0) ?? 0
     }
     
+    static func calculateFeaturedCellIndex(of collectionView: UICollectionView) -> Int {
+        return max(0, Int(collectionView.contentOffset.y / RootCategoriesCollectionViewLayout.dragOffset))
+    }
+    
     var featuredCellIndex: Int {
-        return  max(0, Int(collectionView!.contentOffset.y / dragOffset))
+        return  RootCategoriesCollectionViewLayout.calculateFeaturedCellIndex(of: collectionView!)
     }
     
     var collectionViewWidth: CGFloat {
@@ -30,7 +34,7 @@ class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
     }
     
     var collectionViewHeight: CGFloat {
-        return (CGFloat(numberOfItems) * dragOffset) + (collectionView!.bounds.height - dragOffset)
+        return (CGFloat(numberOfItems) * RootCategoriesCollectionViewLayout.dragOffset) + (collectionView!.bounds.height - RootCategoriesCollectionViewLayout.dragOffset)
     }
     
     var featuredCellHeight: CGFloat {
@@ -46,7 +50,7 @@ class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
     }
     
     var nextItemPercentageOffset: CGFloat {
-        return (collectionView!.contentOffset.y / dragOffset) - CGFloat(featuredCellIndex)
+        return (collectionView!.contentOffset.y / RootCategoriesCollectionViewLayout.dragOffset) - CGFloat(featuredCellIndex)
     }
     
     var cache = [UICollectionViewLayoutAttributes]()

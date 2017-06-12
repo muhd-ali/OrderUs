@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '20A9DD9ABBF08BC57372A26C35327BF1'
-               BlueprintName = 'M13Checkbox'
+               BlueprintIdentifier = '681BE6E3D02A43F9BA63777AC435C8FD'
+               BlueprintName = 'GTMSessionFetcher'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'M13Checkbox.framework'>
+               BuildableName = 'GTMSessionFetcher.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

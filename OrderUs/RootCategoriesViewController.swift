@@ -12,7 +12,7 @@ import SDWebImage
 
 class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     struct Constants {
-        static let appTintColor = UIColor(red: 244/255, green: 124/255, blue: 32/255, alpha: 1)
+        static let appTintColor = UIColor(red: 244/255, green: 124/255, blue: 32/255, alpha: 0.1)
     }
     
     let appTintColor = Constants.appTintColor
@@ -93,7 +93,6 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
             layout.delegate = self
         }
         setNavigationBarColors()
-        initializeSearchController()
         initializeSideMenu()
         initializeBlurMenu()
     }
@@ -115,6 +114,11 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         UIView.animate(withDuration: animationDuration) { [unowned uoSelf = self] in
             uoSelf.tabBarController?.tabBar.frame = frame!.offsetBy(dx: 0, dy: -(frame?.height ?? 0))
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        initializeSearchController() // breaks if called in viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -227,6 +231,32 @@ extension RootCategoriesViewController: UICollectionViewDelegate {
         } else {
             collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.top, animated: true)
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let featuredCellIndex = CGFloat(RootCategoriesCollectionViewLayout.calculateFeaturedCellIndex(of: collectionView))
+        let cellHeight = collectionView.bounds.width / 2
+        let cellOffset = scrollView.contentOffset.y.truncatingRemainder(dividingBy: cellHeight)
+        var targetOffset: CGFloat = 0
+        if (cellOffset > cellHeight / 2) {
+            targetOffset += (featuredCellIndex + 1) * cellHeight
+        } else {
+            targetOffset += featuredCellIndex * cellHeight
+        }
+        print("offset = \(cellOffset); targetOffset = \(targetOffset)")
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let featuredCellIndex = CGFloat(RootCategoriesCollectionViewLayout.calculateFeaturedCellIndex(of: collectionView))
+        let cellHeight = collectionView.bounds.width / 2
+        let cellOffset = scrollView.contentOffset.y.truncatingRemainder(dividingBy: cellHeight)
+        var targetOffset: CGFloat = 0
+        if (cellOffset > cellHeight / 2) {
+            targetOffset += (featuredCellIndex + 1) * cellHeight
+        } else {
+            targetOffset += featuredCellIndex * cellHeight
+        }
+        targetContentOffset.pointee.y = targetOffset
     }
 }
 

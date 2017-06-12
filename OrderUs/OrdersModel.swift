@@ -16,7 +16,7 @@ class OrdersModel: NSObject {
         }
         
         struct Payment {
-            static let all = [("On Delivery", "On Delivery"), ("With Credit Card", "With Credit Card")]
+            static let all = [("With Cash On Delivery", "With Cash On Delivery"), ("With Credit Card", "With Credit Card")]
             static let initial = all[0]
         }
     }
