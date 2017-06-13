@@ -30,6 +30,7 @@ class RootCategoriesCollectionViewLayout: UICollectionViewLayout {
     }
     
     var collectionViewWidth: CGFloat {
+        print("here width = \(collectionView!.bounds.width)")
         return collectionView!.bounds.width
     }
     

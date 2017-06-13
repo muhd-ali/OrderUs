@@ -199,6 +199,7 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         hideSearchBar()
     }
     
+    var featureCellIndex: CGFloat = 0
     var lastFeaturedIndex: CGFloat = 0
 }
 
@@ -231,37 +232,33 @@ extension RootCategoriesViewController: UICollectionViewDelegate {
         if indexPath == featuredCellIndexPath {
             performSegue(withIdentifier: "MiddleCategories", sender: indexPath.item)
         } else {
-            collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.top, animated: true)
+//            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
         }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let featuredCellIndex = CGFloat(RootCategoriesCollectionViewLayout.calculateFeaturedCellIndex(of: collectionView))
-        let cellHeight = collectionView.bounds.width / 2
-        let cellOffset = scrollView.contentOffset.y.truncatingRemainder(dividingBy: cellHeight)
-        var targetOffset: CGFloat = 0
-        if (cellOffset > cellHeight / 2) {
-            targetOffset += (featuredCellIndex + 1) * cellHeight
-        } else {
-            targetOffset += featuredCellIndex * cellHeight
+        let cellMaxHeight: CGFloat = collectionView.bounds.height / 2
+        let collectionViewYOffset = scrollView.contentOffset.y
+        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
+        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
+        if (cellOffset > cellMaxHeight / 2) {
+            featuredCellIndex += 1
         }
-        print("offset = \(cellOffset); targetOffset = \(targetOffset)")
+        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
+        print("collectionView.bounds.width = \(collectionView.bounds.width )")
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let featuredCellIndex = CGFloat(RootCategoriesCollectionViewLayout.calculateFeaturedCellIndex(of: collectionView))
-        guard ((featuredCellIndex == lastFeaturedIndex + 1) || (featuredCellIndex == lastFeaturedIndex - 1)) else {
-            return
-        }
+        let cellMaxHeight: CGFloat = collectionView.bounds.height / 2
+        let collectionViewYOffset = scrollView.contentOffset.y
+        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
+        guard (abs(featuredCellIndex - lastFeaturedIndex) < 2) else { return }
         lastFeaturedIndex = featuredCellIndex
-        let cellHeight = collectionView.bounds.width / 2
-        let cellOffset = scrollView.contentOffset.y.truncatingRemainder(dividingBy: cellHeight)
-        var targetOffset: CGFloat = 0
-        if (cellOffset > cellHeight / 2) {
-            targetOffset += (featuredCellIndex + 1) * cellHeight
-        } else {
-            targetOffset += featuredCellIndex * cellHeight
+        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
+        if (cellOffset > cellMaxHeight / 2) {
+            featuredCellIndex += 1
         }
+        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
         targetContentOffset.pointee.y = targetOffset
     }
 }

@@ -99,7 +99,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="root-background" translatesAutoresizingMaskIntoConstraints="NO" id="9iS-qB-0vp">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="01F-wz-Pmz">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="01F-wz-Pmz">
                                 <rect key="frame" x="32" y="72" width="256" height="384"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewLayout key="collectionViewLayout" id="cjg-MK-AMP" customClass="RootCategoriesCollectionViewLayout" customModule="OrderUs" customModuleProvider="target"/>
@@ -111,7 +111,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrA-mM-9dT">
+                                                <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrA-mM-9dT">
                                                     <rect key="frame" x="0.5" y="0.5" width="250" height="250"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nrw-dD-TmG">
@@ -486,7 +486,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6x-lC-gm7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1532" y="351.27436281859076"/>
+            <point key="canvasLocation" x="473" y="930"/>
         </scene>
         <!--Order Detail View Controller-->
         <scene sceneID="wAW-NE-2j3">
@@ -546,7 +546,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="53q-zn-gSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2533.5999999999999" y="350.37481259370315"/>
+            <point key="canvasLocation" x="1459" y="904"/>
         </scene>
         <!--Post a Job-->
         <scene sceneID="Oqu-bn-VDI">
@@ -577,7 +577,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7E-4k-64e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="472.5" y="905"/>
+            <point key="canvasLocation" x="-1168" y="930"/>
         </scene>
         <!--Categories Table View Controller-->
         <scene sceneID="WlC-1K-wxr">
@@ -653,7 +653,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="4412" y="-1013.3433283358322"/>
+            <point key="canvasLocation" x="2533" y="-656"/>
         </scene>
         <!--Side Menu Table View Controller-->
         <scene sceneID="Ie7-4L-uv3">
@@ -842,7 +842,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfE-Y0-EvH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1594" y="-331"/>
+            <point key="canvasLocation" x="1459" y="119"/>
         </scene>
         <!--Place Order View Controller-->
         <scene sceneID="9lk-xb-edm">
@@ -916,7 +916,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAt-yT-6SQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2533.5999999999999" y="-331.48425787106447"/>
+            <point key="canvasLocation" x="2531" y="115"/>
         </scene>
         <!--Middle Categories Table View Controller-->
         <scene sceneID="94a-2v-qoH">
@@ -1012,7 +1012,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMP-xt-ncK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1593" y="-1039"/>
+            <point key="canvasLocation" x="1459" y="-656"/>
         </scene>
         <!--Search Results Table View Controller-->
         <scene sceneID="ffK-pN-xLS">
@@ -1056,7 +1056,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGB-6A-fZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-378" y="-1013"/>
+            <point key="canvasLocation" x="-379" y="-656"/>
         </scene>
         <!--Item Details View Controller-->
         <scene sceneID="UDo-8u-PBJ">
@@ -1178,7 +1178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJb-9p-gSW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5412" y="-1013.3433283358322"/>
+            <point key="canvasLocation" x="3480" y="-656"/>
         </scene>
         <!--Order Options Table View Controller-->
         <scene sceneID="maa-Hm-TQK">
@@ -1244,7 +1244,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byQ-Ep-Kmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3480.8000000000002" y="32.383808095952027"/>
+            <point key="canvasLocation" x="3480" y="-64"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="T1H-Iu-PHb">
@@ -1349,7 +1349,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ut6-JP-SNX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="-1013"/>
+            <point key="canvasLocation" x="473" y="-656"/>
         </scene>
         <!--Item-->
         <scene sceneID="t86-PN-VDp">
