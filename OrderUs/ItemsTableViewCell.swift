@@ -73,10 +73,11 @@ class ItemsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var quantityStepperOutlet: QuantityStepper!
     @IBAction func quantityStepperValueChanged(_ sender: QuantityStepper) {
-        print(OrdersModel.sharedInstance.order.items)
+//        print(OrdersModel.sharedInstance.order.items)
         if var orderedItem = OrdersModel.sharedInstance.order.getItem(withID: item.ID) {
             quantityStepperOutlet.previousValue = orderedItem.quantityValue
-            orderedItem.quantityValue += quantityStepperOutlet.value
+            orderedItem.quantityValue = quantityStepperOutlet.value
+            print("value = \(orderedItem.quantityValue)")
         } else {
             let quantity = quantityStepperOutlet.value
             let unit = item.minQuantity.Unit
