@@ -7,6 +7,24 @@
 //
 
 import Foundation
+import CoreLocation
+
+struct OrderLocation {
+    var addressLines: [String]
+    var location: CLLocation
+    
+    var jsonData: [String: Any] {
+        return [
+            "addressLines" : addressLines,
+            "coordinates" : [
+                "latitude" : location.coordinate.latitude,
+                "longitude" : location.coordinate.longitude
+            ],
+        ]
+    }
+    
+    static let null = OrderLocation(addressLines: [], location: CLLocation())
+}
 
 class OrdersModel: NSObject {
     struct Preferences {

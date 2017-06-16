@@ -236,31 +236,31 @@ extension RootCategoriesViewController: UICollectionViewDelegate {
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let cellMaxHeight: CGFloat = collectionView.bounds.height / 2
-        let collectionViewYOffset = scrollView.contentOffset.y
-        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
-        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
-        if (cellOffset > cellMaxHeight / 2) {
-            featuredCellIndex += 1
-        }
-        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
-        print("collectionView.bounds.width = \(collectionView.bounds.width )")
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let cellMaxHeight: CGFloat = collectionView.bounds.height / 2
-        let collectionViewYOffset = scrollView.contentOffset.y
-        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
-        guard (abs(featuredCellIndex - lastFeaturedIndex) < 2) else { return }
-        lastFeaturedIndex = featuredCellIndex
-        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
-        if (cellOffset > cellMaxHeight / 2) {
-            featuredCellIndex += 1
-        }
-        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
-        targetContentOffset.pointee.y = targetOffset
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let cellMaxHeight: CGFloat = 150 // should be collectionView.bounds.height / 2
+//        let collectionViewYOffset = scrollView.contentOffset.y
+//        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
+//        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
+//        if (cellOffset > cellMaxHeight / 2) {
+//            featuredCellIndex += 1
+//        }
+//        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
+//        print("collectionView.bounds.width = \(collectionView.bounds.width)")
+//    }
+//    
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        let cellMaxHeight: CGFloat = 150 // should be collectionView.bounds.height / 2
+//        let collectionViewYOffset = scrollView.contentOffset.y
+//        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
+//        guard (abs(featuredCellIndex - lastFeaturedIndex) < 2) else { return }
+//        lastFeaturedIndex = featuredCellIndex
+//        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
+//        if (cellOffset > cellMaxHeight / 2) {
+//            featuredCellIndex += 1
+//        }
+//        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
+//        targetContentOffset.pointee.y = targetOffset
+//    }
 }
 
 extension RootCategoriesViewController: UICollectionViewDataSource {

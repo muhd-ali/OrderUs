@@ -54,7 +54,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
   - MIBadgeButton-Swift (0.5)
-  - PKHUD (4.2.2)
+  - PKHUD (4.2.3)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -96,7 +96,7 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
-  PKHUD: 9a3599e04d57676ec14746c40e423a52fb6588c0
+  PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   Socket.IO-Client-Swift: 9c5b4e5e76e30e1b9a1804c40e11dad0a002b1a4
 

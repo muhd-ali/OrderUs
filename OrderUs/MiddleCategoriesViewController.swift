@@ -85,12 +85,12 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dvc = segue.destination as? CategoriesTableViewController, segue.identifier == "Items" {
+        if let dvc = segue.destination as? ItemsTableViewController, segue.identifier == "Items" {
             if let index = sender as? Int {
-                dvc.tableList = categories[index].Children
+                dvc.tableList = categories[index].Children.items()
                 dvc.title = categories[index].Name
             } else if let indexInfo = sender as? (selected: Category, parentIndex: Int) {
-                dvc.tableList = indexInfo.selected.Children
+                dvc.tableList = indexInfo.selected.Children.items()
                 dvc.title = indexInfo.selected.Name
             }
         }

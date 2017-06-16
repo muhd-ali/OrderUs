@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchResultsTableViewController: UITableViewController {
-    var tableList: DataManager.ListType?
+    var tableList: [Selectable]?
     var parentNavigationController: UINavigationController?
     var searchController: UISearchController?
     internal var results: [SearchResult] = []
@@ -46,35 +46,9 @@ class SearchResultsTableViewController: UITableViewController {
 }
 
 extension SearchResultsTableViewController: UISearchResultsUpdating {
-    private func findSearchResults(fromList list: DataManager.ListType, withSearchedText text: String) -> [SearchResult] {
-        let results = list.searchItemsFromWholeTree { result in
-            result.Name.lowercased().range(of: text.lowercased()) != nil
-        }
-        
-        return results.map {
-            var result = $0
-            let fontSize: CGFloat = 12.0
-            let attributedPath = result.path.map { pathStep in NSMutableAttributedString(string: pathStep, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])}
-            let highlightAttributes = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: fontSize), NSBackgroundColorAttributeName : UIColor.yellow]
-            attributedPath.last?.addAttributes(highlightAttributes, range: (result.path.last!.lowercased() as NSString).range(of: text.lowercased()))
-            result.attributedPath = attributedPath.reduce(nil) {
-                var str = $0.0
-                if str == nil {
-                    str = NSMutableAttributedString()
-                } else {
-                    str?.append(NSMutableAttributedString(string: "->"))
-                }
-                str?.append($0.1)
-                return str
-            }
-            return result
-        }
-    }
-    
-    
     func updateSearchResults(for searchController: UISearchController) {
         if let searchedText = searchController.searchBar.text {
-            results = findSearchResults(fromList: tableList ?? [], withSearchedText: searchedText)
+            results = tableList?.searchItemsFromWholeTree(containing: searchedText) ?? []
             tableView.reloadData()
         }
     }

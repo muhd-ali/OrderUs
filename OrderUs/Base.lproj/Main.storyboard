@@ -546,7 +546,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="53q-zn-gSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1459" y="904"/>
+            <point key="canvasLocation" x="1459" y="930"/>
         </scene>
         <!--Post a Job-->
         <scene sceneID="Oqu-bn-VDI">
@@ -579,16 +579,16 @@
             </objects>
             <point key="canvasLocation" x="-1168" y="930"/>
         </scene>
-        <!--Categories Table View Controller-->
+        <!--Items Table View Controller-->
         <scene sceneID="WlC-1K-wxr">
             <objects>
-                <tableViewController storyboardIdentifier="CategoriesController" id="kDv-a7-jK2" customClass="CategoriesTableViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CategoriesController" id="kDv-a7-jK2" customClass="ItemsTableViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="98" sectionHeaderHeight="28" sectionFooterHeight="28" id="bH3-Df-LZc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Category" rowHeight="90" id="cjs-Vn-cst" customClass="CategoriesTableViewCell" customModule="OrderUs" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="item" rowHeight="90" id="cjs-Vn-cst" customClass="CategoriesTableViewCell" customModule="OrderUs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cjs-Vn-cst" id="ORh-tT-T5x">
@@ -608,9 +608,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0OQ-sn-9B2">
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="0OQ-sn-9B2">
                                             <rect key="frame" x="38" y="34" width="20" height="20"/>
-                                            <color key="color" red="0.039215686270000001" green="0.37647058820000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
@@ -736,7 +735,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="poS-G1-QJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2066.4000000000001" y="904.49775112443785"/>
+            <point key="canvasLocation" x="-2066" y="930"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="RjK-ka-A6X">
