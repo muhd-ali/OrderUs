@@ -116,7 +116,7 @@ class ServerCommunicator: NSObject {
     
     private func setupAcknowledgedOrderEvent() {
         socket.on(Constants.orderAcknowledged) { (data, ack) in
-            OrdersModel.sharedInstance.orderAcknowledged()
+            OrdersModel.sharedInstance.lastOrderAcknowledged()
         }
     }
     

@@ -17,7 +17,7 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBOutlet weak var cartTableView: UITableView!
-    var shoppingCartList: [OrdersModel.OrderedItem] = OrdersModel.sharedInstance.order.items
+    var shoppingCartList: [Order.OrderedItem] = OrdersModel.sharedInstance.order.items
     
     @IBOutlet weak var totalCostDisplay: UILabel!
     override func viewDidLoad() {

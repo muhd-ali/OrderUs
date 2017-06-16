@@ -32,7 +32,7 @@ class MainMenuViewController: UITabBarController {
     }
     
     private func setTrackOrderBadge() {
-        let orderedItemsCount = OrdersModel.sharedInstance.orders.count
+        let orderedItemsCount = OrdersModel.sharedInstance.placedOrders.count
         
         if orderedItemsCount > 0 {
             trackOrdersButtonOutlet.badgeString = "\(orderedItemsCount)"

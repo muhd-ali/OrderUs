@@ -27,7 +27,9 @@ class ItemsTableViewController: UITableViewController {
         }
     }
     
+    var lastSelectedIndexPath: IndexPath!
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        lastSelectedIndexPath = indexPath
         performSegue(withIdentifier: "ItemDetail", sender: indexPath.row)
     }
     
@@ -42,9 +44,10 @@ class ItemsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
         
-        let category = tableList[indexPath.row]
-        if let categoryCell = cell as? CategoriesTableViewCell {
-            categoryCell.category = category
+        let item = tableList[indexPath.row]
+        if let itemCell = cell as? ItemsTableViewCell {
+            itemCell.item = item
+            itemCell.quantityStepperOutlet.stepValue = item.minQuantity.Number
         }
         
         return cell
@@ -80,7 +83,11 @@ class ItemsTableViewController: UITableViewController {
     // Mark: View Controller Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        initializeSearchController()
-        hideSearchBar()
+        if self.isMovingToParentViewController {
+            initializeSearchController()
+            hideSearchBar()
+        } else {
+            tableView.reloadRows(at: [lastSelectedIndexPath], with: .automatic)
+        }
     }
 }

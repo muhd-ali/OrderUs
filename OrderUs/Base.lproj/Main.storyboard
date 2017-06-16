@@ -588,7 +588,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="item" rowHeight="90" id="cjs-Vn-cst" customClass="CategoriesTableViewCell" customModule="OrderUs" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="item" rowHeight="90" id="cjs-Vn-cst" customClass="ItemsTableViewCell" customModule="OrderUs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cjs-Vn-cst" id="ORh-tT-T5x">
@@ -602,29 +602,67 @@
                                                 <constraint firstAttribute="height" constant="80" id="i3K-qi-zUs"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFY-do-4Ae">
-                                            <rect key="frame" x="98" y="35" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <nil key="textColor"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFY-do-4Ae">
+                                            <rect key="frame" x="96" y="5" width="97.5" height="24"/>
+                                            <color key="tintColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                            <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="0OQ-sn-9B2">
                                             <rect key="frame" x="38" y="34" width="20" height="20"/>
                                         </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7X-1P-wr7">
+                                            <rect key="frame" x="96" y="36.5" width="129" height="18.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" autorepeat="NO" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="xaO-Um-NfK" customClass="QuantityStepper" customModule="OrderUs" customModuleProvider="target">
+                                            <rect key="frame" x="185" y="30.5" width="94" height="29"/>
+                                            <connections>
+                                                <action selector="quantityStepperValueChanged:" destination="cjs-Vn-cst" eventType="valueChanged" id="m1m-CP-688"/>
+                                            </connections>
+                                        </stepper>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WaS-vI-zh7">
+                                            <rect key="frame" x="96" y="68.5" width="129" height="16"/>
+                                            <color key="backgroundColor" red="1" green="0.96532463269619195" blue="0.77366663655499912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Quantity in cart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ov-rL-pZd">
+                                            <rect key="frame" x="102.5" y="69.5" width="116" height="14.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="xIn-Fh-GCo" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="3fQ-sC-8fF"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="xIn-Fh-GCo" secondAttribute="leading" id="8Hx-n3-PKd"/>
+                                        <constraint firstItem="9ov-rL-pZd" firstAttribute="centerY" secondItem="WaS-vI-zh7" secondAttribute="centerY" id="ARA-j4-IDt"/>
+                                        <constraint firstItem="WaS-vI-zh7" firstAttribute="width" secondItem="O7X-1P-wr7" secondAttribute="width" id="C4D-m6-tLF"/>
+                                        <constraint firstItem="WaS-vI-zh7" firstAttribute="height" secondItem="O7X-1P-wr7" secondAttribute="height" multiplier="0.9" id="EEO-Xx-Igp"/>
+                                        <constraint firstItem="9ov-rL-pZd" firstAttribute="centerX" secondItem="WaS-vI-zh7" secondAttribute="centerX" id="Nhg-bI-Eae"/>
                                         <constraint firstItem="0OQ-sn-9B2" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="Qbs-Y2-Dhc"/>
                                         <constraint firstItem="0OQ-sn-9B2" firstAttribute="centerX" secondItem="xIn-Fh-GCo" secondAttribute="centerX" id="Tzp-rx-SAh"/>
-                                        <constraint firstItem="YFY-do-4Ae" firstAttribute="leading" secondItem="xIn-Fh-GCo" secondAttribute="trailing" constant="9.5" id="fSV-Ls-p5W"/>
-                                        <constraint firstItem="YFY-do-4Ae" firstAttribute="centerY" secondItem="xIn-Fh-GCo" secondAttribute="centerY" id="ylw-AA-im8"/>
+                                        <constraint firstItem="9ov-rL-pZd" firstAttribute="width" secondItem="WaS-vI-zh7" secondAttribute="width" multiplier="0.9" id="Yfy-Cc-8Kh"/>
+                                        <constraint firstItem="WaS-vI-zh7" firstAttribute="bottom" secondItem="xIn-Fh-GCo" secondAttribute="bottom" id="Z6z-CE-tS8"/>
+                                        <constraint firstItem="9ov-rL-pZd" firstAttribute="height" secondItem="WaS-vI-zh7" secondAttribute="height" multiplier="0.9" id="bsf-0G-vwt"/>
+                                        <constraint firstItem="xaO-Um-NfK" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="cAD-yw-fec"/>
+                                        <constraint firstItem="YFY-do-4Ae" firstAttribute="leading" secondItem="xIn-Fh-GCo" secondAttribute="trailing" constant="8" symbolic="YES" id="fSV-Ls-p5W"/>
+                                        <constraint firstItem="O7X-1P-wr7" firstAttribute="leading" secondItem="xIn-Fh-GCo" secondAttribute="trailing" constant="8" symbolic="YES" id="gDS-gX-X8H"/>
+                                        <constraint firstItem="YFY-do-4Ae" firstAttribute="top" secondItem="xIn-Fh-GCo" secondAttribute="top" id="kel-Sh-xSr"/>
+                                        <constraint firstItem="O7X-1P-wr7" firstAttribute="centerY" secondItem="xIn-Fh-GCo" secondAttribute="centerY" id="rgI-dR-kXR"/>
+                                        <constraint firstItem="WaS-vI-zh7" firstAttribute="leading" secondItem="xIn-Fh-GCo" secondAttribute="trailing" constant="8" symbolic="YES" id="vu3-Ki-vXQ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="xaO-Um-NfK" secondAttribute="trailing" id="zm8-10-3A3"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="itemImageView" destination="xIn-Fh-GCo" id="9y2-C3-2yX"/>
+                                    <outlet property="itemLabel" destination="YFY-do-4Ae" id="IrF-jh-7to"/>
+                                    <outlet property="itemPriceLabel" destination="O7X-1P-wr7" id="iIo-9E-GvR"/>
+                                    <outlet property="itemQuantityLabel" destination="9ov-rL-pZd" id="otz-d4-E2N"/>
+                                    <outlet property="quantityStepperOutlet" destination="xaO-Um-NfK" id="fG8-V8-RWg"/>
                                     <outlet property="spinner" destination="0OQ-sn-9B2" id="6ZU-Lq-1WX"/>
-                                    <outlet property="typeImageView" destination="xIn-Fh-GCo" id="PMM-4i-g7o"/>
-                                    <outlet property="typeLabel" destination="YFY-do-4Ae" id="sXY-Op-wei"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -652,7 +690,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2533" y="-656"/>
+            <point key="canvasLocation" x="2531.25" y="-656.25"/>
         </scene>
         <!--Side Menu Table View Controller-->
         <scene sceneID="Ie7-4L-uv3">
@@ -1090,7 +1128,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" continuous="NO" autorepeat="NO" value="1" minimumValue="1" maximumValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Tsh-KQ-Z1w" customClass="QuantityStepper" customModule="OrderUs" customModuleProvider="target">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" continuous="NO" autorepeat="NO" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Tsh-KQ-Z1w" customClass="QuantityStepper" customModule="OrderUs" customModuleProvider="target">
                                 <rect key="frame" x="16" y="263" width="94" height="29"/>
                                 <connections>
                                     <action selector="quantityStepperValueChangedAction:" destination="Oh2-dG-GUp" eventType="valueChanged" id="HQT-i1-sUL"/>

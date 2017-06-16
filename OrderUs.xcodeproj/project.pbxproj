@@ -19,7 +19,7 @@
 		1389837D1EE59322003FD12A /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1389837C1EE59322003FD12A /* SideMenuTableViewController.swift */; };
 		138CD9C41E7C3283004C5EC4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C31E7C3283004C5EC4 /* DataManager.swift */; };
 		138CD9C61E7C3367004C5EC4 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C51E7C3367004C5EC4 /* ItemsTableViewController.swift */; };
-		138CD9C81E7C40B2004C5EC4 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */; };
+		138CD9C81E7C40B2004C5EC4 /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C71E7C40B2004C5EC4 /* ItemsTableViewCell.swift */; };
 		13969B2E1EDBC53C001145B1 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B2D1EDBC53C001145B1 /* OrderDetailViewController.swift */; };
 		13969B351EDCEAF6001145B1 /* FacebookCustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B341EDCEAF6001145B1 /* FacebookCustomLoginButton.swift */; };
 		13969B3A1EDDA1DB001145B1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B391EDDA1DB001145B1 /* SignInViewController.swift */; };
@@ -48,6 +48,7 @@
 		B993256B1EF3CA9B00D068A9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993256A1EF3CA9B00D068A9 /* Category.swift */; };
 		B993256D1EF3CABD00D068A9 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993256C1EF3CABD00D068A9 /* Selectable.swift */; };
 		B99325701EF3CB1600D068A9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993256F1EF3CB1600D068A9 /* Item.swift */; };
+		B99325721EF3F3EF00D068A9 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99325711EF3F3EF00D068A9 /* Order.swift */; };
 		B99B69E11EA100070002A354 /* OrderOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */; };
 		B9CE10FB1EB37BA600C8C29C /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */; };
 		B9CE10FD1EB9C42400C8C29C /* Goals.txt in Resources */ = {isa = PBXBuildFile; fileRef = B9CE10FC1EB9C42400C8C29C /* Goals.txt */; };
@@ -83,7 +84,7 @@
 		1389837C1EE59322003FD12A /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 		138CD9C31E7C3283004C5EC4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		138CD9C51E7C3367004C5EC4 /* ItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		138CD9C71E7C40B2004C5EC4 /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemsTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		13969B2D1EDBC53C001145B1 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		13969B341EDCEAF6001145B1 /* FacebookCustomLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCustomLoginButton.swift; sourceTree = "<group>"; };
 		13969B361EDCF21A001145B1 /* OrderUs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrderUs.entitlements; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 		B993256A1EF3CA9B00D068A9 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B993256C1EF3CABD00D068A9 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		B993256F1EF3CB1600D068A9 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		B99325711EF3F3EF00D068A9 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OrderOptionsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		B9CE10FC1EB9C42400C8C29C /* Goals.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Goals.txt; sourceTree = "<group>"; };
@@ -150,7 +152,6 @@
 				B993256C1EF3CABD00D068A9 /* Selectable.swift */,
 				B993256E1EF3CAF600D068A9 /* Items */,
 				B99325691EF3CA7C00D068A9 /* Categories */,
-				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
 				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
 				B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */,
 			);
@@ -207,6 +208,7 @@
 		13A34A531EC3616300720285 /* Orders */ = {
 			isa = PBXGroup;
 			children = (
+				B99325711EF3F3EF00D068A9 /* Order.swift */,
 				B94AACC71E9E4A88005328D0 /* OrdersModel.swift */,
 				13A34A511EC3615700720285 /* PendingOrdersTableViewController.swift */,
 				13969B2D1EDBC53C001145B1 /* OrderDetailViewController.swift */,
@@ -304,7 +306,8 @@
 			isa = PBXGroup;
 			children = (
 				138CD9C51E7C3367004C5EC4 /* ItemsTableViewController.swift */,
-				138CD9C71E7C40B2004C5EC4 /* CategoriesTableViewCell.swift */,
+				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
+				138CD9C71E7C40B2004C5EC4 /* ItemsTableViewCell.swift */,
 				B993256F1EF3CB1600D068A9 /* Item.swift */,
 			);
 			name = Items;
@@ -475,6 +478,7 @@
 				13573CC31EC12FB0003A396A /* ItemCD+CoreDataProperties.swift in Sources */,
 				135036D51EAE5E3B003B7745 /* PlaceOrderViewController.swift in Sources */,
 				138CD9C61E7C3367004C5EC4 /* ItemsTableViewController.swift in Sources */,
+				B99325721EF3F3EF00D068A9 /* Order.swift in Sources */,
 				B95965121E606C4600C196E1 /* SignInRootViewController.swift in Sources */,
 				1389837D1EE59322003FD12A /* SideMenuTableViewController.swift in Sources */,
 				B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */,
@@ -484,7 +488,7 @@
 				B993256D1EF3CABD00D068A9 /* Selectable.swift in Sources */,
 				B95965101E606C4600C196E1 /* AppDelegate.swift in Sources */,
 				13573CC41EC12FB0003A396A /* CategoryCD+CoreDataClass.swift in Sources */,
-				138CD9C81E7C40B2004C5EC4 /* CategoriesTableViewCell.swift in Sources */,
+				138CD9C81E7C40B2004C5EC4 /* ItemsTableViewCell.swift in Sources */,
 				13969B3A1EDDA1DB001145B1 /* SignInViewController.swift in Sources */,
 				13FEE9131EE0C109000DA99E /* BottomCategoriesTableViewCell.swift in Sources */,
 				1372B3BE1EBA5F2B0042B0F2 /* SignInModel.swift in Sources */,

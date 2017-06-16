@@ -10,7 +10,7 @@ import UIKit
 import FlexibleSteppedProgressBar
 
 class OrderDetailViewController: UIViewController {
-    var order: OrdersModel.Order?
+    var order: Order?
     
     @IBOutlet weak var progressBarOutlet: FlexibleSteppedProgressBar!
     @IBOutlet weak var orderIDOutlet: UITextView!

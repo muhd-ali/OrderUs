@@ -66,7 +66,7 @@ class ItemDetailsViewController: UIViewController {
         let currentThisItemInCart = cartItems.filter { cartItem -> Bool in cartItem.item.ID == item!.ID }
         if (currentThisItemInCart.count == 0) {
             cartItems.append(
-                OrdersModel.OrderedItem(
+                Order.OrderedItem(
                     item: item!,
                     quantityValue: itemQuantityValue,
                     quantityUnit: itemQuantityUnit

@@ -15,7 +15,7 @@ class PendingOrdersTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    var pendingOrders: [OrdersModel.Order] = OrdersModel.sharedInstance.pendingOrders
+    var pendingOrders: [Order] = OrdersModel.sharedInstance.placedOrders.pending
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
