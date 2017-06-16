@@ -9,7 +9,7 @@
 import UIKit
 
 class ItemsTableViewController: UITableViewController {
-    private let appTintColor = RootCategoriesViewController.Constants.appTintColor
+    private let appTintColor = MainMenuViewController.Constants.appTintColor
     
     var tableList: [Item] = [] {
         didSet {

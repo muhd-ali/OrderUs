@@ -22,6 +22,7 @@ class ItemsTableViewCell: UITableViewCell {
             if item != nil {
                 itemName = item.Name
                 itemImageURL = item.ImageURL
+                orderedItem = OrdersModel.sharedInstance.order.getItem(withID: item.ID)
                 updateUI()
             }
         }
@@ -35,6 +36,7 @@ class ItemsTableViewCell: UITableViewCell {
     
     var itemName = NotFound.itemName
     var itemImageURL = NotFound.itemImageURL
+    var orderedItem: Order.OrderedItem!
     
     private func updateUI() {
         itemLabel.text = itemName
@@ -42,21 +44,34 @@ class ItemsTableViewCell: UITableViewCell {
         updateImage()
         updatePriceLabel()
         updateItemQuantityLabel()
+        setStepperUI()
+    }
+    
+    private func setStepperUI() {
+        quantityStepperOutlet.setIncrementImage(#imageLiteral(resourceName: "stepperPlus"), for: .normal)
+        quantityStepperOutlet.setDecrementImage(#imageLiteral(resourceName: "stepperMinus"), for: .normal)
+        let image = #imageLiteral(resourceName: "stepperBkg")
+        quantityStepperOutlet.setBackgroundImage(image, for: .normal)
+        quantityStepperOutlet.setBackgroundImage(image, for: .disabled)
+        quantityStepperOutlet.setBackgroundImage(image, for: .highlighted)
+        quantityStepperOutlet.setBackgroundImage(image, for: .focused)
+        quantityStepperOutlet.setBackgroundImage(image, for: .selected)
     }
     
     private func updateItemQuantityLabel() {
         var quantity = "None added in cart"
-        if let orderedItem = OrdersModel.sharedInstance.order.getItem(withID: item.ID) {
-            quantity = "\(orderedItem.quantityValue) \(orderedItem.quantityUnit) in cart"
+        if orderedItem != nil {
+            let value = orderedItem.quantityValue
+            quantity = "\(value) \(orderedItem.quantityUnit)\(value == 1 ? "" : "s") in cart"
+            quantityStepperOutlet.value = value
         }
-        
         itemQuantityLabel.text = quantity
     }
     
     private func updatePriceLabel() {
-        let price = String(describing: item?.Price ?? 0)
-        let minQuantityNumber = String(describing: item?.minQuantity.Number ?? 0)
-        let minQuantityUnit = String(describing: item?.minQuantity.Unit ?? "")
+        let price = String(describing: item.Price)
+        let minQuantityNumber = String(describing: item.minQuantity.Number)
+        let minQuantityUnit = String(describing: item.minQuantity.Unit)
         
         itemPriceLabel.text = "PKR \(price) / \(minQuantityNumber) \(minQuantityUnit)"
     }
@@ -73,16 +88,33 @@ class ItemsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var quantityStepperOutlet: QuantityStepper!
     @IBAction func quantityStepperValueChanged(_ sender: QuantityStepper) {
-//        print(OrdersModel.sharedInstance.order.items)
-        if var orderedItem = OrdersModel.sharedInstance.order.getItem(withID: item.ID) {
+        let currentValue = quantityStepperOutlet.value
+        if orderedItem != nil {
             quantityStepperOutlet.previousValue = orderedItem.quantityValue
-            orderedItem.quantityValue = quantityStepperOutlet.value
-            print("value = \(orderedItem.quantityValue)")
+            if currentValue == 0 {
+                OrdersModel.sharedInstance.order.removeItem(withID: item.ID)
+                orderedItem = nil
+            } else {
+                orderedItem.quantityValue = quantityStepperOutlet.value
+            }
         } else {
-            let quantity = quantityStepperOutlet.value
             let unit = item.minQuantity.Unit
-            let orderedItem = Order.OrderedItem(item: item, quantityValue: quantity, quantityUnit: quantity == 1 ? unit : "\(unit)s")
+            orderedItem = Order.OrderedItem(item: item, quantityValue: currentValue, quantityUnit: currentValue == 1 ? unit : "\(unit)s")
             OrdersModel.sharedInstance.order.items.append(orderedItem)
         }
+        
+        var transitionEffect = UIViewAnimationOptions.transitionFlipFromBottom
+        if quantityStepperOutlet.valueIsIncreasing {
+            transitionEffect = .transitionFlipFromTop
+        }
+        UIView.transition(
+            with: itemQuantityLabel,
+            duration: 0.2,
+            options: [transitionEffect, .curveEaseInOut],
+            animations: { [unowned uoSelf = self] in
+                uoSelf.updateItemQuantityLabel()
+            },
+            completion: nil
+        )
     }
 }

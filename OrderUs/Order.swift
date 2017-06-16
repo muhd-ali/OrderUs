@@ -55,10 +55,17 @@ class Order: NSObject {
         }
     }
     
-    struct OrderedItem {
+    class OrderedItem: NSObject {
         var item: Item
         var quantityValue: Double
         var quantityUnit: String
+        
+        init(item: Item, quantityValue: Double, quantityUnit: String) {
+            self.item = item
+            self.quantityValue = quantityValue
+            self.quantityUnit = quantityUnit
+            super.init()
+        }
         
         var jsonData: [String : Any] {
             return [
@@ -148,5 +155,9 @@ class Order: NSObject {
     
     func getItem(withID: String) -> OrderedItem? {
         return items.filter({ $0.item.ID == withID }).first
+    }
+    
+    func removeItem(withID: String) {
+        items = items.filter({ $0.item.ID != withID })
     }
 }

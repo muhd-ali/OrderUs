@@ -75,7 +75,7 @@ class ItemDetailsViewController: UIViewController {
             OrdersModel.sharedInstance.order.items = cartItems
         } else {
             OrdersModel.sharedInstance.order.items = cartItems.map {
-                var newItem = $0
+                let newItem = $0
                 if (newItem.item.ID == item!.ID) {
                     newItem.quantityValue += itemQuantityValue
                 }
@@ -121,7 +121,7 @@ class ItemDetailsViewController: UIViewController {
         
         UIView.transition(
             with: itemQuantityLabel,
-            duration: 0.25,
+            duration: 0.2,
             options: [.curveEaseInOut, transitionEffect],
             animations: { [unowned uoSelf = self] in
                 uoSelf.itemQuantityLabel.text = "\(uoSelf.quantityStepperOutlet.value) \(uoSelf.itemQuantityUnit)"

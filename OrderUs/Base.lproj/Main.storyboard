@@ -372,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wcq-ME-uXp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3350" y="807"/>
+            <point key="canvasLocation" x="-3371" y="806"/>
         </scene>
         <!--Main Menu-->
         <scene sceneID="wGq-0L-xyH">
@@ -385,9 +385,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title="❌"/>
-                                <connections>
-                                    <action selector="signOutButtonAction:" destination="ddM-ss-WEa" eventType="touchUpInside" id="Jqz-kF-yfq"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                         <rightBarButtonItems>
@@ -431,8 +428,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <outlet property="shoppingCartOutlet" destination="Q4o-gf-n16" id="BfZ-vb-Eio"/>
-                        <outlet property="trackOrdersButtonOutlet" destination="DDJ-Dz-665" id="717-FA-VCe"/>
                         <segue destination="d00-x6-Je5" kind="relationship" relationship="viewControllers" id="2Pt-AR-BNi"/>
                         <segue destination="ahB-Yg-eWC" kind="relationship" relationship="viewControllers" id="5HP-DE-dHp"/>
                     </connections>
@@ -572,7 +567,7 @@
                             <constraint firstItem="UYS-cd-a7Z" firstAttribute="top" secondItem="mgC-CA-DJf" secondAttribute="bottom" id="MPQ-jm-oBf"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="XLc-vq-6GU"/>
+                    <tabBarItem key="tabBarItem" title="Post a Job" image="bike" selectedImage="bike" id="XLc-vq-6GU"/>
                     <navigationItem key="navigationItem" title="Post a Job" id="whU-o7-yLL"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7E-4k-64e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -588,11 +583,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="item" rowHeight="90" id="cjs-Vn-cst" customClass="ItemsTableViewCell" customModule="OrderUs" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" rowHeight="90" id="cjs-Vn-cst" customClass="ItemsTableViewCell" customModule="OrderUs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cjs-Vn-cst" id="ORh-tT-T5x">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xIn-Fh-GCo">
@@ -612,24 +607,30 @@
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="0OQ-sn-9B2">
                                             <rect key="frame" x="38" y="34" width="20" height="20"/>
                                         </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7X-1P-wr7">
-                                            <rect key="frame" x="96" y="36.5" width="129" height="18.5"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="➧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyO-YQ-b2O">
+                                            <rect key="frame" x="294.5" y="33.5" width="17" height="24"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                             <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" autorepeat="NO" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="xaO-Um-NfK" customClass="QuantityStepper" customModule="OrderUs" customModuleProvider="target">
-                                            <rect key="frame" x="185" y="30.5" width="94" height="29"/>
+                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" continuous="NO" autorepeat="NO" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="xaO-Um-NfK" customClass="QuantityStepper" customModule="OrderUs" customModuleProvider="target">
+                                            <rect key="frame" x="200.5" y="30" width="94" height="29"/>
                                             <connections>
                                                 <action selector="quantityStepperValueChanged:" destination="cjs-Vn-cst" eventType="valueChanged" id="m1m-CP-688"/>
                                             </connections>
                                         </stepper>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WaS-vI-zh7">
-                                            <rect key="frame" x="96" y="68.5" width="129" height="16"/>
+                                            <rect key="frame" x="96" y="68.5" width="128.5" height="16"/>
                                             <color key="backgroundColor" red="1" green="0.96532463269619195" blue="0.77366663655499912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Quantity in cart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ov-rL-pZd">
-                                            <rect key="frame" x="102.5" y="69.5" width="116" height="14.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Quantity in cart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="9ov-rL-pZd">
+                                            <rect key="frame" x="103" y="69.5" width="116" height="14.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Item Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="O7X-1P-wr7">
+                                            <rect key="frame" x="96" y="52.5" width="57" height="16"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -639,21 +640,22 @@
                                         <constraint firstItem="xIn-Fh-GCo" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="3fQ-sC-8fF"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="xIn-Fh-GCo" secondAttribute="leading" id="8Hx-n3-PKd"/>
                                         <constraint firstItem="9ov-rL-pZd" firstAttribute="centerY" secondItem="WaS-vI-zh7" secondAttribute="centerY" id="ARA-j4-IDt"/>
-                                        <constraint firstItem="WaS-vI-zh7" firstAttribute="width" secondItem="O7X-1P-wr7" secondAttribute="width" id="C4D-m6-tLF"/>
-                                        <constraint firstItem="WaS-vI-zh7" firstAttribute="height" secondItem="O7X-1P-wr7" secondAttribute="height" multiplier="0.9" id="EEO-Xx-Igp"/>
+                                        <constraint firstItem="IyO-YQ-b2O" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="CV7-3X-kVr"/>
                                         <constraint firstItem="9ov-rL-pZd" firstAttribute="centerX" secondItem="WaS-vI-zh7" secondAttribute="centerX" id="Nhg-bI-Eae"/>
+                                        <constraint firstItem="IyO-YQ-b2O" firstAttribute="leading" secondItem="xaO-Um-NfK" secondAttribute="trailing" id="PEo-In-JB9"/>
                                         <constraint firstItem="0OQ-sn-9B2" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="Qbs-Y2-Dhc"/>
                                         <constraint firstItem="0OQ-sn-9B2" firstAttribute="centerX" secondItem="xIn-Fh-GCo" secondAttribute="centerX" id="Tzp-rx-SAh"/>
                                         <constraint firstItem="9ov-rL-pZd" firstAttribute="width" secondItem="WaS-vI-zh7" secondAttribute="width" multiplier="0.9" id="Yfy-Cc-8Kh"/>
                                         <constraint firstItem="WaS-vI-zh7" firstAttribute="bottom" secondItem="xIn-Fh-GCo" secondAttribute="bottom" id="Z6z-CE-tS8"/>
                                         <constraint firstItem="9ov-rL-pZd" firstAttribute="height" secondItem="WaS-vI-zh7" secondAttribute="height" multiplier="0.9" id="bsf-0G-vwt"/>
+                                        <constraint firstItem="WaS-vI-zh7" firstAttribute="top" secondItem="O7X-1P-wr7" secondAttribute="bottom" id="bxi-Au-QGk"/>
                                         <constraint firstItem="xaO-Um-NfK" firstAttribute="centerY" secondItem="ORh-tT-T5x" secondAttribute="centerY" id="cAD-yw-fec"/>
+                                        <constraint firstItem="O7X-1P-wr7" firstAttribute="leading" secondItem="WaS-vI-zh7" secondAttribute="leading" id="epa-av-TVD"/>
                                         <constraint firstItem="YFY-do-4Ae" firstAttribute="leading" secondItem="xIn-Fh-GCo" secondAttribute="trailing" constant="8" symbolic="YES" id="fSV-Ls-p5W"/>
-                                        <constraint firstItem="O7X-1P-wr7" firstAttribute="leading" secondItem="xIn-Fh-GCo" secondAttribute="trailing" constant="8" symbolic="YES" id="gDS-gX-X8H"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="IyO-YQ-b2O" secondAttribute="trailing" id="flS-Ox-5EH"/>
                                         <constraint firstItem="YFY-do-4Ae" firstAttribute="top" secondItem="xIn-Fh-GCo" secondAttribute="top" id="kel-Sh-xSr"/>
-                                        <constraint firstItem="O7X-1P-wr7" firstAttribute="centerY" secondItem="xIn-Fh-GCo" secondAttribute="centerY" id="rgI-dR-kXR"/>
                                         <constraint firstItem="WaS-vI-zh7" firstAttribute="leading" secondItem="xIn-Fh-GCo" secondAttribute="trailing" constant="8" symbolic="YES" id="vu3-Ki-vXQ"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="xaO-Um-NfK" secondAttribute="trailing" id="zm8-10-3A3"/>
+                                        <constraint firstItem="O7X-1P-wr7" firstAttribute="height" secondItem="WaS-vI-zh7" secondAttribute="height" id="x8J-pJ-2Nv"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1388,11 +1390,11 @@
             </objects>
             <point key="canvasLocation" x="473" y="-656"/>
         </scene>
-        <!--Item-->
+        <!--Store-->
         <scene sceneID="t86-PN-VDp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d00-x6-Je5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="UJV-En-Hp3"/>
+                    <tabBarItem key="tabBarItem" title="Store" image="favourite" selectedImage="favourite" id="UJV-En-Hp3"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hLW-y3-vY1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1411,7 +1413,9 @@
     <resources>
         <image name="ad-subscription" width="797" height="1405"/>
         <image name="app-logo" width="254" height="254"/>
+        <image name="bike" width="30" height="30"/>
         <image name="facebook-button-logo" width="150" height="150"/>
+        <image name="favourite" width="30" height="20"/>
         <image name="google-button-logo" width="150" height="153"/>
         <image name="icon-search" width="25" height="25"/>
         <image name="icon-shoppingCart" width="25" height="25"/>

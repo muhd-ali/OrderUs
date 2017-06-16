@@ -15,7 +15,7 @@ extension UIApplication {
 }
 
 class MiddleCategoriesTableViewController: UITableViewController, DataManagerDelegate {
-    private let appTintColor = RootCategoriesViewController.Constants.appTintColor
+    private let appTintColor = MainMenuViewController.Constants.appTintColor
     
     var dataChangedFunctionCalled: Bool = false
     func dataChanged(newList: [Category]) {

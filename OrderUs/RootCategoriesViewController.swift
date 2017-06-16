@@ -11,11 +11,7 @@ import SDWebImage
 
 
 class RootCategoriesViewController: UIViewController, DataManagerDelegate {
-    struct Constants {
-        static let appTintColor = UIColor(red: 244/255, green: 124/255, blue: 32/255, alpha: 0.1)
-    }
-    
-    let appTintColor = Constants.appTintColor
+    let appTintColor = MainMenuViewController.Constants.appTintColor
     let animationDuration: TimeInterval = 0.2
     
     @IBOutlet weak var blurView: UIVisualEffectView!
