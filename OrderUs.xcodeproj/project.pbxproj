@@ -150,10 +150,10 @@
 			isa = PBXGroup;
 			children = (
 				B993256C1EF3CABD00D068A9 /* Selectable.swift */,
+				B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */,
+				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
 				B993256E1EF3CAF600D068A9 /* Items */,
 				B99325691EF3CA7C00D068A9 /* Categories */,
-				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
-				B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */,
 			);
 			name = "Shopping Menu";
 			sourceTree = "<group>";
@@ -294,10 +294,10 @@
 		B99325691EF3CA7C00D068A9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				B993256A1EF3CA9B00D068A9 /* Category.swift */,
 				13FEE90A1EE06777000DA99E /* RootCategories */,
 				13FEE90F1EE0BB95000DA99E /* MiddleCategories */,
 				13FEE9141EE0C179000DA99E /* BottomCategories */,
-				B993256A1EF3CA9B00D068A9 /* Category.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -305,10 +305,10 @@
 		B993256E1EF3CAF600D068A9 /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				138CD9C51E7C3367004C5EC4 /* ItemsTableViewController.swift */,
-				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
-				138CD9C71E7C40B2004C5EC4 /* ItemsTableViewCell.swift */,
 				B993256F1EF3CB1600D068A9 /* Item.swift */,
+				138CD9C51E7C3367004C5EC4 /* ItemsTableViewController.swift */,
+				138CD9C71E7C40B2004C5EC4 /* ItemsTableViewCell.swift */,
+				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
 			);
 			name = Items;
 			sourceTree = "<group>";

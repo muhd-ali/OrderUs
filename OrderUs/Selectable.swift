@@ -62,7 +62,7 @@ extension Sequence where Iterator.Element == Selectable {
                 if str == nil {
                     str = NSMutableAttributedString()
                 } else {
-                    str?.append(NSMutableAttributedString(string: "->"))
+                    str?.append(NSMutableAttributedString(string: ">"))
                 }
                 str?.append($0.1)
                 return str

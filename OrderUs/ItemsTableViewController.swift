@@ -26,10 +26,8 @@ class ItemsTableViewController: UITableViewController {
             }
         }
     }
-    
-    var lastSelectedIndexPath: IndexPath!
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        lastSelectedIndexPath = indexPath
         performSegue(withIdentifier: "ItemDetail", sender: indexPath.row)
     }
     
@@ -102,7 +100,7 @@ class ItemsTableViewController: UITableViewController {
             initializeSearchController()
             hideSearchBar()
         } else {
-            tableView.reloadRows(at: [lastSelectedIndexPath], with: .automatic)
+            tableView.reloadData()
         }
     }
 }

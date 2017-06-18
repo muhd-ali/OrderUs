@@ -94,7 +94,7 @@ class ItemDetailsViewController: UIViewController {
             .labeledSuccess(title: "Added To Cart", subtitle: nil),
             delay: 0.5) { [unowned uoSelf = self] finished in
                 if finished {
-                    _ = uoSelf.navigationController?.popViewController(animated: true)
+                    uoSelf.dismiss(animated: true, completion: nil)
                 }
         }
     }

@@ -11,9 +11,9 @@ import PKHUD
 
 class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PlaceOrderViewControllerDelegate {
     
-    private var userWantsToPlaceOrder = false
+    private var userAskedToPlaceOrder = false
     func userRequestedToPlaceOrder() {
-        userWantsToPlaceOrder = true
+        userAskedToPlaceOrder = true
     }
     
     @IBOutlet weak var cartTableView: UITableView!
@@ -46,11 +46,12 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
                 .labeledError(title: "Location", subtitle: "Please enable location services and try again"),
                 delay: 0.5
             )
-}
+        }
+        userAskedToPlaceOrder = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if userWantsToPlaceOrder {
+        if userAskedToPlaceOrder {
             placeOrder()
         }
     }

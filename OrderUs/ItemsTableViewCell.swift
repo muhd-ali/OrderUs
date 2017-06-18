@@ -65,6 +65,8 @@ class ItemsTableViewCell: UITableViewCell {
             let value = orderedItem.quantityValue
             quantity = "\(value) \(orderedItem.quantityUnit)\(value == 1 ? "" : "s") in cart"
             quantityStepperOutlet.value = value
+        } else {
+            quantityStepperOutlet.value = 0
         }
         itemQuantityInCartLabel.text = quantity
     }
