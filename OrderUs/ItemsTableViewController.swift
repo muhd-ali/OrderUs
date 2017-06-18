@@ -53,8 +53,23 @@ class ItemsTableViewController: UITableViewController {
         return cell
     }
     
+    @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
+        let searchBarHeight: CGFloat = searchController.searchBar.bounds.height
+        let navigationBarHeight = navigationController?.navigationBar.bounds.height ?? 0
+        let statusBarHeight: CGFloat = UIApplication.shared.statusBarView?.bounds.height ?? 0
+        let navigationBarOffset = (navigationBarHeight + statusBarHeight) - searchBarHeight
+        if tableView.contentOffset.y == -CGFloat(searchBarHeight + navigationBarOffset) {
+            UIView.animate(withDuration: 0.2) { [unowned uoSelf = self] in
+                uoSelf.tableView.contentOffset = CGPoint(x: 0, y: -navigationBarOffset)
+            }
+        } else {
+            let indexPath = IndexPath(row: NSNotFound, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+    
     private func hideSearchBar() {
-        let searchBarHeight = 44.0
+        let searchBarHeight = searchController.searchBar.bounds.height
         if tableView.contentOffset.y == 0.0 {
             tableView.contentOffset = CGPoint(x: 0.0, y: searchBarHeight)
         }

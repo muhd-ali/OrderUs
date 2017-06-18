@@ -37,10 +37,12 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DataManager.sharedInstance.delegate = self
+        //        DataManager.sharedInstance.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         initializeSearchController()
+        let nib = UINib(nibName: "MiddleCategoriesCellView", bundle: nil)
+        tableView.register(nib, forHeaderFooterViewReuseIdentifier: "MiddleCategoriesCellView")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -107,9 +109,24 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
         }
     }
     
+    @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
+        let searchBarHeight: CGFloat = searchController.searchBar.bounds.height
+        let navigationBarHeight = navigationController?.navigationBar.bounds.height ?? 0
+        let statusBarHeight: CGFloat = UIApplication.shared.statusBarView?.bounds.height ?? 0
+        let navigationBarOffset = (navigationBarHeight + statusBarHeight) - searchBarHeight
+        if tableView.contentOffset.y == -CGFloat(searchBarHeight + navigationBarOffset) {
+            UIView.animate(withDuration: 0.2) { [unowned uoSelf = self] in
+                uoSelf.tableView.contentOffset = CGPoint(x: 0, y: -navigationBarOffset)
+            }
+        } else {
+            let indexPath = IndexPath(row: NSNotFound, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+    
     private func hideSearchBar() {
-        let searchBarHeight = 44.0
         if tableView.contentOffset.y == 0.0 {
+            let searchBarHeight = searchController.searchBar.bounds.height
             tableView.contentOffset = CGPoint(x: 0.0, y: searchBarHeight)
         }
     }
@@ -144,16 +161,17 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let categoryCell = Bundle.main.loadNibNamed("MiddleCategoriesCellViews", owner: self, options: nil)?.first as? MiddleSuperCategoryView {
-            categoryCell.category = categories[section]
-            categoryCell.controller = self
-            categoryCell.indexSection = section
-            return categoryCell
+        let categoryCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MiddleCategoriesCellView")
+        if let cell = categoryCell as? MiddleSuperCategoryView {
+            cell.category = categories[section]
+            cell.controller = self
+            cell.indexSection = section
+            cell.contentView.backgroundColor = UIColor.groupTableViewBackground
         }
-        return nil
+        return categoryCell
     }
-    
     // UITableViewDelegate - end
+    
     
     // UITableViewDataSource - start
     override func numberOfSections(in tableView: UITableView) -> Int {

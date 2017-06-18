@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MiddleSuperCategoryView: UIView {
+class MiddleSuperCategoryView: UITableViewHeaderFooterView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var accessoryArrow: UILabel!

@@ -12,8 +12,9 @@ import SDWebImage
 class ItemsTableViewCell: UITableViewCell {
     @IBOutlet weak var itemLabel: UILabel!
     @IBOutlet weak var itemPriceLabel: UILabel!
+    @IBOutlet weak var itemMinQuantityLabel: UILabel!
     @IBOutlet weak var itemImageView: UIImageView!
-    @IBOutlet weak var itemQuantityLabel: UILabel!
+    @IBOutlet weak var itemQuantityInCartLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     
@@ -42,7 +43,7 @@ class ItemsTableViewCell: UITableViewCell {
         itemLabel.text = itemName
         itemImageView.image = nil
         updateImage()
-        updatePriceLabel()
+        updatePriceDisplay()
         updateItemQuantityLabel()
         setStepperUI()
     }
@@ -65,15 +66,18 @@ class ItemsTableViewCell: UITableViewCell {
             quantity = "\(value) \(orderedItem.quantityUnit)\(value == 1 ? "" : "s") in cart"
             quantityStepperOutlet.value = value
         }
-        itemQuantityLabel.text = quantity
+        itemQuantityInCartLabel.text = quantity
     }
     
-    private func updatePriceLabel() {
-        let price = String(describing: item.Price)
-        let minQuantityNumber = String(describing: item.minQuantity.Number)
-        let minQuantityUnit = String(describing: item.minQuantity.Unit)
+    private func updatePriceDisplay() {
+        let priceStr = String(describing: item.Price)
+        let minQuantityNumber = item.minQuantity.Number
+        let minQuantityNumberStr = minQuantityNumber == 1 ? "each" : String(describing: minQuantityNumber)
+        let minQuantityUnit = item.minQuantity.Unit
+        let minQuantityUnitStr = minQuantityNumber == 1 ? minQuantityUnit : "\(minQuantityUnit)s"
         
-        itemPriceLabel.text = "PKR \(price) / \(minQuantityNumber) \(minQuantityUnit)"
+        itemPriceLabel.text = "PKR \(priceStr)"
+        itemMinQuantityLabel.text = "\(minQuantityNumberStr) \(minQuantityUnitStr)"
     }
     
     private func updateImage() {
@@ -108,7 +112,7 @@ class ItemsTableViewCell: UITableViewCell {
             transitionEffect = .transitionFlipFromTop
         }
         UIView.transition(
-            with: itemQuantityLabel,
+            with: itemQuantityInCartLabel,
             duration: 0.2,
             options: [transitionEffect, .curveEaseInOut],
             animations: { [unowned uoSelf = self] in

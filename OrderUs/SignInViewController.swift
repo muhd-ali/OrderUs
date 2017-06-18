@@ -67,11 +67,6 @@ class SignInViewController: UIViewController, SignInModelDelegate, GIDSignInUIDe
                 withReadPermissions: ["public_profile", "email", "user_friends"],
                 from: self
             ) { [unowned uoSelf = self] (result, error) in
-                if (error != nil || (result?.isCancelled ?? false)) {
-                    uoSelf.showUI(animate: true)
-                    uoSelf.spinner.stopAnimating()
-                    return
-                }
                 uoSelf.facebookCustomLoginButtonOutlet.setTitle(ButtonText.signOut, for: .normal)
                 uoSelf.facebookCustomLoginButtonOutlet.delegate?.facebookCustomloginButton(uoSelf.facebookCustomLoginButtonOutlet, didCompleteWith: result, error: error)
             }
@@ -94,22 +89,19 @@ class SignInViewController: UIViewController, SignInModelDelegate, GIDSignInUIDe
     
     func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
         signInStarted()
-        print("function 1 was called")
     }
     
     func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
         self.present(viewController, animated: true, completion: nil)
-        print("function 2 was called")
     }
     
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
         self.dismiss(animated: true, completion: nil)
         googleCustomLoginButtonOutlet.setTitle(ButtonText.signOut, for: .normal)
-        print("function 3 was called")
     }
     
     
-    var signInInProgress = false
+    private var signInInProgress = false
     
     private func hideUI() {
         emailOutlet.alpha = 0
@@ -155,6 +147,12 @@ class SignInViewController: UIViewController, SignInModelDelegate, GIDSignInUIDe
         spinner.startAnimating()
         signInInProgress = true
         hideUI(animate: true)
+    }
+    
+    func signInFailed() {
+        spinner.stopAnimating()
+        signInInProgress = false
+        signedOut()
     }
     
     func signInCompleted() {

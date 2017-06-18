@@ -26,7 +26,7 @@
 		13969B3C1EDDB1F3001145B1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B3B1EDDB1F3001145B1 /* SignUpViewController.swift */; };
 		13969B461EDEF041001145B1 /* RootCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B451EDEF041001145B1 /* RootCategoriesViewController.swift */; };
 		13A34A521EC3615700720285 /* PendingOrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A34A511EC3615700720285 /* PendingOrdersTableViewController.swift */; };
-		13D898371EE4804C0049ED22 /* MiddleCategoriesCellViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13D898361EE4804C0049ED22 /* MiddleCategoriesCellViews.xib */; };
+		13D898371EE4804C0049ED22 /* MiddleCategoriesCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13D898361EE4804C0049ED22 /* MiddleCategoriesCellView.xib */; };
 		13D898391EE484340049ED22 /* MiddleSuperCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D898381EE484340049ED22 /* MiddleSuperCategoryView.swift */; };
 		13E83F0A1E9A2479004B32CF /* QuantityStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E83F091E9A2479004B32CF /* QuantityStepper.swift */; };
 		13FEE9071EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */; };
@@ -92,7 +92,7 @@
 		13969B3B1EDDB1F3001145B1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		13969B451EDEF041001145B1 /* RootCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesViewController.swift; sourceTree = "<group>"; };
 		13A34A511EC3615700720285 /* PendingOrdersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingOrdersTableViewController.swift; sourceTree = "<group>"; };
-		13D898361EE4804C0049ED22 /* MiddleCategoriesCellViews.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleCategoriesCellViews.xib; sourceTree = "<group>"; };
+		13D898361EE4804C0049ED22 /* MiddleCategoriesCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleCategoriesCellView.xib; sourceTree = "<group>"; };
 		13D898381EE484340049ED22 /* MiddleSuperCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleSuperCategoryView.swift; sourceTree = "<group>"; };
 		13E83F091E9A2479004B32CF /* QuantityStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuantityStepper.swift; sourceTree = "<group>"; };
 		13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -231,7 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				13FEE90B1EE0A426000DA99E /* MiddleCategoriesViewController.swift */,
-				13D898361EE4804C0049ED22 /* MiddleCategoriesCellViews.xib */,
+				13D898361EE4804C0049ED22 /* MiddleCategoriesCellView.xib */,
 				13D898381EE484340049ED22 /* MiddleSuperCategoryView.swift */,
 			);
 			name = MiddleCategories;
@@ -393,7 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B959651A1E606C4600C196E1 /* LaunchScreen.storyboard in Resources */,
-				13D898371EE4804C0049ED22 /* MiddleCategoriesCellViews.xib in Resources */,
+				13D898371EE4804C0049ED22 /* MiddleCategoriesCellView.xib in Resources */,
 				B9CE10FD1EB9C42400C8C29C /* Goals.txt in Resources */,
 				1372B3BC1EBA5AA50042B0F2 /* GoogleService-Info.plist in Resources */,
 				B95965171E606C4600C196E1 /* Assets.xcassets in Resources */,

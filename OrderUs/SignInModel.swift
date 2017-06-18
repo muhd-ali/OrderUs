@@ -10,12 +10,11 @@ import Foundation
 import FBSDKLoginKit
 import GoogleSignIn
 import FacebookCore
-//
-//protocol SignInModelDelegate {
-//    func signedIn()
-//}
+
+
 protocol SignInModelDelegate {
     func signInStarted()
+    func signInFailed()
     func signInCompleted()
 }
 
@@ -85,10 +84,13 @@ class SignInModel: NSObject, FacebookCustomLoginButtonDelegate, GIDSignInDelegat
     
     // Facebook Login Button Delegate API
     func facebookCustomloginButton(_ loginButton: FacebookCustomLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        //
-        userSignedInSoGetFacebookUserInfo()
-        print("======================Logged in Using Facebook========================")
-        delegate?.signInCompleted()
+        if (error == nil && !result.isCancelled) {
+            print("======================Logged in Using Facebook========================")
+            userSignedInSoGetFacebookUserInfo()
+            delegate?.signInCompleted()
+        } else {
+            delegate?.signInFailed()
+        }
     }
     
     func facebookCustomloginButtonWillLogin(_ loginButton: FacebookCustomLoginButton!) -> Bool {
@@ -110,6 +112,7 @@ class SignInModel: NSObject, FacebookCustomLoginButtonDelegate, GIDSignInDelegat
             userSignedInSoGetGoogleUserInfo(user: user)
             delegate?.signInCompleted()
         } else {
+            delegate?.signInFailed()
             print("\(error.localizedDescription)")
         }
     }
