@@ -98,7 +98,7 @@ class ItemsTableViewController: UITableViewController {
     // Mark: View Controller Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.isMovingToParentViewController {
+        if self.isMovingToParentViewController { // first appearance
             initializeSearchController()
             hideSearchBar()
         } else {

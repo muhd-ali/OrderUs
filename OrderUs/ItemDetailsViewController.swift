@@ -14,6 +14,10 @@ class ItemDetailsViewController: UIViewController {
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var itemQuantityLabel: UILabel!
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBAction func CancelButtonPressed(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
     
     var item: Item? {
         didSet {
@@ -25,6 +29,8 @@ class ItemDetailsViewController: UIViewController {
             }
         }
     }
+    
+    let appTintColor = MainMenuViewController.Constants.appTintColor
     
     private struct NotFound {
         static let itemName = "no type found"
@@ -101,7 +107,19 @@ class ItemDetailsViewController: UIViewController {
         updateUI()
     }
     
+    func setupStatusBar() {
+        let statusBar = UIApplication.shared.statusBarView
+        statusBar?.backgroundColor = appTintColor
+        statusBar?.tintColor = UIColor.white
+    }
+    
+    func setupNavigationBar() {
+        navigationBar.items?.last?.title = itemName
+    }
+    
     private func updateUI() {
+        setupStatusBar()
+        setupNavigationBar()
         itemNameLabel.text = itemName
         updateImage()
         updateDynamicContent(increasingValues: true)

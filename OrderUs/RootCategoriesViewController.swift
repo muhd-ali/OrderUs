@@ -94,21 +94,20 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     }
     
     internal func hideTabBar() {
-        let frame = tabBarController?.tabBar.frame
-        UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
-            uoSelf.tabBarController?.tabBar.frame = frame!.offsetBy(dx: 0, dy: frame?.height ?? 0)
-        }) {   [unowned uoSelf = self] (completed) in
-            if completed {
-                uoSelf.tabBarController?.tabBar.isHidden = true
-            }
+        if let tc = tabBarController as? MainMenuViewController {
+            tc.hideTabBar(animated: true)
         }
     }
     
     internal func showTabBar() {
-        tabBarController?.tabBar.isHidden = false
-        let frame = tabBarController?.tabBar.frame
-        UIView.animate(withDuration: animationDuration) { [unowned uoSelf = self] in
-            uoSelf.tabBarController?.tabBar.frame = frame!.offsetBy(dx: 0, dy: -(frame?.height ?? 0))
+        if let tc = tabBarController as? MainMenuViewController {
+            tc.showTabBar(animated: true)
+        }
+    }
+    
+    private func setSelfAsMainMenuActive() {
+        if let tc = tabBarController as? MainMenuViewController {
+            tc.active = self
         }
     }
     
@@ -122,6 +121,7 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         if (tabBarController?.tabBar.isHidden ?? false) {
             showTabBar()
         }
+        setSelfAsMainMenuActive()
     }
     
     var dataChangedFunctionCalled: Bool = false
@@ -137,7 +137,6 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     var featuredCellIndexPath = IndexPath(item: 0, section: 0)
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        hideTabBar()
         hideSearchBar()
         if let dvc = segue.destination as? MiddleCategoriesTableViewController,
             let index = sender as? Int,
@@ -199,6 +198,12 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     var lastFeaturedIndex: CGFloat = 0
 }
 
+extension RootCategoriesViewController: MainMenuViewControllerCurrentActive {
+    func homeButtonPressed() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+}
+
 extension RootCategoriesViewController: SideMenuTableViewControllerDelegate {
     func sideMenuDidAppear() {
         showBlurView()
@@ -228,35 +233,35 @@ extension RootCategoriesViewController: UICollectionViewDelegate {
         if indexPath == featuredCellIndexPath {
             performSegue(withIdentifier: "MiddleCategories", sender: indexPath.item)
         } else {
-//            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+            //            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
         }
     }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let cellMaxHeight: CGFloat = 150 // should be collectionView.bounds.height / 2
-//        let collectionViewYOffset = scrollView.contentOffset.y
-//        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
-//        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
-//        if (cellOffset > cellMaxHeight / 2) {
-//            featuredCellIndex += 1
-//        }
-//        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
-//        print("collectionView.bounds.width = \(collectionView.bounds.width)")
-//    }
-//    
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        let cellMaxHeight: CGFloat = 150 // should be collectionView.bounds.height / 2
-//        let collectionViewYOffset = scrollView.contentOffset.y
-//        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
-//        guard (abs(featuredCellIndex - lastFeaturedIndex) < 2) else { return }
-//        lastFeaturedIndex = featuredCellIndex
-//        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
-//        if (cellOffset > cellMaxHeight / 2) {
-//            featuredCellIndex += 1
-//        }
-//        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
-//        targetContentOffset.pointee.y = targetOffset
-//    }
+    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //        let cellMaxHeight: CGFloat = 150 // should be collectionView.bounds.height / 2
+    //        let collectionViewYOffset = scrollView.contentOffset.y
+    //        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
+    //        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
+    //        if (cellOffset > cellMaxHeight / 2) {
+    //            featuredCellIndex += 1
+    //        }
+    //        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
+    //        print("collectionView.bounds.width = \(collectionView.bounds.width)")
+    //    }
+    //
+    //    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    //        let cellMaxHeight: CGFloat = 150 // should be collectionView.bounds.height / 2
+    //        let collectionViewYOffset = scrollView.contentOffset.y
+    //        var featuredCellIndex = CGFloat(Int(collectionViewYOffset / cellMaxHeight))
+    //        guard (abs(featuredCellIndex - lastFeaturedIndex) < 2) else { return }
+    //        lastFeaturedIndex = featuredCellIndex
+    //        let cellOffset = collectionViewYOffset.truncatingRemainder(dividingBy: cellMaxHeight)
+    //        if (cellOffset > cellMaxHeight / 2) {
+    //            featuredCellIndex += 1
+    //        }
+    //        let targetOffset: CGFloat = featuredCellIndex * cellMaxHeight
+    //        targetContentOffset.pointee.y = targetOffset
+    //    }
 }
 
 extension RootCategoriesViewController: UICollectionViewDataSource {
