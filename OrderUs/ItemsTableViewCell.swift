@@ -55,8 +55,6 @@ class ItemsTableViewCell: UITableViewCell {
         quantityStepperOutlet.setBackgroundImage(image, for: .normal)
         quantityStepperOutlet.setBackgroundImage(image, for: .disabled)
         quantityStepperOutlet.setBackgroundImage(image, for: .highlighted)
-        quantityStepperOutlet.setBackgroundImage(image, for: .focused)
-        quantityStepperOutlet.setBackgroundImage(image, for: .selected)
     }
     
     private func updateItemQuantityLabel() {
