@@ -105,12 +105,6 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         }
     }
     
-    private func setSelfAsMainMenuActive() {
-        if let tc = tabBarController as? MainMenuViewController {
-            tc.active = self
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         initializeSearchController() // breaks if called in viewDidLoad()
@@ -121,7 +115,6 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         if (tabBarController?.tabBar.isHidden ?? false) {
             showTabBar()
         }
-        setSelfAsMainMenuActive()
     }
     
     var dataChangedFunctionCalled: Bool = false
@@ -196,12 +189,6 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     
     var featureCellIndex: CGFloat = 0
     var lastFeaturedIndex: CGFloat = 0
-}
-
-extension RootCategoriesViewController: MainMenuViewControllerCurrentActive {
-    func homeButtonPressed() {
-        navigationController?.popToRootViewController(animated: true)
-    }
 }
 
 extension RootCategoriesViewController: SideMenuTableViewControllerDelegate {
