@@ -100,8 +100,7 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     
     func didSelectSection(at section: Int?) {
         if section != nil {
-            if categories[section!].ChildrenCategories.isEmpty {
-                // go to items view controller
+            if categories[section!].containsItems {
                 performSegue(withIdentifier: "Items", sender: section!)
             } else {
                 setCollapseData(with: section)
@@ -179,7 +178,7 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !categories[section].ChildrenCategories.isEmpty {
+        if !categories[section].containsItems {
             return 1
         }
         return 0

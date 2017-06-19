@@ -16,4 +16,8 @@ struct Category: Selectable {
     var Children: [Selectable]
     var ChildrenCategories: [String]
     var ChildrenItems: [String]
+    
+    var containsItems: Bool {
+       return ChildrenCategories.isEmpty
+    }
 }

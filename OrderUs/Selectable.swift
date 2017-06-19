@@ -16,25 +16,41 @@ protocol Selectable {
 }
 
 struct SearchResult {
-    var item: Item
-    var path: [String]
-    var attributedPath: NSMutableAttributedString?
+    var selectable: Selectable
+    var path: [Selectable]
+    var searchedText: String?
+    
+    var attributedPath: NSMutableAttributedString? {
+        guard searchedText != nil else { return nil }
+        let fontSize: CGFloat = 12.0
+        let attributedPath = path.map { pathStep in NSMutableAttributedString(string: pathStep.Name, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])}
+        let highlightAttributes = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: fontSize), NSBackgroundColorAttributeName : UIColor.yellow]
+        attributedPath.last?.addAttributes(highlightAttributes, range: (path.last!.Name.lowercased() as NSString).range(of: searchedText!.lowercased()))
+        return attributedPath.reduce(NSMutableAttributedString(string: "")) {
+            let str = $0.0
+            if !str.string.isEmpty {
+                str.append(NSMutableAttributedString(string: ">"))
+            }
+            str.append($0.1)
+            return str
+        }
+    }
 }
 
 extension Sequence where Iterator.Element == Selectable {
-    private func searchItemsFromWholeTreeHelper(condition: (Item) -> Bool, path: [String]) -> [SearchResult] {
+    private func searchItemsFromWholeTreeHelper(condition: (Item) -> Bool, path: [Selectable]) -> [SearchResult] {
         var results: [SearchResult] = []
         self.forEach { selectable in
             if let category = selectable as? Category {
                 var mutablePath = path
-                mutablePath.append(category.Name)
+                mutablePath.append(category)
                 let innerResults = category.Children.searchItemsFromWholeTreeHelper(condition: condition, path: mutablePath)
                 results.append(contentsOf: innerResults)
             } else if let item = selectable as? Item {
                 if condition(item) {
                     var mutablePath = path
-                    mutablePath.append(item.Name)
-                    let result = SearchResult(item: item, path: mutablePath, attributedPath: nil)
+                    mutablePath.append(item)
+                    let result = SearchResult(selectable: item, path: mutablePath, searchedText: nil)
                     results.append(result)
                 }
             }
@@ -50,24 +66,10 @@ extension Sequence where Iterator.Element == Selectable {
         let results = self.searchItemsFromWholeTree { result in
             result.Name.lowercased().range(of: string.lowercased()) != nil
         }
-        
         return results.map {
-            var result = $0
-            let fontSize: CGFloat = 12.0
-            let attributedPath = result.path.map { pathStep in NSMutableAttributedString(string: pathStep, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])}
-            let highlightAttributes = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: fontSize), NSBackgroundColorAttributeName : UIColor.yellow]
-            attributedPath.last?.addAttributes(highlightAttributes, range: (result.path.last!.lowercased() as NSString).range(of: string.lowercased()))
-            result.attributedPath = attributedPath.reduce(nil) {
-                var str = $0.0
-                if str == nil {
-                    str = NSMutableAttributedString()
-                } else {
-                    str?.append(NSMutableAttributedString(string: ">"))
-                }
-                str?.append($0.1)
-                return str
-            }
-            return result
+            var mutable = $0
+            mutable.searchedText = string
+            return mutable
         }
     }
     

@@ -49,6 +49,8 @@
 		B993256D1EF3CABD00D068A9 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993256C1EF3CABD00D068A9 /* Selectable.swift */; };
 		B99325701EF3CB1600D068A9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993256F1EF3CB1600D068A9 /* Item.swift */; };
 		B99325721EF3F3EF00D068A9 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99325711EF3F3EF00D068A9 /* Order.swift */; };
+		B99325751EF7CE8900D068A9 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99325741EF7CE8900D068A9 /* SearchResultsTableViewCell.swift */; };
+		B99325771EF7CF3A00D068A9 /* ResultPathCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99325761EF7CF3A00D068A9 /* ResultPathCollectionViewCell.swift */; };
 		B99B69E11EA100070002A354 /* OrderOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */; };
 		B9CE10FB1EB37BA600C8C29C /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */; };
 		B9CE10FD1EB9C42400C8C29C /* Goals.txt in Resources */ = {isa = PBXBuildFile; fileRef = B9CE10FC1EB9C42400C8C29C /* Goals.txt */; };
@@ -119,6 +121,8 @@
 		B993256C1EF3CABD00D068A9 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		B993256F1EF3CB1600D068A9 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B99325711EF3F3EF00D068A9 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		B99325741EF7CE8900D068A9 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
+		B99325761EF7CF3A00D068A9 /* ResultPathCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultPathCollectionViewCell.swift; sourceTree = "<group>"; };
 		B99B69E01EA100070002A354 /* OrderOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OrderOptionsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		B9CE10FC1EB9C42400C8C29C /* Goals.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Goals.txt; sourceTree = "<group>"; };
@@ -150,8 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				B993256C1EF3CABD00D068A9 /* Selectable.swift */,
-				B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */,
 				13E83F091E9A2479004B32CF /* QuantityStepper.swift */,
+				B99325731EF7CE5200D068A9 /* Search */,
 				B993256E1EF3CAF600D068A9 /* Items */,
 				B99325691EF3CA7C00D068A9 /* Categories */,
 			);
@@ -313,6 +317,16 @@
 			name = Items;
 			sourceTree = "<group>";
 		};
+		B99325731EF7CE5200D068A9 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				B9CE10FA1EB37BA600C8C29C /* SearchResultsTableViewController.swift */,
+				B99325741EF7CE8900D068A9 /* SearchResultsTableViewCell.swift */,
+				B99325761EF7CF3A00D068A9 /* ResultPathCollectionViewCell.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		C79133BA92A72BB3A2C98CFA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +478,7 @@
 				B972566D1EA75A7300D9DE9E /* ServerCommunicator.swift in Sources */,
 				13969B3C1EDDB1F3001145B1 /* SignUpViewController.swift in Sources */,
 				B993256B1EF3CA9B00D068A9 /* Category.swift in Sources */,
+				B99325771EF7CF3A00D068A9 /* ResultPathCollectionViewCell.swift in Sources */,
 				13969B2E1EDBC53C001145B1 /* OrderDetailViewController.swift in Sources */,
 				13969B351EDCEAF6001145B1 /* FacebookCustomLoginButton.swift in Sources */,
 				138983791EE4F8DE003FD12A /* SWRevealViewController.m in Sources */,
@@ -479,6 +494,7 @@
 				135036D51EAE5E3B003B7745 /* PlaceOrderViewController.swift in Sources */,
 				138CD9C61E7C3367004C5EC4 /* ItemsTableViewController.swift in Sources */,
 				B99325721EF3F3EF00D068A9 /* Order.swift in Sources */,
+				B99325751EF7CE8900D068A9 /* SearchResultsTableViewCell.swift in Sources */,
 				B95965121E606C4600C196E1 /* SignInRootViewController.swift in Sources */,
 				1389837D1EE59322003FD12A /* SideMenuTableViewController.swift in Sources */,
 				B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */,
