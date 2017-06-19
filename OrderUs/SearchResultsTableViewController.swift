@@ -73,7 +73,7 @@ class SearchResultsTableViewController: UITableViewController {
 extension SearchResultsTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let searchedText = searchController.searchBar.text {
-            results = tableList?.searchItemsFromWholeTree(containing: searchedText) ?? []
+            results = tableList?.searchSelectablesFromWholeTree(containing: searchedText) ?? []
             tableView.reloadData()
         }
     }

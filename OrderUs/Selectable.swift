@@ -23,47 +23,39 @@ struct SearchResult {
     var attributedPath: NSMutableAttributedString? {
         guard searchedText != nil else { return nil }
         let fontSize: CGFloat = 12.0
-        let attributedPath = path.map { pathStep in NSMutableAttributedString(string: pathStep.Name, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])}
+        let attributedPath = NSMutableAttributedString(string: path.last!.Name, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])
         let highlightAttributes = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: fontSize), NSBackgroundColorAttributeName : UIColor.yellow]
-        attributedPath.last?.addAttributes(highlightAttributes, range: (path.last!.Name.lowercased() as NSString).range(of: searchedText!.lowercased()))
-        return attributedPath.reduce(NSMutableAttributedString(string: "")) {
-            let str = $0.0
-            if !str.string.isEmpty {
-                str.append(NSMutableAttributedString(string: ">"))
-            }
-            str.append($0.1)
-            return str
-        }
+        attributedPath.addAttributes(highlightAttributes, range: (path.last!.Name.lowercased() as NSString).range(of: searchedText!.lowercased()))
+        return attributedPath
     }
 }
 
 extension Sequence where Iterator.Element == Selectable {
-    private func searchItemsFromWholeTreeHelper(condition: (Item) -> Bool, path: [Selectable]) -> [SearchResult] {
+    private func searchSelectablesFromWholeTreeHelper(condition: (Selectable) -> Bool, path: [Selectable]) -> [SearchResult] {
         var results: [SearchResult] = []
         self.forEach { selectable in
             if let category = selectable as? Category {
                 var mutablePath = path
                 mutablePath.append(category)
-                let innerResults = category.Children.searchItemsFromWholeTreeHelper(condition: condition, path: mutablePath)
+                let innerResults = category.Children.searchSelectablesFromWholeTreeHelper(condition: condition, path: mutablePath)
                 results.append(contentsOf: innerResults)
-            } else if let item = selectable as? Item {
-                if condition(item) {
-                    var mutablePath = path
-                    mutablePath.append(item)
-                    let result = SearchResult(selectable: item, path: mutablePath, searchedText: nil)
-                    results.append(result)
-                }
+            }
+            if condition(selectable) {
+                var mutablePath = path
+                mutablePath.append(selectable)
+                let result = SearchResult(selectable: selectable, path: mutablePath, searchedText: nil)
+                results.append(result)
             }
         }
         return results
     }
     
-    private func searchItemsFromWholeTree(condition: (Item) -> Bool) -> [SearchResult]  {
-        return searchItemsFromWholeTreeHelper(condition: condition, path: [])
+    private func searchSelectablesFromWholeTree(condition: (Selectable) -> Bool) -> [SearchResult]  {
+        return searchSelectablesFromWholeTreeHelper(condition: condition, path: [])
     }
     
-    func searchItemsFromWholeTree(containing string: String) -> [SearchResult] {
-        let results = self.searchItemsFromWholeTree { result in
+    func searchSelectablesFromWholeTree(containing string: String) -> [SearchResult] {
+        let results = self.searchSelectablesFromWholeTree { result in
             result.Name.lowercased().range(of: string.lowercased()) != nil
         }
         return results.map {
@@ -82,7 +74,7 @@ extension Sequence where Iterator.Element == Selectable {
         }
         return cs
     }
-
+    
     func items() -> [Item] {
         var its = [Item]()
         for selectable in self {

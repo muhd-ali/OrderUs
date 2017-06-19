@@ -18,7 +18,7 @@ class SearchResultsTableViewCell: UITableViewCell {
     var result: SearchResult! {
         didSet {
             if result != nil {
-                resultLabel.text = result.selectable.Name
+                resultLabel.attributedText = result.attributedPath
                 resultPathCollectionView.dataSource = self
                 resultPathCollectionView.delegate = self
                 resultPathCollectionView.reloadData()
