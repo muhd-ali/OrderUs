@@ -29,9 +29,6 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         searchBarIsHidden ? showSearchBar() : hideSearchBar()
     }
     
-    @IBOutlet weak var shoppingCartButtonOutlet: UIBarButtonItem!
-    @IBOutlet weak var trackingButtonOutlet: UIBarButtonItem!
-    
     private func initializeBlurMenu() {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(blurViewTapped))
         blurView.addGestureRecognizer(recognizer)

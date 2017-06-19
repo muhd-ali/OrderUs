@@ -211,7 +211,7 @@
                             </barButtonItem>
                             <barButtonItem image="icon-tracking" style="plain" id="uPu-Qs-RIn">
                                 <connections>
-                                    <segue destination="N0s-Q9-VoT" kind="show" id="Lzv-T5-UlV"/>
+                                    <segue destination="QwQ-fb-oXC" kind="show" id="xCT-WD-t7H"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -224,9 +224,7 @@
                         <outlet property="searchBarView" destination="GsD-ug-0LG" id="a9U-lY-fve"/>
                         <outlet property="searchButtonOutlet" destination="GZj-5g-NJg" id="OKj-cl-Y4S"/>
                         <outlet property="seatchBarViewTopOffset" destination="EhB-vP-zNz" id="I8S-lr-XdM"/>
-                        <outlet property="shoppingCartButtonOutlet" destination="JIg-bR-WMy" id="E2q-XT-Hfh"/>
                         <outlet property="sideMenuButtonOutlet" destination="CYG-5h-GlA" id="03U-UY-stV"/>
-                        <outlet property="trackingButtonOutlet" destination="uPu-Qs-RIn" id="pUc-y5-DVI"/>
                         <segue destination="4dV-Eb-mBd" kind="show" identifier="MiddleCategories" id="Jlw-nv-vsl"/>
                     </connections>
                 </viewController>
@@ -439,10 +437,78 @@
             </objects>
             <point key="canvasLocation" x="-1167" y="116"/>
         </scene>
-        <!--Pending Orders Table View Controller-->
+        <!--Orders View Controller-->
+        <scene sceneID="9rA-6w-PO2">
+            <objects>
+                <viewController id="QwQ-fb-oXC" customClass="OrdersViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vd4-mP-m28"/>
+                        <viewControllerLayoutGuide type="bottom" id="jjR-0P-Q8f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FRD-yv-byS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zR4-gX-2hF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="112" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ItH-ME-YhZ">
+                                <rect key="frame" x="0.0" y="64" width="128" height="367"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pendingOrder" textLabel="PHb-DA-rvz" detailTextLabel="whe-3m-ezv" rowHeight="112" style="IBUITableViewCellStyleSubtitle" id="wK7-l1-jNf">
+                                        <rect key="frame" x="0.0" y="28" width="128" height="112"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wK7-l1-jNf" id="CJb-x7-xJR">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="112"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PHb-DA-rvz">
+                                                    <rect key="frame" x="15" y="39" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="whe-3m-ezv">
+                                                    <rect key="frame" x="15" y="59.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ItH-ME-YhZ" firstAttribute="leading" secondItem="zR4-gX-2hF" secondAttribute="leading" id="3mt-CW-GJ0"/>
+                            <constraint firstItem="zR4-gX-2hF" firstAttribute="width" secondItem="FRD-yv-byS" secondAttribute="width" id="DHN-ka-ESq"/>
+                            <constraint firstItem="jjR-0P-Q8f" firstAttribute="top" secondItem="ItH-ME-YhZ" secondAttribute="bottom" id="NUn-7J-KvS"/>
+                            <constraint firstItem="zR4-gX-2hF" firstAttribute="height" secondItem="FRD-yv-byS" secondAttribute="height" id="aAV-Lo-AtG"/>
+                            <constraint firstItem="ItH-ME-YhZ" firstAttribute="width" secondItem="zR4-gX-2hF" secondAttribute="width" multiplier="0.4" id="cjI-JR-XY6"/>
+                            <constraint firstItem="zR4-gX-2hF" firstAttribute="centerX" secondItem="FRD-yv-byS" secondAttribute="centerX" id="nwU-b6-Aa9"/>
+                            <constraint firstItem="ItH-ME-YhZ" firstAttribute="top" secondItem="vd4-mP-m28" secondAttribute="bottom" id="wwU-vl-eyz"/>
+                            <constraint firstItem="zR4-gX-2hF" firstAttribute="centerY" secondItem="FRD-yv-byS" secondAttribute="centerY" id="xaF-3L-RcF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="ItH-ME-YhZ" id="epG-1F-qE0"/>
+                        <segue destination="jai-8o-5A7" kind="show" identifier="OrderDetail" id="13X-dP-m0F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3XJ-gf-Zbz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="472.5" y="930"/>
+        </scene>
+        <!--Table View Controller-->
         <scene sceneID="40S-X4-2Ab">
             <objects>
-                <tableViewController id="N0s-Q9-VoT" customClass="PendingOrdersTableViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="N0s-Q9-VoT" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="90" sectionHeaderHeight="18" sectionFooterHeight="18" id="50z-DU-se3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -478,13 +544,10 @@
                             <outlet property="delegate" destination="N0s-Q9-VoT" id="qUe-Lc-Ei7"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <segue destination="jai-8o-5A7" kind="show" identifier="OrderDetail" id="1aE-VC-e8y"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6x-lC-gm7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="930"/>
+            <point key="canvasLocation" x="473" y="1770"/>
         </scene>
         <!--Order Detail View Controller-->
         <scene sceneID="wAW-NE-2j3">
@@ -707,7 +770,7 @@
                             </barButtonItem>
                             <barButtonItem image="icon-tracking" style="plain" id="XVT-38-cxh">
                                 <connections>
-                                    <segue destination="N0s-Q9-VoT" kind="show" id="Cjz-Xz-f2y"/>
+                                    <segue destination="QwQ-fb-oXC" kind="show" id="pSS-7M-4Lv"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -1095,7 +1158,7 @@
                             </barButtonItem>
                             <barButtonItem image="icon-tracking" style="plain" id="3vp-M3-2Z5">
                                 <connections>
-                                    <segue destination="N0s-Q9-VoT" kind="show" id="3uT-3O-hay"/>
+                                    <segue destination="QwQ-fb-oXC" kind="show" id="BfG-Gc-36s"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -1581,9 +1644,9 @@
         <image name="root-background" width="1656" height="2944"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lzv-T5-UlV"/>
-        <segue reference="I8B-UE-iQ4"/>
         <segue reference="Jlw-nv-vsl"/>
+        <segue reference="pSS-7M-4Lv"/>
+        <segue reference="ZGO-ch-U06"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
