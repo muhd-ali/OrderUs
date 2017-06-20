@@ -49,26 +49,53 @@ extension OrdersViewController: UITableViewDelegate {
 //        }
 //    }
 
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        guard indexPath != selectedRowIndex else { return }
+//        let animationDuration: TimeInterval = 0.2
+//        let frame = orderDetailsContainerView.frame
+//        let lastSelectedRowIndex = selectedRowIndex
+//        let lastSelectedCell = tableView.cellForRow(at: lastSelectedRowIndex)!
+//        let lastSelectedCellFrameInView = lastSelectedCell.convert(lastSelectedCell.frame, to: view)
+//        orderDetailsContainerView.frame = CGRect(x: lastSelectedCellFrameInView.origin.x, y: lastSelectedCellFrameInView.midY, width: 1, height: 1)
+//        UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
+//            uoSelf.orderDetailsContainerView.layoutIfNeeded()
+//        }) { [unowned uoSelf = self] (completed) in
+//            if completed {
+//                uoSelf.selectedRowIndex = indexPath
+//                uoSelf.orderDetailViewController.order = uoSelf.orders[uoSelf.selectedRowIndex.row]
+//                tableView.reloadRows(at: [lastSelectedRowIndex, indexPath], with: .automatic)
+//                
+//                uoSelf.orderDetailsContainerView.frame = frame
+//                UIView.animate(withDuration: animationDuration, animations: {
+//                    uoSelf.orderDetailsContainerView.layoutIfNeeded()
+//                })
+//            }
+//        }
+//    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath != selectedRowIndex else { return }
         let animationDuration: TimeInterval = 0.2
-        let frame = orderDetailsContainerView.frame
-        let lastSelectedRowIndex = selectedRowIndex
         UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
-            let lastSelectedCell = tableView.cellForRow(at: lastSelectedRowIndex)!
-            let lastSelectedCellFrameInView = lastSelectedCell.convert(lastSelectedCell.frame, to: uoSelf.view)
-            uoSelf.orderDetailsContainerView.frame = CGRect(x: lastSelectedCellFrameInView.origin.x, y: lastSelectedCellFrameInView.midY, width: 1, height: 1)
-            uoSelf.orderDetailsContainerView.layoutIfNeeded()
-        }) { [unowned uoSelf = self] (completed) in
-            if completed {
+            let frame = uoSelf.orderDetailsContainerView.frame
+            uoSelf.orderDetailsContainerView.frame = frame.offsetBy(dx: -frame.width, dy: 0)
+            uoSelf.orderDetailViewController.viewDidDisappear(true)
+        }) { [unowned uoSelf = self] (completed1) in
+            if completed1 {
+                let oldSelectedRowIndex = uoSelf.selectedRowIndex
                 uoSelf.selectedRowIndex = indexPath
                 uoSelf.orderDetailViewController.order = uoSelf.orders[uoSelf.selectedRowIndex.row]
-                tableView.reloadRows(at: [lastSelectedRowIndex, indexPath], with: .automatic)
+                tableView.reloadRows(at: [oldSelectedRowIndex, indexPath], with: .automatic)
                 
                 UIView.animate(withDuration: animationDuration, animations: {
-                    uoSelf.orderDetailsContainerView.frame = frame
-                    uoSelf.orderDetailsContainerView.layoutIfNeeded()
-                })
+                    let frame = uoSelf.orderDetailsContainerView.frame
+                    uoSelf.orderDetailsContainerView.frame = frame.offsetBy(dx: frame.width, dy: 0)
+                }) { (completed2) in
+                    if completed2 {
+                        uoSelf.orderDetailViewController.viewDidAppear(true)
+                    }
+                }
+                
             }
         }
     }
@@ -88,8 +115,8 @@ extension OrdersViewController: UITableViewDataSource {
         
         let order = orders[indexPath.row]
         
-        cell.textLabel?.text = order.startedAtTime
-        cell.detailTextLabel?.text = order.startedAtDate
+        cell.textLabel?.text = order.timeStamp?.startedAt.shortTime
+        cell.detailTextLabel?.text = order.timeStamp?.startedAt.shortDate
         
         if indexPath.row == selectedRowIndex.row {
             cell.backgroundColor = UIColor.white

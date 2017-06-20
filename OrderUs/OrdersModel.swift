@@ -47,7 +47,7 @@ class OrdersModel: NSObject {
     }
     
     func orderPlaced() {
-        order.timeStamp = Order.TimeStamp(startedAt: Date(), acceptedAt: nil, delieveredAt: nil)
+        order.timeStamp = Order.TimeStamp(startedAt: Date(), acknowledgedAt: nil, acceptedAt: nil, delieveredAt: nil)
         placedOrders.append(order)
         order = Order()
     }

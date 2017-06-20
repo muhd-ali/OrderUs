@@ -28,37 +28,51 @@ class OrderDetailViewController: UIViewController {
     
     
     func updateUI() {
-        customizeProgressBar()
         orderIDLabel.text = order.id
         totalPriceLabel.text = "PKR \(order.totalCost)"
         orderedItemsTableView.reloadData()
     }
     
-    func customizeProgressBar() {
+    private func initializeProgressBar() {
         progressBarOutlet.translatesAutoresizingMaskIntoConstraints = false
         let rad: CGFloat = 10
         let lineHeight: CGFloat = 2
         
-        progressBarOutlet.numberOfPoints = 3
+        progressBarOutlet.numberOfPoints = 4
         progressBarOutlet.lineHeight = lineHeight
         progressBarOutlet.radius = rad
         progressBarOutlet.progressRadius = rad * 2
         progressBarOutlet.progressLineHeight = lineHeight * 2
         progressBarOutlet.delegate = self
         progressBarOutlet.stepTextFont = progressBarOutlet.stepTextFont!.withSize(10)
-        
-        if order.timeStamp?.acceptedAt != nil {
+        progressBarOutlet.stepAnimationDuration = 0.2
+    }
+    
+    private func updateProgressBar() {
+        progressBarOutlet.currentIndex = 0
+
+        if order.isAccepted {
             progressBarOutlet.currentIndex += 1
         }
         
-        if order.timeStamp?.delieveredAt != nil {
+        if order.isAcknowledged {
             progressBarOutlet.currentIndex += 1
         }
+
+        if order.isDelievered {
+            progressBarOutlet.currentIndex += 1
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateProgressBar()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         orderedItemsTableView.dataSource = self
+        initializeProgressBar()
         if order != nil {
             updateUI()
         }
@@ -99,9 +113,10 @@ extension OrderDetailViewController: FlexibleSteppedProgressBarDelegate {
     func progressBar(_ progressBar: FlexibleSteppedProgressBar, textAtIndex index: Int, position: FlexibleSteppedProgressBarTextLocation) -> String {
         if position == FlexibleSteppedProgressBarTextLocation.top {
             switch index {
-            case 0: return "Started at"
-            case 1: return "Accepted at"
-            case 2: return "Delievered at"
+            case 0: return "Started"
+            case 1: return "Received"
+            case 2: return "Accepted"
+            case 3: return "Delievered"
             default: break
             }
         }
@@ -110,9 +125,10 @@ extension OrderDetailViewController: FlexibleSteppedProgressBarDelegate {
         if position == FlexibleSteppedProgressBarTextLocation.bottom {
             if let o = order {
                 switch index {
-                case 0: return o.startedAtTime
-                case 1: return o.acceptedAtshortString
-                case 2: return o.delieveredAtshortString
+                case 0: return o.timeStamp?.startedAt.shortTime ?? ""
+                case 1: return o.timeStamp?.acknowledgedAt?.shortTime ?? ""
+                case 2: return o.timeStamp?.acceptedAt?.shortTime ?? ""
+                case 3: return o.timeStamp?.delieveredAt?.shortTime ?? ""
                 default: break
                 }
             }

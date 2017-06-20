@@ -111,11 +111,12 @@ class Order: NSObject {
     
     struct TimeStamp {
         var startedAt: Date
+        var acknowledgedAt: Date?
         var acceptedAt: Date?
         var delieveredAt: Date?
     }
     
-    var id = UUID().uuidString
+    let id = UUID().uuidString
     var items: [OrderedItem] = []
     var userData = UserData.null
     var userDoorStepOption = Preferences.Doorstep.initial.1
@@ -141,46 +142,6 @@ class Order: NSObject {
         ]
     }
     
-    var startedAtTime: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        if let time = timeStamp?.startedAt {
-            return formatter.string(from: time)
-        }
-        return "no time"
-    }
-    
-    var startedAtDate: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
-        if let time = timeStamp?.startedAt {
-            return formatter.string(from: time)
-        }
-        return "no date"
-    }
-    
-    var acceptedAtshortString: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        if let time = timeStamp?.acceptedAt {
-            return formatter.string(from: time)
-        }
-        return ""
-    }
-    
-    var delieveredAtshortString: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        if let time = timeStamp?.delieveredAt {
-            return formatter.string(from: time)
-        }
-        return ""
-    }
-    
     func getItem(withID: String) -> OrderedItem? {
         return items.filter({ $0.item.ID == withID }).first
     }
@@ -193,5 +154,37 @@ class Order: NSObject {
         return items.reduce(0) { (result, orderedItem) in
             result + orderedItem.totalCost
         }
+    }
+    
+    var isStarted: Bool {
+        return timeStamp != nil
+    }
+    
+    var isAccepted: Bool {
+        return timeStamp?.acceptedAt != nil
+    }
+    
+    var isAcknowledged: Bool {
+        return timeStamp?.acknowledgedAt != nil
+    }
+    
+    var isDelievered: Bool {
+        return timeStamp?.delieveredAt != nil
+    }
+}
+
+extension Date {
+    var shortTime: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter.string(from: self)
+    }
+
+    var shortDate: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        return formatter.string(from: self)
     }
 }
