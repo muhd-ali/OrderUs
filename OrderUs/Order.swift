@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 extension Sequence where Iterator.Element == Order {
     private func orders(with state: Order.State) -> [Order] {
@@ -24,6 +25,23 @@ extension Sequence where Iterator.Element == Order {
     var pending: [Order] {
         return orders(except: .delieveredToUser)
     }
+}
+
+struct OrderLocation {
+    var addressLines: [String]
+    var location: CLLocation
+    
+    var jsonData: [String: Any] {
+        return [
+            "addressLines" : addressLines,
+            "coordinates" : [
+                "latitude" : location.coordinate.latitude,
+                "longitude" : location.coordinate.longitude
+            ],
+        ]
+    }
+    
+    static let null = OrderLocation(addressLines: [], location: CLLocation())
 }
 
 class Order: NSObject {
@@ -74,7 +92,7 @@ class Order: NSObject {
             ]
         }
         
-        func totalCost() -> Double {
+        var totalCost: Double {
             return (item.Price / item.minQuantity.Number) * quantityValue
         }
     }
@@ -123,14 +141,24 @@ class Order: NSObject {
         ]
     }
     
-    var startedAtshortString: String {
+    var startedAtTime: String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+        formatter.dateStyle = .none
         formatter.timeStyle = .short
         if let time = timeStamp?.startedAt {
             return formatter.string(from: time)
         }
-        return ""
+        return "no time"
+    }
+    
+    var startedAtDate: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
+        if let time = timeStamp?.startedAt {
+            return formatter.string(from: time)
+        }
+        return "no date"
     }
     
     var acceptedAtshortString: String {
@@ -159,5 +187,11 @@ class Order: NSObject {
     
     func removeItem(withID: String) {
         items = items.filter({ $0.item.ID != withID })
+    }
+    
+    var totalCost: Double {
+        return items.reduce(0) { (result, orderedItem) in
+            result + orderedItem.totalCost
+        }
     }
 }

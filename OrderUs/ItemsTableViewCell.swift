@@ -61,7 +61,7 @@ class ItemsTableViewCell: UITableViewCell {
         var quantity = "None added in cart"
         if orderedItem != nil {
             let value = orderedItem.quantityValue
-            quantity = "\(value) \(orderedItem.quantityUnit)\(value == 1 ? "" : "s") in cart"
+            quantity = "\(value) \(orderedItem.quantityUnit) in cart"
             quantityStepperOutlet.value = value
         } else {
             quantityStepperOutlet.value = 0

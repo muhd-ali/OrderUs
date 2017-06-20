@@ -9,7 +9,7 @@
 import UIKit
 import PKHUD
 
-class shoppingCartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PlaceOrderViewControllerDelegate {
+class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDelegate {
     
     private var userAskedToPlaceOrder = false
     func userRequestedToPlaceOrder() {
@@ -57,45 +57,13 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBOutlet weak var proceedButtonOutlet: UIButton!
-    private func updateUI() {
+    internal func updateUI() {
         title = "Shopping Cart"
-        let totalCost = shoppingCartList.reduce(0) { $0 + ($1.totalCost()) }
+        let totalCost = shoppingCartList.reduce(0) { $0 + ($1.totalCost) }
         totalCostDisplay.text = "Total Cost = \(totalCost) PKR"
         if shoppingCartList.count == 0 {
             proceedButtonOutlet.isEnabled = false
             proceedButtonOutlet.setTitle("Cart is Empty", for: .disabled)
-        }
-    }
-    
-    // MARK: - Table view data source
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return shoppingCartList.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingCartItem", for: indexPath)
-        
-        let cartItem = shoppingCartList[indexPath.section]
-        cell.textLabel?.text = cartItem.item.Name
-        cell.detailTextLabel?.text = "\(cartItem.quantityValue) \(cartItem.quantityUnit) for \(cartItem.totalCost()) PKR"
-        
-        return cell
-    }
-    
-    // Override to support editing the table view.
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        switch editingStyle {
-        case .delete:
-            shoppingCartList.remove(at: indexPath.section)
-            OrdersModel.sharedInstance.order.items = shoppingCartList
-            updateUI()
-            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
-        default: break
         }
     }
     
@@ -110,5 +78,35 @@ class shoppingCartViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
     }
+}
+
+extension shoppingCartViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return shoppingCartList.count
+    }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderedItemTableViewCell", for: indexPath)
+        if let itemCell = cell as? OrderedItemTableViewCell {
+            itemCell.orderedItem = shoppingCartList[indexPath.section]
+        }
+        return cell
+    }
+}
+
+extension shoppingCartViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            shoppingCartList.remove(at: indexPath.section)
+            OrdersModel.sharedInstance.order.items = shoppingCartList
+            updateUI()
+            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
+        default: break
+        }
+    }
 }

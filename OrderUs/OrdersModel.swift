@@ -7,24 +7,6 @@
 //
 
 import Foundation
-import CoreLocation
-
-struct OrderLocation {
-    var addressLines: [String]
-    var location: CLLocation
-    
-    var jsonData: [String: Any] {
-        return [
-            "addressLines" : addressLines,
-            "coordinates" : [
-                "latitude" : location.coordinate.latitude,
-                "longitude" : location.coordinate.longitude
-            ],
-        ]
-    }
-    
-    static let null = OrderLocation(addressLines: [], location: CLLocation())
-}
 
 class OrdersModel: NSObject {
     static let sharedInstance = OrdersModel()
@@ -32,7 +14,8 @@ class OrdersModel: NSObject {
     var order = Order()
     
     var placedOrders: [Order] = [
-        Order()
+        Order(),
+        Order(),
     ]
     
     var nextOrderCanBePlaced: Bool {
@@ -48,19 +31,19 @@ class OrdersModel: NSObject {
     }
     
     func placeOrder() -> PlaceOrderResult {
-        let signInModel = SignInModel.sharedInstance
-        if let userData = signInModel.userData, signInModel.signedIn {
-            if userData.email != nil {
-                order.userData = userData
-                if let location = DataManager.sharedInstance.orderLocation {
-                    order.location = location
+//        let signInModel = SignInModel.sharedInstance
+//        if let userData = signInModel.userData, signInModel.signedIn {
+//            if userData.email != nil {
+//                order.userData = userData
+//                if let location = DataManager.sharedInstance.orderLocation {
+//                    order.location = location
                     ServerCommunicator.sharedInstance.placeOrder()
                     return .success
-                }
-                return .noLocationFound
-            }
-        }
-        return .notSignedIn
+//                }
+//                return .noLocationFound
+//            }
+//        }
+//        return .notSignedIn
     }
     
     func orderPlaced() {
