@@ -28,7 +28,7 @@ class OrderOptionsTableViewController: UITableViewController {
     private func showDoorStepOptionsMenu() {
         showOptionsMenu(options: Order.Preferences.Doorstep.all, message: "When at my doorstep, the rider should:") { [unowned uoSelf = self] doorStepOption in
             uoSelf.doorStepOptionOutlet.text = doorStepOption.0
-            OrdersModel.sharedInstance.order.userDoorStepOption = doorStepOption.1
+            OrdersModel.sharedInstance.currentOrder.userDoorStepOption = doorStepOption.1
         }
     }
     
@@ -36,7 +36,7 @@ class OrderOptionsTableViewController: UITableViewController {
     private func showPaymentOptionsMenu() {
         showOptionsMenu(options: Order.Preferences.Payment.all, message: "I would like to pay:") { [unowned uoSelf = self] paymentOption in
             uoSelf.paymentOptionOutlet.text = paymentOption.0
-            OrdersModel.sharedInstance.order.userPaymentOption = paymentOption.1
+            OrdersModel.sharedInstance.currentOrder.userPaymentOption = paymentOption.1
         }
     }
     

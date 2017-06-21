@@ -65,7 +65,7 @@ class DataManager: NSObject {
             ImageURL: "\(ServerCommunicator.Constants.serverIP)/\(rawItem["imageURL"]! as! String)".replacingOccurrences(of: " ", with: "%20"),
             Parent: rawItem["Parent"]! as! String,
             ID: rawItem["_id"]! as! String,
-            minQuantity: Item.MinQuantity(rawMinQuantity: rawItem["minQuantity"]! as! [String : Any]),
+            minQuantity: Item.Quantity(rawQuantity: rawItem["minQuantity"]! as! [String : Any]),
             Price: rawItem["price"]! as! Double
         )
     }
@@ -145,7 +145,7 @@ class DataManager: NSObject {
         structuredItems.removeAll()
     }
     
-    var categoryTree: [Category] = ExampleCategories.MainList
+    var categoryTree = [Category]()
     private func generateCategoryTree() {
         let categoriesWithAddedItems = addItems(to: structuredCategories)
         categoryTree = reorder(categoriesWithAddedItems: categoriesWithAddedItems)
@@ -185,69 +185,6 @@ class DataManager: NSObject {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-    
-    struct ExampleCategories {
-        private static let FreshProduceList: ListType = [
-            Category(
-                Name : "Fruits",
-                ImageURL : "https://cdn.pixabay.com/photo/2016/04/01/12/20/apple-1300670.960.720.png",
-                Parent : "0",
-                ID : "1",
-                Children : [],
-                ChildrenCategories : [],
-                ChildrenItems : []
-            ),
-            Category(
-                Name : "Vegetables",
-                ImageURL : "https://cdn.pixabay.com/photo/2012/04/13/17/15/vegetables-32932.960.720.png",
-                Parent : "0",
-                ID : "2",
-                Children : [],
-                ChildrenCategories : [],
-                ChildrenItems : []
-            ),
-            ]
-        
-        private static let GroceryList: ListType = [
-            Category(
-                Name : "Fresh Produce",
-                ImageURL : "https://cdn.pixabay.com/photo/2012/04/24/16/09/fruit-40276.960.720.png",
-                Parent : "0",
-                ID : "3",
-                Children : FreshProduceList,
-                ChildrenCategories : [],
-                ChildrenItems : []
-            ),
-            Item(
-                Name : "Eggs",
-                ImageURL : "http://res.freestockphotos.biz/pictures/11/11446-illustration-of-a-white-egg-pv.png",
-                Parent: "4",
-                ID : "1",
-                minQuantity : Item.MinQuantity(rawMinQuantity: [Item.MinQuantity.NumberKey : 1, Item.MinQuantity.UnitKey : "dozen"]),
-                Price : 120
-            ),
-            Item(
-                Name : "Bread",
-                ImageURL : "https://cdn.pixabay.com/photo/2012/04/03/14/51/bread-25205.960.720.png",
-                Parent: "4",
-                ID : "2",
-                minQuantity : Item.MinQuantity(rawMinQuantity: [Item.MinQuantity.NumberKey : 50, Item.MinQuantity.UnitKey : "loaf"]),
-                Price : 80.0
-            )
-        ]
-        
-        static let MainList: [Category] = [
-            Category(
-                Name : "Grocery",
-                ImageURL : "https://static-s.aa-cdn.net/img/gp/20600004669003/AoNNBeQTIOeAnoUkuWhtAnXbGikpxa1QqwFcmSyQ51DjaBP-K5iU-3b-nbCuaGG6Ur4=w300?v=1",
-                Parent : "0",
-                ID : "4",
-                Children : GroceryList,
-                ChildrenCategories : [],
-                ChildrenItems : []
-            ),
-            ]
-    }
 }
 
 extension DataManager: CLLocationManagerDelegate {
@@ -257,6 +194,7 @@ extension DataManager: CLLocationManagerDelegate {
                 if let placeMark = placeMarks?.first {
                     if let address = placeMark.addressDictionary?["FormattedAddressLines"] as? [String] {
                         uoSelf.orderLocation = OrderLocation(addressLines: address, location: latestLocation)
+                        OrdersModel.sharedInstance.currentOrder.updateLocation(to: uoSelf.orderLocation!)
                     }
                 }
             }

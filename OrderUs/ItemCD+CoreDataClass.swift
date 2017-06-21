@@ -44,7 +44,7 @@ public class ItemCD: NSManagedObject {
                     ImageURL: itemCD.imageurl!,
                     Parent: itemCD.parent!,
                     ID: itemCD.id!,
-                    minQuantity: Item.MinQuantity(number: itemCD.minquantity_number, unit: itemCD.minquantity_unit!),
+                    minQuantity: Item.Quantity(number: itemCD.minquantity_number, unit: itemCD.minquantity_unit!),
                     Price: itemCD.price
                 )
             }

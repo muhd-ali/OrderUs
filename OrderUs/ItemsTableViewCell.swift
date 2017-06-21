@@ -23,7 +23,7 @@ class ItemsTableViewCell: UITableViewCell {
             if item != nil {
                 itemName = item.Name
                 itemImageURL = item.ImageURL
-                orderedItem = OrdersModel.sharedInstance.order.getItem(withID: item.ID)
+                orderedItem = OrdersModel.sharedInstance.currentOrder.getItem(withID: item.ID)
                 updateUI()
             }
         }
@@ -60,9 +60,8 @@ class ItemsTableViewCell: UITableViewCell {
     private func updateItemQuantityLabel() {
         var quantity = "None added in cart"
         if orderedItem != nil {
-            let value = orderedItem.quantityValue
-            quantity = "\(value) \(orderedItem.quantityUnit) in cart"
-            quantityStepperOutlet.value = value
+            quantity = "\(orderedItem.quantity.string1) in cart"
+            quantityStepperOutlet.value = orderedItem.quantity.Number
         } else {
             quantityStepperOutlet.value = 0
         }
@@ -70,14 +69,8 @@ class ItemsTableViewCell: UITableViewCell {
     }
     
     private func updatePriceDisplay() {
-        let priceStr = String(describing: item.Price)
-        let minQuantityNumber = item.minQuantity.Number
-        let minQuantityNumberStr = minQuantityNumber == 1 ? "each" : String(describing: minQuantityNumber)
-        let minQuantityUnit = item.minQuantity.Unit
-        let minQuantityUnitStr = minQuantityNumber == 1 ? minQuantityUnit : "\(minQuantityUnit)s"
-        
-        itemPriceLabel.text = "PKR \(priceStr)"
-        itemMinQuantityLabel.text = "\(minQuantityNumberStr) \(minQuantityUnitStr)"
+        itemPriceLabel.text = "PKR \(item.Price)"
+        itemMinQuantityLabel.text = "\(item.minQuantity.string2)"
     }
     
     private func updateImage() {
@@ -94,17 +87,19 @@ class ItemsTableViewCell: UITableViewCell {
     @IBAction func quantityStepperValueChanged(_ sender: QuantityStepper) {
         let currentValue = quantityStepperOutlet.value
         if orderedItem != nil {
-            quantityStepperOutlet.previousValue = orderedItem.quantityValue
+            quantityStepperOutlet.previousValue = orderedItem.quantity.Number
             if currentValue == 0 {
-                OrdersModel.sharedInstance.order.removeItem(withID: item.ID)
+                OrdersModel.sharedInstance.currentOrder.removeItem(withID: item.ID)
                 orderedItem = nil
             } else {
-                orderedItem.quantityValue = quantityStepperOutlet.value
+                orderedItem.quantity.Number = quantityStepperOutlet.value
             }
         } else {
-            let unit = item.minQuantity.Unit
-            orderedItem = Order.OrderedItem(item: item, quantityValue: currentValue, quantityUnit: currentValue == 1 ? unit : "\(unit)s")
-            OrdersModel.sharedInstance.order.items.append(orderedItem)
+            orderedItem = Order.OrderedItem(
+                item: item,
+                quantity: currentValue
+            )
+            OrdersModel.sharedInstance.currentOrder.items.append(orderedItem)
         }
         
         var transitionEffect = UIViewAnimationOptions.transitionFlipFromBottom

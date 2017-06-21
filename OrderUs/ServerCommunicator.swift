@@ -126,9 +126,9 @@ class ServerCommunicator: NSObject {
     }
     
     func placeOrder() {
-        OrdersModel.sharedInstance.order.promoteState()
+        OrdersModel.sharedInstance.currentOrder.promoteState()
         
-        let jsonData = OrdersModel.sharedInstance.order.jsonData
+        let jsonData = OrdersModel.sharedInstance.currentOrder.jsonData
         socket
             .emitWithAck(Constants.newOrder, with: [jsonData])
             .timingOut(after: 10) { (ack) in

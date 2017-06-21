@@ -11,26 +11,42 @@ import UIKit
 class OrdersViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var orderDetailsContainerView: UIView!
-    internal var orderDetailViewController: OrderDetailViewController!
+    internal var orderDetailViewController: OrderDetailViewController?
+    @IBOutlet weak var noOrdersContainerView: UIView!
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.layer.zPosition = 2
-        self.title = "Track Orders"
     }
     
-    // MARK: - Table view data source
+    private func setupDetailsView() {
+        if orders.count == 0 {
+            orderDetailsContainerView.removeFromSuperview()
+        } else {
+            noOrdersContainerView.removeFromSuperview()
+        }
+    }
+    
+    private func updateUI() {
+        self.title = "Track Orders"
+        setupTableView()
+        setupDetailsView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateUI()
+    }
+
     var orders: [Order] = OrdersModel.sharedInstance.placedOrders.pending
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dvc = segue.destination as? OrderDetailViewController {
+        if let dvc = segue.destination as? OrderDetailViewController, orders.count > 0 {
             orderDetailViewController = dvc
             dvc.order = orders[selectedRowIndex.row]
         }
@@ -79,12 +95,12 @@ extension OrdersViewController: UITableViewDelegate {
         UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
             let frame = uoSelf.orderDetailsContainerView.frame
             uoSelf.orderDetailsContainerView.frame = frame.offsetBy(dx: -frame.width, dy: 0)
-            uoSelf.orderDetailViewController.viewDidDisappear(true)
+            uoSelf.orderDetailViewController?.viewDidDisappear(true)
         }) { [unowned uoSelf = self] (completed1) in
             if completed1 {
                 let oldSelectedRowIndex = uoSelf.selectedRowIndex
                 uoSelf.selectedRowIndex = indexPath
-                uoSelf.orderDetailViewController.order = uoSelf.orders[uoSelf.selectedRowIndex.row]
+                uoSelf.orderDetailViewController?.order = uoSelf.orders[uoSelf.selectedRowIndex.row]
                 tableView.reloadRows(at: [oldSelectedRowIndex, indexPath], with: .automatic)
                 
                 UIView.animate(withDuration: animationDuration, animations: {
@@ -92,7 +108,7 @@ extension OrdersViewController: UITableViewDelegate {
                     uoSelf.orderDetailsContainerView.frame = frame.offsetBy(dx: frame.width, dy: 0)
                 }) { (completed2) in
                     if completed2 {
-                        uoSelf.orderDetailViewController.viewDidAppear(true)
+                        uoSelf.orderDetailViewController?.viewDidAppear(true)
                     }
                 }
                 

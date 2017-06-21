@@ -26,16 +26,7 @@ class PlaceOrderViewController: UIViewController {
     }
     
     func updateUI() {
-        let addressLines = DataManager.sharedInstance.orderLocation?.addressLines ?? []
-        if addressLines.count > 0 {
-            addressOutlet.text = addressLines.reduce("") { (result, address) in
-                if result.isEmpty {
-                    return address
-                } else {
-                    return result + "\n" + address
-                }
-            }
-        }
+        addressOutlet.text = DataManager.sharedInstance.orderLocation?.address ?? ""
     }
     
     @IBAction func placeOrderAction(_ sender: UIButton) {

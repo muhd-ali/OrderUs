@@ -36,10 +36,10 @@ class ItemDetailsViewController: UIViewController {
         static let itemName = "no type found"
         static let itemImageURL = "no url found"
         static let itemPrice = -1.0
-        static let itemMinQuantity = Item.MinQuantity (
-            rawMinQuantity: [
-                Item.MinQuantity.NumberKey : -1,
-                Item.MinQuantity.UnitKey : "not found"
+        static let itemMinQuantity = Item.Quantity (
+            rawQuantity: [
+                Item.Quantity.NumberKey : -1,
+                Item.Quantity.UnitKey : "not found"
             ]
         )
     }
@@ -68,22 +68,21 @@ class ItemDetailsViewController: UIViewController {
     }
     
     @IBAction func addToCartButton(_ sender: UIButton) {
-        var cartItems = OrdersModel.sharedInstance.order.items
+        var cartItems = OrdersModel.sharedInstance.currentOrder.items
         let currentThisItemInCart = cartItems.filter { cartItem -> Bool in cartItem.item.ID == item!.ID }
         if (currentThisItemInCart.count == 0) {
             cartItems.append(
                 Order.OrderedItem(
                     item: item!,
-                    quantityValue: itemQuantityValue,
-                    quantityUnit: itemQuantityUnit
+                    quantity: itemQuantityValue
                 )
             )
-            OrdersModel.sharedInstance.order.items = cartItems
+            OrdersModel.sharedInstance.currentOrder.items = cartItems
         } else {
-            OrdersModel.sharedInstance.order.items = cartItems.map {
+            OrdersModel.sharedInstance.currentOrder.items = cartItems.map {
                 let newItem = $0
                 if (newItem.item.ID == item!.ID) {
-                    newItem.quantityValue += itemQuantityValue
+                    newItem.quantity.Number += itemQuantityValue
                 }
                 return newItem
             }
@@ -156,8 +155,6 @@ class ItemDetailsViewController: UIViewController {
             },
             completion: nil
         )
-        
-        
     }
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!

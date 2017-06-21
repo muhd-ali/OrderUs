@@ -11,11 +11,9 @@ import Foundation
 class OrdersModel: NSObject {
     static let sharedInstance = OrdersModel()
     
-    var order = Order()
+    var currentOrder = Order()
     
     var placedOrders: [Order] = [
-        Order(),
-        Order(),
     ]
     
     var nextOrderCanBePlaced: Bool {
@@ -47,8 +45,8 @@ class OrdersModel: NSObject {
     }
     
     func orderPlaced() {
-        order.timeStamp = Order.TimeStamp(startedAt: Date(), acknowledgedAt: nil, acceptedAt: nil, delieveredAt: nil)
-        placedOrders.append(order)
-        order = Order()
+        currentOrder.timeStamp = Order.TimeStamp(startedAt: Date(), acknowledgedAt: nil, acceptedAt: nil, delieveredAt: nil)
+        placedOrders.append(currentOrder)
+        currentOrder = Order()
     }
 }

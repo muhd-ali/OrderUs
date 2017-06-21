@@ -9,25 +9,31 @@
 import Foundation
 
 struct Item: Selectable {
-    struct MinQuantity {
+    struct Quantity {
         static let NumberKey = "number"
         static let UnitKey = "unit"
-        let Number: Double
+        var Number: Double
         let Unit: String
-        init(rawMinQuantity: [String : Any]) {
-            Number = Double(rawMinQuantity[MinQuantity.NumberKey]! as! Int)
-            Unit = rawMinQuantity[MinQuantity.UnitKey]! as! String
+        init(rawQuantity: [String : Any]) {
+            Number = Double(rawQuantity[Quantity.NumberKey]! as! Int)
+            Unit = rawQuantity[Quantity.UnitKey]! as! String
         }
-        
         init(number: Double, unit: String) {
             Number = number
             Unit = unit
         }
-    }
+        var string1: String {
+            return "\(Number) \(Unit)\(Number == 1 ? "" : "s")"
+        }
+
+        var string2: String {
+            return "\(Number == 1 ? "each" : "\(Number)") \(Unit)\(Number == 1 ? "" : "s")"
+        }
+}
     internal var Name: String
     internal var ImageURL: String
     internal var Parent: String
     internal var ID: String
-    var minQuantity: MinQuantity
+    var minQuantity: Quantity
     var Price: Double
 }
