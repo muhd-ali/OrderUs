@@ -30,18 +30,8 @@ class PlaceOrderViewController: UIViewController {
     }
     
     @IBAction func placeOrderAction(_ sender: UIButton) {
-        if OrdersModel.sharedInstance.nextOrderCanBePlaced {
-            delegate?.userRequestedToPlaceOrder()
-            _ = navigationController?.popViewController(animated: true)
-        } else {
-            HUD.flash(
-                .labeledProgress(
-                    title: "Please Wait",
-                    subtitle: "Please wait while your previous order is acknowledged"
-                ),
-                delay: 0.5
-            )
-        }
+        delegate?.userRequestedToPlaceOrder()
+        _ = navigationController?.popViewController(animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

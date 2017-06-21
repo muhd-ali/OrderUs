@@ -78,9 +78,15 @@ class OrderDetailViewController: UIViewController {
         }
     }
     
+    private func scrollOrderDetailsPageToBottom() {
+        let orderDetailsLastIndex = IndexPath(row: 0, section: orderDetails.count - 1)
+        orderDetailsTableView.scrollToRow(at: orderDetailsLastIndex, at: .top, animated: true)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateProgressBar()
+        scrollOrderDetailsPageToBottom()
     }
     
     override func viewDidLoad() {
@@ -146,6 +152,8 @@ extension OrderDetailViewController: UITableViewDataSource {
         switch tableView.tag {
         case 1:
             return orderDetails[section].name
+        case 2:
+            return "Items: "
         default:
             return nil
         }

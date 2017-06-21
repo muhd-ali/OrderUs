@@ -46,6 +46,14 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
                 .labeledError(title: "Location", subtitle: "Please enable location services and try again"),
                 delay: 0.5
             )
+        case .pendingOrderInQueue:
+            HUD.flash(
+                .labeledProgress(
+                    title: "Please Wait",
+                    subtitle: "Please wait while your previous order is acknowledged"
+                ),
+                delay: 0.5
+            )
         }
         userAskedToPlaceOrder = false
     }

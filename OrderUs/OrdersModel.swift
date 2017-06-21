@@ -25,16 +25,18 @@ class OrdersModel: NSObject {
     }
     
     enum PlaceOrderResult {
-        case success, notSignedIn, noLocationFound
+        case success, notSignedIn, noLocationFound, pendingOrderInQueue
     }
     
     func placeOrder() -> PlaceOrderResult {
+//        guard OrdersModel.sharedInstance.nextOrderCanBePlaced else { return .pendingOrderInQueue }
 //        let signInModel = SignInModel.sharedInstance
 //        if let userData = signInModel.userData, signInModel.signedIn {
 //            if userData.email != nil {
-//                order.userData = userData
+//                currentOrder.userData = userData
 //                if let location = DataManager.sharedInstance.orderLocation {
-//                    order.location = location
+//                    currentOrder.location = location
+        
                     ServerCommunicator.sharedInstance.placeOrder()
                     return .success
 //                }
