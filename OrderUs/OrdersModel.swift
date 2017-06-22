@@ -14,6 +14,8 @@ class OrdersModel: NSObject {
     var currentOrder = Order()
     
     var placedOrders: [Order] = [
+        Order(),
+        Order(),
     ]
     
     var nextOrderCanBePlaced: Bool {

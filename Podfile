@@ -6,11 +6,12 @@ target 'OrderUs' do
   use_frameworks!
 
   # Pods for OrderUs
-  pod 'PKHUD', '~> 4.2'
-  pod "MIBadgeButton-Swift", :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
+  pod 'PKHUD'
+  pod 'BBBadgeBarButtonItem'
   pod 'Socket.IO-Client-Swift'
-  pod 'SDWebImage', '~> 4.0'
+  pod 'SDWebImage'
   pod "FlexibleSteppedProgressBar"
+  pod 'UIImageColors'
 
   # Facebook
   pod 'FacebookCore'

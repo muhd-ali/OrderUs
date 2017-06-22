@@ -16,7 +16,11 @@ class MainMenuViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.tintColor = Constants.appTintColor
+        tabBar.tintColor = UIColor.green
+        tabBar.items?.forEach{ (item)in
+//            item.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.white], for: .normal)
+            item.image = item.image?.withRenderingMode(.alwaysOriginal)
+        }
     }
     
     private let animationDuration: TimeInterval = 0.2

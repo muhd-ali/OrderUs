@@ -199,7 +199,7 @@
                     <navigationItem key="navigationItem" id="fc9-Y8-cLu">
                         <barButtonItem key="leftBarButtonItem" image="icon-sideMenu" id="CYG-5h-GlA"/>
                         <rightBarButtonItems>
-                            <barButtonItem image="icon-shoppingCart" style="plain" id="JIg-bR-WMy">
+                            <barButtonItem image="icon-shoppingCart" style="plain" id="JIg-bR-WMy" customClass="BBBadgeBarButtonItem">
                                 <connections>
                                     <segue destination="stU-Fw-yXh" kind="show" id="I8B-UE-iQ4"/>
                                 </connections>
@@ -209,7 +209,7 @@
                                     <action selector="searchButtonAction:" destination="FnB-8v-oM5" id="WPF-L8-QgD"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="icon-tracking" style="plain" id="uPu-Qs-RIn">
+                            <barButtonItem image="icon-tracking" style="plain" id="uPu-Qs-RIn" customClass="BBBadgeBarButtonItem">
                                 <connections>
                                     <segue destination="QwQ-fb-oXC" kind="show" id="xCT-WD-t7H"/>
                                 </connections>
@@ -222,9 +222,10 @@
                         <outlet property="blurViewTopConstraint" destination="Tan-cK-8nt" id="hio-mH-vSP"/>
                         <outlet property="collectionView" destination="01F-wz-Pmz" id="t9g-Uk-xXc"/>
                         <outlet property="searchBarView" destination="GsD-ug-0LG" id="a9U-lY-fve"/>
-                        <outlet property="searchButtonOutlet" destination="GZj-5g-NJg" id="OKj-cl-Y4S"/>
                         <outlet property="seatchBarViewTopOffset" destination="EhB-vP-zNz" id="I8S-lr-XdM"/>
+                        <outlet property="shoppingCartButtonOutlet" destination="JIg-bR-WMy" id="UZ0-Pe-nxE"/>
                         <outlet property="sideMenuButtonOutlet" destination="CYG-5h-GlA" id="03U-UY-stV"/>
+                        <outlet property="trackingButtonOutlet" destination="uPu-Qs-RIn" id="oDP-Z3-lyP"/>
                         <segue destination="4dV-Eb-mBd" kind="show" identifier="MiddleCategories" id="Jlw-nv-vsl"/>
                     </connections>
                 </viewController>
@@ -564,7 +565,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="66" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="810-Y1-Zla">
-                                <rect key="frame" x="12" y="273" width="216" height="161"/>
+                                <rect key="frame" x="12" y="269" width="216" height="165"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderedItemTableViewCell" rowHeight="66" id="Htr-FV-34s" customClass="OrderedItemTableViewCell" customModule="OrderUs" customModuleProvider="target">
@@ -580,7 +581,7 @@
                                                         <constraint firstAttribute="width" secondItem="rw0-5J-YsB" secondAttribute="height" multiplier="1:1" id="0jQ-Du-LBV"/>
                                                     </constraints>
                                                 </imageView>
-                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="pXq-R0-5fG">
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pXq-R0-5fG">
                                                     <rect key="frame" x="27" y="23.5" width="20" height="20"/>
                                                 </activityIndicatorView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7u-ka-d4K">
@@ -632,7 +633,7 @@
                                                 <constraint firstItem="Doo-dv-UeK" firstAttribute="height" secondItem="wCw-C8-laD" secondAttribute="height" id="xNQ-Ho-XO9"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="orderedItemImageView" destination="rw0-5J-YsB" id="Vvo-dG-Vb6"/>
                                             <outlet property="orderedItemNameLabel" destination="U7u-ka-d4K" id="RGA-wY-hSC"/>
@@ -657,7 +658,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="34" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lmJ-lb-Aa1">
-                                <rect key="frame" x="12" y="104" width="216" height="161"/>
+                                <rect key="frame" x="12" y="104" width="216" height="165"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailCell" rowHeight="34" id="cvd-fR-42C">
@@ -667,7 +668,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="216" height="34"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3Y-F0-DnL">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="right" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3Y-F0-DnL">
                                                     <rect key="frame" x="0.0" y="0.0" width="216" height="33.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <string key="text">Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information InformationInformationInformation v Information Information Information Information</string>
@@ -692,7 +693,7 @@
                         <constraints>
                             <constraint firstItem="r5L-fg-CWj" firstAttribute="top" secondItem="810-Y1-Zla" secondAttribute="bottom" constant="8" symbolic="YES" id="6bM-Hh-L6K"/>
                             <constraint firstItem="v7h-x5-8Ed" firstAttribute="height" secondItem="3od-s3-Sob" secondAttribute="height" multiplier="0.2" id="6eb-w7-WPk"/>
-                            <constraint firstItem="810-Y1-Zla" firstAttribute="top" secondItem="lmJ-lb-Aa1" secondAttribute="bottom" constant="8" symbolic="YES" id="86d-hO-Bdm"/>
+                            <constraint firstItem="810-Y1-Zla" firstAttribute="top" secondItem="lmJ-lb-Aa1" secondAttribute="bottom" id="86d-hO-Bdm"/>
                             <constraint firstItem="810-Y1-Zla" firstAttribute="height" secondItem="lmJ-lb-Aa1" secondAttribute="height" id="Ap9-53-Sci"/>
                             <constraint firstItem="r5L-fg-CWj" firstAttribute="width" secondItem="810-Y1-Zla" secondAttribute="width" id="G3Y-6O-4wg"/>
                             <constraint firstItem="810-Y1-Zla" firstAttribute="width" secondItem="lmJ-lb-Aa1" secondAttribute="width" id="GCP-PL-Vq6"/>
@@ -1018,7 +1019,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="99" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zh7-dK-dGO">
-                                <rect key="frame" x="0.0" y="107" width="320" height="302"/>
+                                <rect key="frame" x="0.0" y="107" width="320" height="253"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderedItemTableViewCell" rowHeight="99" id="1MM-sZ-cHK" customClass="OrderedItemTableViewCell" customModule="OrderUs" customModuleProvider="target">
@@ -1103,7 +1104,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zml-Q5-zfM">
-                                <rect key="frame" x="40" y="417" width="240" height="46"/>
+                                <rect key="frame" x="40" y="368" width="240" height="46"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Proceed"/>
@@ -1150,7 +1151,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="act-eb-5xt">
-                                <rect key="frame" x="40" y="426" width="240" height="46"/>
+                                <rect key="frame" x="40" y="377" width="240" height="46"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Place Order"/>
@@ -1159,7 +1160,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2X-uZ-vSq">
-                                <rect key="frame" x="0.0" y="176" width="320" height="242"/>
+                                <rect key="frame" x="0.0" y="176" width="320" height="193"/>
                                 <connections>
                                     <segue destination="QbX-mj-aKD" kind="embed" identifier="orderOptionsView" id="JbR-mQ-I5F"/>
                                 </connections>
@@ -1601,7 +1602,7 @@
             <objects>
                 <tableViewController id="QbX-mj-aKD" customClass="OrderOptionsTableViewController" customModule="OrderUs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="1aC-3Y-b2w">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="242"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="193"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -1833,9 +1834,9 @@
         <image name="root-background" width="1656" height="2944"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sfg-du-b3T"/>
-        <segue reference="BfG-Gc-36s"/>
-        <segue reference="lUb-hu-OVu"/>
+        <segue reference="Jlw-nv-vsl"/>
+        <segue reference="I8B-UE-iQ4"/>
+        <segue reference="xCT-WD-t7H"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

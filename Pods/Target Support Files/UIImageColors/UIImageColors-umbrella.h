@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double MIBadgeButton_SwiftVersionNumber;
-FOUNDATION_EXPORT const unsigned char MIBadgeButton_SwiftVersionString[];
+FOUNDATION_EXPORT double UIImageColorsVersionNumber;
+FOUNDATION_EXPORT const unsigned char UIImageColorsVersionString[];
 

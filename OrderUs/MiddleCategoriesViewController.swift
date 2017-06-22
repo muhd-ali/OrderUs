@@ -162,10 +162,10 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let categoryCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MiddleCategoriesCellView")
         if let cell = categoryCell as? MiddleSuperCategoryView {
-            cell.category = categories[section]
+            let category = categories[section]
+            cell.category = category
             cell.controller = self
             cell.indexSection = section
-            cell.contentView.backgroundColor = UIColor.groupTableViewBackground
         }
         return categoryCell
     }
@@ -189,7 +189,8 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
         if indexPath.row == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "MiddleCategoryCollection", for: indexPath)
             if let categoriesCell = cell as? BottomCategoriesTableViewCell {
-                categoriesCell.categories = categories[indexPath.section].Children.categories()
+                let category = categories[indexPath.section]
+                categoriesCell.categories = category.Children.categories()
                 categoriesCell.containerHeight = rowHeight
                 categoriesCell.controller = self
                 categoriesCell.parentIndex = indexPath.section

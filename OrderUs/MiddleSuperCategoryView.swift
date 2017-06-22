@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UIImageColors
 
 class MiddleSuperCategoryView: UITableViewHeaderFooterView {
     @IBOutlet weak var imageView: UIImageView!
@@ -62,9 +63,12 @@ class MiddleSuperCategoryView: UITableViewHeaderFooterView {
         if let url = URL(string: categoryImageURL) {
             spinner.startAnimating()
             imageView.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
+                uiImage?.getColors(scaleDownSize: CGSize(width: 10, height: 10)) { (colors) in
+                    uoSelf.contentView.backgroundColor = colors.primary.withAlphaComponent(0.8)
+                }
                 uoSelf.spinner.stopAnimating()
             }
         }
     }
-
+    
 }

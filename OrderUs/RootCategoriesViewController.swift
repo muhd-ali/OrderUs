@@ -8,7 +8,7 @@
 
 import UIKit
 import SDWebImage
-
+import BBBadgeBarButtonItem
 
 class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     let appTintColor = MainMenuViewController.Constants.appTintColor
@@ -24,7 +24,25 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     
     
-    @IBOutlet weak var searchButtonOutlet: UIBarButtonItem!
+    
+    @IBOutlet weak var trackingButtonOutlet: BBBadgeBarButtonItem!
+    @IBOutlet weak var shoppingCartButtonOutlet: BBBadgeBarButtonItem!
+    
+    private func setBadge(string: String, on item: BBBadgeBarButtonItem) {
+        item.badgeValue = string
+        item.badgeBGColor = UIColor.white
+        item.badgeTextColor = appTintColor
+        item.shouldHideBadgeAtZero = true
+        item.shouldAnimateBadge = true
+    }
+    
+    private func setBadges() {
+        let ordersModel = OrdersModel.sharedInstance
+        print("asdasd")
+        setBadge(string: "\(ordersModel.placedOrders.count)", on: trackingButtonOutlet)
+        setBadge(string: "\(ordersModel.currentOrder.items.count)", on: shoppingCartButtonOutlet)
+    }
+    
     @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
         searchBarIsHidden ? showSearchBar() : hideSearchBar()
     }
@@ -109,9 +127,7 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if (tabBarController?.tabBar.isHidden ?? false) {
-            showTabBar()
-        }
+        setBadges()
     }
     
     var dataChangedFunctionCalled: Bool = false

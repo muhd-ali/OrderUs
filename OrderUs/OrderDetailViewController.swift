@@ -105,9 +105,9 @@ class OrderDetailViewController: UIViewController {
 extension OrderDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         switch tableView.tag {
-        case 1:
+        case orderDetailsTableView.tag:
             return orderDetails.count
-        case 2:
+        case orderedItemsTableView.tag:
             return 1
         default:
             return 0
@@ -116,9 +116,9 @@ extension OrderDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView.tag {
-        case 1:
+        case orderDetailsTableView.tag:
             return 1
-        case 2:
+        case orderedItemsTableView.tag:
             return order.items.count
         default:
             return 0
@@ -127,7 +127,7 @@ extension OrderDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView.tag {
-        case 1:
+        case orderDetailsTableView.tag:
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath)
             if let textView = cell.viewWithTag(1) as? UITextView {
                 textView.text = orderDetails[indexPath.section].value
@@ -137,7 +137,7 @@ extension OrderDetailViewController: UITableViewDataSource {
                 textView.frame = frame
             }
             return cell
-        case 2:
+        case orderedItemsTableView.tag:
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderedItemTableViewCell", for: indexPath)
             if let itemCell = cell as? OrderedItemTableViewCell {
                 itemCell.orderedItem = order.items[indexPath.row]
@@ -150,9 +150,9 @@ extension OrderDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch tableView.tag {
-        case 1:
+        case orderDetailsTableView.tag:
             return orderDetails[section].name
-        case 2:
+        case orderedItemsTableView.tag:
             return "Items: "
         default:
             return nil

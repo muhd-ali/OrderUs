@@ -1,4 +1,5 @@
 PODS:
+  - BBBadgeBarButtonItem (1.2)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -53,34 +54,26 @@ PODS:
   - GTMSessionFetcher/Core (1.1.10)
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
-  - MIBadgeButton-Swift (0.5)
   - PKHUD (4.2.3)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
-  - Socket.IO-Client-Swift (10.0.0)
+  - Socket.IO-Client-Swift (10.0.1)
+  - UIImageColors (1.4.0)
 
 DEPENDENCIES:
+  - BBBadgeBarButtonItem
   - FacebookCore
   - FacebookLogin
   - FlexibleSteppedProgressBar
   - Google/SignIn
-  - MIBadgeButton-Swift (from `https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git`, branch `master`)
-  - PKHUD (~> 4.2)
-  - SDWebImage (~> 4.0)
+  - PKHUD
+  - SDWebImage
   - Socket.IO-Client-Swift
-
-EXTERNAL SOURCES:
-  MIBadgeButton-Swift:
-    :branch: master
-    :git: https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git
-
-CHECKOUT OPTIONS:
-  MIBadgeButton-Swift:
-    :commit: 3c2638d2e6e46ec2e6dd978d8ada8863df3df5e6
-    :git: https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git
+  - UIImageColors
 
 SPEC CHECKSUMS:
+  BBBadgeBarButtonItem: c2fbca0bff18e21b70defc9438a8a5048008e7ca
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
@@ -95,11 +88,11 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
-  MIBadgeButton-Swift: 9e57309b00b168d75ca8fecb45bc75124a8ffddf
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  Socket.IO-Client-Swift: 9c5b4e5e76e30e1b9a1804c40e11dad0a002b1a4
+  Socket.IO-Client-Swift: f6553633ba6a01df8f1c8b583ec36560901e9de6
+  UIImageColors: 1f891e1a3224efebb01ad476df3a5aed4220ee24
 
-PODFILE CHECKSUM: 51924827fc8bbeefa27e992472730b28d134310d
+PODFILE CHECKSUM: cba779100f51be6744da1a571fe40d976fca2758
 
 COCOAPODS: 1.2.1
