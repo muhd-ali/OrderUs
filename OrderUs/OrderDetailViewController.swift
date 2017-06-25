@@ -59,7 +59,7 @@ class OrderDetailViewController: UIViewController {
         progressBarOutlet.progressLineHeight = lineHeight * 2
         progressBarOutlet.delegate = self
         progressBarOutlet.stepTextFont = progressBarOutlet.stepTextFont!.withSize(10)
-        progressBarOutlet.stepAnimationDuration = 0.2
+        progressBarOutlet.stepAnimationDuration = MainMenuViewController.Constants.animationDuration
     }
     
     private func updateProgressBar() {

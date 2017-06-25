@@ -8,10 +8,16 @@
 
 import UIKit
 
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+}
 
 class MainMenuViewController: UITabBarController {
     struct Constants {
         static let appTintColor = UIColor(red: 244/255, green: 124/255, blue: 32/255, alpha: 1)
+        static let animationDuration: TimeInterval = 0.2
     }
     
     override func viewDidLoad() {
@@ -23,7 +29,7 @@ class MainMenuViewController: UITabBarController {
         }
     }
     
-    private let animationDuration: TimeInterval = 0.2
+    private let animationDuration: TimeInterval = Constants.animationDuration
     
     private func applyYOffsetToTabBar(yOffset: CGFloat) {
         tabBar.frame = tabBar.frame.offsetBy(dx: 0, dy: yOffset)

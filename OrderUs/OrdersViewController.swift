@@ -56,42 +56,9 @@ class OrdersViewController: UIViewController {
 }
 
 extension OrdersViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch section {
-//        case 0:
-//            return "Pending"
-//        default:
-//            return ""
-//        }
-//    }
-
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard indexPath != selectedRowIndex else { return }
-//        let animationDuration: TimeInterval = 0.2
-//        let frame = orderDetailsContainerView.frame
-//        let lastSelectedRowIndex = selectedRowIndex
-//        let lastSelectedCell = tableView.cellForRow(at: lastSelectedRowIndex)!
-//        let lastSelectedCellFrameInView = lastSelectedCell.convert(lastSelectedCell.frame, to: view)
-//        orderDetailsContainerView.frame = CGRect(x: lastSelectedCellFrameInView.origin.x, y: lastSelectedCellFrameInView.midY, width: 1, height: 1)
-//        UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
-//            uoSelf.orderDetailsContainerView.layoutIfNeeded()
-//        }) { [unowned uoSelf = self] (completed) in
-//            if completed {
-//                uoSelf.selectedRowIndex = indexPath
-//                uoSelf.orderDetailViewController.order = uoSelf.orders[uoSelf.selectedRowIndex.row]
-//                tableView.reloadRows(at: [lastSelectedRowIndex, indexPath], with: .automatic)
-//                
-//                uoSelf.orderDetailsContainerView.frame = frame
-//                UIView.animate(withDuration: animationDuration, animations: {
-//                    uoSelf.orderDetailsContainerView.layoutIfNeeded()
-//                })
-//            }
-//        }
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath != selectedRowIndex else { return }
-        let animationDuration: TimeInterval = 0.2
+        let animationDuration: TimeInterval = MainMenuViewController.Constants.animationDuration
         UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
             let frame = uoSelf.orderDetailsContainerView.frame
             uoSelf.orderDetailsContainerView.frame = frame.offsetBy(dx: -frame.width, dy: 0)

@@ -10,8 +10,8 @@ import UIKit
 import SDWebImage
 
 class RootCategoriesViewController: UIViewController, DataManagerDelegate {
-    let appTintColor = MainMenuViewController.Constants.appTintColor
-    let animationDuration: TimeInterval = 0.2
+    private let appTintColor = MainMenuViewController.Constants.appTintColor
+    private let animationDuration: TimeInterval = MainMenuViewController.Constants.animationDuration
     
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var blurViewTopConstraint: NSLayoutConstraint!
@@ -124,12 +124,11 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         hideSearchBar()
-        if let dvc = segue.destination as? MiddleCategoriesTableViewController,
+        if let dvc = segue.destination as? TreeHeirarchyViewController      ,
             let index = sender as? Int,
             segue.identifier == "MiddleCategories" {
-            let selected = categories[index]
-            dvc.categories = selected.Children.categories()
-            dvc.title = selected.Name
+            dvc.masterCategories = categories
+            dvc.selectedMasterIndex = IndexPath(row: index, section: 0)
         }
     }
     

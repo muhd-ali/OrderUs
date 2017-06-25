@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchResultsTableViewController: UITableViewController {
-    static func initializeFor(tableList: [Selectable], navigationController: UINavigationController?, delegate: UISearchBarDelegate?, searchBarView: UIView?) -> UISearchBar {
+    static func initializeFor(tableList: [Selectable], navigationController: UINavigationController?, delegate: UISearchBarDelegate?, searchBarView: UIView?) -> SearchResultsTableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let searchResultsController = storyboard.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
         searchResultsController?.tableList = tableList
@@ -28,10 +28,12 @@ class SearchResultsTableViewController: UITableViewController {
         searchBar.tintColor = UIColor.white
         searchBarView?.addSubview(searchBar)
         searchBar.sizeToFit()
-        return searchBar
+        searchResultsController?.searchBar = searchBar
+        return searchResultsController!
     }
     
     var tableList: [Selectable]?
+    var searchBar: UISearchBar?
     var parentNavigationController: UINavigationController?
     var searchController: UISearchController?
     internal var results: [SearchResult] = []
@@ -41,6 +43,8 @@ class SearchResultsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        automaticallyAdjustsScrollViewInsets = false
+        tableView.contentInset.top = 64
         let nib = UINib(nibName: "SearchHeaderView", bundle: nil)
         tableView.register(nib, forHeaderFooterViewReuseIdentifier: "SearchHeaderView")
     }
@@ -91,9 +95,8 @@ class SearchResultsTableViewController: UITableViewController {
                 dismiss(animated: true) { [unowned uoSelf = self] in
                     uoSelf.parentNavigationController?.pushViewController(vc, animated: true)
                 }
-            } else if let vc = storyboard?.instantiateViewController(withIdentifier: "MiddleCategoriesController") as? MiddleCategoriesTableViewController {
-                vc.categories = category.Children.categories()
-                vc.title = category.Name
+            } else if let vc = storyboard?.instantiateViewController(withIdentifier: "TreeHeirarchyViewController") as? TreeHeirarchyViewController {
+                vc.masterCategories = category.Children.categories()
                 dismiss(animated: true) { [unowned uoSelf = self] in
                     uoSelf.parentNavigationController?.pushViewController(vc, animated: true)
                 }

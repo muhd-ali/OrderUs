@@ -69,8 +69,10 @@ class ItemsTableViewController: UITableViewController {
         }
     }
     
+    private var searchController: SearchResultsTableViewController?
     private func initializeSearchController() {
-        tableView.tableHeaderView = SearchResultsTableViewController.initializeFor(tableList: tableList, navigationController: navigationController, delegate: nil, searchBarView: nil)
+        searchController = SearchResultsTableViewController.initializeFor(tableList: tableList, navigationController: navigationController, delegate: nil, searchBarView: nil)
+        tableView.tableHeaderView = searchController!.searchBar
         hideSearchBar()
     }
     
