@@ -49,6 +49,7 @@ class ItemsTableViewCell: UITableViewCell {
     }
     
     private func setStepperUI() {
+        quantityStepperOutlet.maximumValue = 100 * item.minQuantity.Number
         quantityStepperOutlet.setIncrementImage(#imageLiteral(resourceName: "stepperPlus"), for: .normal)
         quantityStepperOutlet.setDecrementImage(#imageLiteral(resourceName: "stepperMinus"), for: .normal)
         let image = #imageLiteral(resourceName: "stepperBkg")

@@ -9,8 +9,6 @@
 import UIKit
 
 class SearchResultsTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var resultPathCollectionView: UICollectionView!
     
     var rowHeight: CGFloat!
@@ -18,7 +16,6 @@ class SearchResultsTableViewCell: UITableViewCell {
     var result: SearchResult! {
         didSet {
             if result != nil {
-                resultLabel.attributedText = result.attributedPath
                 resultPathCollectionView.dataSource = self
                 resultPathCollectionView.delegate = self
                 resultPathCollectionView.reloadData()
@@ -44,7 +41,7 @@ extension SearchResultsTableViewCell: UICollectionViewDelegate {
 
 extension SearchResultsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var side: CGFloat = rowHeight - (resultLabel.bounds.height + 16)
+        var side: CGFloat = 0.9 * rowHeight
         if isLinkCell(at: indexPath) {
             side = side / 3
         }

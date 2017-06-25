@@ -49,11 +49,7 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
         super.viewDidAppear(animated)
     }
     
-    var categories: [Category] = [] {
-        didSet {
-            searchResultsController?.tableList = categories
-        }
-    }
+    var categories: [Category] = []
     
     struct Constants {
         static let noSelectedSection = -1
@@ -109,7 +105,7 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     }
     
     @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
-        let searchBarHeight: CGFloat = searchController.searchBar.bounds.height
+        let searchBarHeight: CGFloat = tableView.tableHeaderView!.bounds.height
         let navigationBarHeight = navigationController?.navigationBar.bounds.height ?? 0
         let statusBarHeight: CGFloat = UIApplication.shared.statusBarView?.bounds.height ?? 0
         let navigationBarOffset = (navigationBarHeight + statusBarHeight) - searchBarHeight
@@ -125,28 +121,13 @@ class MiddleCategoriesTableViewController: UITableViewController, DataManagerDel
     
     private func hideSearchBar() {
         if tableView.contentOffset.y == 0.0 {
-            let searchBarHeight = searchController.searchBar.bounds.height
+            let searchBarHeight = tableView.tableHeaderView!.bounds.height
             tableView.contentOffset = CGPoint(x: 0.0, y: searchBarHeight)
         }
     }
     
-    private var searchController: UISearchController!
-    private var searchResultsController: SearchResultsTableViewController?
-    
     private func initializeSearchController() {
-        searchResultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
-        searchResultsController?.tableList = categories
-        searchResultsController?.parentNavigationController = navigationController
-        searchResultsController?.searchController = searchController
-        
-        searchController = UISearchController(searchResultsController: searchResultsController)
-        searchController.searchResultsUpdater = searchResultsController
-        
-        searchController.dimsBackgroundDuringPresentation = true
-        let searchBar = searchController.searchBar
-        searchBar.barTintColor = appTintColor
-        tableView.tableHeaderView = searchBar
-        searchBar.sizeToFit()
+        tableView.tableHeaderView = SearchResultsTableViewController.initializeFor(tableList: categories, navigationController: navigationController, delegate: nil, searchBarView: nil)
         hideSearchBar()
     }
     

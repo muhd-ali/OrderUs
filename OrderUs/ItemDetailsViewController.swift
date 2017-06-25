@@ -23,7 +23,7 @@ class ItemDetailsViewController: UIViewController {
     var item: Item! {
         didSet {
             if item != nil {
-                orderedItem = Order.OrderedItem(item: item!, quantity: item!.minQuantity.Number)
+                orderedItem = Order.OrderedItem(item: item, quantity: item.minQuantity.Number)
                 if isViewLoaded {
                     updateUI()
                 }
@@ -44,14 +44,14 @@ class ItemDetailsViewController: UIViewController {
     
     @IBAction func addToCartButton(_ sender: UIButton) {
         var cartItems = OrdersModel.sharedInstance.currentOrder.items
-        let currentThisItemInCart = cartItems.filter { cartItem -> Bool in cartItem.item.ID == item!.ID }
+        let currentThisItemInCart = cartItems.filter { cartItem -> Bool in cartItem.item.ID == item.ID }
         if (currentThisItemInCart.count == 0) {
             cartItems.append(orderedItem)
             OrdersModel.sharedInstance.currentOrder.items = cartItems
         } else {
             OrdersModel.sharedInstance.currentOrder.items = cartItems.map {
                 let newItem = $0
-                if (newItem.item.ID == item!.ID) {
+                if (newItem.item.ID == item.ID) {
                     newItem.quantity.Number += orderedItem.quantity.Number
                 }
                 return newItem
@@ -70,7 +70,8 @@ class ItemDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        quantityStepperOutlet.minimumValue = item!.minQuantity.Number
+        quantityStepperOutlet.minimumValue = item.minQuantity.Number
+        quantityStepperOutlet.maximumValue = 100 * item.minQuantity.Number
         quantityStepperOutlet.stepValue = quantityStepperOutlet.minimumValue
         orderedItem.quantity.Number = quantityStepperOutlet.minimumValue
         updateUI()
@@ -83,13 +84,13 @@ class ItemDetailsViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        navigationBar.items?.last?.title = item?.Name
+        navigationBar.items?.last?.title = item.Name
     }
     
     private func updateUI() {
         setupStatusBar()
         setupNavigationBar()
-        itemNameLabel.text = item?.Name
+        itemNameLabel.text = item.Name
         updateImage()
         updateDynamicContent(increasingValues: true)
     }

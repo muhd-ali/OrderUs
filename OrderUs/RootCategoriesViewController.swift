@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import BBBadgeBarButtonItem
 
 class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     let appTintColor = MainMenuViewController.Constants.appTintColor
@@ -25,23 +24,9 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     
     
     
-    @IBOutlet weak var trackingButtonOutlet: BBBadgeBarButtonItem!
-    @IBOutlet weak var shoppingCartButtonOutlet: BBBadgeBarButtonItem!
+    @IBOutlet weak var trackingButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var shoppingCartButtonOutlet: UIBarButtonItem!
     
-    private func setBadge(string: String, on item: BBBadgeBarButtonItem) {
-        item.badgeValue = string
-        item.badgeBGColor = UIColor.white
-        item.badgeTextColor = appTintColor
-        item.shouldHideBadgeAtZero = true
-        item.shouldAnimateBadge = true
-    }
-    
-    private func setBadges() {
-        let ordersModel = OrdersModel.sharedInstance
-        print("asdasd")
-        setBadge(string: "\(ordersModel.placedOrders.count)", on: trackingButtonOutlet)
-        setBadge(string: "\(ordersModel.currentOrder.items.count)", on: shoppingCartButtonOutlet)
-    }
     
     @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
         searchBarIsHidden ? showSearchBar() : hideSearchBar()
@@ -125,11 +110,6 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         initializeSearchController() // breaks if called in viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setBadges()
-    }
-    
     var dataChangedFunctionCalled: Bool = false
     func dataChanged(newList: [Category]) {
         dataChangedFunctionCalled = true
@@ -178,25 +158,8 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     }
     
     private var searchBarIsHidden = true
-    private var searchController: UISearchController!
-    private var searchResultsController: SearchResultsTableViewController?
-    
     private func initializeSearchController() {
-        searchResultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
-        searchResultsController?.tableList = categories
-        searchResultsController?.parentNavigationController = navigationController
-        searchResultsController?.searchController = searchController
-        
-        searchController = UISearchController(searchResultsController: searchResultsController)
-        searchController.searchResultsUpdater = searchResultsController
-        
-        searchController.dimsBackgroundDuringPresentation = true
-        
-        let searchBar = searchController.searchBar
-        searchBar.delegate = self
-        searchBar.barTintColor = appTintColor
-        searchBarView.addSubview(searchBar)
-        searchBar.sizeToFit()
+        _ = SearchResultsTableViewController.initializeFor(tableList: categories, navigationController: navigationController, delegate: self, searchBarView: searchBarView)
         hideSearchBar()
     }
     

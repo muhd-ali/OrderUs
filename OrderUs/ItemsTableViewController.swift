@@ -11,11 +11,7 @@ import UIKit
 class ItemsTableViewController: UITableViewController {
     private let appTintColor = MainMenuViewController.Constants.appTintColor
     
-    var tableList: [Item] = [] {
-        didSet {
-            searchResultsController?.tableList = tableList
-        }
-    }
+    var tableList: [Item] = []
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dvc = segue.destination as? ItemDetailsViewController {
@@ -52,7 +48,7 @@ class ItemsTableViewController: UITableViewController {
     }
     
     @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
-        let searchBarHeight: CGFloat = searchController.searchBar.bounds.height
+        let searchBarHeight: CGFloat = tableView.tableHeaderView!.bounds.height
         let navigationBarHeight = navigationController?.navigationBar.bounds.height ?? 0
         let statusBarHeight: CGFloat = UIApplication.shared.statusBarView?.bounds.height ?? 0
         let navigationBarOffset = (navigationBarHeight + statusBarHeight) - searchBarHeight
@@ -67,29 +63,14 @@ class ItemsTableViewController: UITableViewController {
     }
     
     private func hideSearchBar() {
-        let searchBarHeight = searchController.searchBar.bounds.height
+        let searchBarHeight = tableView.tableHeaderView!.bounds.height
         if tableView.contentOffset.y == 0.0 {
             tableView.contentOffset = CGPoint(x: 0.0, y: searchBarHeight)
         }
     }
     
-    private var searchController: UISearchController!
-    private var searchResultsController: SearchResultsTableViewController?
-    
     private func initializeSearchController() {
-        searchResultsController = storyboard?.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
-        searchResultsController?.tableList = tableList
-        searchResultsController?.parentNavigationController = navigationController
-        searchResultsController?.searchController = searchController
-        
-        searchController = UISearchController(searchResultsController: searchResultsController)
-        searchController.searchResultsUpdater = searchResultsController
-        
-        searchController.dimsBackgroundDuringPresentation = true
-        let searchBar = searchController.searchBar
-        searchBar.barTintColor = appTintColor
-        tableView.tableHeaderView = searchBar
-        searchBar.sizeToFit()
+        tableView.tableHeaderView = SearchResultsTableViewController.initializeFor(tableList: tableList, navigationController: navigationController, delegate: nil, searchBarView: nil)
         hideSearchBar()
     }
     

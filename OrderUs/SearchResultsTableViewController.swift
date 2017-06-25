@@ -9,6 +9,28 @@
 import UIKit
 
 class SearchResultsTableViewController: UITableViewController {
+    static func initializeFor(tableList: [Selectable], navigationController: UINavigationController?, delegate: UISearchBarDelegate?, searchBarView: UIView?) -> UISearchBar {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let searchResultsController = storyboard.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
+        searchResultsController?.tableList = tableList
+        searchResultsController?.parentNavigationController = navigationController
+        
+        let searchController = UISearchController(searchResultsController: searchResultsController)
+        searchResultsController?.searchController = searchController
+        searchController.searchResultsUpdater = searchResultsController
+        searchController.dimsBackgroundDuringPresentation = true
+        
+        let searchBar = searchController.searchBar
+        if delegate != nil {
+            searchBar.delegate = delegate
+        }
+        searchBar.barTintColor = MainMenuViewController.Constants.appTintColor
+        searchBar.tintColor = UIColor.white
+        searchBarView?.addSubview(searchBar)
+        searchBar.sizeToFit()
+        return searchBar
+    }
+    
     var tableList: [Selectable]?
     var parentNavigationController: UINavigationController?
     var searchController: UISearchController?
@@ -17,20 +39,38 @@ class SearchResultsTableViewController: UITableViewController {
         return tableView.bounds.height / 5
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let nib = UINib(nibName: "SearchHeaderView", bundle: nil)
+        tableView.register(nib, forHeaderFooterViewReuseIdentifier: "SearchHeaderView")
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return results.count
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SearchHeaderView")
+        if let searchHeader = view as? SearchHeaderView {
+            searchHeader.searchLabel.attributedText = results[section].attributedPath
+            searchHeader.contentView.backgroundColor = UIColor.groupTableViewBackground
+        }
+        return view
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchResultCell", for: indexPath)
         
         if let resultCell = cell as? SearchResultsTableViewCell {
-            let result = results[indexPath.row]
+            let result = results[indexPath.section]
             resultCell.result = result
             resultCell.rowHeight = rowHeight
             resultCell.controller = self
