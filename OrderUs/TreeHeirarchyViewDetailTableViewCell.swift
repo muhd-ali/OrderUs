@@ -28,11 +28,9 @@ class TreeHeirarchyViewDetailTableViewCell: UITableViewCell {
     }
     
     private func updateImage() {
-        if let url = URL(string: category.ImageURL) {
-            spinner.startAnimating()
-            nodeImageView.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
-                uoSelf.spinner.stopAnimating()
-            }
+        spinner.startAnimating()
+        category.applyImage(to: nodeImageView) { [unowned uoSelf = self] in
+            uoSelf.spinner.stopAnimating()
         }
     }
 }

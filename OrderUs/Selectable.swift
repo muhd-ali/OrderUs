@@ -7,12 +7,35 @@
 //
 
 import Foundation
+import SDWebImage
 
-protocol Selectable {
-    var Name: String {get}
-    var ImageURL: String {get}
-    var Parent: String {get}
-    var ID: String {get}
+class Selectable { // Never to be Instantiated!!!
+    let Name: String
+    let ImageURL: String
+    let Parent: String
+    let ID: String
+    
+    internal init(rawSelectable: [String: Any]) {
+        Name =  rawSelectable["Name"]! as! String
+        ImageURL = "\(ServerCommunicator.Constants.serverIP)/\(rawSelectable["imageURL"]! as! String)".replacingOccurrences(of: " ", with: "%20")
+        Parent = rawSelectable["Parent"]! as! String
+        ID = rawSelectable["_id"]! as! String
+    }
+    
+    internal init(Name: String, ImageURL: String, Parent: String, ID: String) {
+        self.Name = Name
+        self.ImageURL = ImageURL
+        self.Parent = Parent
+        self.ID = ID
+    }
+    
+    func applyImage(to imageView: UIImageView, completion: (() -> Void)?) {
+        if let url = URL(string: ImageURL) {
+            imageView.sd_setImage(with: url) { (uiImage, error, cacheType, url) in
+                completion?()
+            }
+        }
+    }
 }
 
 struct SearchResult {

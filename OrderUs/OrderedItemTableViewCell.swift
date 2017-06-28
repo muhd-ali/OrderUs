@@ -31,11 +31,9 @@ class OrderedItemTableViewCell: UITableViewCell {
     }
     
     private func updateImage() {
-        if let url = URL(string: orderedItem.item.ImageURL) {
-            spinner.startAnimating()
-            orderedItemImageView.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
-                uoSelf.spinner.stopAnimating()
-            }
+        spinner.startAnimating()
+        orderedItem.item.applyImage(to: orderedItemImageView) { [unowned uoSelf = self] in
+            uoSelf.spinner.stopAnimating()
         }
     }
 }

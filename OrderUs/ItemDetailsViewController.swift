@@ -14,10 +14,6 @@ class ItemDetailsViewController: UIViewController {
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var itemQuantityLabel: UILabel!
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBAction func CancelButtonPressed(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
     
     private var orderedItem: Order.OrderedItem!
     var item: Item! {
@@ -42,39 +38,19 @@ class ItemDetailsViewController: UIViewController {
         updateDynamicContent(increasingValues: quantityStepperOutlet.valueIsIncreasing)
     }
     
-    @IBAction func addToCartButton(_ sender: UIButton) {
-        var cartItems = OrdersModel.sharedInstance.currentOrder.items
-        let currentThisItemInCart = cartItems.filter { cartItem -> Bool in cartItem.item.ID == item.ID }
-        if (currentThisItemInCart.count == 0) {
-            cartItems.append(orderedItem)
-            OrdersModel.sharedInstance.currentOrder.items = cartItems
-        } else {
-            OrdersModel.sharedInstance.currentOrder.items = cartItems.map {
-                let newItem = $0
-                if (newItem.item.ID == item.ID) {
-                    newItem.quantity.Number += orderedItem.quantity.Number
-                }
-                return newItem
-            }
-        }
-        
-        
-        HUD.flash(
-            .labeledSuccess(title: "Added To Cart", subtitle: nil),
-            delay: 0.5) { [unowned uoSelf = self] finished in
-                if finished {
-                    uoSelf.dismiss(animated: true, completion: nil)
-                }
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func setupStepper() {
         quantityStepperOutlet.minimumValue = item.minQuantity.Number
         quantityStepperOutlet.maximumValue = 100 * item.minQuantity.Number
         quantityStepperOutlet.stepValue = quantityStepperOutlet.minimumValue
         orderedItem.quantity.Number = quantityStepperOutlet.minimumValue
-        updateUI()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if item != nil {
+            setupStepper()
+            updateUI()
+        }
     }
     
     func setupStatusBar() {
@@ -83,13 +59,8 @@ class ItemDetailsViewController: UIViewController {
         statusBar?.tintColor = UIColor.white
     }
     
-    func setupNavigationBar() {
-        navigationBar.items?.last?.title = item.Name
-    }
-    
     private func updateUI() {
         setupStatusBar()
-        setupNavigationBar()
         itemNameLabel.text = item.Name
         updateImage()
         updateDynamicContent(increasingValues: true)
@@ -130,11 +101,9 @@ class ItemDetailsViewController: UIViewController {
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     private func updateImage() {
-        if let url = URL(string: item.ImageURL) {
-            spinner.startAnimating()
-            itemImageView.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
-                uoSelf.spinner.stopAnimating()
-            }
+        spinner.startAnimating()
+        item.applyImage(to: itemImageView) { [unowned uoSelf = self] in
+            uoSelf.spinner.stopAnimating()
         }
     }
 }

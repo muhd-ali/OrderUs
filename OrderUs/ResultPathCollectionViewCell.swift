@@ -27,11 +27,9 @@ class ResultPathCollectionViewCell: UICollectionViewCell {
     }
     
     private func updateImage() {
-        if let url = URL(string: selectable.ImageURL) {
-            spinner.startAnimating()
-            pathCellImageView.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
-                uoSelf.spinner.stopAnimating()
-            }
+        spinner.startAnimating()
+        selectable.applyImage(to: pathCellImageView) { [unowned uoSelf = self] in
+            uoSelf.spinner.stopAnimating()
         }
     }
 }

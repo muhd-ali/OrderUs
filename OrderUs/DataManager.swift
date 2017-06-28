@@ -58,18 +58,6 @@ class DataManager: NSObject {
         }
     }
     
-    
-    private func makeItem(rawItem:  [String : Any]) -> Item {
-        return Item(
-            Name: rawItem["Name"]! as! String,
-            ImageURL: "\(ServerCommunicator.Constants.serverIP)/\(rawItem["imageURL"]! as! String)".replacingOccurrences(of: " ", with: "%20"),
-            Parent: rawItem["Parent"]! as! String,
-            ID: rawItem["_id"]! as! String,
-            minQuantity: Item.Quantity(rawQuantity: rawItem["minQuantity"]! as! [String : Any]),
-            Price: rawItem["price"]! as! Double
-        )
-    }
-    
     private func ifDataFetchedFromServerGenerateTree() {
         if itemsLoaded && categoriesLoaded {
             generateCategoryTree()
@@ -95,46 +83,10 @@ class DataManager: NSObject {
     private var structuredItems: [Item] = []
     var rawItems: [[String : Any]] = [] {
         didSet {
-            structuredItems = rawItems.map { makeItem(rawItem: $0) }
+            structuredItems = rawItems.map { Item(rawItem: $0) }
             updateItemsInDB(items: structuredItems)
             itemsLoaded = true
             ifDataFetchedFromServerGenerateTree()
-        }
-    }
-    
-    private func makeCategory(rawCategory: [String : Any]) -> Category {
-        return Category(
-            Name: rawCategory["Name"]! as! String,
-            ImageURL: "\(ServerCommunicator.Constants.serverIP)/\(rawCategory["imageURL"]! as! String)".replacingOccurrences(of: " ", with: "%20"),
-            Parent: rawCategory["Parent"]! as! String,
-            ID: rawCategory["_id"]! as! String,
-            Children: [],
-            ChildrenCategories: rawCategory["ChildrenCategories"]! as! [String],
-            ChildrenItems: rawCategory["ChildrenItems"]! as! [String]
-        )
-    }
-    
-    private func addChildrenCategories(to category: Category, from list: [Category]) -> Category {
-        var childrenCategories = list.filter {category.ChildrenCategories.contains($0.ID)}
-        childrenCategories = childrenCategories.map {
-            return addChildrenCategories(to: $0, from: list)
-        }
-        var modifiedCategory = category
-        modifiedCategory.Children.append(contentsOf: childrenCategories as [Selectable])
-        return modifiedCategory
-    }
-    
-    private func reorder(categoriesWithAddedItems: [Category]) -> [Category] {
-        let reordered = categoriesWithAddedItems.map { addChildrenCategories(to: $0, from: categoriesWithAddedItems) }
-        return reordered.filter{ $0.Parent == "0" }
-    }
-    
-    private func addItems(to categories: [Category]) -> [Category] {
-         return categories.map { categoryWithoutChildren in
-            var category = categoryWithoutChildren
-            let children = structuredItems.filter { item in category.ChildrenItems.contains(item.ID) }
-            category.Children.append(contentsOf: children as [Selectable])
-            return category
         }
     }
     
@@ -147,8 +99,8 @@ class DataManager: NSObject {
     
     var categoryTree = [Category]()
     private func generateCategoryTree() {
-        let categoriesWithAddedItems = addItems(to: structuredCategories)
-        categoryTree = reorder(categoriesWithAddedItems: categoriesWithAddedItems)
+        let categoriesWithAddedItems = structuredCategories.addChildren(items: structuredItems)
+        categoryTree = categoriesWithAddedItems.setOrder()
         //freeMemory()
         delegate.dataChanged(newList: categoryTree)
     }
@@ -169,7 +121,7 @@ class DataManager: NSObject {
     private var structuredCategories: [Category] = []
     var rawCategories: [[String : Any]] = [] {
         didSet {
-            structuredCategories = rawCategories.map { makeCategory(rawCategory: $0) }
+            structuredCategories = rawCategories.map { Category(rawCategory: $0) }
             updateCategoriesInDB(categories: structuredCategories)
             categoriesLoaded = true
             ifDataFetchedFromServerGenerateTree()

@@ -65,7 +65,9 @@ class SearchResultsTableViewController: UITableViewController {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SearchHeaderView")
         if let searchHeader = view as? SearchHeaderView {
             searchHeader.searchLabel.attributedText = results[section].attributedPath
-            searchHeader.contentView.backgroundColor = UIColor.groupTableViewBackground
+            let bgColor = UIColor.groupTableViewBackground
+            searchHeader.contentView.backgroundColor = bgColor
+            searchHeader.backgroundColor = bgColor
         }
         return view
     }
@@ -89,8 +91,8 @@ class SearchResultsTableViewController: UITableViewController {
     
     func selected(selectable: Selectable) {
         if let category = selectable as? Category {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "ItemsTableViewController") as? ItemsTableViewController, category.containsItems {
-                vc.tableList = category.Children.items()
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "ItemsViewController") as? ItemsViewController, category.containsItems {
+                vc.items = category.Children.items()
                 vc.title = category.Name
                 dismiss(animated: true) { [unowned uoSelf = self] in
                     uoSelf.parentNavigationController?.pushViewController(vc, animated: true)

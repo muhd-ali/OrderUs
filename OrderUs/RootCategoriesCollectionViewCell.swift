@@ -50,12 +50,10 @@ class RootCategoriesCollectionViewCell: UICollectionViewCell {
             ).cgPath
     }
     
-    func updateImage() {
-        if let url = URL(string: categoryImageURL) {
-            spinner.startAnimating()
-            categoryImage.sd_setImage(with: url) { [unowned uoSelf = self] (uiImage, error, cacheType, url) in
-                uoSelf.spinner.stopAnimating()
-            }
+    private func updateImage() {
+        spinner.startAnimating()
+        category?.applyImage(to: categoryImage) { [unowned uoSelf = self] in
+            uoSelf.spinner.stopAnimating()
         }
     }
 }

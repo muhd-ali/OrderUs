@@ -24,9 +24,9 @@ class TreeHeirarchyViewController: UIViewController, DataManagerDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dvc = segue.destination as? ItemsTableViewController, segue.identifier == "Items" {
+        if let dvc = segue.destination as? ItemsViewController, segue.identifier == "Items" {
             if let category = sender as? Category {
-                dvc.tableList = category.Children.items()
+                dvc.items = category.Children.items()
                 dvc.title = category.Name
             }
         }
@@ -36,6 +36,7 @@ class TreeHeirarchyViewController: UIViewController, DataManagerDelegate {
         didSet {
             if isViewLoaded {
                 treeView.masterCategoriesChanged(to: masterCategories)
+                searchController?.tableList = masterCategories
             }
         }
     }
@@ -43,6 +44,7 @@ class TreeHeirarchyViewController: UIViewController, DataManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         DataManager.sharedInstance.delegate = self
+        hideSearchBar()
         initializeUI()
         initializeSearchController()
     }
@@ -50,8 +52,11 @@ class TreeHeirarchyViewController: UIViewController, DataManagerDelegate {
     private var searchBarIsHidden = true
     internal var searchController: SearchResultsTableViewController?
     private func initializeSearchController() {
-        searchController = SearchResultsTableViewController.initializeFor(tableList: treeView.detailCategories, navigationController: navigationController, delegate: self, searchBarView: searchView)
-        hideSearchBar()
+        let index = selectedMasterIndex.row
+        guard masterCategories.count > index else { return }
+        let selected = masterCategories[index]
+        let categories = selected.Children.categories()
+        searchController = SearchResultsTableViewController.initializeFor(tableList: categories, navigationController: navigationController, delegate: self, searchBarView: searchView)
     }
     
     private func animateLayout(delay: TimeInterval) {
@@ -103,7 +108,7 @@ class TreeHeirarchyViewController: UIViewController, DataManagerDelegate {
         return treeView.detailCategories
     }
     
-    var selectedMasterIndex: IndexPath?
+    var selectedMasterIndex = IndexPath(item: 0, section: 0)
     
     private func initializeUI() {
         automaticallyAdjustsScrollViewInsets = false

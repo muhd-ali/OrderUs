@@ -13,11 +13,14 @@ import CoreData
 public class ItemCD: NSManagedObject {
     
     class func replaceOrAddItem(with item: Item, inManagedObjectContext context: NSManagedObjectContext) -> ItemCD? {
+        if item.ID == "23" {
+            print(item.Name)
+        }
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ItemCD")
         request.predicate = NSPredicate(format: "id = %@", item.ID)
         
-        if let itemCD = (try? context.fetch(request))?.first {
-            context.delete(itemCD as! NSManagedObject)
+        if let itemCD = (try? context.fetch(request))?.first as? ItemCD {
+            context.delete(itemCD)
         }
         
         if let itemCD = NSEntityDescription.insertNewObject(forEntityName: "ItemCD", into: context) as? ItemCD {
@@ -38,16 +41,7 @@ public class ItemCD: NSManagedObject {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ItemCD")
         
         if let itemsCD = (try? context.fetch(request)) as? [ItemCD] {
-            return itemsCD.map { itemCD in
-                Item(
-                    Name: itemCD.name!,
-                    ImageURL: itemCD.imageurl!,
-                    Parent: itemCD.parent!,
-                    ID: itemCD.id!,
-                    minQuantity: Item.Quantity(number: itemCD.minquantity_number, unit: itemCD.minquantity_unit!),
-                    Price: itemCD.price
-                )
-            }
+            return itemsCD.map { Item(itemCD: $0) }
         }
         
         return nil

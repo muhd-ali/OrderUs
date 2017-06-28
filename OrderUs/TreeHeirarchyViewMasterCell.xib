@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,13 +17,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f5l-aI-CQJ">
-                    <rect key="frame" x="20" y="20" width="184" height="124"/>
+                    <rect key="frame" x="11" y="0.0" width="202" height="172"/>
                 </imageView>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Yp8-Xm-6hP">
-                    <rect key="frame" x="102" y="72" width="20" height="20"/>
+                    <rect key="frame" x="102" y="76" width="20" height="20"/>
                 </activityIndicatorView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="dev-Be-HKB">
-                    <rect key="frame" x="0.0" y="152" width="224" height="20"/>
+                    <rect key="frame" x="11" y="172" width="202" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="X8b-Vs-0Mu"/>
                     </constraints>
@@ -32,14 +33,14 @@
                 </label>
             </subviews>
             <constraints>
-                <constraint firstItem="dev-Be-HKB" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="18G-aX-uzh"/>
-                <constraint firstAttribute="bottom" secondItem="dev-Be-HKB" secondAttribute="bottom" constant="20" symbolic="YES" id="IN9-AK-khR"/>
-                <constraint firstItem="f5l-aI-CQJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" id="M1f-bK-bX5"/>
+                <constraint firstItem="dev-Be-HKB" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="18G-aX-uzh"/>
+                <constraint firstAttribute="bottom" secondItem="dev-Be-HKB" secondAttribute="bottom" id="IN9-AK-khR"/>
+                <constraint firstItem="f5l-aI-CQJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="M1f-bK-bX5"/>
                 <constraint firstItem="Yp8-Xm-6hP" firstAttribute="centerY" secondItem="f5l-aI-CQJ" secondAttribute="centerY" id="NdD-ew-fvi"/>
-                <constraint firstAttribute="trailing" secondItem="f5l-aI-CQJ" secondAttribute="trailing" constant="20" symbolic="YES" id="YOy-b5-ILa"/>
-                <constraint firstItem="dev-Be-HKB" firstAttribute="top" secondItem="f5l-aI-CQJ" secondAttribute="bottom" constant="8" symbolic="YES" id="gRz-aO-21O"/>
+                <constraint firstItem="f5l-aI-CQJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Xko-FN-Kz0"/>
+                <constraint firstItem="dev-Be-HKB" firstAttribute="top" secondItem="f5l-aI-CQJ" secondAttribute="bottom" id="gRz-aO-21O"/>
                 <constraint firstItem="Yp8-Xm-6hP" firstAttribute="centerX" secondItem="f5l-aI-CQJ" secondAttribute="centerX" id="mo8-zY-7xS"/>
-                <constraint firstItem="f5l-aI-CQJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="sQJ-Ay-7Xp"/>
+                <constraint firstItem="f5l-aI-CQJ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="qdc-hI-g7Z"/>
                 <constraint firstItem="dev-Be-HKB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vwv-ib-Rq7"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

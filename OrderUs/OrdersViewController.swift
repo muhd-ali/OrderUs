@@ -17,7 +17,6 @@ class OrdersViewController: UIViewController {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.layer.zPosition = 2
