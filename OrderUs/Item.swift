@@ -51,22 +51,27 @@ class Item: Selectable {
     }
     
     private var isInShoppingCartPrivate: Bool?
-    var orderedItem: Order.OrderedItem?
+    private var orderedItemPrivate: Order.OrderedItem?
     
     private func checkShoppingCart() {
-        let orderedItems = OrdersModel.sharedInstance.currentOrder.items.filter { $0.item.ID == ID }
-        if !orderedItems.isEmpty {
-            isInShoppingCartPrivate = true
-            orderedItem = orderedItems.first
-        } else {
+        let currentOrder = OrdersModel.sharedInstance.currentOrder
+        let orderedItem = currentOrder.getItem(withID: ID)
+        if orderedItem == nil {
+            orderedItemPrivate = Order.OrderedItem(item: self)
             isInShoppingCartPrivate = false
+        } else {
+            orderedItemPrivate = orderedItem
+            isInShoppingCartPrivate = true
         }
     }
     
     var isInShoppingCart: Bool {
-        if isInShoppingCartPrivate == nil {
-            checkShoppingCart()
-        }
+        checkShoppingCart()
         return isInShoppingCartPrivate!
+    }
+    
+    var orderedItem: Order.OrderedItem {
+        checkShoppingCart()
+        return orderedItemPrivate!
     }
 }

@@ -640,7 +640,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="216" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rw0-5J-YsB">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rw0-5J-YsB">
                                                     <rect key="frame" x="8" y="4" width="59" height="59"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="rw0-5J-YsB" secondAttribute="height" multiplier="1:1" id="0jQ-Du-LBV"/>
@@ -1099,7 +1099,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xrC-AO-LiV">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xrC-AO-LiV">
                                                     <rect key="frame" x="8" y="5" width="88.5" height="88.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="xrC-AO-LiV" secondAttribute="height" multiplier="1:1" id="trm-c4-M64"/>

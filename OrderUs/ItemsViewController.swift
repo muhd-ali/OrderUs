@@ -79,22 +79,25 @@ class ItemsViewController: UIViewController {
     }
     
     internal func updateDetailView(to indexPath: IndexPath) {
+        itemDetailViewController?.viewWillDisappear(true) // {
         let animationDuration: TimeInterval = MainMenuViewController.Constants.animationDuration
         UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
             let frame = uoSelf.itemDetailContainerView.frame
             uoSelf.itemDetailContainerView.frame = frame.offsetBy(dx: -frame.width, dy: 0)
-            uoSelf.itemDetailViewController?.viewDidDisappear(true)
         }) { [unowned uoSelf = self] (completed1) in
             if completed1 {
+                uoSelf.itemDetailViewController?.viewDidDisappear(true)
+                // }
                 uoSelf.selectedRowIndex = indexPath
                 uoSelf.itemDetailViewController?.item = uoSelf.items[uoSelf.selectedRowIndex.row]
-                
+                uoSelf.itemDetailViewController?.viewWillAppear(true) // {
                 UIView.animate(withDuration: animationDuration, animations: {
                     let frame = uoSelf.itemDetailContainerView.frame
                     uoSelf.itemDetailContainerView.frame = frame.offsetBy(dx: frame.width, dy: 0)
                 }) { (completed2) in
                     if completed2 {
                         uoSelf.itemDetailViewController?.viewDidAppear(true)
+                        // }
                     }
                 }
                 

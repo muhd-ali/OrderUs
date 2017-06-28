@@ -44,6 +44,14 @@ class Order: NSObject {
         items = items.filter({ $0.item.ID != withID })
     }
     
+    func set(item: OrderedItem) {
+        removeItem(withID: item.item.ID)
+        guard item.quantity.Number > 0 else {
+            return
+        }
+        items.append(item)
+    }
+    
     var totalCost: Double {
         return items.reduce(0) { (result, orderedItem) in
             result + orderedItem.totalCost

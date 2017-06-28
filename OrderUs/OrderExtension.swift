@@ -92,10 +92,10 @@ extension Order {
         var item: Item
         var quantity: Item.Quantity
         
-        init(item: Item, quantity: Double) {
+        init(item: Item) {
             self.item = item
             self.quantity = item.minQuantity
-            self.quantity.Number = quantity
+            self.quantity.Number = 0
             super.init()
         }
         

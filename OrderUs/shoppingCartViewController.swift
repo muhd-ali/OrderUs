@@ -17,11 +17,13 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
     }
     
     @IBOutlet weak var cartTableView: UITableView!
-    var shoppingCartList: [Order.OrderedItem] = OrdersModel.sharedInstance.currentOrder.items
+    internal var  currentOrder = OrdersModel.sharedInstance.currentOrder
+    internal var shoppingCartList: [Order.OrderedItem] = []
     
     @IBOutlet weak var totalCostDisplay: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        shoppingCartList = currentOrder.items
         cartTableView.dataSource = self
         cartTableView.delegate = self
         updateUI()
@@ -110,10 +112,14 @@ extension shoppingCartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            shoppingCartList.remove(at: indexPath.section)
-            OrdersModel.sharedInstance.currentOrder.items = shoppingCartList
+            let item = shoppingCartList[indexPath.section]
+            currentOrder.removeItem(withID: item.item.ID)
+            shoppingCartList = currentOrder.items
+            tableView.deleteSections(
+                IndexSet(integer: indexPath.section),
+                with: .automatic
+            )
             updateUI()
-            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .fade)
         default: break
         }
     }

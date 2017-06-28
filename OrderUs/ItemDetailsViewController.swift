@@ -16,16 +16,7 @@ class ItemDetailsViewController: UIViewController {
     @IBOutlet weak var itemQuantityLabel: UILabel!
     
     private var orderedItem: Order.OrderedItem!
-    var item: Item! {
-        didSet {
-            if item != nil {
-                orderedItem = Order.OrderedItem(item: item, quantity: item.minQuantity.Number)
-                if isViewLoaded {
-                    updateUI()
-                }
-            }
-        }
-    }
+    var item: Item!
     
     let appTintColor = MainMenuViewController.Constants.appTintColor
     
@@ -39,18 +30,24 @@ class ItemDetailsViewController: UIViewController {
     }
     
     private func setupStepper() {
-        quantityStepperOutlet.minimumValue = item.minQuantity.Number
+        quantityStepperOutlet.minimumValue = 0
         quantityStepperOutlet.maximumValue = 100 * item.minQuantity.Number
-        quantityStepperOutlet.stepValue = quantityStepperOutlet.minimumValue
-        orderedItem.quantity.Number = quantityStepperOutlet.minimumValue
+        quantityStepperOutlet.value = orderedItem.quantity.Number
+        quantityStepperOutlet.stepValue = item.minQuantity.Number
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if item != nil {
+            orderedItem = item.orderedItem
             setupStepper()
             updateUI()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        OrdersModel.sharedInstance.currentOrder.set(item: orderedItem)
     }
     
     func setupStatusBar() {
@@ -64,10 +61,6 @@ class ItemDetailsViewController: UIViewController {
         itemNameLabel.text = item.Name
         updateImage()
         updateDynamicContent(increasingValues: true)
-    }
-    
-    private func getTotalPrice() -> Double {
-        return item.Price / quantityStepperOutlet.minimumValue * quantityStepperOutlet.value
     }
     
     private func updateDynamicContent(increasingValues: Bool) {
@@ -93,7 +86,7 @@ class ItemDetailsViewController: UIViewController {
             duration: 0.25,
             options: [.curveEaseInOut, transitionEffect],
             animations: { [unowned uoSelf = self] in
-                uoSelf.itemPriceLabel.text = "\(uoSelf.getTotalPrice()) PKR"
+                uoSelf.itemPriceLabel.text = "\(uoSelf.orderedItem.totalCost) PKR"
             },
             completion: nil
         )
