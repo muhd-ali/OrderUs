@@ -92,13 +92,13 @@ class SearchResultsTableViewController: UITableViewController {
     func selected(selectable: Selectable) {
         if let category = selectable as? Category {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "ItemsViewController") as? ItemsViewController, category.containsItems {
-                vc.items = category.Children.items()
-                vc.title = category.Name
-                dismiss(animated: true) { [unowned uoSelf = self] in
-                    uoSelf.parentNavigationController?.pushViewController(vc, animated: true)
-                }
-            } else if let vc = storyboard?.instantiateViewController(withIdentifier: "TreeHeirarchyViewController") as? TreeHeirarchyViewController {
-                vc.masterCategories = category.Children.categories()
+//                vc.items = category.Children.items()
+//                vc.title = category.Name
+//                dismiss(animated: true) { [unowned uoSelf = self] in
+//                    uoSelf.parentNavigationController?.pushViewController(vc, animated: true)
+//                }
+            } else if let vc = storyboard?.instantiateViewController(withIdentifier: "TreeHeirarchyViewController") as? SelectableViewController {
+                vc.categories = category.Children.categories()
                 dismiss(animated: true) { [unowned uoSelf = self] in
                     uoSelf.parentNavigationController?.pushViewController(vc, animated: true)
                 }

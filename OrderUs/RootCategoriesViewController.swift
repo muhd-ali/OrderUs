@@ -124,10 +124,10 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         hideSearchBar()
-        if let dvc = segue.destination as? TreeHeirarchyViewController      ,
+        if let dvc = segue.destination as? SelectableViewController      ,
             let index = sender as? Int,
             segue.identifier == "MiddleCategories" {
-            dvc.masterCategories = categories
+            dvc.categories = categories
             dvc.selectedMasterIndex = IndexPath(row: index, section: 0)
         }
     }

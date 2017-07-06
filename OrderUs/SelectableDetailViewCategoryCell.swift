@@ -1,5 +1,5 @@
 //
-//  TreeHeirarchyViewMasterTableViewCell.swift
+//  TreeHeirarchyViewDetailTableViewCell.swift
 //  OrderUs
 //
 //  Created by Muhammadali on 25/06/2017.
@@ -8,10 +8,11 @@
 
 import UIKit
 
-class TreeHeirarchyViewMasterTableViewCell: UITableViewCell {
+class SelectableDetailViewCategoryCell: UITableViewCell {
     @IBOutlet weak var nodeLabel: UILabel!
     @IBOutlet weak var nodeImageView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     
     var category: Category! {
         didSet {
