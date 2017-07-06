@@ -874,7 +874,7 @@
                                                                 <constraint firstAttribute="height" constant="20" id="IzR-dn-Yl4"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                                            <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="06Q-A8-3i6">
@@ -884,6 +884,7 @@
                                                             <rect key="frame" x="4" y="8" width="72" height="63"/>
                                                         </imageView>
                                                     </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="06Q-A8-3i6" firstAttribute="centerX" secondItem="ore-s1-6wK" secondAttribute="centerX" id="6se-v9-eCC"/>
                                                         <constraint firstItem="vfU-6a-PuW" firstAttribute="centerX" secondItem="3qX-sq-7M8" secondAttribute="centerX" id="DUE-if-frG"/>
@@ -896,6 +897,7 @@
                                                         <constraint firstItem="ore-s1-6wK" firstAttribute="width" secondItem="3qX-sq-7M8" secondAttribute="width" multiplier="0.9" id="xag-Dc-KRF"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <outlet property="itemImageView" destination="ore-s1-6wK" id="oGi-TW-qhd"/>
                                                     <outlet property="itemLabel" destination="vfU-6a-PuW" id="u6K-Us-7gy"/>

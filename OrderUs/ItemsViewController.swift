@@ -145,13 +145,15 @@ extension ItemsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
         if let itemCell = cell as? ItemsTableViewCell {
             itemCell.item = items[indexPath.row]
-        }
-        
-        if indexPath.row == selectedRowIndex.row {
-            cell.backgroundColor = UIColor.white
-        } else {
-            cell.backgroundColor = UIColor.clear
+            if indexPath.row == selectedRowIndex.row {
+                itemCell.contentView.backgroundColor = UIColor.white
+                itemCell.itemLabel.textColor = UIColor.black
+            } else {
+                itemCell.updateBGColor()
+                itemCell.itemLabel.textColor = UIColor.white
+            }
         }
         return cell
+        
     }
 }

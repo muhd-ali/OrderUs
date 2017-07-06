@@ -50,31 +50,20 @@ class Item: Selectable {
         super.init(Name: name, ImageURL: imageURL, Parent: parent, ID: id)
     }
     
-    private var isInShoppingCartPrivate: Bool?
     private weak var orderedItemPrivate: Order.OrderedItem?
     
     private func checkShoppingCart() {
         let currentOrder = OrdersModel.sharedInstance.currentOrder
         let orderedItem = currentOrder.getItem(withID: ID)
-        if orderedItem == nil {
-            isInShoppingCartPrivate = false
-        } else {
+        if orderedItem != nil {
             orderedItemPrivate = orderedItem
-            isInShoppingCartPrivate = true
+        } else {
+            orderedItemPrivate = nil
         }
-    }
-    
-    var isInShoppingCart: Bool {
-        if isInShoppingCartPrivate == nil {
-            checkShoppingCart()
-        }
-        return isInShoppingCartPrivate!
     }
     
     var orderedItem: Order.OrderedItem {
-        if isInShoppingCartPrivate == nil {
-            checkShoppingCart()
-        }
+        checkShoppingCart()
         if orderedItemPrivate == nil {
             return Order.OrderedItem(item: self)
         } else {

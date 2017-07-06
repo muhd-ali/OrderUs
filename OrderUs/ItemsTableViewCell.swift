@@ -26,6 +26,14 @@ class ItemsTableViewCell: UITableViewCell {
         updateImage()
     }
     
+    func updateBGColor() {
+        if item.orderedItem.quantity.Number > 0 {
+            contentView.backgroundColor = MainMenuViewController.Constants.appTintColor
+        } else {
+            contentView.backgroundColor = UIColor.clear
+        }
+    }
+    
     private func updateImage() {
         spinner.startAnimating()
         item.applyImage(to: itemImageView) { [unowned uoSelf = self] in
