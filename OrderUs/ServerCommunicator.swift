@@ -14,7 +14,7 @@ class ServerCommunicator: NSObject {
     static let sharedInstance = ServerCommunicator()
     
     struct Constants {
-        static let serverIP = "http://192.168.0.216"
+        static let serverIP = "http://192.168.0.223"
 //        static let serverIP = "http://192.168.0.105"
         static let connectionEstablished = "connect"
         static let checkIfDataNeedsToBeReloaded = "dataNeedsToBeReloaded"

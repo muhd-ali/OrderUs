@@ -20,6 +20,10 @@ class ItemDetailsViewController: UIViewController {
     
     let appTintColor = MainMenuViewController.Constants.appTintColor
     
+    @IBOutlet weak var titleItem: UINavigationItem!
+    @IBAction func didPressCloseButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
     @IBOutlet weak var quantityStepperOutlet: QuantityStepper!
@@ -59,6 +63,7 @@ class ItemDetailsViewController: UIViewController {
     private func updateUI() {
         setupStatusBar()
         itemNameLabel.text = item.Name
+        titleItem.title = item.Name
         updateImage()
         updateDynamicContent(increasingValues: true)
     }

@@ -31,22 +31,32 @@ class Category: Selectable {
     }
     
     var containsItems: Bool {
-       return ChildrenCategories.isEmpty
+        return ChildrenCategories.isEmpty
     }
     
     func contains(item: Item) -> Bool {
         return ChildrenItems.contains(item.ID)
     }
-
+    
     func contains(category: Category) -> Bool {
         return ChildrenCategories.contains(category.ID)
     }
-
-    internal func addChildren(from list: [Category]) -> Category {
+    
+    internal func addChildrenCategories(from list: [Category]) -> Category {
         let childrenCategories = list.filter { self.contains(category: $0) }
+        childrenCategories.forEach { $0.parentCategory = self }
+        
         let modifiedCategory = self
         modifiedCategory.Children.append(contentsOf: childrenCategories as [Selectable])
         return modifiedCategory
+    }
+    
+    func getGroupCategories() -> [Category] {
+        if Parent == "0" {
+            return DataManager.sharedInstance.categoryTree
+        } else  {
+            return parentCategory.Children as! [Category]
+        }
     }
 }
 
@@ -54,14 +64,15 @@ extension Sequence where Iterator.Element == Category {
     func addChildren(items: [Item]) -> [Category] {
         return self.map { categoryWithoutChildren in
             let category = categoryWithoutChildren
-            let children = items.filter { category.contains(item: $0) }
+            let children = items.filter { item in category.contains(item: item) }
+            children.forEach { item in item.parentCategory = category }
             category.Children.append(contentsOf: children as [Selectable])
             return category
         }
     }
     
     func setOrder() -> [Category] {
-        let reordered = self.map { $0.addChildren(from: self as! [Category]) }
+        let reordered = self.map { $0.addChildrenCategories(from: self as! [Category]) }
         return reordered.filter{ $0.Parent == "0" }
     }
 }

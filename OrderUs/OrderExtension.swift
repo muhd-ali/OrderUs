@@ -109,6 +109,26 @@ extension Order {
         var totalCost: Double {
             return (item.Price / item.minQuantity.Number) * quantity.Number
         }
+        
+        var totalCostString: String {
+            guard quantity.Number > 0 else { return "none" }
+            return "PKR \(totalCost)"
+        }
+        
+        func updateInCart() {
+            let currentOrder = OrdersModel.sharedInstance.currentOrder
+            
+            guard quantity.Number > 0 else {
+                currentOrder.removeItem(withID: item.ID)
+                return
+            }
+            
+            if let cartItem = currentOrder.getItem(withID: item.ID) {
+                cartItem.quantity.Number = quantity.Number
+            } else {
+                currentOrder.items.append(self)
+            }
+        }
     }
     
     struct Preferences {

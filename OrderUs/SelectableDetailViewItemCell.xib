@@ -17,19 +17,19 @@
             <rect key="frame" x="0.0" y="0.0" width="397" height="141"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="n3T-Ue-sPI">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pepsi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n3T-Ue-sPI">
                     <rect key="frame" x="123" y="14" width="170" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="lge-g3-pWr"/>
                     </constraints>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fID-xt-327">
-                    <rect key="frame" x="123" y="42" width="170" height="13.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 ml" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fID-xt-327">
+                    <rect key="frame" x="123" y="42" width="170" height="14"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                    <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5YE-yZ-pdq">
@@ -44,28 +44,37 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iio-qU-wmU">
                     <rect key="frame" x="301" y="61" width="94" height="29"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUm-yx-BpZ">
-                            <rect key="frame" x="0.0" y="0.0" width="94" height="29"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cart quantity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUm-yx-BpZ">
+                            <rect key="frame" x="0.0" y="0.0" width="94" height="13.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                            <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cart price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdj-RQ-Qf2">
+                            <rect key="frame" x="0.0" y="15.5" width="94" height="13.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.96532463270000002" blue="0.77366663660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="1" green="0.51342323749999996" blue="0.1427899745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="VUm-yx-BpZ" firstAttribute="centerY" secondItem="iio-qU-wmU" secondAttribute="centerY" id="0cE-3I-UVV"/>
-                        <constraint firstItem="VUm-yx-BpZ" firstAttribute="centerX" secondItem="iio-qU-wmU" secondAttribute="centerX" id="dfQ-GG-5mF"/>
-                        <constraint firstItem="VUm-yx-BpZ" firstAttribute="height" secondItem="iio-qU-wmU" secondAttribute="height" id="mwF-Zc-SHm"/>
-                        <constraint firstItem="VUm-yx-BpZ" firstAttribute="width" secondItem="iio-qU-wmU" secondAttribute="width" id="yeE-dx-3oO"/>
+                        <constraint firstItem="VUm-yx-BpZ" firstAttribute="centerX" secondItem="iio-qU-wmU" secondAttribute="centerX" id="5XY-kc-3F9"/>
+                        <constraint firstAttribute="bottom" secondItem="Bdj-RQ-Qf2" secondAttribute="bottom" id="93w-fl-lVB"/>
+                        <constraint firstItem="Bdj-RQ-Qf2" firstAttribute="width" secondItem="iio-qU-wmU" secondAttribute="width" id="Bpn-Jq-RE0"/>
+                        <constraint firstItem="VUm-yx-BpZ" firstAttribute="width" secondItem="iio-qU-wmU" secondAttribute="width" id="GWr-hX-oCC"/>
+                        <constraint firstItem="VUm-yx-BpZ" firstAttribute="top" secondItem="iio-qU-wmU" secondAttribute="top" id="PiJ-yi-HXK"/>
+                        <constraint firstItem="VUm-yx-BpZ" firstAttribute="height" secondItem="Bdj-RQ-Qf2" secondAttribute="height" id="gQE-rB-cKc"/>
+                        <constraint firstItem="Bdj-RQ-Qf2" firstAttribute="centerX" secondItem="iio-qU-wmU" secondAttribute="centerX" id="yYc-BA-03y"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceB-Ho-OnF">
-                    <rect key="frame" x="123" y="113.5" width="170" height="13.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PKR 40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceB-Ho-OnF">
+                    <rect key="frame" x="123" y="113.5" width="170" height="14"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                    <color key="textColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="B0t-I2-ABb">
+                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="B0t-I2-ABb" customClass="QuantityStepper" customModule="OrderUs" customModuleProvider="target">
                     <rect key="frame" x="301" y="98" width="94" height="29"/>
                     <color key="tintColor" red="0.95686274510000002" green="0.48627450979999998" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
@@ -81,9 +90,9 @@
                 <constraint firstAttribute="trailing" secondItem="B0t-I2-ABb" secondAttribute="trailing" constant="2" id="4pb-mg-1AT"/>
                 <constraint firstItem="iio-qU-wmU" firstAttribute="height" secondItem="B0t-I2-ABb" secondAttribute="height" id="5sB-9c-7mX"/>
                 <constraint firstItem="ceB-Ho-OnF" firstAttribute="bottom" secondItem="jpt-rz-1FB" secondAttribute="bottom" id="8G8-se-SrX"/>
+                <constraint firstItem="iio-qU-wmU" firstAttribute="leading" secondItem="n3T-Ue-sPI" secondAttribute="trailing" constant="8" symbolic="YES" id="AOM-3e-n6O"/>
                 <constraint firstItem="n3T-Ue-sPI" firstAttribute="top" secondItem="jpt-rz-1FB" secondAttribute="top" id="Drk-UY-Dxv"/>
                 <constraint firstItem="B0t-I2-ABb" firstAttribute="top" secondItem="iio-qU-wmU" secondAttribute="bottom" constant="8" symbolic="YES" id="EMi-KM-XPN"/>
-                <constraint firstItem="VUm-yx-BpZ" firstAttribute="leading" secondItem="n3T-Ue-sPI" secondAttribute="trailing" constant="8" id="GkG-jH-CgR"/>
                 <constraint firstItem="B0t-I2-ABb" firstAttribute="bottom" secondItem="jpt-rz-1FB" secondAttribute="bottom" id="Si7-7G-8fH"/>
                 <constraint firstItem="fID-xt-327" firstAttribute="leading" secondItem="n3T-Ue-sPI" secondAttribute="leading" id="YEj-S7-5HC"/>
                 <constraint firstItem="jpt-rz-1FB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="YTl-Z7-Cx1"/>
@@ -102,6 +111,7 @@
                 <outlet property="itemMinQuantityLabel" destination="fID-xt-327" id="Buq-dK-lSG"/>
                 <outlet property="itemNameLabel" destination="n3T-Ue-sPI" id="HyJ-xo-uqh"/>
                 <outlet property="itemPriceLabel" destination="ceB-Ho-OnF" id="EE6-LI-RDZ"/>
+                <outlet property="priceInCartLabel" destination="Bdj-RQ-Qf2" id="Q3G-BA-dwq"/>
                 <outlet property="quantityInCartContainer" destination="iio-qU-wmU" id="Ajf-au-uut"/>
                 <outlet property="quantityInCartLabel" destination="VUm-yx-BpZ" id="HKo-nV-ZqD"/>
                 <outlet property="spinner" destination="5YE-yZ-pdq" id="7aV-IG-rYc"/>

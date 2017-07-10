@@ -24,6 +24,9 @@ class SelectableDetailViewCategoryCell: UITableViewCell {
     
     private func updateUI() {
         nodeLabel.text = category.Name
+        let bgColor = UIColor.groupTableViewBackground
+        contentView.backgroundColor = bgColor
+        backgroundColor = bgColor
         updateImage()
     }
     

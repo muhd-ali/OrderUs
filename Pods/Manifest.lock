@@ -14,9 +14,9 @@ PODS:
     - FacebookCore (~> 0.2)
     - FBSDKCoreKit (~> 4.15)
     - FBSDKLoginKit (~> 4.15)
-  - FBSDKCoreKit (4.23.0):
+  - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.23.0):
+  - FBSDKLoginKit (4.24.0):
     - FBSDKCoreKit
   - FirebaseAnalytics (3.9.0):
     - FirebaseCore (~> 3.6)
@@ -27,6 +27,7 @@ PODS:
   - FirebaseInstanceID (1.0.10):
     - FirebaseCore (~> 3.6)
   - FlexibleSteppedProgressBar (0.4.0)
+  - GMStepper (2.0.0)
   - Google/Core (3.1.0):
     - FirebaseAnalytics (~> 3.2)
   - Google/SignIn (3.1.0):
@@ -58,7 +59,7 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
-  - Socket.IO-Client-Swift (10.0.1)
+  - Socket.IO-Client-Swift (10.2.0)
   - UIImageColors (1.4.0)
 
 DEPENDENCIES:
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - FacebookCore
   - FacebookLogin
   - FlexibleSteppedProgressBar
+  - GMStepper
   - Google/SignIn
   - PKHUD
   - SDWebImage
@@ -77,12 +79,13 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
-  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
-  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
+  FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
+  FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   FlexibleSteppedProgressBar: 599c2e738903fa9d76e0773044a501e3ee64f6d9
+  GMStepper: 6aff0c881afac2f432e5c9b0df71e44e14110a06
   Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
@@ -90,9 +93,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  Socket.IO-Client-Swift: f6553633ba6a01df8f1c8b583ec36560901e9de6
+  Socket.IO-Client-Swift: ecd7fe4d2746a7557e71c2d6e95e23e3be31ddd1
   UIImageColors: 1f891e1a3224efebb01ad476df3a5aed4220ee24
 
-PODFILE CHECKSUM: cba779100f51be6744da1a571fe40d976fca2758
+PODFILE CHECKSUM: c7bb6b2031ea307dab63b017981f3d0aac593d0b
 
 COCOAPODS: 1.2.1

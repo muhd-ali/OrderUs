@@ -14,6 +14,7 @@ class Selectable { // Never to be Instantiated!!!
     let ImageURL: String
     let Parent: String
     let ID: String
+    internal var parentCategory: Category!
     
     internal init(rawSelectable: [String: Any]) {
         Name =  rawSelectable["Name"]! as! String

@@ -18,11 +18,14 @@ class Item: Selectable {
             Number = Double(rawQuantity[Quantity.NumberKey]! as! Int)
             Unit = rawQuantity[Quantity.UnitKey]! as! String
         }
+        
         init(number: Double, unit: String) {
             Number = number
             Unit = unit
         }
+        
         var string1: String {
+            guard Number > 0 else { return "none added" }
             return "\(Number) \(Unit)\(Number == 1 ? "" : "s")"
         }
         

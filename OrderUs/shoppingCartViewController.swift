@@ -23,6 +23,10 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
     @IBOutlet weak var totalCostDisplay: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        automaticallyAdjustsScrollViewInsets = false
+        let detailItemCell = SelectableViewController.Constant.CellName.detailItemCell
+        let nib = UINib(nibName: detailItemCell, bundle: nil)
+        cartTableView.register(nib, forCellReuseIdentifier: detailItemCell)
         shoppingCartList = currentOrder.items
         cartTableView.dataSource = self
         cartTableView.delegate = self
@@ -66,11 +70,15 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
         }
     }
     
+    internal func updateTotalCost() {
+        let totalCost = shoppingCartList.reduce(0) { $0 + ($1.totalCost) }
+        totalCostDisplay.text = "PKR \(totalCost)"
+    }
+    
     @IBOutlet weak var proceedButtonOutlet: UIButton!
     internal func updateUI() {
         title = "Shopping Cart"
-        let totalCost = shoppingCartList.reduce(0) { $0 + ($1.totalCost) }
-        totalCostDisplay.text = "Total Cost = \(totalCost) PKR"
+        updateTotalCost()
         if shoppingCartList.count == 0 {
             proceedButtonOutlet.isEnabled = false
             proceedButtonOutlet.setTitle("Cart is Empty", for: .disabled)
@@ -90,6 +98,13 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
     }
 }
 
+extension shoppingCartViewController: SelectableDetailViewItemCellDelegate {
+    func quantityChanged(at cell: UITableViewCell, from: Double, to: Double) {
+        let indexPath = cartTableView.indexPath(for: cell)
+        updateTotalCost()
+    }
+}
+
 extension shoppingCartViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return shoppingCartList.count
@@ -100,10 +115,12 @@ extension shoppingCartViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderedItemTableViewCell", for: indexPath)
-        if let itemCell = cell as? OrderedItemTableViewCell {
-            itemCell.orderedItem = shoppingCartList[indexPath.section]
+        let cell = tableView.dequeueReusableCell(withIdentifier: SelectableViewController.Constant.CellName.detailItemCell, for: indexPath)
+        if let itemCell = cell as? SelectableDetailViewItemCell {
+            itemCell.item = shoppingCartList[indexPath.section].item
+            itemCell.delegate = self
         }
+        cell.selectionStyle = .none
         return cell
     }
 }

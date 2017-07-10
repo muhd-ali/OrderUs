@@ -10,12 +10,10 @@
 		13016E261EF8A1F000C83DE5 /* OrderedItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13016E251EF8A1F000C83DE5 /* OrderedItemTableViewCell.swift */; };
 		13451C611EFF36DE009CCC86 /* SearchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13451C601EFF36DE009CCC86 /* SearchHeaderView.xib */; };
 		13451C631EFF3726009CCC86 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13451C621EFF3726009CCC86 /* SearchHeaderView.swift */; };
-		13451C651EFF4BC1009CCC86 /* TreeHeirarchyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13451C641EFF4BC1009CCC86 /* TreeHeirarchyViewController.swift */; };
 		13451C681EFF4FF7009CCC86 /* SelectableMasterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13451C671EFF4FF7009CCC86 /* SelectableMasterViewCell.xib */; };
 		13451C6A1EFF500E009CCC86 /* SelectableDetailViewCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13451C691EFF500E009CCC86 /* SelectableDetailViewCategoryCell.xib */; };
 		13451C6C1EFF503D009CCC86 /* SelectableMasterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13451C6B1EFF503D009CCC86 /* SelectableMasterViewCell.swift */; };
 		13451C6E1EFF506A009CCC86 /* SelectableDetailViewCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13451C6D1EFF506A009CCC86 /* SelectableDetailViewCategoryCell.swift */; };
-		13451C701EFFCF74009CCC86 /* TreeHeirarchyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13451C6F1EFFCF74009CCC86 /* TreeHeirarchyView.swift */; };
 		135036D51EAE5E3B003B7745 /* PlaceOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135036D41EAE5E3B003B7745 /* PlaceOrderViewController.swift */; };
 		13573CB21EC11C91003A396A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13573CB01EC11C91003A396A /* Model.xcdatamodeld */; };
 		13573CC21EC12FB0003A396A /* ItemCD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13573CBE1EC12FB0003A396A /* ItemCD+CoreDataClass.swift */; };
@@ -27,19 +25,16 @@
 		138983791EE4F8DE003FD12A /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 138983781EE4F8DE003FD12A /* SWRevealViewController.m */; };
 		1389837D1EE59322003FD12A /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1389837C1EE59322003FD12A /* SideMenuTableViewController.swift */; };
 		138CD9C41E7C3283004C5EC4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C31E7C3283004C5EC4 /* DataManager.swift */; };
-		138CD9C81E7C40B2004C5EC4 /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CD9C71E7C40B2004C5EC4 /* ItemsTableViewCell.swift */; };
 		13969B2E1EDBC53C001145B1 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B2D1EDBC53C001145B1 /* OrderDetailViewController.swift */; };
 		13969B351EDCEAF6001145B1 /* FacebookCustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B341EDCEAF6001145B1 /* FacebookCustomLoginButton.swift */; };
 		13969B3A1EDDA1DB001145B1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B391EDDA1DB001145B1 /* SignInViewController.swift */; };
 		13969B3C1EDDB1F3001145B1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B3B1EDDB1F3001145B1 /* SignUpViewController.swift */; };
 		13969B461EDEF041001145B1 /* RootCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13969B451EDEF041001145B1 /* RootCategoriesViewController.swift */; };
-		13C973681F00AD1200152C6C /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C973671F00AD1200152C6C /* ItemsViewController.swift */; };
 		13E83F0A1E9A2479004B32CF /* QuantityStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E83F091E9A2479004B32CF /* QuantityStepper.swift */; };
 		13FEE9071EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */; };
 		13FEE9091EE06465000DA99E /* RootCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE9081EE06465000DA99E /* RootCategoriesCollectionViewCell.swift */; };
 		B908F8781EB9FF930002C319 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B908F8771EB9FF930002C319 /* MainMenuViewController.swift */; };
 		B91657701EFA82AD00F35DE3 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B916576F1EFA82AD00F35DE3 /* OrdersViewController.swift */; };
-		B91657721F0E615B00F35DE3 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91657711F0E615B00F35DE3 /* ItemsTableViewController.swift */; };
 		B91657751F0E666400F35DE3 /* SelectableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91657741F0E666400F35DE3 /* SelectableViewController.swift */; };
 		B93FD6251F0E849D00D94EB1 /* SelectableDetailViewItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B93FD6241F0E849D00D94EB1 /* SelectableDetailViewItemCell.xib */; };
 		B93FD6271F0E84CD00D94EB1 /* SelectableDetailViewItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93FD6261F0E84CD00D94EB1 /* SelectableDetailViewItemCell.swift */; };
@@ -84,12 +79,10 @@
 		13016E251EF8A1F000C83DE5 /* OrderedItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedItemTableViewCell.swift; sourceTree = "<group>"; };
 		13451C601EFF36DE009CCC86 /* SearchHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchHeaderView.xib; sourceTree = "<group>"; };
 		13451C621EFF3726009CCC86 /* SearchHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
-		13451C641EFF4BC1009CCC86 /* TreeHeirarchyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeHeirarchyViewController.swift; sourceTree = "<group>"; };
 		13451C671EFF4FF7009CCC86 /* SelectableMasterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectableMasterViewCell.xib; sourceTree = "<group>"; };
 		13451C691EFF500E009CCC86 /* SelectableDetailViewCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectableDetailViewCategoryCell.xib; sourceTree = "<group>"; };
 		13451C6B1EFF503D009CCC86 /* SelectableMasterViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableMasterViewCell.swift; sourceTree = "<group>"; };
 		13451C6D1EFF506A009CCC86 /* SelectableDetailViewCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableDetailViewCategoryCell.swift; sourceTree = "<group>"; };
-		13451C6F1EFFCF74009CCC86 /* TreeHeirarchyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeHeirarchyView.swift; sourceTree = "<group>"; };
 		135036D41EAE5E3B003B7745 /* PlaceOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOrderViewController.swift; sourceTree = "<group>"; };
 		13573CB11EC11C91003A396A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		13573CBE1EC12FB0003A396A /* ItemCD+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ItemCD+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -103,14 +96,12 @@
 		1389837B1EE4FBF4003FD12A /* OrderUs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrderUs-Bridging-Header.h"; sourceTree = "<group>"; };
 		1389837C1EE59322003FD12A /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 		138CD9C31E7C3283004C5EC4 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		138CD9C71E7C40B2004C5EC4 /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemsTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		13969B2D1EDBC53C001145B1 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		13969B341EDCEAF6001145B1 /* FacebookCustomLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCustomLoginButton.swift; sourceTree = "<group>"; };
 		13969B361EDCF21A001145B1 /* OrderUs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrderUs.entitlements; sourceTree = "<group>"; };
 		13969B391EDDA1DB001145B1 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		13969B3B1EDDB1F3001145B1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		13969B451EDEF041001145B1 /* RootCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesViewController.swift; sourceTree = "<group>"; };
-		13C973671F00AD1200152C6C /* ItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		13E83F091E9A2479004B32CF /* QuantityStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuantityStepper.swift; sourceTree = "<group>"; };
 		13FEE9061EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesCollectionViewLayout.swift; sourceTree = "<group>"; };
 		13FEE9081EE06465000DA99E /* RootCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -119,7 +110,6 @@
 		AE73323074D86D0D740746B9 /* Pods-OrderUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrderUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-OrderUs/Pods-OrderUs.release.xcconfig"; sourceTree = "<group>"; };
 		B908F8771EB9FF930002C319 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		B916576F1EFA82AD00F35DE3 /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
-		B91657711F0E615B00F35DE3 /* ItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewController.swift; sourceTree = "<group>"; };
 		B91657741F0E666400F35DE3 /* SelectableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableViewController.swift; sourceTree = "<group>"; };
 		B93FD6241F0E849D00D94EB1 /* SelectableDetailViewItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectableDetailViewItemCell.xib; sourceTree = "<group>"; };
 		B93FD6261F0E84CD00D94EB1 /* SelectableDetailViewItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableDetailViewItemCell.swift; sourceTree = "<group>"; };
@@ -158,21 +148,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		13451C661EFF4FC3009CCC86 /* TreeHeirarchyView */ = {
-			isa = PBXGroup;
-			children = (
-				13451C6F1EFFCF74009CCC86 /* TreeHeirarchyView.swift */,
-				13451C641EFF4BC1009CCC86 /* TreeHeirarchyViewController.swift */,
-				13451C671EFF4FF7009CCC86 /* SelectableMasterViewCell.xib */,
-				13451C6B1EFF503D009CCC86 /* SelectableMasterViewCell.swift */,
-				13451C691EFF500E009CCC86 /* SelectableDetailViewCategoryCell.xib */,
-				13451C6D1EFF506A009CCC86 /* SelectableDetailViewCategoryCell.swift */,
-				B93FD6241F0E849D00D94EB1 /* SelectableDetailViewItemCell.xib */,
-				B93FD6261F0E84CD00D94EB1 /* SelectableDetailViewItemCell.swift */,
-			);
-			name = TreeHeirarchyView;
-			sourceTree = "<group>";
-		};
 		135036D61EAE5E7D003B7745 /* Shopping Cart */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +252,12 @@
 			isa = PBXGroup;
 			children = (
 				B91657741F0E666400F35DE3 /* SelectableViewController.swift */,
+				13451C671EFF4FF7009CCC86 /* SelectableMasterViewCell.xib */,
+				13451C6B1EFF503D009CCC86 /* SelectableMasterViewCell.swift */,
+				13451C691EFF500E009CCC86 /* SelectableDetailViewCategoryCell.xib */,
+				13451C6D1EFF506A009CCC86 /* SelectableDetailViewCategoryCell.swift */,
+				B93FD6241F0E849D00D94EB1 /* SelectableDetailViewItemCell.xib */,
+				B93FD6261F0E84CD00D94EB1 /* SelectableDetailViewItemCell.swift */,
 			);
 			name = SelectableView;
 			sourceTree = "<group>";
@@ -321,10 +302,9 @@
 		B99325691EF3CA7C00D068A9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				B91657731F0E661E00F35DE3 /* SelectableView */,
 				B993256A1EF3CA9B00D068A9 /* Category.swift */,
 				13FEE90A1EE06777000DA99E /* RootCategories */,
-				13451C661EFF4FC3009CCC86 /* TreeHeirarchyView */,
+				B91657731F0E661E00F35DE3 /* SelectableView */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -333,10 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				B993256F1EF3CB1600D068A9 /* Item.swift */,
-				13C973671F00AD1200152C6C /* ItemsViewController.swift */,
-				138CD9C71E7C40B2004C5EC4 /* ItemsTableViewCell.swift */,
 				B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */,
-				B91657711F0E615B00F35DE3 /* ItemsTableViewController.swift */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -523,11 +500,9 @@
 				13FEE9091EE06465000DA99E /* RootCategoriesCollectionViewCell.swift in Sources */,
 				B94AACC61E9E2C91005328D0 /* shoppingCartViewController.swift in Sources */,
 				B93FD6271F0E84CD00D94EB1 /* SelectableDetailViewItemCell.swift in Sources */,
-				B91657721F0E615B00F35DE3 /* ItemsTableViewController.swift in Sources */,
 				13451C6C1EFF503D009CCC86 /* SelectableMasterViewCell.swift in Sources */,
 				B908F8781EB9FF930002C319 /* MainMenuViewController.swift in Sources */,
 				B94AACC81E9E4A88005328D0 /* OrdersModel.swift in Sources */,
-				13C973681F00AD1200152C6C /* ItemsViewController.swift in Sources */,
 				13FEE9071EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift in Sources */,
 				B9CE10FB1EB37BA600C8C29C /* SearchResultsTableViewController.swift in Sources */,
 				13969B461EDEF041001145B1 /* RootCategoriesViewController.swift in Sources */,
@@ -540,14 +515,11 @@
 				B91657751F0E666400F35DE3 /* SelectableViewController.swift in Sources */,
 				B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */,
 				13573CB21EC11C91003A396A /* Model.xcdatamodeld in Sources */,
-				13451C651EFF4BC1009CCC86 /* TreeHeirarchyViewController.swift in Sources */,
 				138CD9C41E7C3283004C5EC4 /* DataManager.swift in Sources */,
-				13451C701EFFCF74009CCC86 /* TreeHeirarchyView.swift in Sources */,
 				B91657701EFA82AD00F35DE3 /* OrdersViewController.swift in Sources */,
 				B993256D1EF3CABD00D068A9 /* Selectable.swift in Sources */,
 				B95965101E606C4600C196E1 /* AppDelegate.swift in Sources */,
 				13573CC41EC12FB0003A396A /* CategoryCD+CoreDataClass.swift in Sources */,
-				138CD9C81E7C40B2004C5EC4 /* ItemsTableViewCell.swift in Sources */,
 				13016E261EF8A1F000C83DE5 /* OrderedItemTableViewCell.swift in Sources */,
 				13969B3A1EDDA1DB001145B1 /* SignInViewController.swift in Sources */,
 				1372B3BE1EBA5F2B0042B0F2 /* SignInModel.swift in Sources */,

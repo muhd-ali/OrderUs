@@ -12,6 +12,7 @@ target 'OrderUs' do
   pod 'SDWebImage'
   pod "FlexibleSteppedProgressBar"
   pod 'UIImageColors'
+  pod 'GMStepper'
 
   # Facebook
   pod 'FacebookCore'

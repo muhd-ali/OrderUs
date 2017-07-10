@@ -125,6 +125,16 @@ class SelectableViewController: UIViewController, DataManagerDelegate {
         searchViewTopConstraint.constant = 0
         animateLayout(delay: 0)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Item" {
+            if let dvc = segue.destination as? ItemDetailsViewController,
+               let indexPath = sender as? IndexPath {
+                let items = selectedCategory.Children.items()
+                dvc.item = items[indexPath.row]
+            }
+        }
+    }
 }
 
 extension SelectableViewController {
@@ -159,6 +169,9 @@ extension SelectableViewController {
         if let itemCell = cell as? SelectableDetailViewItemCell {
             itemCell.item = selectedCategory.Children[indexPath.row] as! Item
         }
+        let bgColor = UIColor.groupTableViewBackground
+        cell.contentView.backgroundColor = bgColor
+        cell.backgroundColor = bgColor
         cell.selectionStyle = .none
         return cell
     }
@@ -195,7 +208,7 @@ extension SelectableViewController {
         }
         let selected = selectedCategory
         if selected.containsItems {
-            performSegue(withIdentifier: "Items", sender: selected)
+            performSegue(withIdentifier: "Item", sender: indexPath)
         } else {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "SelectableViewController") as? SelectableViewController {
                 vc.categories = selectedCategory.Children.categories()
