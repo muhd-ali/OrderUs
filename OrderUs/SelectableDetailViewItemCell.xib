@@ -35,7 +35,7 @@
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5YE-yZ-pdq">
                     <rect key="frame" x="48" y="60.5" width="20" height="20"/>
                 </activityIndicatorView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jpt-rz-1FB">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jpt-rz-1FB">
                     <rect key="frame" x="2" y="14" width="113" height="113"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="jpt-rz-1FB" secondAttribute="height" multiplier="1:1" id="Y7g-zh-WGv"/>
