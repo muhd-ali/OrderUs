@@ -55,7 +55,7 @@ class SignInRootViewController: UIViewController, GIDSignInUIDelegate, SignInVie
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         signUpView.alpha = 0
-        signUpView.bounds.origin.x -= signInView.bounds.width
+        signUpView.bounds.origin.x = signInView.bounds.origin.x - signInView.bounds.width
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

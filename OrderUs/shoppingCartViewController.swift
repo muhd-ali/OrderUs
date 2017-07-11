@@ -79,6 +79,7 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
     internal func updateUI() {
         title = "Shopping Cart"
         updateTotalCost()
+        proceedButtonOutlet.setTitleColor(UIColor.gray, for: .disabled)
         if shoppingCartList.count == 0 {
             proceedButtonOutlet.isEnabled = false
             proceedButtonOutlet.setTitle("Cart is Empty", for: .disabled)
