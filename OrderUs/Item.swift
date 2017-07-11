@@ -10,18 +10,24 @@ import Foundation
 
 class Item: Selectable {
     struct Quantity {
-        static let NumberKey = "number"
-        static let UnitKey = "unit"
+        struct Key {
+            static let Number = "number"
+            static let Unit = "unit"
+            static let Price = "price"
+        }
         var Number: Double
         let Unit: String
+        let Price: Double
         init(rawQuantity: [String : Any]) {
-            Number = Double(rawQuantity[Quantity.NumberKey]! as! Int)
-            Unit = rawQuantity[Quantity.UnitKey]! as! String
+            Number = Double(rawQuantity[Key.Number]! as! Int)
+            Unit = rawQuantity[Key.Unit]! as! String
+            Price = rawQuantity[Key.Price] as! Double
         }
         
-        init(number: Double, unit: String) {
+        init(number: Double, unit: String, price: Double) {
             Number = number
             Unit = unit
+            Price = price
         }
         
         var string1: String {
@@ -34,17 +40,15 @@ class Item: Selectable {
         }
     }
     var minQuantity: Quantity
-    var Price: Double
     
     init(rawItem:  [String : Any]) {
         minQuantity = Item.Quantity(rawQuantity: rawItem["minQuantity"]! as! [String : Any])
-        Price = rawItem["price"]! as! Double
         super.init(rawSelectable: rawItem)
     }
     
     init(itemCD: ItemCD) {
-        self.minQuantity = Item.Quantity(number: itemCD.minquantity_number, unit: itemCD.minquantity_unit!)
-        self.Price = itemCD.price
+        self.minQuantity = Item.Quantity(number: itemCD.minquantity_number, unit: itemCD.minquantity_unit!, price: 0.0)
+//        self.Price = itemCD.price
         
         let name = itemCD.name!
         let imageURL = itemCD.imageurl!

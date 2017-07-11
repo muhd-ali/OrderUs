@@ -107,7 +107,7 @@ extension Order {
         }
         
         var totalCost: Double {
-            return (item.Price / item.minQuantity.Number) * quantity.Number
+            return (item.minQuantity.Price / item.minQuantity.Number) * quantity.Number
         }
         
         var totalCostString: String {

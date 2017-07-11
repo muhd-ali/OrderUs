@@ -27,7 +27,7 @@ public class ItemCD: NSManagedObject {
             itemCD.parent = item.Parent
             itemCD.minquantity_number = item.minQuantity.Number
             itemCD.minquantity_unit = item.minQuantity.Unit
-            itemCD.price = item.Price
+//            itemCD.price = item.Price
             return itemCD
         }
         

@@ -18,7 +18,7 @@ class SelectableDetailViewItemCell: UITableViewCell {
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var itemMinQuantityLabel: UILabel!
-    @IBOutlet weak var stepper: QuantityStepper!
+    var stepper: QuantityStepper!
     @IBOutlet weak var quantityInCartContainer: UIView!
     @IBOutlet weak var priceInCartLabel: UILabel!
     @IBOutlet weak var quantityInCartLabel: UILabel!
@@ -28,7 +28,7 @@ class SelectableDetailViewItemCell: UITableViewCell {
         didSet {
             if item != nil {
                 orderedItem = item.orderedItem
-                setupStepper()
+//                setupStepper()
                 updateUI()
             }
         }
@@ -48,7 +48,7 @@ class SelectableDetailViewItemCell: UITableViewCell {
         priceInCartLabel.text = orderedItem.totalCostString
     }
     
-    @IBAction func stepperValueChanged(_ sender: QuantityStepper) {
+    func stepperValueChanged(_ sender: QuantityStepper) {
         stepper.previousValue = orderedItem.quantity.Number
         orderedItem.quantity.Number = stepper.value
         delegate?.quantityChanged(at: self, from: stepper.previousValue!, to: stepper.value)
@@ -70,7 +70,7 @@ class SelectableDetailViewItemCell: UITableViewCell {
     
     private func updateUI() {
         itemNameLabel.text = item.Name
-        itemPriceLabel.text = "PKR \(item.Price)"
+        itemPriceLabel.text = "PKR \(item.minQuantity.Price)"
         updateCartValues()
         itemMinQuantityLabel.text = item.minQuantity.string2
         updateImage()
