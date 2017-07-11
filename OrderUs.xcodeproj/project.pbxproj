@@ -17,9 +17,7 @@
 		135036D51EAE5E3B003B7745 /* PlaceOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135036D41EAE5E3B003B7745 /* PlaceOrderViewController.swift */; };
 		13573CB21EC11C91003A396A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13573CB01EC11C91003A396A /* Model.xcdatamodeld */; };
 		13573CC21EC12FB0003A396A /* ItemCD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13573CBE1EC12FB0003A396A /* ItemCD+CoreDataClass.swift */; };
-		13573CC31EC12FB0003A396A /* ItemCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13573CBF1EC12FB0003A396A /* ItemCD+CoreDataProperties.swift */; };
 		13573CC41EC12FB0003A396A /* CategoryCD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13573CC01EC12FB0003A396A /* CategoryCD+CoreDataClass.swift */; };
-		13573CC51EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13573CC11EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift */; };
 		1372B3BC1EBA5AA50042B0F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1372B3BB1EBA5AA50042B0F2 /* GoogleService-Info.plist */; };
 		1372B3BE1EBA5F2B0042B0F2 /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1372B3BD1EBA5F2B0042B0F2 /* SignInModel.swift */; };
 		138983791EE4F8DE003FD12A /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 138983781EE4F8DE003FD12A /* SWRevealViewController.m */; };
@@ -38,6 +36,8 @@
 		B91657751F0E666400F35DE3 /* SelectableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91657741F0E666400F35DE3 /* SelectableViewController.swift */; };
 		B93FD6251F0E849D00D94EB1 /* SelectableDetailViewItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B93FD6241F0E849D00D94EB1 /* SelectableDetailViewItemCell.xib */; };
 		B93FD6271F0E84CD00D94EB1 /* SelectableDetailViewItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93FD6261F0E84CD00D94EB1 /* SelectableDetailViewItemCell.swift */; };
+		B93FD6361F14BC3400D94EB1 /* ItemCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93FD6341F14BC3400D94EB1 /* ItemCD+CoreDataProperties.swift */; };
+		B93FD6371F14BC3400D94EB1 /* CategoryCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93FD6351F14BC3400D94EB1 /* CategoryCD+CoreDataProperties.swift */; };
 		B94682031E97F091002B83F6 /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */; };
 		B94AACC61E9E2C91005328D0 /* shoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94AACC51E9E2C91005328D0 /* shoppingCartViewController.swift */; };
 		B94AACC81E9E4A88005328D0 /* OrdersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94AACC71E9E4A88005328D0 /* OrdersModel.swift */; };
@@ -86,9 +86,7 @@
 		135036D41EAE5E3B003B7745 /* PlaceOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOrderViewController.swift; sourceTree = "<group>"; };
 		13573CB11EC11C91003A396A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		13573CBE1EC12FB0003A396A /* ItemCD+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ItemCD+CoreDataClass.swift"; sourceTree = "<group>"; };
-		13573CBF1EC12FB0003A396A /* ItemCD+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ItemCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		13573CC01EC12FB0003A396A /* CategoryCD+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryCD+CoreDataClass.swift"; sourceTree = "<group>"; };
-		13573CC11EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1372B3BB1EBA5AA50042B0F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1372B3BD1EBA5F2B0042B0F2 /* SignInModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		138983771EE4F8DE003FD12A /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -113,6 +111,8 @@
 		B91657741F0E666400F35DE3 /* SelectableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableViewController.swift; sourceTree = "<group>"; };
 		B93FD6241F0E849D00D94EB1 /* SelectableDetailViewItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectableDetailViewItemCell.xib; sourceTree = "<group>"; };
 		B93FD6261F0E84CD00D94EB1 /* SelectableDetailViewItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableDetailViewItemCell.swift; sourceTree = "<group>"; };
+		B93FD6341F14BC3400D94EB1 /* ItemCD+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ItemCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B93FD6351F14BC3400D94EB1 /* CategoryCD+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CategoryCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B94682021E97F091002B83F6 /* ItemDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemDetailsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B94AACC51E9E2C91005328D0 /* shoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = shoppingCartViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B94AACC71E9E4A88005328D0 /* OrdersModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersModel.swift; sourceTree = "<group>"; };
@@ -174,10 +174,10 @@
 			isa = PBXGroup;
 			children = (
 				13573CB01EC11C91003A396A /* Model.xcdatamodeld */,
+				B93FD6341F14BC3400D94EB1 /* ItemCD+CoreDataProperties.swift */,
+				B93FD6351F14BC3400D94EB1 /* CategoryCD+CoreDataProperties.swift */,
 				13573CBE1EC12FB0003A396A /* ItemCD+CoreDataClass.swift */,
-				13573CBF1EC12FB0003A396A /* ItemCD+CoreDataProperties.swift */,
 				13573CC01EC12FB0003A396A /* CategoryCD+CoreDataClass.swift */,
-				13573CC11EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -489,11 +489,11 @@
 				B99325701EF3CB1600D068A9 /* Item.swift in Sources */,
 				13451C6E1EFF506A009CCC86 /* SelectableDetailViewCategoryCell.swift in Sources */,
 				B99B69E11EA100070002A354 /* OrderOptionsTableViewController.swift in Sources */,
-				13573CC51EC12FB0003A396A /* CategoryCD+CoreDataProperties.swift in Sources */,
 				B972566D1EA75A7300D9DE9E /* ServerCommunicator.swift in Sources */,
 				13969B3C1EDDB1F3001145B1 /* SignUpViewController.swift in Sources */,
 				B993256B1EF3CA9B00D068A9 /* Category.swift in Sources */,
 				B99325771EF7CF3A00D068A9 /* ResultPathCollectionViewCell.swift in Sources */,
+				B93FD6371F14BC3400D94EB1 /* CategoryCD+CoreDataProperties.swift in Sources */,
 				13969B2E1EDBC53C001145B1 /* OrderDetailViewController.swift in Sources */,
 				13969B351EDCEAF6001145B1 /* FacebookCustomLoginButton.swift in Sources */,
 				138983791EE4F8DE003FD12A /* SWRevealViewController.m in Sources */,
@@ -506,7 +506,6 @@
 				13FEE9071EE0432C000DA99E /* RootCategoriesCollectionViewLayout.swift in Sources */,
 				B9CE10FB1EB37BA600C8C29C /* SearchResultsTableViewController.swift in Sources */,
 				13969B461EDEF041001145B1 /* RootCategoriesViewController.swift in Sources */,
-				13573CC31EC12FB0003A396A /* ItemCD+CoreDataProperties.swift in Sources */,
 				135036D51EAE5E3B003B7745 /* PlaceOrderViewController.swift in Sources */,
 				B99325721EF3F3EF00D068A9 /* Order.swift in Sources */,
 				B99325751EF7CE8900D068A9 /* SearchResultsTableViewCell.swift in Sources */,
@@ -522,6 +521,7 @@
 				13573CC41EC12FB0003A396A /* CategoryCD+CoreDataClass.swift in Sources */,
 				13016E261EF8A1F000C83DE5 /* OrderedItemTableViewCell.swift in Sources */,
 				13969B3A1EDDA1DB001145B1 /* SignInViewController.swift in Sources */,
+				B93FD6361F14BC3400D94EB1 /* ItemCD+CoreDataProperties.swift in Sources */,
 				1372B3BE1EBA5F2B0042B0F2 /* SignInModel.swift in Sources */,
 				13451C631EFF3726009CCC86 /* SearchHeaderView.swift in Sources */,
 				B99325791EFA781300D068A9 /* OrderExtension.swift in Sources */,

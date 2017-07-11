@@ -47,8 +47,7 @@ class Item: Selectable {
     }
     
     init(itemCD: ItemCD) {
-        self.minQuantity = Item.Quantity(number: itemCD.minquantity_number, unit: itemCD.minquantity_unit!, price: 0.0)
-//        self.Price = itemCD.price
+        self.minQuantity = Item.Quantity(number: itemCD.minquantity_number, unit: itemCD.minquantity_unit!, price: itemCD.minquantity_price)
         
         let name = itemCD.name!
         let imageURL = itemCD.imageurl!
