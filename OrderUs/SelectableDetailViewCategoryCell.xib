@@ -21,8 +21,8 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="6c7-qh-3qa"/>
                     </constraints>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <color key="textColor" red="1" green="0.51342323749999996" blue="0.1427899745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9sz-6o-0rH">

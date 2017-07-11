@@ -127,6 +127,7 @@ class SelectableViewController: UIViewController, DataManagerDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        hideSearchBar()
         if segue.identifier == "Item" {
             if let dvc = segue.destination as? ItemDetailsViewController,
                let indexPath = sender as? IndexPath {
@@ -159,7 +160,6 @@ extension SelectableViewController {
         if let categoryCell = cell as? SelectableDetailViewCategoryCell {
             categoryCell.category = selectedCategory.Children[indexPath.row] as! Category
         }
-        cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
         return cell
     }
@@ -169,19 +169,21 @@ extension SelectableViewController {
         if let itemCell = cell as? SelectableDetailViewItemCell {
             itemCell.item = selectedCategory.Children[indexPath.row] as! Item
         }
-        let bgColor = UIColor.groupTableViewBackground
-        cell.contentView.backgroundColor = bgColor
-        cell.backgroundColor = bgColor
-        cell.selectionStyle = .none
         return cell
     }
     
     internal func detailCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
+        var cell = UITableViewCell()
         if selectedCategory.containsItems {
-            return detailItemCell(for: tableView, at: indexPath)
+            cell = detailItemCell(for: tableView, at: indexPath)
         } else {
-            return detailCategoryCell(for: tableView, at: indexPath)
+            cell = detailCategoryCell(for: tableView, at: indexPath)
         }
+        let bgColor = UIColor.groupTableViewBackground
+//        cell.contentView.backgroundColor = bgColor
+        cell.backgroundColor = bgColor
+        cell.selectionStyle = .none
+        return cell
     }
     
     internal func didSelectMasterRow(for tableView: UITableView, at indexPath: IndexPath) {

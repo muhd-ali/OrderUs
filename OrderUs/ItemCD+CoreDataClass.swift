@@ -13,9 +13,6 @@ import CoreData
 public class ItemCD: NSManagedObject {
     
     class func replaceOrAddItem(with item: Item, inManagedObjectContext context: NSManagedObjectContext) -> ItemCD? {
-        if item.ID == "23" {
-            print(item.Name)
-        }
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ItemCD")
         request.predicate = NSPredicate(format: "id = %@", item.ID)
         
