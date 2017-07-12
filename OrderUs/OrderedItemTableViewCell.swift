@@ -25,8 +25,8 @@ class OrderedItemTableViewCell: UITableViewCell {
     
     private func updateUI() {
         orderedItemNameLabel.text = orderedItem.item.Name
-        orderedItemQuantityLabel.text = orderedItem.quantity.string1
-        orderedItemPriceLabel.text = "PKR \(orderedItem.totalCost)"
+        orderedItemQuantityLabel.text = orderedItem.quantityString1
+        orderedItemPriceLabel.text = orderedItem.costString
         updateImage()
     }
     

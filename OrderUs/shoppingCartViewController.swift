@@ -101,7 +101,6 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
 
 extension shoppingCartViewController: SelectableDetailViewItemCellDelegate {
     func quantityChanged(at cell: UITableViewCell, from: Double, to: Double) {
-        let indexPath = cartTableView.indexPath(for: cell)
         updateTotalCost()
     }
 }
@@ -140,5 +139,9 @@ extension shoppingCartViewController: UITableViewDelegate {
             updateUI()
         default: break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 2.5 * 0.25 * view.bounds.width
     }
 }

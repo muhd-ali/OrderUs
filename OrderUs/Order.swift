@@ -46,7 +46,7 @@ class Order: NSObject {
     
     func set(item: OrderedItem) {
         removeItem(withID: item.item.ID)
-        guard item.quantity.Number > 0 else {
+        guard item.units > 0 else {
             return
         }
         items.append(item)

@@ -16,7 +16,6 @@ import GGLSignIn
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     var window: UIWindow?
     let serverCommunicator = ServerCommunicator.sharedInstance
     

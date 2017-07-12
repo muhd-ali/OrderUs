@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GMStepper
 
 protocol SelectableDetailViewItemCellDelegate {
     func quantityChanged(at cell: UITableViewCell, from: Double, to: Double)
@@ -16,19 +17,18 @@ class SelectableDetailViewItemCell: UITableViewCell {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var itemNameLabel: UILabel!
-    @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var itemMinQuantityLabel: UILabel!
-    var stepper: QuantityStepper!
     @IBOutlet weak var quantityInCartContainer: UIView!
     @IBOutlet weak var priceInCartLabel: UILabel!
     @IBOutlet weak var quantityInCartLabel: UILabel!
+    @IBOutlet weak var stepper: GMStepper!
     
     var delegate: SelectableDetailViewItemCellDelegate?
     var item: Item! {
         didSet {
             if item != nil {
                 orderedItem = item.orderedItem
-//                setupStepper()
+                setupStepper()
                 updateUI()
             }
         }
@@ -37,24 +37,24 @@ class SelectableDetailViewItemCell: UITableViewCell {
     private var orderedItem: Order.OrderedItem!
     
     private func setupStepper() {
-        stepper.stepValue = item.minQuantity.Number
-        stepper.value = orderedItem.quantity.Number
+        stepper.value = Double(orderedItem.units)
         stepper.minimumValue = 0
-        stepper.maximumValue = 100 * item.minQuantity.Number
+        stepper.maximumValue = 99
     }
     
     private func updateCartValues() {
-        quantityInCartLabel.text = orderedItem.quantity.string1
-        priceInCartLabel.text = orderedItem.totalCostString
+        quantityInCartLabel.text = orderedItem.quantityString1
+        priceInCartLabel.text = orderedItem.costString
     }
     
-    func stepperValueChanged(_ sender: QuantityStepper) {
-        stepper.previousValue = orderedItem.quantity.Number
-        orderedItem.quantity.Number = stepper.value
-        delegate?.quantityChanged(at: self, from: stepper.previousValue!, to: stepper.value)
+    @IBAction func stepperValueChanged(_ sender: GMStepper) {
+        let previousValue = orderedItem.units
+        let valueIsIncreasing = stepper.valueIsIncreasing(previousValue: previousValue)
+        orderedItem.units = stepper.value
+        delegate?.quantityChanged(at: self, from: previousValue, to: stepper.value)
         orderedItem.updateInCart()
         var transition = UIViewAnimationOptions.transitionFlipFromBottom
-        if stepper.valueIsIncreasing {
+        if valueIsIncreasing {
             transition = UIViewAnimationOptions.transitionFlipFromTop
         }
         UIView.transition(
@@ -70,9 +70,8 @@ class SelectableDetailViewItemCell: UITableViewCell {
     
     private func updateUI() {
         itemNameLabel.text = item.Name
-        itemPriceLabel.text = "PKR \(item.minQuantity.Price)"
         updateCartValues()
-        itemMinQuantityLabel.text = item.minQuantity.string2
+        itemMinQuantityLabel.text = "\(item.minQuantity.costString) per \(item.minQuantity.string2)"
         updateImage()
     }
     

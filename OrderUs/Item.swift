@@ -30,13 +30,27 @@ class Item: Selectable {
             Price = price
         }
         
+        var costString: String {
+            return "PKR \(Price)"
+        }
+        
+        func string1(with units: Double) -> String {
+            let amount = Double(units) * Number
+            guard amount > 0 else { return "none added" }
+            return "\(amount) \(Unit)\(amount == 1 ? "" : "s")"
+        }
+        
+        func string2(with units: Double) -> String {
+            let amount = Double(units) * Number
+            return "\(amount == 1 ? "each" : "\(amount)") \(Unit)\(amount == 1 ? "" : "s")"
+        }
+        
         var string1: String {
-            guard Number > 0 else { return "none added" }
-            return "\(Number) \(Unit)\(Number == 1 ? "" : "s")"
+            return string1(with: 1)
         }
         
         var string2: String {
-            return "\(Number == 1 ? "each" : "\(Number)") \(Unit)\(Number == 1 ? "" : "s")"
+            return string2(with: 1)
         }
     }
     var minQuantity: Quantity

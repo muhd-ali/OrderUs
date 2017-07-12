@@ -233,7 +233,11 @@ extension SelectableViewController: UITableViewDelegate {
         case masterTableView.tag:
             return masterTableWidth
         case detailTableView.tag:
-            return masterTableWidth
+            if selectedCategory.containsItems {
+                return 2.5 * masterTableWidth
+            } else {
+                return masterTableWidth
+            }
         default:
             return 0
         }

@@ -90,41 +90,49 @@ extension Order {
     
     class OrderedItem: NSObject {
         var item: Item
-        var quantity: Item.Quantity
+        var units: Double = 0
         
         init(item: Item) {
             self.item = item
-            self.quantity = item.minQuantity
-            self.quantity.Number = 0
             super.init()
         }
         
         var jsonData: [String : Any] {
             return [
                 "item_id" : item.ID,
-                "quanity" : ["number" : quantity.Number, "unit" : quantity.Unit],
+                "units" : units,
             ]
         }
         
-        var totalCost: Double {
-            return (item.minQuantity.Price / item.minQuantity.Number) * quantity.Number
+        internal var totalCost: Double {
+            return (item.minQuantity.Price * Double(units))
         }
         
-        var totalCostString: String {
-            guard quantity.Number > 0 else { return "none" }
+        var costString: String {
+            guard units > 0 else { return "none" }
             return "PKR \(totalCost)"
         }
         
+        var quantityString1: String {
+            guard units > 0 else { return "none" }
+            return item.minQuantity.string1(with: units)
+        }
+
+        var quantityString2: String {
+            guard units > 0 else { return "none" }
+            return item.minQuantity.string2(with: units)
+        }
+
         func updateInCart() {
             let currentOrder = OrdersModel.sharedInstance.currentOrder
             
-            guard quantity.Number > 0 else {
+            guard units > 0 else {
                 currentOrder.removeItem(withID: item.ID)
                 return
             }
             
             if let cartItem = currentOrder.getItem(withID: item.ID) {
-                cartItem.quantity.Number = quantity.Number
+                cartItem.units = units
             } else {
                 currentOrder.items.append(self)
             }

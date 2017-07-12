@@ -28,15 +28,15 @@ class ItemDetailsViewController: UIViewController {
     
     @IBOutlet weak var quantityStepperOutlet: QuantityStepper!
     @IBAction func quantityStepperValueChangedAction(_ sender: QuantityStepper) {
-        quantityStepperOutlet.previousValue = orderedItem.quantity.Number
-        orderedItem.quantity.Number = quantityStepperOutlet.value
+        quantityStepperOutlet.previousValue = orderedItem.units
+        orderedItem.units = quantityStepperOutlet.value
         updateDynamicContent(increasingValues: quantityStepperOutlet.valueIsIncreasing)
     }
     
     private func setupStepper() {
         quantityStepperOutlet.minimumValue = 0
         quantityStepperOutlet.maximumValue = 100 * item.minQuantity.Number
-        quantityStepperOutlet.value = orderedItem.quantity.Number
+        quantityStepperOutlet.value = orderedItem.units
         quantityStepperOutlet.stepValue = item.minQuantity.Number
     }
     
@@ -81,7 +81,7 @@ class ItemDetailsViewController: UIViewController {
             duration: 0.2,
             options: [.curveEaseInOut, transitionEffect],
             animations: { [unowned uoSelf = self] in
-                uoSelf.itemQuantityLabel.text = uoSelf.orderedItem.quantity.string1
+                uoSelf.itemQuantityLabel.text = uoSelf.orderedItem.quantityString1
             },
             completion: nil
         )
