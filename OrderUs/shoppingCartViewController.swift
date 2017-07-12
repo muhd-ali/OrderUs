@@ -33,6 +33,18 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
         updateUI()
     }
     
+    @IBOutlet weak var capacityProgressView: UIProgressView!
+    @IBAction func didPressCapacityDetailDisclosure(_ sender: UIButton) {
+        let controller = (storyboard?.instantiateViewController(withIdentifier: "popoverView"))!
+        controller.modalPresentationStyle = UIModalPresentationStyle.popover
+        let popController = controller.popoverPresentationController!
+        popController.permittedArrowDirections = .any
+        popController.delegate = self
+        popController.sourceRect = sender.bounds
+        popController.sourceView =  sender
+        self.present(controller, animated: true, completion: nil)
+    }
+    
     private func placeOrder() {
         let result = OrdersModel.sharedInstance.placeOrder()
         switch result {
@@ -96,6 +108,13 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
                 dvc.delegate = self
             }
         }
+    }
+}
+
+extension shoppingCartViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        print("=======================")
+        return UIModalPresentationStyle.none
     }
 }
 
