@@ -37,11 +37,16 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
     @IBAction func didPressCapacityDetailDisclosure(_ sender: UIButton) {
         let controller = (storyboard?.instantiateViewController(withIdentifier: "popoverView"))!
         controller.modalPresentationStyle = UIModalPresentationStyle.popover
-        let popController = controller.popoverPresentationController!
-        popController.permittedArrowDirections = .any
-        popController.delegate = self
-        popController.sourceRect = sender.bounds
-        popController.sourceView =  sender
+        let width = 0.5 * view.bounds.width; let height = 0.25 * view.bounds.height
+        controller.preferredContentSize = CGSize(width: width, height: height)
+        if let popController = controller.popoverPresentationController {
+            popController.permittedArrowDirections = .any
+            popController.backgroundColor = MainMenuViewController.Constants.appTintColor
+            popController.delegate = self
+            popController.sourceRect = sender.bounds
+            popController.sourceView =  sender
+        }
+        
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -112,8 +117,7 @@ class shoppingCartViewController: UIViewController, PlaceOrderViewControllerDele
 }
 
 extension shoppingCartViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        print("=======================")
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
 }

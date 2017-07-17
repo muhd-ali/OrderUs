@@ -1057,13 +1057,13 @@
                         <viewControllerLayoutGuide type="bottom" id="sr8-jD-3eD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Fxc-MT-4y3">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gur-Hy-gLZ">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="The capacity bar shows the space left in the Rider's Delievery Box. You will have to place another order if it gets filled." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gur-Hy-gLZ">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+                                <color key="backgroundColor" red="0.55302828550000005" green="0.77685821060000004" blue="0.2583603263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -1076,16 +1076,13 @@
                             <constraint firstItem="gur-Hy-gLZ" firstAttribute="centerX" secondItem="Fxc-MT-4y3" secondAttribute="centerX" id="qZx-53-yrB"/>
                         </constraints>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="200"/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="200"/>
+                    <size key="freeformSize" width="200" height="100"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SO6-Vf-AUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2301" y="-676"/>
+            <point key="canvasLocation" x="1408" y="-651"/>
         </scene>
         <!--Place Order View Controller-->
         <scene sceneID="9lk-xb-edm">
