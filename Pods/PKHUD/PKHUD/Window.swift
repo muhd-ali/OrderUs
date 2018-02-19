@@ -12,8 +12,8 @@ import UIKit
 /// The window used to display the PKHUD within. Placed atop the applications main window.
 internal class ContainerView: UIView {
 
-    internal let frameView: FrameView
-    internal init(frameView: FrameView = FrameView()) {
+    @objc internal let frameView: FrameView
+    @objc internal init(frameView: FrameView = FrameView()) {
         self.frameView = frameView
         super.init(frame: CGRect.zero)
         commonInit()
@@ -40,7 +40,7 @@ internal class ContainerView: UIView {
         backgroundView.frame = bounds
     }
 
-    internal func showFrameView() {
+    @objc internal func showFrameView() {
         layer.removeAllAnimations()
         frameView.center = center
         frameView.alpha = 1.0
@@ -49,8 +49,8 @@ internal class ContainerView: UIView {
 
     fileprivate var willHide = false
 
-    internal func hideFrameView(animated anim: Bool, completion: ((Bool) -> Void)? = nil) {
-        let finalize: (_ finished: Bool) -> (Void) = { finished in
+    @objc internal func hideFrameView(animated anim: Bool, completion: ((Bool) -> Void)? = nil) {
+        let finalize: (_ finished: Bool) -> Void = { finished in
             self.isHidden = true
             self.removeFromSuperview()
             self.willHide = false
@@ -82,7 +82,7 @@ internal class ContainerView: UIView {
         return view
     }()
 
-    internal func showBackground(animated anim: Bool) {
+    @objc internal func showBackground(animated anim: Bool) {
         if anim {
             UIView.animate(withDuration: 0.175, animations: {
                 self.backgroundView.alpha = 1.0
@@ -92,7 +92,7 @@ internal class ContainerView: UIView {
         }
     }
 
-    internal func hideBackground(animated anim: Bool) {
+    @objc internal func hideBackground(animated anim: Bool) {
         if anim {
             UIView.animate(withDuration: 0.65, animations: {
                 self.backgroundView.alpha = 0.0

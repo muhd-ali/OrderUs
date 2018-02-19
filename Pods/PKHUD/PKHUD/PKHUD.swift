@@ -16,7 +16,7 @@ open class PKHUD: NSObject {
         static let sharedHUD = PKHUD()
     }
 
-    public var viewToPresentOn: UIView? = nil
+    @objc public var viewToPresentOn: UIView?
 
     fileprivate let container = ContainerView()
     fileprivate var hideTimer: Timer?
@@ -29,7 +29,7 @@ open class PKHUD: NSObject {
     /// not be shown at all.
     /// This may be used to prevent HUD display for very short tasks.
     /// Defaults to 0 (no grace time).
-    @available(*, deprecated, message: "Will be removed with Swift4 support, use gracePeriod instead")
+    @objc @available(*, deprecated, message: "Will be removed with Swift4 support, use gracePeriod instead")
     public var graceTime: TimeInterval {
         get {
             return gracePeriod
@@ -44,12 +44,12 @@ open class PKHUD: NSObject {
     /// not be shown at all.
     /// This may be used to prevent HUD display for very short tasks.
     /// Defaults to 0 (no grace time).
-    public var gracePeriod: TimeInterval = 0
+    @objc public var gracePeriod: TimeInterval = 0
     fileprivate var graceTimer: Timer?
 
     // MARK: Public
 
-    open class var sharedHUD: PKHUD {
+    @objc open class var sharedHUD: PKHUD {
         return Constants.sharedHUD
     }
 
@@ -69,7 +69,7 @@ open class PKHUD: NSObject {
         self.container.accessibilityIdentifier = "PKHUD"
     }
 
-    public convenience init(viewToPresentOn view: UIView) {
+    @objc public convenience init(viewToPresentOn view: UIView) {
         self.init()
         viewToPresentOn = view
     }
@@ -78,8 +78,8 @@ open class PKHUD: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
 
-    open var dimsBackground = true
-    open var userInteractionOnUnderlyingViewsEnabled: Bool {
+    @objc open var dimsBackground = true
+    @objc open var userInteractionOnUnderlyingViewsEnabled: Bool {
         get {
             return !container.isUserInteractionEnabled
         }
@@ -88,11 +88,11 @@ open class PKHUD: NSObject {
         }
     }
 
-    open var isVisible: Bool {
+    @objc open var isVisible: Bool {
         return !container.isHidden
     }
 
-    open var contentView: UIView {
+    @objc open var contentView: UIView {
         get {
             return container.frameView.content
         }
@@ -102,7 +102,7 @@ open class PKHUD: NSObject {
         }
     }
 
-    open var effect: UIVisualEffect? {
+    @objc open var effect: UIVisualEffect? {
         get {
             return container.frameView.effect
         }
@@ -111,7 +111,7 @@ open class PKHUD: NSObject {
         }
     }
 
-    open func show(onView view: UIView? = nil) {
+    @objc open func show(onView view: UIView? = nil) {
         let view: UIView = view ?? viewToPresentOn ?? UIApplication.shared.keyWindow!
         if  !view.subviews.contains(container) {
             view.addSubview(container)
@@ -134,24 +134,24 @@ open class PKHUD: NSObject {
         }
     }
 
-    func showContent() {
+    @objc func showContent() {
         graceTimer?.invalidate()
         container.showFrameView()
         startAnimatingContentView()
     }
 
-    open func hide(animated anim: Bool = true, completion: TimerAction? = nil) {
+    @objc open func hide(animated anim: Bool = true, completion: TimerAction? = nil) {
         graceTimer?.invalidate()
 
         container.hideFrameView(animated: anim, completion: completion)
         stopAnimatingContentView()
     }
 
-    open func hide(_ animated: Bool, completion: TimerAction? = nil) {
+    @objc open func hide(_ animated: Bool, completion: TimerAction? = nil) {
         hide(animated: animated, completion: completion)
     }
 
-    open func hide(afterDelay delay: TimeInterval, completion: TimerAction? = nil) {
+    @objc open func hide(afterDelay delay: TimeInterval, completion: TimerAction? = nil) {
         let key = UUID().uuidString
         let userInfo = ["timerActionKey": key]
         if let completion = completion {
@@ -168,17 +168,17 @@ open class PKHUD: NSObject {
 
     // MARK: Internal
 
-    internal func willEnterForeground(_ notification: Notification?) {
+    @objc internal func willEnterForeground(_ notification: Notification?) {
         self.startAnimatingContentView()
     }
 
-    internal func startAnimatingContentView() {
+    @objc internal func startAnimatingContentView() {
         if let animatingContentView = contentView as? PKHUDAnimating, isVisible {
             animatingContentView.startAnimation()
         }
     }
 
-    internal func stopAnimatingContentView() {
+    @objc internal func stopAnimatingContentView() {
         if let animatingContentView = contentView as? PKHUDAnimating {
             animatingContentView.stopAnimation?()
         }
@@ -186,7 +186,7 @@ open class PKHUD: NSObject {
 
     // MARK: Timer callbacks
 
-    internal func performDelayedHide(_ timer: Timer? = nil) {
+    @objc internal func performDelayedHide(_ timer: Timer? = nil) {
         let userInfo = timer?.userInfo as? [String:AnyObject]
         let key = userInfo?["timerActionKey"] as? String
         var completion: TimerAction?
@@ -199,7 +199,7 @@ open class PKHUD: NSObject {
         hide(animated: true, completion: completion)
     }
 
-    internal func handleGraceTimer(_ timer: Timer? = nil) {
+    @objc internal func handleGraceTimer(_ timer: Timer? = nil) {
         // Show the HUD only if the task is still running
         if (graceTimer?.isValid)! {
             showContent()

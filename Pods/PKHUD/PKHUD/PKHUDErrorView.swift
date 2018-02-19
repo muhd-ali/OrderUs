@@ -12,10 +12,10 @@ import UIKit
 /// PKHUDErrorView provides an animated error (cross) view.
 open class PKHUDErrorView: PKHUDSquareBaseView, PKHUDAnimating {
 
-    var dashOneLayer = PKHUDErrorView.generateDashLayer()
-    var dashTwoLayer = PKHUDErrorView.generateDashLayer()
+    @objc var dashOneLayer = PKHUDErrorView.generateDashLayer()
+    @objc var dashTwoLayer = PKHUDErrorView.generateDashLayer()
 
-    class func generateDashLayer() -> CAShapeLayer {
+    @objc class func generateDashLayer() -> CAShapeLayer {
         let dash = CAShapeLayer()
         dash.frame = CGRect(x: 0.0, y: 0.0, width: 88.0, height: 88.0)
         dash.path = {
@@ -33,7 +33,7 @@ open class PKHUDErrorView: PKHUDSquareBaseView, PKHUDAnimating {
         return dash
     }
 
-    public init(title: String? = nil, subtitle: String? = nil) {
+    @objc public init(title: String? = nil, subtitle: String? = nil) {
         super.init(title: title, subtitle: subtitle)
         layer.addSublayer(dashOneLayer)
         layer.addSublayer(dashTwoLayer)
@@ -49,7 +49,7 @@ open class PKHUDErrorView: PKHUDSquareBaseView, PKHUDAnimating {
         dashTwoLayer.position = layer.position
     }
 
-    func rotationAnimation(_ angle: CGFloat) -> CABasicAnimation {
+    @objc func rotationAnimation(_ angle: CGFloat) -> CABasicAnimation {
         var animation: CABasicAnimation
         if #available(iOS 9.0, *) {
             let springAnimation = CASpringAnimation(keyPath:"transform.rotation.z")

@@ -47,8 +47,8 @@ struct SearchResult {
     var attributedPath: NSMutableAttributedString? {
         guard searchedText != nil else { return nil }
         let fontSize: CGFloat = 12.0
-        let attributedPath = NSMutableAttributedString(string: path.last!.Name, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])
-        let highlightAttributes = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: fontSize), NSBackgroundColorAttributeName : UIColor.yellow]
+        let attributedPath = NSMutableAttributedString(string: path.last!.Name, attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: fontSize)])
+        let highlightAttributes = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: fontSize), NSAttributedStringKey.backgroundColor : UIColor.yellow]
         attributedPath.addAttributes(highlightAttributes, range: (path.last!.Name.lowercased() as NSString).range(of: searchedText!.lowercased()))
         return attributedPath
     }

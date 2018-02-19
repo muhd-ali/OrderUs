@@ -25,15 +25,14 @@ class ServerCommunicator: NSObject {
         static let orderAcknowledged = "acknowledgeOrder"
 
     }
-    
-    let socket: SocketIOClient = SocketIOClient(
+    let socket: SocketIOClient = SocketManager (
         socketURL: URL(string: Constants.serverIP)!,
         config: [
             .forcePolling(true),
             .reconnects(true),
             .reconnectWait(5),
             ]
-    )
+    ).defaultSocket
     
     func connect() {
         socket.connect()

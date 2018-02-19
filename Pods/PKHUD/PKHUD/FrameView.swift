@@ -46,7 +46,7 @@ internal class FrameView: UIVisualEffectView {
     }
 
     fileprivate var _content = UIView()
-    internal var content: UIView {
+    @objc internal var content: UIView {
         get {
             return _content
         }

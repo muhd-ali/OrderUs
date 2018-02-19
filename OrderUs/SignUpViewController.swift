@@ -22,7 +22,7 @@ class SignUpViewController: UIViewController {
             textField?.layer.borderColor = UIColor.white.cgColor
             textField.attributedPlaceholder = NSAttributedString(
                 string: placeholderText,
-                attributes: [NSForegroundColorAttributeName: UIColor.orange]
+                attributes: [NSAttributedStringKey.foregroundColor: UIColor.orange]
             )
         }
     }

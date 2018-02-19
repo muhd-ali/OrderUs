@@ -37,7 +37,7 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
         blurView.addGestureRecognizer(recognizer)
     }
     
-    func blurViewTapped(recognizer: UITapGestureRecognizer) {
+    @objc func blurViewTapped(recognizer: UITapGestureRecognizer) {
         revealViewController().revealToggle(nil)
     }
     
@@ -77,7 +77,7 @@ class RootCategoriesViewController: UIViewController, DataManagerDelegate {
     private func setNavigationBarColors() {
         navigationController?.navigationBar.barTintColor = appTintColor
         navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
     }
     
     override func viewDidLoad() {

@@ -12,7 +12,7 @@ import UIKit
 /// PKHUDSquareBaseView provides a square view, which you can subclass and add additional views to.
 open class PKHUDSquareBaseView: UIView {
 
-    static let defaultSquareBaseViewFrame = CGRect(origin: CGPoint.zero, size: CGSize(width: 156.0, height: 156.0))
+    @objc static let defaultSquareBaseViewFrame = CGRect(origin: CGPoint.zero, size: CGSize(width: 156.0, height: 156.0))
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +22,7 @@ open class PKHUDSquareBaseView: UIView {
         super.init(coder: aDecoder)
     }
 
-    public init(image: UIImage? = nil, title: String? = nil, subtitle: String? = nil) {
+    @objc public init(image: UIImage? = nil, title: String? = nil, subtitle: String? = nil) {
         super.init(frame: PKHUDSquareBaseView.defaultSquareBaseViewFrame)
         self.imageView.image = image
         titleLabel.text = title
@@ -33,7 +33,7 @@ open class PKHUDSquareBaseView: UIView {
         addSubview(subtitleLabel)
     }
 
-    open let imageView: UIImageView = {
+    @objc open let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.alpha = 0.85
         imageView.clipsToBounds = true
@@ -41,7 +41,7 @@ open class PKHUDSquareBaseView: UIView {
         return imageView
     }()
 
-    open let titleLabel: UILabel = {
+    @objc open let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 17.0)
@@ -51,7 +51,7 @@ open class PKHUDSquareBaseView: UIView {
         return label
     }()
 
-    open let subtitleLabel: UILabel = {
+    @objc open let subtitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14.0)

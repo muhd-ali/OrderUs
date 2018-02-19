@@ -38,7 +38,7 @@ import CoreGraphics
     }
     
     /// The current selected index
-    open var currentIndex: Int = 0 {
+    @objc open var currentIndex: Int = 0 {
         willSet(newValue){
             if let delegate = self.delegate {
                 delegate.progressBar?(self, willSelectItemAtIndex: newValue)
@@ -50,7 +50,7 @@ import CoreGraphics
         }
     }
     
-    open var completedTillIndex: Int = -1 {
+    @objc open var completedTillIndex: Int = -1 {
         willSet(newValue){
 
         }
@@ -59,16 +59,16 @@ import CoreGraphics
         }
     }
     
-    open var currentSelectedCenterColor: UIColor = UIColor.black
-    open var currentSelectedTextColor: UIColor!
-    open var viewBackgroundColor: UIColor = UIColor.white
-    open var selectedOuterCircleStrokeColor: UIColor!
-    open var lastStateOuterCircleStrokeColor: UIColor!
-    open var lastStateCenterColor: UIColor!
-    open var centerLayerTextColor: UIColor!
-    open var centerLayerDarkBackgroundTextColor: UIColor = UIColor.white
+    @objc open var currentSelectedCenterColor: UIColor = UIColor.black
+    @objc open var currentSelectedTextColor: UIColor!
+    @objc open var viewBackgroundColor: UIColor = UIColor.white
+    @objc open var selectedOuterCircleStrokeColor: UIColor!
+    @objc open var lastStateOuterCircleStrokeColor: UIColor!
+    @objc open var lastStateCenterColor: UIColor!
+    @objc open var centerLayerTextColor: UIColor!
+    @objc open var centerLayerDarkBackgroundTextColor: UIColor = UIColor.white
     
-    open var useLastState: Bool = false {
+    @objc open var useLastState: Bool = false {
         didSet {
             if useLastState {
                 self.layer.addSublayer(self.clearLastStateLayer)
@@ -86,19 +86,19 @@ import CoreGraphics
         }
     }
     
-    open var selectedOuterCircleLineWidth: CGFloat = 3.0 {
+    @objc open var selectedOuterCircleLineWidth: CGFloat = 3.0 {
         didSet {
             self.setNeedsDisplay()
         }
     }
     
-    open var lastStateOuterCircleLineWidth: CGFloat = 5.0 {
+    @objc open var lastStateOuterCircleLineWidth: CGFloat = 5.0 {
         didSet {
             self.setNeedsDisplay()
         }
     }
     
-    open var textDistance: CGFloat = 20.0 {
+    @objc open var textDistance: CGFloat = 20.0 {
         didSet {
             self.setNeedsDisplay()
         }
@@ -174,14 +174,14 @@ import CoreGraphics
     }
     
     /// The text font in the step points
-    open var stepTextFont: UIFont? {
+    @objc open var stepTextFont: UIFont? {
         didSet {
             self.setNeedsDisplay()
         }
     }
     
     /// The text color in the step points
-    open var stepTextColor: UIColor? {
+    @objc open var stepTextColor: UIColor? {
         didSet {
             self.setNeedsDisplay()
         }
@@ -203,7 +203,7 @@ import CoreGraphics
     }
     
     /// The component's delegate
-    open weak var delegate: FlexibleSteppedProgressBarDelegate?
+    @objc open weak var delegate: FlexibleSteppedProgressBarDelegate?
     
     
     //MARK: - Private properties
@@ -259,7 +259,7 @@ import CoreGraphics
         self.init(frame:CGRect.zero)
     }
     
-    func commonInit() {
+    @objc func commonInit() {
         if currentSelectedTextColor == nil {
             currentSelectedTextColor = selectedBackgoundColor
         }
@@ -633,33 +633,33 @@ import CoreGraphics
                 
                 xCursor = centerPoint.x
                 
-                startAngle = CGFloat(M_PI)
+                startAngle = CGFloat.pi
                 endAngle = -angle
                 
             } else if(i < nbPoint - 1) {
                 
-                startAngle = CGFloat(M_PI) + angle
+                startAngle = CGFloat.pi + angle
                 endAngle = -angle
                 
             } else if(i == (nbPoint - 1)){
                 
-                startAngle = CGFloat(M_PI) + angle
+                startAngle = CGFloat.pi + angle
                 endAngle = 0
                 
             } else if(i == nbPoint) {
                 
                 startAngle = 0
-                endAngle = CGFloat(M_PI) - angle
+                endAngle = CGFloat.pi - angle
                 
             } else if (i < (2 * nbPoint - 1)) {
                 
                 startAngle = angle
-                endAngle = CGFloat(M_PI) - angle
+                endAngle = CGFloat.pi - angle
                 
             } else {
                 
                 startAngle = angle
-                endAngle = CGFloat(M_PI)
+                endAngle = CGFloat.pi
                 
             }
             
@@ -686,7 +686,7 @@ import CoreGraphics
 //        let angle = CGFloat(M_PI)/4
         let path = UIBezierPath()
 //        path.addArcWithCenter(center, radius: self._progressRadius + _radius, startAngle: angle, endAngle: 2*CGFloat(M_PI) + CGFloat(M_PI)/4, clockwise: true)
-        path.addArc(withCenter: center, radius: self._progressRadius + lastStateOuterCircleLineWidth, startAngle: 0, endAngle: 4*CGFloat(M_PI), clockwise: true)
+        path.addArc(withCenter: center, radius: self._progressRadius + lastStateOuterCircleLineWidth, startAngle: 0, endAngle: 4*CGFloat.pi, clockwise: true)
         return path
     }
     
@@ -732,7 +732,7 @@ import CoreGraphics
      
      - parameter gestureRecognizer: The gesture recognizer responsible for the action
      */
-    func gestureAction(_ gestureRecognizer: UIGestureRecognizer) {
+    @objc func gestureAction(_ gestureRecognizer: UIGestureRecognizer) {
         if(gestureRecognizer.state == UIGestureRecognizerState.ended ||
             gestureRecognizer.state == UIGestureRecognizerState.changed ) {
             
