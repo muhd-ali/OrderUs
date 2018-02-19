@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import GMStepper
 
 class QuantityStepper: UIStepper {
-
     var previousValue: Double? {
         didSet {
             if (previousValue != nil) {
@@ -22,4 +22,14 @@ class QuantityStepper: UIStepper {
         }
     }
     var valueIsIncreasing = true
+}
+
+extension GMStepper {
+    func valueIsIncreasing(previousValue: Double) -> Bool {
+        if (value > previousValue) {
+            return true
+        } else {
+            return false
+        }
+    }
 }

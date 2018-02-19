@@ -8,79 +8,112 @@
 
 import UIKit
 
-class SearchResultsTableViewController: UITableViewController, UISearchResultsUpdating {
-    var tableList: DataManager.ListType?
+class SearchResultsTableViewController: UITableViewController {
+    static func initializeFor(tableList: [Selectable], navigationController: UINavigationController?, delegate: UISearchBarDelegate?, searchBarView: UIView?) -> SearchResultsTableViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let searchResultsController = storyboard.instantiateViewController(withIdentifier: "searchResultsController") as? SearchResultsTableViewController
+        searchResultsController?.tableList = tableList
+        searchResultsController?.parentNavigationController = navigationController
+        
+        let searchController = UISearchController(searchResultsController: searchResultsController)
+        searchResultsController?.searchController = searchController
+        searchController.searchResultsUpdater = searchResultsController
+        searchController.dimsBackgroundDuringPresentation = true
+        
+        let searchBar = searchController.searchBar
+        if delegate != nil {
+            searchBar.delegate = delegate
+        }
+        searchBar.barTintColor = MainMenuViewController.Constants.appTintColor
+        searchBar.tintColor = UIColor.white
+        searchBarView?.addSubview(searchBar)
+        searchBar.sizeToFit()
+        searchResultsController?.searchBar = searchBar
+        return searchResultsController!
+    }
+    
+    var tableList: [Selectable]?
+    var searchBar: UISearchBar?
     var parentNavigationController: UINavigationController?
     var searchController: UISearchController?
-    private var results: [SearchResult] = []
+    internal var results: [SearchResult] = []
+    private var rowHeight: CGFloat {
+        return tableView.bounds.height / 5
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        automaticallyAdjustsScrollViewInsets = false
+        tableView.contentInset.top = 64
+        let nib = UINib(nibName: "SearchHeaderView", bundle: nil)
+        tableView.register(nib, forHeaderFooterViewReuseIdentifier: "SearchHeaderView")
     }
-    
-    // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return results.count
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SearchHeaderView")
+        if let searchHeader = view as? SearchHeaderView {
+            searchHeader.searchLabel.attributedText = results[section].attributedPath
+            let bgColor = UIColor.groupTableViewBackground
+            searchHeader.contentView.backgroundColor = bgColor
+            searchHeader.backgroundColor = bgColor
+        }
+        return view
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchResultCell", for: indexPath)
         
-        let result = results[indexPath.row]
-        
-        cell.textLabel?.text = result.item.Name
-        cell.detailTextLabel?.attributedText = result.attributedPath
-        
+        if let resultCell = cell as? SearchResultsTableViewCell {
+            let result = results[indexPath.section]
+            resultCell.result = result
+            resultCell.rowHeight = rowHeight
+            resultCell.controller = self
+        }
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "ItemDetailViewController") as? ItemDetailsViewController {
-            let item = results[indexPath.row].item
-            vc.item = item; vc.title = item.Name
-            parentNavigationController?.pushViewController(vc, animated: true)
-        }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeight
     }
     
-    // MARK: - UISearchResultsUpdating
     
-    private func findSearchResults(fromList list: DataManager.ListType, listPath: String, withSearchedText text: String) -> [SearchResult] {
-        let results = list.searchItems { result in
-            result.Name.lowercased().range(of: text.lowercased()) != nil
-        }
-
-        return results.map {
-            var result = $0
-            let fontSize: CGFloat = 12.0
-            let attributedPath = result.path.map { pathStep in NSMutableAttributedString(string: pathStep, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: fontSize)])}
-            let highlightAttributes = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: fontSize), NSBackgroundColorAttributeName : UIColor.yellow]
-            attributedPath.last?.addAttributes(highlightAttributes, range: (result.path.last!.lowercased() as NSString).range(of: text.lowercased()))
-            result.attributedPath = attributedPath.reduce(nil) {
-                var str = $0.0
-                if str == nil {
-                    str = NSMutableAttributedString()
-                } else {
-                    str?.append(NSMutableAttributedString(string: "->"))
-                }
-                str?.append($0.1)
-                return str
+    func selected(selectable: Selectable) {
+        if let category = selectable as? Category,
+            let vc = storyboard?.instantiateViewController(withIdentifier: "SelectableViewController") as? SelectableViewController {
+            vc.categories = category.getGroupCategories()
+            let index = vc.categories.index(where: { $0.ID == category.ID })!
+            vc.selectedMasterIndex = IndexPath(row: index, section: 0)
+            dismiss(animated: true) { [unowned uoSelf = self] in
+                uoSelf.parentNavigationController?.pushViewController(vc, animated: true)
             }
-            return result
+        } else if let item = selectable as? Item {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "ItemDetailViewController") as? ItemDetailsViewController {
+                vc.item = item; vc.title = item.Name
+                dismiss(animated: true) { [unowned uoSelf = self] in
+                    uoSelf.parentNavigationController?.present(vc, animated: true, completion: nil)
+                }
+            }
         }
     }
-    
-    
+}
+
+extension SearchResultsTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let searchedText = searchController.searchBar.text {
-            results = findSearchResults(fromList: tableList ?? [], listPath: "list", withSearchedText: searchedText)
+            results = tableList?.searchSelectablesFromWholeTree(containing: searchedText) ?? []
             tableView.reloadData()
         }
     }
-    
 }

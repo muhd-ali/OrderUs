@@ -10,12 +10,11 @@ import Foundation
 import FBSDKLoginKit
 import GoogleSignIn
 import FacebookCore
-//
-//protocol SignInModelDelegate {
-//    func signedIn()
-//}
+
+
 protocol SignInModelDelegate {
     func signInStarted()
+    func signInFailed()
     func signInCompleted()
 }
 
@@ -30,9 +29,10 @@ struct UserData {
             "email" : email ?? "",
         ]
     }
+    static let null = UserData(id: nil, name: nil, email: nil)
 }
 
-class SignInModel: NSObject, FBSDKLoginButtonDelegate, GIDSignInDelegate {
+class SignInModel: NSObject, FacebookCustomLoginButtonDelegate, GIDSignInDelegate {
     var signedIn = false
     func signInViewDidLoad() {
         if (FBSDKAccessToken.current() != nil) {    // User already Signed Into Facebook
@@ -83,24 +83,22 @@ class SignInModel: NSObject, FBSDKLoginButtonDelegate, GIDSignInDelegate {
     var userData: UserData?
     
     // Facebook Login Button Delegate API
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        //
-        guard (error == nil && !result.isCancelled) else {
-            print("======================Could not log in Using Facebook========================")
-            return
+    func facebookCustomloginButton(_ loginButton: FacebookCustomLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if (error == nil && !result.isCancelled) {
+            print("======================Logged in Using Facebook========================")
+            userSignedInSoGetFacebookUserInfo()
+            delegate?.signInCompleted()
+        } else {
+            delegate?.signInFailed()
         }
-        
-        userSignedInSoGetFacebookUserInfo()
-        print("======================Logged in Using Facebook========================")
-        delegate?.signInCompleted()
     }
     
-    func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
+    func facebookCustomloginButtonWillLogin(_ loginButton: FacebookCustomLoginButton!) -> Bool {
         delegate?.signInStarted()
         return true
     }
     
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+    func loginButtonDidLogOut(_ loginButton: FacebookCustomLoginButton!) {
         print("======================Logged out of Facebook========================")
     }
     
@@ -114,6 +112,7 @@ class SignInModel: NSObject, FBSDKLoginButtonDelegate, GIDSignInDelegate {
             userSignedInSoGetGoogleUserInfo(user: user)
             delegate?.signInCompleted()
         } else {
+            delegate?.signInFailed()
             print("\(error.localizedDescription)")
         }
     }

@@ -11,14 +11,16 @@ import CoreData
 
 @objc(CategoryCD)
 public class CategoryCD: NSManagedObject {
-
+    
     class func replaceOrAddCategory(with category: Category, inManagedObjectContext context: NSManagedObjectContext) -> CategoryCD? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CategoryCD")
         request.predicate = NSPredicate(format: "id = %@", category.ID)
         
         if let categoryCD = (try? context.fetch(request))?.first as? CategoryCD {
-            return categoryCD
-        } else if let categoryCD = NSEntityDescription.insertNewObject(forEntityName: "CategoryCD", into: context) as? CategoryCD {
+            context.delete(categoryCD)
+        }
+        
+        if let categoryCD = NSEntityDescription.insertNewObject(forEntityName: "CategoryCD", into: context) as? CategoryCD {
             categoryCD.id = category.ID
             categoryCD.name = category.Name
             categoryCD.imageurl = category.ImageURL
@@ -35,17 +37,7 @@ public class CategoryCD: NSManagedObject {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CategoryCD")
         
         if let categoriesCD = (try? context.fetch(request)) as? [CategoryCD] {
-            return categoriesCD.map { categoryCD in
-                Category(
-                    Name: categoryCD.name!,
-                    ImageURL: categoryCD.imageurl!,
-                    Parent: categoryCD.parent!,
-                    ID: categoryCD.id!,
-                    Children: [],
-                    ChildrenCategories: categoryCD.childrenCategories as? [String] ?? [],
-                    ChildrenItems: categoryCD.childrenItems as? [String] ?? []
-                )
-            }
+            return categoriesCD.map { Category(categoryCD: $0) }
         }
         
         return nil

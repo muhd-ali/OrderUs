@@ -2,7 +2,7 @@
 //  ItemCD+CoreDataProperties.swift
 //  OrderUs
 //
-//  Created by Muhammadali on 09/05/2017.
+//  Created by muaz hamza on 2017-07-11.
 //  Copyright © 2017 PRO. All rights reserved.
 //
 
@@ -21,7 +21,7 @@ extension ItemCD {
     @NSManaged public var minquantity_number: Double
     @NSManaged public var minquantity_unit: String?
     @NSManaged public var name: String?
-    @NSManaged public var price: Double
     @NSManaged public var parent: String?
+    @NSManaged public var minquantity_price: Double
 
 }

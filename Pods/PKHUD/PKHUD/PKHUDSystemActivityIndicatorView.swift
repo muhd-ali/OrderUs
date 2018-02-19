@@ -27,7 +27,7 @@ public final class PKHUDSystemActivityIndicatorView: PKHUDSquareBaseView, PKHUDA
         commonInit()
     }
 
-    func commonInit () {
+    @objc func commonInit () {
         backgroundColor = UIColor.clear
         alpha = 0.8
 
@@ -39,7 +39,7 @@ public final class PKHUDSystemActivityIndicatorView: PKHUDSquareBaseView, PKHUDA
         activityIndicatorView.center = self.center
     }
 
-    let activityIndicatorView: UIActivityIndicatorView = {
+    @objc let activityIndicatorView: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         activity.color = UIColor.black
         return activity

@@ -46,7 +46,7 @@ internal class FrameView: UIVisualEffectView {
     }
 
     fileprivate var _content = UIView()
-    internal var content: UIView {
+    @objc internal var content: UIView {
         get {
             return _content
         }
@@ -57,7 +57,7 @@ internal class FrameView: UIVisualEffectView {
             _content.clipsToBounds = true
             _content.contentMode = .center
             frame.size = _content.bounds.size
-            addSubview(_content)
+            contentView.addSubview(_content)
         }
     }
 }

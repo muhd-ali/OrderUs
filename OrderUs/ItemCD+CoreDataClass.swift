@@ -16,8 +16,8 @@ public class ItemCD: NSManagedObject {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ItemCD")
         request.predicate = NSPredicate(format: "id = %@", item.ID)
         
-        if let itemCD = (try? context.fetch(request))?.first {
-            context.delete(itemCD as! NSManagedObject)
+        if let itemCD = (try? context.fetch(request))?.first as? ItemCD {
+            context.delete(itemCD)
         }
         
         if let itemCD = NSEntityDescription.insertNewObject(forEntityName: "ItemCD", into: context) as? ItemCD {
@@ -27,7 +27,7 @@ public class ItemCD: NSManagedObject {
             itemCD.parent = item.Parent
             itemCD.minquantity_number = item.minQuantity.Number
             itemCD.minquantity_unit = item.minQuantity.Unit
-            itemCD.price = item.Price
+            itemCD.minquantity_price = item.minQuantity.Price
             return itemCD
         }
         
@@ -38,16 +38,7 @@ public class ItemCD: NSManagedObject {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ItemCD")
         
         if let itemsCD = (try? context.fetch(request)) as? [ItemCD] {
-            return itemsCD.map { itemCD in
-                Item(
-                    Name: itemCD.name!,
-                    ImageURL: itemCD.imageurl!,
-                    Parent: itemCD.parent!,
-                    ID: itemCD.id!,
-                    minQuantity: Item.MinQuantity(number: itemCD.minquantity_number, unit: itemCD.minquantity_unit!),
-                    Price: itemCD.price
-                )
-            }
+            return itemsCD.map { Item(itemCD: $0) }
         }
         
         return nil

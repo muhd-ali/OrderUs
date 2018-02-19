@@ -12,7 +12,7 @@ import UIKit
 /// PKHUDCheckmarkView provides an animated success (checkmark) view.
 open class PKHUDSuccessView: PKHUDSquareBaseView, PKHUDAnimating {
 
-    var checkmarkShapeLayer: CAShapeLayer = {
+    @objc var checkmarkShapeLayer: CAShapeLayer = {
         let checkmarkPath = UIBezierPath()
         checkmarkPath.move(to: CGPoint(x: 4.0, y: 27.0))
         checkmarkPath.addLine(to: CGPoint(x: 34.0, y: 56.0))
@@ -30,7 +30,7 @@ open class PKHUDSuccessView: PKHUDSquareBaseView, PKHUDAnimating {
         return layer
     }()
 
-    public init(title: String? = nil, subtitle: String? = nil) {
+    @objc public init(title: String? = nil, subtitle: String? = nil) {
         super.init(title: title, subtitle: subtitle)
         layer.addSublayer(checkmarkShapeLayer)
         checkmarkShapeLayer.position = layer.position

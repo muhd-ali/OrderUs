@@ -14,6 +14,7 @@ class ServerCommunicator: NSObject {
     static let sharedInstance = ServerCommunicator()
     
     struct Constants {
+//        static let serverIP = "http://192.168.0.218"
         static let serverIP = "http://192.168.0.105"
         static let connectionEstablished = "connect"
         static let checkIfDataNeedsToBeReloaded = "dataNeedsToBeReloaded"
@@ -21,16 +22,17 @@ class ServerCommunicator: NSObject {
         static let itemsList = "itemsList"
         static let categoriesList = "categoriesList"
         static let newOrder = "newOrder"
+        static let orderAcknowledged = "acknowledgeOrder"
+
     }
-    
-    let socket: SocketIOClient = SocketIOClient(
+    let socket: SocketIOClient = SocketManager (
         socketURL: URL(string: Constants.serverIP)!,
         config: [
             .forcePolling(true),
             .reconnects(true),
             .reconnectWait(5),
             ]
-    )
+    ).defaultSocket
     
     func connect() {
         socket.connect()
@@ -55,6 +57,7 @@ class ServerCommunicator: NSObject {
         setupEventTocheckIfDataNeedsToBeReloaded()
         setupEventToReceiveItemsList()
         setupEventToReceiveCategoriesList()
+        setupOrderEvents()
     }
     
     private func requestReloadItemsData() {
@@ -111,11 +114,25 @@ class ServerCommunicator: NSObject {
         socket.emit(Constants.checkIfDataNeedsToBeReloaded, with: [""])
     }
     
+    private func setupAcknowledgedOrderEvent() {
+        socket.on(Constants.orderAcknowledged) { (data, ack) in
+            OrdersModel.sharedInstance.lastOrderAcknowledged()
+        }
+    }
+    
+    private func setupOrderEvents() {
+        setupAcknowledgedOrderEvent()
+    }
+    
     func placeOrder() {
-        OrdersModel.sharedInstance.order.promoteState()
+        OrdersModel.sharedInstance.currentOrder.promoteState()
         
-        let jsonData = OrdersModel.sharedInstance.order.jsonData
-        socket.emit(Constants.newOrder, with: [jsonData])
+        let jsonData = OrdersModel.sharedInstance.currentOrder.jsonData
+        socket
+            .emitWithAck(Constants.newOrder, with: [jsonData])
+            .timingOut(after: 10) { (ack) in
+                print(ack)
+        }
         
         OrdersModel.sharedInstance.orderPlaced()
     }

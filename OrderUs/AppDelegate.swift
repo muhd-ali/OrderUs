@@ -14,14 +14,14 @@ import GoogleSignIn
 import GGLSignIn
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     var window: UIWindow?
     let serverCommunicator = ServerCommunicator.sharedInstance
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        UIApplication.shared.statusBarStyle = .lightContent
         serverCommunicator.bootstrap()
         
         DataManager.sharedInstance.bootStrap(dbContext: managedObjectContext)

@@ -7,64 +7,79 @@
 //
 
 import UIKit
-import MIBadgeButton_Swift
-import FBSDKLoginKit
-import GoogleSignIn
+
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+}
 
 class MainMenuViewController: UITabBarController {
-
+    struct Constants {
+        static let appTintColor = UIColor(red: 244/255, green: 124/255, blue: 32/255, alpha: 1)
+        static let animationDuration: TimeInterval = 0.2
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    @IBOutlet weak var shoppingCartOutlet: MIBadgeButton!
-    
-    @IBOutlet weak var trackOrdersButtonOutlet: MIBadgeButton!
-    
-    private func setShoppingCartBadge() {
-        let cartItemsCount = OrdersModel.sharedInstance.order.items.count
-        
-        if cartItemsCount > 0 {
-            shoppingCartOutlet.badgeString = "\(cartItemsCount)"
-        } else {
-            shoppingCartOutlet.badgeString = nil
+        tabBar.tintColor = UIColor.green
+        tabBar.items?.forEach{ (item)in
+//            item.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.white], for: .normal)
+            item.image = item.image?.withRenderingMode(.alwaysOriginal)
         }
     }
-
-    private func setTrackOrderBadge() {
-        let orderedItemsCount = OrdersModel.sharedInstance.orders.count
-        
-        if orderedItemsCount > 0 {
-            trackOrdersButtonOutlet.badgeString = "\(orderedItemsCount)"
+    
+    private let animationDuration: TimeInterval = Constants.animationDuration
+    
+    private func applyYOffsetToTabBar(yOffset: CGFloat) {
+        tabBar.frame = tabBar.frame.offsetBy(dx: 0, dy: yOffset)
+    }
+    
+    private func applyHideOffsetToTabBar() {
+        applyYOffsetToTabBar(yOffset: tabBar.frame.height)
+    }
+    
+    private func applyShowOffsetToTabBar() {
+        applyYOffsetToTabBar(yOffset: -tabBar.frame.height)
+    }
+    
+    private func setIsHiddenOfTabBar(hidden: Bool) {
+        tabBar.isHidden = hidden
+    }
+    
+    private func setIsHiddenOfTabBarToFalse() {
+        setIsHiddenOfTabBar(hidden: false)
+    }
+    
+    private func setIsHiddenOfTabBarToTrue() {
+        setIsHiddenOfTabBar(hidden: true)
+    }
+    
+    func hideTabBar(animated: Bool) {
+        if animated {
+            UIView.animate(withDuration: animationDuration, animations: { [unowned uoSelf = self] in
+                uoSelf.applyHideOffsetToTabBar()
+            }) { [unowned uoSelf = self] (completed) in
+                if completed {
+                    uoSelf.setIsHiddenOfTabBarToTrue()
+                }
+            }
         } else {
-            trackOrdersButtonOutlet.badgeString = nil
+            applyHideOffsetToTabBar()
+            setIsHiddenOfTabBarToTrue()
         }
     }
-
-    private func setBadges() {
-        setShoppingCartBadge()
-        setTrackOrderBadge()
-    }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setBadges()
+    func showTabBar(animated: Bool) {
+        if animated {
+            setIsHiddenOfTabBarToFalse()
+            
+            UIView.animate(withDuration: animationDuration) { [unowned uoSelf = self] in
+                uoSelf.applyShowOffsetToTabBar()
+            }
+        } else {
+            setIsHiddenOfTabBarToFalse()
+            applyShowOffsetToTabBar()
+        }
     }
-
-    
-    @IBAction func signOutButtonAction(_ sender: UIButton) {
-        FBSDKLoginManager().logOut()
-        GIDSignIn.sharedInstance().signOut()
-        SignInModel.sharedInstance.signedIn = false
-        presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-
 }
